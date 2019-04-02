@@ -1,0 +1,30 @@
+{# This can be overridden at project templates level. Override it in templates/cmscontent/section_carousel.html. #}
+
+{# In Django admin, select the 'Section Carousel Plugin' and edit as many slides as you want. #}
+
+<div class="cycle-slideshow hidden-xs"
+data-cycle-fx="fade"
+data-cycle-slides=".showcase-slide"
+data-cycle-timeout="2000"
+data-cycle-caption="#showcase-caption"
+data-cycle-caption-template="{{slideNum}}/{{slideCount}}"
+data-cycle-prev="#showcase-prev"
+data-cycle-next="#showcase-next">
+    {% for slide in instance.sectioncarouselpluginslide_set.all %}
+        <div class="showcase-slide">
+            <img class="showcase-slide-bg" src="{{ slide.image.url }}" alt="{{ slide.image_alt }}">
+            <div class="caption">
+                <span>{{ slide.date|date:"m-d" }}</span>
+                <p>
+                    <strong>{{ slide.title_line_1 }}</strong>
+                    <strong>{{ slide.title_line_2 }}</strong>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="showcase-control-panel">
+        <span id="showcase-prev">Prev</span>
+        <div id="showcase-caption"></div>
+        <span id="showcase-next">Next</span>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags thumbnail %}
+
+{% block title %}{% trans 'Edit Ad' %}{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    {{ form.media }}
+    <!-- use jquery.form.js as jquery post not sending file -->
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+
+    <script type="text/javascript">
+        var return_url = '{% url 'communityadmin_ns:wantsoffers' %}';
+    </script>
+{% endblock %}
+
+{% block back-link %}
+    <a href="{% url 'communityadmin_ns:wantsoffers' %}">{% trans 'Back to list' %}</a>
+{% endblock %}
+
+{% block content %}
+    {% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'communityadmin/sidemenu.html' %}
+            </div>{# end sidebar menu #}
+        </div>{# end five columns sidebar #}
+    {% endblock %}
+
+    <div class="eleven columns">
+        <h4>{% trans 'Edit Ad' %}</h4>
+
+        {% include 'includes/messages.html' %}
+
+        <div id="place_ad_form_errors" class="hide"></div>
+
+        <form id="place_ad_form" method="post" action="." class="element form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="element label required{% if form.title.errors %} error{% endif %}">
+                <label for="id_title">{{ form.title.label }}</label>
+                <div class="field">
+                    <div class="element field">
+                        <input id="id_title" name="title" type="text" class="input-text large" value="{% if form.title.value %}{{ form.title.value }}{% endif %}">{% if form.title.errors %}<span>{% for error in form.title.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            {# only offers for Nantes #}
+            <input type="hidden" id="id_adtype" name="adtype" value="1"/>
+            <div class="element label">
+                        <label for="id_ad_images">{% trans "Images" %}</label>
+                        <div class="field">
+                            <div class="dropzone" style=""></div>
+                        </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="element label{% if form.description.errors %} error{% endif %}">
+                <label>{{ form.description.label }}</label>
+                <div class="field">
+                    <div class="element field tinymce">
+                        {{ form.description }}
+
+                        {% if form.description.errors %}
+                            <span>{% for error in form.description.errors %}{{ error }}<br />{% endfor %}</span><br />
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+
+            <div class="element label required filter-box{% if form.category.errors %} error{% endif %}">
+                <span class="toggle-field target_toggle" data-activate="true" data-target=".filter-box .field">&nbsp;</span>
+                <label>{{ form.category.label }}</label>
+                <div class="field" style="display: none;">
+                    <div class="element small checkbox-container checkbox-tree">
+                        {{ form.category }}
+                    </div>
+                <div class="clearfix"></div>
+                <div class="element">
+                        {% if form.category.errors %}
+                            <span>{% for error in form.category.errors %}{{ error }}<br />{% endfor %}</span><br />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+
+            <div class="element label{% if form.keywords.errors %} error{% endif %}">
+                <label>{{ form.keywords.label }}</label>
+                <div class="field">
+                    <div class="element field">
+                        {{ form.keywords }}
+
+                        {% if form.keywords.errors %}
+                            <span>{% for error in form.keywords.errors %}{{ error }}<br />{% endfor %}</span><br />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <fieldset>
+                <div class="element label">
+                    <label style="width:initial !important;"></label>
+                </div>
+                <div class="element label">
+                    <label style="color:red;width: 250px;">&nbsp;* {% trans 'Indicates mandatory field' %}</label>
+                </div>
+                <div class="clearfix"></div>
+            </fieldset>
+            <hr>
+
+            <div id="place_ad_form_spinner" class="element spinner hide pull-right"></div>
+            <button class="element button pull-right" id="place_ad_form_button">
+                <span class="l"></span>
+                <span class="c">{% trans 'Update Ad' %}</span>
+                <span class="r"></span>
+            </button>
+        </form>
+
+    </div>{# end eleven columns #}
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/dropzone.js' %}"></script>
+
+    {% url 'api_marketplace_ad_images' object.pk as image_endpoint %}
+    {% include "includes/filefield_dropzone.html" %}
+
+    {% url 'communityadmin_ns:wantsoffers' as success_url %}
+    {% include "includes/edit_ad_js.html" %}
+{% endblock %}

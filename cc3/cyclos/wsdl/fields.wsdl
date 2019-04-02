@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="fields" targetNamespace="http://fields.webservices.cyclos.strohalm.nl/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://fields.webservices.cyclos.strohalm.nl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <xs:schema elementFormDefault="unqualified" targetNamespace="http://fields.webservices.cyclos.strohalm.nl/" version="1.0" xmlns:tns="http://fields.webservices.cyclos.strohalm.nl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="adFieldsForAdSearch" type="tns:adFieldsForAdSearch"/>
+            <xs:element name="adFieldsForAdSearchResponse" type="tns:adFieldsForAdSearchResponse"/>
+            <xs:element name="allAdFields" type="tns:allAdFields"/>
+            <xs:element name="allAdFieldsResponse" type="tns:allAdFieldsResponse"/>
+            <xs:element name="allMemberFields" type="tns:allMemberFields"/>
+            <xs:element name="allMemberFieldsResponse" type="tns:allMemberFieldsResponse"/>
+            <xs:element name="memberFields" type="tns:memberFields"/>
+            <xs:element name="memberFieldsForAdSearch" type="tns:memberFieldsForAdSearch"/>
+            <xs:element name="memberFieldsForAdSearchResponse" type="tns:memberFieldsForAdSearchResponse"/>
+            <xs:element name="memberFieldsForMemberSearch" type="tns:memberFieldsForMemberSearch"/>
+            <xs:element name="memberFieldsForMemberSearchResponse" type="tns:memberFieldsForMemberSearchResponse"/>
+            <xs:element name="memberFieldsResponse" type="tns:memberFieldsResponse"/>
+            <xs:element name="paymentFields" type="tns:paymentFields"/>
+            <xs:element name="paymentFieldsResponse" type="tns:paymentFieldsResponse"/>
+            <xs:element name="possibleValuesForAdField" type="tns:possibleValuesForAdField"/>
+            <xs:element name="possibleValuesForAdFieldGivenParent" type="tns:possibleValuesForAdFieldGivenParent"/>
+            <xs:element name="possibleValuesForAdFieldGivenParentResponse" type="tns:possibleValuesForAdFieldGivenParentResponse"/>
+            <xs:element name="possibleValuesForAdFieldResponse" type="tns:possibleValuesForAdFieldResponse"/>
+            <xs:element name="possibleValuesForMemberField" type="tns:possibleValuesForMemberField"/>
+            <xs:element name="possibleValuesForMemberFieldGivenParent" type="tns:possibleValuesForMemberFieldGivenParent"/>
+            <xs:element name="possibleValuesForMemberFieldGivenParentResponse" type="tns:possibleValuesForMemberFieldGivenParentResponse"/>
+            <xs:element name="possibleValuesForMemberFieldResponse" type="tns:possibleValuesForMemberFieldResponse"/>
+            <xs:element name="possibleValuesForPaymentFields" type="tns:possibleValuesForPaymentFields"/>
+            <xs:element name="possibleValuesForPaymentFieldsResponse" type="tns:possibleValuesForPaymentFieldsResponse"/>
+            <xs:complexType name="possibleValuesForMemberFieldGivenParent">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="parent" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForMemberFieldGivenParentResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:possibleValue"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValue">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="value" type="xs:string"/>
+                            <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+                            <xs:element name="defaultValue" type="xs:boolean"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="entityVO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForMemberField">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForMemberFieldResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:possibleValue"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="paymentFields">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="transferTypeId" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="paymentFieldsResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="field">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="displayName" type="xs:string"/>
+                            <xs:element minOccurs="0" name="internalName" type="xs:string"/>
+                            <xs:element minOccurs="0" name="required" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="type" type="tns:type"/>
+                            <xs:element minOccurs="0" name="control" type="tns:control"/>
+                            <xs:element minOccurs="0" name="mask" type="xs:string"/>
+                            <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="possibleValues" nillable="true" type="tns:possibleValue"/>
+                            <xs:element minOccurs="0" name="minLength" type="xs:int"/>
+                            <xs:element minOccurs="0" name="maxLength" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="memberFieldsForAdSearch">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="memberFieldsForAdSearchResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="adFieldsForAdSearch">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="adFieldsForAdSearchResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForAdField">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForAdFieldResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:possibleValue"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForAdFieldGivenParent">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="parent" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForAdFieldGivenParentResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:possibleValue"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="memberFieldsForMemberSearch">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="memberFieldsForMemberSearchResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="memberFields">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="memberFieldsResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="allMemberFields">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="allMemberFieldsResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForPaymentFields">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="transferTypeId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="possibleValuesForPaymentFieldsResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:possibleValue"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="allAdFields">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="allAdFieldsResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:field"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="type">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="STRING"/>
+                    <xs:enumeration value="ENUMERATED"/>
+                    <xs:enumeration value="INTEGER"/>
+                    <xs:enumeration value="DECIMAL"/>
+                    <xs:enumeration value="DATE"/>
+                    <xs:enumeration value="BOOLEAN"/>
+                    <xs:enumeration value="URL"/>
+                    <xs:enumeration value="MEMBER"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="control">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="TEXT"/>
+                    <xs:enumeration value="TEXTAREA"/>
+                    <xs:enumeration value="RICH_EDITOR"/>
+                    <xs:enumeration value="SELECT"/>
+                    <xs:enumeration value="RADIO"/>
+                    <xs:enumeration value="CHECKBOX"/>
+                    <xs:enumeration value="MEMBER_AUTOCOMPLETE"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="possibleValuesForPaymentFieldsResponse">
+        <wsdl:part element="tns:possibleValuesForPaymentFieldsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForMemberField">
+        <wsdl:part element="tns:possibleValuesForMemberField" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="memberFieldsForMemberSearch">
+        <wsdl:part element="tns:memberFieldsForMemberSearch" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="memberFieldsForAdSearchResponse">
+        <wsdl:part element="tns:memberFieldsForAdSearchResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="allAdFields">
+        <wsdl:part element="tns:allAdFields" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForMemberFieldGivenParent">
+        <wsdl:part element="tns:possibleValuesForMemberFieldGivenParent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="allMemberFields">
+        <wsdl:part element="tns:allMemberFields" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForAdFieldGivenParent">
+        <wsdl:part element="tns:possibleValuesForAdFieldGivenParent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="adFieldsForAdSearch">
+        <wsdl:part element="tns:adFieldsForAdSearch" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForMemberFieldGivenParentResponse">
+        <wsdl:part element="tns:possibleValuesForMemberFieldGivenParentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForMemberFieldResponse">
+        <wsdl:part element="tns:possibleValuesForMemberFieldResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="paymentFields">
+        <wsdl:part element="tns:paymentFields" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="adFieldsForAdSearchResponse">
+        <wsdl:part element="tns:adFieldsForAdSearchResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="allAdFieldsResponse">
+        <wsdl:part element="tns:allAdFieldsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="memberFieldsForMemberSearchResponse">
+        <wsdl:part element="tns:memberFieldsForMemberSearchResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="memberFieldsForAdSearch">
+        <wsdl:part element="tns:memberFieldsForAdSearch" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForAdField">
+        <wsdl:part element="tns:possibleValuesForAdField" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForAdFieldGivenParentResponse">
+        <wsdl:part element="tns:possibleValuesForAdFieldGivenParentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForAdFieldResponse">
+        <wsdl:part element="tns:possibleValuesForAdFieldResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="memberFields">
+        <wsdl:part element="tns:memberFields" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="memberFieldsResponse">
+        <wsdl:part element="tns:memberFieldsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="possibleValuesForPaymentFields">
+        <wsdl:part element="tns:possibleValuesForPaymentFields" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="allMemberFieldsResponse">
+        <wsdl:part element="tns:allMemberFieldsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="paymentFieldsResponse">
+        <wsdl:part element="tns:paymentFieldsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="FieldWebService">
+        <wsdl:operation name="possibleValuesForMemberFieldGivenParent">
+            <wsdl:input message="tns:possibleValuesForMemberFieldGivenParent" name="possibleValuesForMemberFieldGivenParent"/>
+            <wsdl:output message="tns:possibleValuesForMemberFieldGivenParentResponse" name="possibleValuesForMemberFieldGivenParentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForMemberField">
+            <wsdl:input message="tns:possibleValuesForMemberField" name="possibleValuesForMemberField"/>
+            <wsdl:output message="tns:possibleValuesForMemberFieldResponse" name="possibleValuesForMemberFieldResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="paymentFields">
+            <wsdl:input message="tns:paymentFields" name="paymentFields"/>
+            <wsdl:output message="tns:paymentFieldsResponse" name="paymentFieldsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="memberFieldsForAdSearch">
+            <wsdl:input message="tns:memberFieldsForAdSearch" name="memberFieldsForAdSearch"/>
+            <wsdl:output message="tns:memberFieldsForAdSearchResponse" name="memberFieldsForAdSearchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="adFieldsForAdSearch">
+            <wsdl:input message="tns:adFieldsForAdSearch" name="adFieldsForAdSearch"/>
+            <wsdl:output message="tns:adFieldsForAdSearchResponse" name="adFieldsForAdSearchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForAdField">
+            <wsdl:input message="tns:possibleValuesForAdField" name="possibleValuesForAdField"/>
+            <wsdl:output message="tns:possibleValuesForAdFieldResponse" name="possibleValuesForAdFieldResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForAdFieldGivenParent">
+            <wsdl:input message="tns:possibleValuesForAdFieldGivenParent" name="possibleValuesForAdFieldGivenParent"/>
+            <wsdl:output message="tns:possibleValuesForAdFieldGivenParentResponse" name="possibleValuesForAdFieldGivenParentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="memberFieldsForMemberSearch">
+            <wsdl:input message="tns:memberFieldsForMemberSearch" name="memberFieldsForMemberSearch"/>
+            <wsdl:output message="tns:memberFieldsForMemberSearchResponse" name="memberFieldsForMemberSearchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="memberFields">
+            <wsdl:input message="tns:memberFields" name="memberFields"/>
+            <wsdl:output message="tns:memberFieldsResponse" name="memberFieldsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="allMemberFields">
+            <wsdl:input message="tns:allMemberFields" name="allMemberFields"/>
+            <wsdl:output message="tns:allMemberFieldsResponse" name="allMemberFieldsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForPaymentFields">
+            <wsdl:input message="tns:possibleValuesForPaymentFields" name="possibleValuesForPaymentFields"/>
+            <wsdl:output message="tns:possibleValuesForPaymentFieldsResponse" name="possibleValuesForPaymentFieldsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="allAdFields">
+            <wsdl:input message="tns:allAdFields" name="allAdFields"/>
+            <wsdl:output message="tns:allAdFieldsResponse" name="allAdFieldsResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="fieldsSoapBinding" type="tns:FieldWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="possibleValuesForMemberFieldGivenParent">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="possibleValuesForMemberFieldGivenParent">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="possibleValuesForMemberFieldGivenParentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForMemberField">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="possibleValuesForMemberField">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="possibleValuesForMemberFieldResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="memberFieldsForAdSearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="memberFieldsForAdSearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="memberFieldsForAdSearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="paymentFields">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="paymentFields">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="paymentFieldsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="adFieldsForAdSearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="adFieldsForAdSearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="adFieldsForAdSearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForAdField">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="possibleValuesForAdField">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="possibleValuesForAdFieldResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForAdFieldGivenParent">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="possibleValuesForAdFieldGivenParent">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="possibleValuesForAdFieldGivenParentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allMemberFields">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="allMemberFields">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allMemberFieldsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="memberFields">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="memberFields">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="memberFieldsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="memberFieldsForMemberSearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="memberFieldsForMemberSearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="memberFieldsForMemberSearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="possibleValuesForPaymentFields">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="possibleValuesForPaymentFields">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="possibleValuesForPaymentFieldsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allAdFields">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="allAdFields">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allAdFieldsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="fields">
+        <wsdl:port binding="tns:fieldsSoapBinding" name="fieldsPort">
+            <soap:address location="http://localhost:8080/cyclos/services/fields"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,85 @@
+{% extends "accounts/base.html" %}
+{% load pagination_tags i18n l10n staticfiles %}
+
+{% block title %}{% trans 'Accounts' %}{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" >
+  var current_language = "{{ LANGUAGE_CODE|default:"en-gb" }}";
+</script>
+{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->
+
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+          {% include 'includes/messages.html' %}
+      <ul class="element transactions">
+       <li><span>{{number_of_transactions}}</span> {% trans 'Transactions Made' %}</li>
+      </ul>
+      <ul class="element credits">
+        <li>{% trans 'Current Spending Limit' %} <span><i>{{currency_symbol}}</i>{{available_balance|floatformat:"-2"}}</span></li>
+      </ul>
+          {% if transactions %}
+          <table class="listing account zebra">
+            <thead>
+              <tr>
+                <th>{% trans 'date'|capfirst %}
+                  <!--
+                  <a class="sort{% ifequal account_search_form_field 'date' %} selected{% endifequal %}" href="{% url 'accounts_home' %}date/{% include 'includes/direction.html' %}/"></a>-->
+                </th>
+                <th>{% trans 'from/to'|capfirst %}<!--
+                  <a class="sort{% ifequal account_search_form_field 'from_to' %} selected{% endifequal %}" href="{% url 'accounts_home' %}from_to/{% include 'includes/direction.html' %}/"></a>-->
+                </th>
+                <th class="not-mobile">{% trans 'description'|capfirst %}<!--
+                  <a class="sort{% ifequal account_search_form_field 'description' %} selected{% endifequal %}" href="{% url 'accounts_home' %}description/{% include 'includes/direction.html' %}/"></a>-->
+                </th>
+                <th>{% trans 'amount'|capfirst %}<!--
+                  <a class="sort{% ifequal account_search_form_field 'amount' %} selected{% endifequal %}" href="{% url 'accounts_home' %}amount/{% include 'includes/direction.html' %}/"></a>-->
+                </th>
+              </tr>
+            </thead>
+
+            <tbody> 
+            {% for transaction in transactions %}
+              <tr>
+                <td class="date"><a href="#">{{ transaction.created|localize }}</a></td>
+                <td class="name"><a href="#">
+                  {% if transaction.amount < 0 %}{% with transaction.recipient.get_profile.full_name as recipient %}
+                    {% if recipient %}
+                    {{ recipient }}
+                    {% else %}
+                    {{transaction.recipient.first_name}} {{transaction.recipient.last_name}} 
+                    {% endif %}
+                    {% endwith %}
+                  {% else %}
+                    {{ transaction.sender.get_profile.full_name }}
+                  {% endif %}
+                  </td>
+                <td class="descr not-mobile"><a href="#">{{ transaction.description|striptags|truncatechars:80|safe|default:'' }}</a></td>
+                <td class="number">
+                  <span class="icon">{{currency_symbol}}</span>
+                  <span class="amount"><a href="#">{{ transaction.amount|floatformat:2 }}</a></span>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+  </table>
+
+  {% paginate 2 %}
+  {% else %}
+  <div class="clearfix"></div>
+  <div>{% trans 'No matching transactions were found' %}</div
+  {% endif %}
+</div>
+{% else %}
+{% blocktrans %}You're not logged in{% endblocktrans %}
+{% endif %}
+{% endblock %}

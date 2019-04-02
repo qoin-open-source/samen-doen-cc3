@@ -1,0 +1,22 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags thumbnail %}
+
+{% block title %}{% trans 'My Ads' %}{% endblock %}
+
+{% block content %}
+
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div><!-- end sidebar menu -->           
+    </div><!-- end five columns sidebar -->
+
+    <div class="eleven columns">
+
+        {% include 'includes/ad_list.html' with ad_list=ad_list sort=True %}
+        {% paginate 2 %}
+
+    </div><!-- end eleven columns -->
+
+{% endblock %}
+

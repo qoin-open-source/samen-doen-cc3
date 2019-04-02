@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block extrajs %}
+{% include "rewards/includes/donation_percentage_slider_form.html" %}
+{% endblock %}
+
+{% block content %}
+                    <form method="post" action="{% url 'update_donation_percentage' %}" class="form">
+                    {% csrf_token %}
+
+                    <div id="slider">
+                      <div id="custom-handle" class="ui-slider-handle"></div>
+                    </div>
+                    <div class="slider-legend">
+                        <label>{{ form.min_percent }}%, min</label>
+                        <label class="pull-right">{{ form.max_percent }}%, max</label>
+                    </div>
+                     {{ form.donation_percent.as_hidden }}
+
+                    <button type="submit" class="btn btn-rounded btn-blue" id="submit_button">{% trans 'Update percentage' %}</button>
+
+                    </form>
+{% endblock %}

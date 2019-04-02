@@ -1,0 +1,11 @@
+{# This can be overridden at project templates level. Override it in templates/cmscontent/news_page.html. #}
+
+{% load i18n %}
+{% for entry in object_list %}
+    <h2>{{ entry.title }}</h2>
+
+    <p>{{ entry.created_by }} {% trans 'at' %} {{ entry.creation_date }}</p>
+    <div>
+        {{ entry.content }}
+    </div>
+{% endfor %}

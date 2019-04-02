@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags i18n %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block extrabody %}class="page-with-sidebar main-content about"{% endblock %}
+{% block extramainclasses %} content-page{% endblock %}
+
+{% block content %}
+        <div class="five columns">
+            {% include 'includes/sidemenu.html' %}
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+
+            <div class="inner placeholder">
+
+                <h1 class="page-title">{% page_attribute "page_title" %}</h1>
+                <div class="row add_first">
+                    <div class="content-whole">
+                        <div class="inner-item placeholder short">
+                            {% placeholder 'content-top-row' %}
+                        </div>
+                    </div><!-- content-whole -->
+                </div><!-- end row -->
+
+                <div class="row add_last">
+
+                    <div class="content-half">
+                        <div class="inner">
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    <div class="img">
+                                        <img src="{% static 'images/content/about-icon-01.png' %}" alt="icon" />
+                                        <span>{% blocktrans %}Find new<br /> clients{% endblocktrans %}</span>
+                                    </div>
+                                    <div class="item-content">{% placeholder 'content-col-1-row-1' %}</div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    <div class="img">
+                                        <img src="{% static 'images/content/about-icon-02.png' %}" alt="icon" />
+                                        <span>{% blocktrans %}Increase<br /> turnover{% endblocktrans %}</span>
+                                    </div>
+                                    <div class="item-content">{% placeholder 'content-col-1-row-2' %}</div>
+                                </div>
+                            </div>
+                        </div><!-- end inner -->
+
+                    </div><!-- content-half -->
+
+                    <div class="content-half">
+                        <div class="inner">
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    <div class="img">
+                                        <img src="{% static 'images/content/about-icon-03.png' %}" alt="icon" />
+                                        <span>{% blocktrans %}Improve<br /> profit{% endblocktrans %}</span>
+                                    </div>
+                                    <div class="item-content">{% placeholder 'content-col-2-row-1' %}</div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    <div class="img">
+                                        <img src="{% static 'images/content/about-icon-04.png' %}" alt="icon" />
+                                        <span>{% blocktrans %}Improve<br /> cash position{% endblocktrans %}</span>
+                                    </div>
+                                    <div class="item-content">{% placeholder 'content-col-2-row-2' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- content-half -->
+
+                </div><!-- end row -->
+            </div>
+        </div>
+{% endblock %}

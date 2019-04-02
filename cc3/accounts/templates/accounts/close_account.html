@@ -1,0 +1,36 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Close Account' %}{% endblock %}
+
+
+
+{% block content %}
+    {% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->           
+        </div><!-- end five columns sidebar -->
+    {% endblock %}
+
+        <div class="eleven columns">
+            <h4>{% trans 'Close Account' %}</h4>
+            {% include 'includes/messages.html' %}
+
+            {% if user_cc3_profile.is_pending_closure %}
+            {% trans 'Your account is pending closure' %}
+            {% else %}
+            <form action="." name="close_account_form" id="close_account_form" method="post">{% csrf_token %}
+                {{form.non_form_errors}}
+            {{form.close_confirmation.label|safe}}
+            {{form.close_confirmation}}
+            <button class="element button pull-right" id="close_account_form_button"><span class="l"></span><span class="c">{% trans 'Close Account' %}</span><span class="r"></span></button>
+            </form>
+            {% endif %}
+            {% block back-link %}
+            {% endblock %}
+        </div><!-- end eleven columns -->
+
+{% endblock %}
+

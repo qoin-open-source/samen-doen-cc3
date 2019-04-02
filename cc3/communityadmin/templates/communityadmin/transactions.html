@@ -1,0 +1,68 @@
+{% extends "marketplace/base.html" %}
+{% load pagination_tags i18n l10n cc3_tags %}
+
+{% block title %}{% trans 'Member List' %}{% endblock %}
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'communityadmin/sidemenu.html' %}
+        </div>{# end sidebar menu #}
+    </div>{# end five columns sidebar #}
+
+    <div class="eleven columns">
+        <h2>{% trans 'Transactions' %} - {{ community }}</h2>
+
+        {% comment %}
+        <p class="disclaimer">
+            {% trans 'Note: System transactions not shown below - see individual member transaction list' %}
+        </p>
+        {% endcomment %}
+
+        <table class="listing account zebra">
+            {% if transactions %}
+                <thead>
+                    <tr>
+                        <th>{% trans 'date'|capfirst %}</th>
+                        <th>{% trans 'from'|capfirst %}</th>
+                        <th>{% trans 'to'|capfirst %}</th>
+                        <th>{% trans 'description'|capfirst %}</th>
+                        <th>{% trans 'amount'|capfirst %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td class="date">{% include 'cyclos/date_created.html' %}</td>
+                            <td class="name">{% include 'cyclos/sender.html' %}</td>
+                            <td class="name">{% include 'cyclos/receiver.html' %}{% include 'cyclos/recipient.html' %}</td>
+                            <td class="descr not-mobile">{% include 'cyclos/description.html' %}</td>
+                            <td class="number">{% currency_icon transaction.amount %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% else %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="clearfix"></div>
+                            <div>{% trans 'No transactions were found' %}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            {% endif %}
+        </table>
+
+        <form action="{% url 'communityadmin_ns:transactions' %}" method="post">
+            {% csrf_token %}
+            <button id="export" name="export" value="export" class="element button pull-right">
+                <span class="l"></span>
+                <span class="c">{% trans 'Export' %}</span>
+                <span class="r"></span>
+            </button>
+        </form>
+
+{% paginate %}
+
+    </div>{# eleven columns #}
+{% endblock %}

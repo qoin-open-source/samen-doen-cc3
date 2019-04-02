@@ -1,0 +1,77 @@
+{% extends "accounts/place_ad.html" %}
+{% load staticfiles i18n %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    {{ form.media }}
+    {# use jquery.form.js as jquery post not sending file #}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+
+    <script type="text/javascript">
+        var browse_translation = "{{ browse }}";
+        var return_url = '{% url 'communityadmin_ns:wantsoffers' %}';
+        var created_by_auto_url = '{% url 'communityadmin_ns:created_by_auto' %}';
+
+        $(function() {
+            $('#id_created_by_name').typeahead({
+                name: 'created_by_name',
+                remote: created_by_auto_url + '?created_by_name=%QUERY'
+            }).on('typeahead:selected', function($e, data) {
+                $("#id_created_by").val(data.id);
+                update_categories(data.id);
+            }).on('typeahead:autocompleted', function($e, data) {
+                $("#id_created_by").val(data.id);
+                update_categories(data.id);
+            }).on('typeahead:opened', function($e, data) {
+                $("#id_created_by").val("");
+            });
+
+            function update_categories(profile_id){
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'communityadmin_ns:categories_auto' %}",
+                    data: { profile_id: profile_id }
+                })
+                .done(function( msg ) {
+                    // deselect all category checkboxes
+                    $("input[name='category']").prop("checked", false);
+                    $("i.checkbox-checked").removeClass("checkbox-checked");
+
+                    for (var category_index in msg) {
+                        var category_id = msg[category_index].id;
+                        var $category_checkbox = $("input[value=" + category_id + "]");
+                        $category_checkbox.prop("checked", "checked");
+                        var i_checkbox = $category_checkbox.next();
+                        i_checkbox.addClass("checkbox-checked");
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block back-link %}
+    <a href="{% url 'communityadmin_ns:wantsoffers' %}">{% trans 'Back to list' %}</a>
+{% endblock %}
+
+{% block sidebar-menu %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'communityadmin/sidemenu.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block created_by %}
+    <div class="element label{% if form.created_by.errors %} error{% endif %}">
+        <label>{% trans 'Community Member' %} <a href="#" class="element tp" title="{% trans 'You can enter either a company name or the name of the person you are placing the advert for.' %}"></a></label>
+        <div class="element field typeahead-div">
+            <input id="id_created_by_name" name="created_by_name" class="search typeahead" type="text" value="{% if form.created_by.value %}{{ form.created_by.first_name }} {{ form.created_by.last_name }}{% endif %}">
+            {% if form.created_by.errors %}
+                <span>{% for error in form.created_by.errors %}{{ error }}<br />{% endfor %}</span><br />
+            {% endif %}
+            <input id="id_created_by" name="created_by" type="hidden" value="{% if form.created_by.value %}{{ form.created_by.value }}{% endif %}">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}

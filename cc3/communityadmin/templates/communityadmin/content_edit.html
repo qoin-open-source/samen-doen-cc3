@@ -1,0 +1,53 @@
+{% extends "marketplace/base.html" %}
+{% load i18n %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+{% block title %}{% trans 'Edit Content' %}{% endblock %}
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+                
+
+<div class="eleven columns">
+
+<h2>{% trans 'Edit Content' %} - {{ community }}</h2>
+
+{% blocktrans with placeholder=object.plugin.placeholder page_url=object.plugin.page.get_absolute_url language=object.plugin.language %}
+<p>
+You are editing content for the placeholder '{{ placeholder }}'
+on page <a href="{{ page_url }}">{{page_url}}</a>
+in the language '{{ language }}'
+</p>
+{% endblocktrans %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.body.errors }}
+        {{ form.body }}
+    </div>
+
+    <button class="element button" type="submit">
+        <span class="l"></span>
+        <span class="c">{% trans 'Save' %}</span>
+        <span class="r"></span>
+    </button>
+    
+</form>
+
+<a href="{% url 'communityadmin_ns:contentlist' %}">{% trans 'Back to list' %}</a>
+
+
+</div><!-- eleven columns -->
+
+{% endblock %}
+

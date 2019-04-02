@@ -1,0 +1,13 @@
+{% load pagination_tags i18n %}
+                    <div class="items">
+                        {% if object_list %}
+                        {% for ad in object_list %}
+                            {% include 'includes/ad_item.html' %}
+                        {% endfor %}
+                        <div class="clearfix"><br /></div>
+                        {% paginate %}
+                        {% else %}
+
+                        <p>&nbsp;{% trans 'There were no results for your search' %}
+                        {% endif %}
+                    </div>

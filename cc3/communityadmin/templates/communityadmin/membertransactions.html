@@ -1,0 +1,62 @@
+{% extends "marketplace/base.html" %}
+{% load pagination_tags i18n l10n staticfiles %}
+{% block title %}{% trans 'Member Transactions' %}{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" >
+  var current_language = "{{ LANGUAGE_CODE|default:"en-gb" }}";
+</script>
+{% endblock %}
+
+{% block content %}
+    <div class="five columns">
+      <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+      </div><!-- end sidebar menu -->
+    </div><!-- end five columns sidebar -->
+
+    <div class="eleven columns">
+      {% include 'includes/messages.html' %}
+      <ul class="element transactions">
+       <li style="height:72px;"><span>{{number_of_transactions}}</span> {% trans 'Transactions Made' %}</li>
+      </ul>
+      <ul class="element credits">
+        <li>{% trans 'Total Payments Made' %} <span><i>{{currency_symbol}}</i>{{number_of_payments_made|floatformat:"-2"}}</span></li>
+        <li>{% trans 'Total Payments Received' %}<span><i>{{currency_symbol}}</i>{{number_of_payments_received|floatformat:"-2"}}</span></li>
+      </ul>
+
+          {% if transactions %}
+          <table class="listing account zebra">
+            <thead>
+              <tr>
+                <th>{% trans 'date'|capfirst %} </th>
+                <th>{% trans 'from/to'|capfirst %} </th>
+                <th class="not-mobile">{% trans 'description'|capfirst %} </th>
+                <th>{% trans 'amount'|capfirst %} </th>
+              </tr>
+            </thead>
+
+            <tbody> 
+            {% for transaction in transactions %}
+            {% with cyclos_url=cyclos_base %}
+              <tr>
+                  <td class="date">{{ transaction.created|localize }}</td>
+                  <td class="name">{% if transaction.amount < 0 %}{% include 'cyclos/recipient.html' %}{% else %}{% include 'cyclos/sender.html' %}{% endif %}</td>
+                  <td class="descr not-mobile"><a target="cyclos" href="{{cyclos_url}}?transferId={{transaction.transfer_id}}&typeId=5&memberId={{cyclos_id}}">{{ transaction.description|striptags|truncatechars:80|safe|default:'' }}</a></td>
+                <td class="number">
+                  <span class="icon">{{currency_symbol}}</span>
+                  <span class="amount">{{ transaction.amount|floatformat:2 }}</span>
+                </td>
+              </tr>
+              {% endwith %}
+            {% endfor %}
+        </tbody>
+  </table>
+
+  {% paginate 2 %}
+  {% else %}
+  <div class="clearfix"></div>
+  <div>{% trans 'No matching transactions were found' %}</div
+  {% endif %}
+</div>
+{% endblock %}

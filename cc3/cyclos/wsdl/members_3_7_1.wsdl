@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="members" targetNamespace="http://members.webservices.cyclos.strohalm.nl/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://members.webservices.cyclos.strohalm.nl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://members.webservices.cyclos.strohalm.nl/" version="1.0" xmlns:tns="http://members.webservices.cyclos.strohalm.nl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="fullTextSearch" type="tns:fullTextSearch"/>
+<xs:element name="fullTextSearchResponse" type="tns:fullTextSearchResponse"/>
+<xs:element name="listManagedGroups" type="tns:listManagedGroups"/>
+<xs:element name="listManagedGroupsResponse" type="tns:listManagedGroupsResponse"/>
+<xs:element name="load" type="tns:load"/>
+<xs:element name="loadByPrincipal" type="tns:loadByPrincipal"/>
+<xs:element name="loadByPrincipalResponse" type="tns:loadByPrincipalResponse"/>
+<xs:element name="loadByUsername" type="tns:loadByUsername"/>
+<xs:element name="loadByUsernameResponse" type="tns:loadByUsernameResponse"/>
+<xs:element name="loadResponse" type="tns:loadResponse"/>
+<xs:element name="registerMember" type="tns:registerMember"/>
+<xs:element name="registerMemberResponse" type="tns:registerMemberResponse"/>
+<xs:element name="search" type="tns:search"/>
+<xs:element name="searchResponse" type="tns:searchResponse"/>
+<xs:element name="updateMember" type="tns:updateMember"/>
+<xs:element name="updateMemberResponse" type="tns:updateMemberResponse"/>
+<xs:complexType name="registerMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="params" type="tns:registerMemberParameters"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="registerMemberParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupId" type="xs:long"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="loginPassword" type="xs:string"/>
+      <xs:element minOccurs="0" name="pin" type="xs:string"/>
+      <xs:element minOccurs="0" name="credentials" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="fields" nillable="true" type="tns:registrationFieldValue"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="registrationFieldValue">
+    <xs:complexContent>
+      <xs:extension base="tns:fieldValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="hidden" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="fieldValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="internalName" type="xs:string"/>
+      <xs:element minOccurs="0" name="fieldId" type="xs:long"/>
+      <xs:element minOccurs="0" name="displayName" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+      <xs:element minOccurs="0" name="possibleValueId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="registerMemberResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:memberRegistrationResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="memberRegistrationResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="awaitingEmailValidation" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="loadByUsername">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="loadByUsernameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:member"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="member">
+    <xs:complexContent>
+      <xs:extension base="tns:entityWithCustomFieldsVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="username" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="groupId" type="xs:long"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="images" nillable="true" type="tns:image"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="entityWithCustomFieldsVO">
+    <xs:complexContent>
+      <xs:extension base="tns:entityVO">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fields" nillable="true" type="tns:fieldValue"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="entityVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="image">
+    <xs:complexContent>
+      <xs:extension base="tns:entityVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="caption" type="xs:string"/>
+          <xs:element minOccurs="0" name="thumbnailUrl" type="xs:string"/>
+          <xs:element minOccurs="0" name="fullUrl" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastModified" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="loadByPrincipal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="params" type="tns:principalParameters"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="principalParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="principalType" type="xs:string"/>
+      <xs:element minOccurs="0" name="principal" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="loadByPrincipalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:member"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="updateMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="params" type="tns:updateMemberParameters"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="updateMemberParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="principalType" type="xs:string"/>
+      <xs:element minOccurs="0" name="principal" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="fields" nillable="true" type="tns:registrationFieldValue"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="updateMemberResponse">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="search">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="params" type="tns:memberSearchParameters"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="memberSearchParameters">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractMemberSearchParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="username" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="randomOrder" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractMemberSearchParameters">
+    <xs:complexContent>
+      <xs:extension base="tns:searchParameters">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fields" nillable="true" type="tns:fieldValue"/>
+          <xs:element minOccurs="0" name="showCustomFields" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="showImages" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="withImagesOnly" type="xs:boolean"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="groupFilterIds" nillable="true" type="xs:long"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="groupIds" nillable="true" type="xs:long"/>
+          <xs:element minOccurs="0" name="excludeLoggedIn" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="searchParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+      <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="searchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:memberResultPage"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="memberResultPage">
+    <xs:complexContent>
+      <xs:extension base="tns:resultPage">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="members" type="tns:member"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="resultPage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+      <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="listManagedGroups">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="listManagedGroupsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:group"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="group">
+    <xs:complexContent>
+      <xs:extension base="tns:entityVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="load">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="loadResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:member"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="fullTextSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="params" type="tns:fullTextMemberSearchParameters"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="fullTextMemberSearchParameters">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractMemberSearchParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="keywords" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="fullTextSearchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:memberResultPage"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="updateMember">
+    <wsdl:part element="tns:updateMember" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fullTextSearchResponse">
+    <wsdl:part element="tns:fullTextSearchResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadByPrincipal">
+    <wsdl:part element="tns:loadByPrincipal" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="load">
+    <wsdl:part element="tns:load" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadByUsername">
+    <wsdl:part element="tns:loadByUsername" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadByPrincipalResponse">
+    <wsdl:part element="tns:loadByPrincipalResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMemberResponse">
+    <wsdl:part element="tns:updateMemberResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listManagedGroups">
+    <wsdl:part element="tns:listManagedGroups" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listManagedGroupsResponse">
+    <wsdl:part element="tns:listManagedGroupsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="search">
+    <wsdl:part element="tns:search" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fullTextSearch">
+    <wsdl:part element="tns:fullTextSearch" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerMemberResponse">
+    <wsdl:part element="tns:registerMemberResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerMember">
+    <wsdl:part element="tns:registerMember" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadByUsernameResponse">
+    <wsdl:part element="tns:loadByUsernameResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchResponse">
+    <wsdl:part element="tns:searchResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadResponse">
+    <wsdl:part element="tns:loadResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MemberWebService">
+    <wsdl:operation name="registerMember">
+      <wsdl:input message="tns:registerMember" name="registerMember">
+    </wsdl:input>
+      <wsdl:output message="tns:registerMemberResponse" name="registerMemberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadByUsername">
+      <wsdl:input message="tns:loadByUsername" name="loadByUsername">
+    </wsdl:input>
+      <wsdl:output message="tns:loadByUsernameResponse" name="loadByUsernameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadByPrincipal">
+      <wsdl:input message="tns:loadByPrincipal" name="loadByPrincipal">
+    </wsdl:input>
+      <wsdl:output message="tns:loadByPrincipalResponse" name="loadByPrincipalResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMember">
+      <wsdl:input message="tns:updateMember" name="updateMember">
+    </wsdl:input>
+      <wsdl:output message="tns:updateMemberResponse" name="updateMemberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="search">
+      <wsdl:input message="tns:search" name="search">
+    </wsdl:input>
+      <wsdl:output message="tns:searchResponse" name="searchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listManagedGroups">
+      <wsdl:input message="tns:listManagedGroups" name="listManagedGroups">
+    </wsdl:input>
+      <wsdl:output message="tns:listManagedGroupsResponse" name="listManagedGroupsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="load">
+      <wsdl:input message="tns:load" name="load">
+    </wsdl:input>
+      <wsdl:output message="tns:loadResponse" name="loadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fullTextSearch">
+      <wsdl:input message="tns:fullTextSearch" name="fullTextSearch">
+    </wsdl:input>
+      <wsdl:output message="tns:fullTextSearchResponse" name="fullTextSearchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="membersSoapBinding" type="tns:MemberWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="loadByUsername">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="loadByUsername">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loadByUsernameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerMember">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="registerMember">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registerMemberResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadByPrincipal">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="loadByPrincipal">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loadByPrincipalResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMember">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateMember">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateMemberResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="search">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="search">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listManagedGroups">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listManagedGroups">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listManagedGroupsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="load">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="load">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loadResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fullTextSearch">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="fullTextSearch">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fullTextSearchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="members">
+    <wsdl:port binding="tns:membersSoapBinding" name="membersPort">
+      <soap:address location="http://localhost:8080/monea/services/members"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

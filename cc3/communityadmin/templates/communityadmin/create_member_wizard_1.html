@@ -1,0 +1,129 @@
+{% extends "marketplace/base.html" %}
+{% load staticfiles i18n %}
+
+{% block extrahead %}
+<script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+<script type="text/javascript">
+    var return_url = "{% url 'communityadmin_ns:addmember' %}";
+</script>
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block title %}{% trans 'Add Member' %}{% endblock %}
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+
+
+<div class="eleven columns communityadmin">
+  <div class="inner">
+    <h2>{% trans 'Add Member' %}{% if community %} - {{ community }}{% endif %}</h2>
+    {% include 'includes/messages.html' %}
+    <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+    <form action="" method="post" class="element form" enctype="multipart/form-data">{% csrf_token %} {#  id="update_profile_form" - when time for ajax work #}
+    {{ wizard.management_form }}
+    {% if wizard.form.non_field_errors %}<div class="element form-error">{{ wizard.form.non_field_errors }}</div>{% endif %}
+    <fieldset>
+
+    {% with field=wizard.form.picture %}
+        {% include 'fragments/forms/_filefield.html' %}
+    {% endwith %}
+
+<div class="element label">
+  <label for="community">Community</label>
+  <div class="field">
+
+      <div class="element"><input type="hidden" id="id_1-community" name="1-community" value="{{community.pk}}">
+        <select disabled="disabled" id="id_1-community_fake" name="1-community_fake">
+            <option value="fake">{{community}}</option>
+        </select>
+
+      </div>
+
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+    {% with field=wizard.form.business_name required=True %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    <div>{% trans 'Contact Person' %}<br />
+
+    {% with field=wizard.form.first_name required=True %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.last_name required=True %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.job_title %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.country %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.city %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.address required=True %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.postal_code %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+{% if wizard.form.registration_number %}
+    {% with field=wizard.form.registration_number %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+{% endif %}
+
+    {% with field=wizard.form.phone_number %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.mobile_number %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.company_website %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.company_description %}
+        {% include 'fragments/forms/_field.html' %}
+    {% endwith %}
+
+    {% with field=wizard.form.categories size='small' %}
+        {% include 'fragments/forms/_multicheckbox_field.html' %}
+    {% endwith %}
+
+{% if wizard.form.want_categories %}
+    {% with field=wizard.form.want_categories size='small' %}
+        {% include 'fragments/forms/_multicheckbox_field.html' %}
+    {% endwith %}
+{% endif %}
+
+    </fieldset>
+
+
+    {% if wizard.steps.prev %}
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+    {% endif %}
+    <input type="submit" value="{% trans "submit" %}"/>
+    </form>
+  </div>
+</div><!-- eleven columns -->
+{% endblock %}

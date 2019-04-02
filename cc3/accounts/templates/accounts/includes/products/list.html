@@ -1,0 +1,72 @@
+{% load i18n %}
+
+<h2>{% trans 'My products' %}</h2>
+
+<h3>{% trans 'Recurring charges' %}</h3>
+
+{% if object_list.count < 1 %}
+    {% trans 'You have no assigned products' %}
+{% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="40%">{% trans 'Product' %}</th>
+                <th width="15%">{% trans 'Quantity' %}</th>
+                <th width="15%">{% trans 'Price' %}</th>
+                <th width="20%"> </th>
+                <th width="10%">{% trans 'Expires' %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in object_list %}
+                <tr>
+                    <td>{{item.product.name }}</td>
+                    <td>{{ item.current_quantity }}</td>
+                    <td>{{ item.product.current_price }}</td>
+                    <td>{% if item.discount_percent %}{{ item.discount_percent }}% {% trans 'discount applies' %}{% else %}&nbsp;{% endif %}</td>
+                    <td>{{ item.end_date|default_if_none:"-" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if estimated_monthly_charges %}<p>{% trans 'Your estimated monthly recurring charges, not including tax are' %} <strong>{{ estimated_monthly_charges }}</strong>.</p>{% endif %}
+    {% if estimated_yearly_charges %}<p>{% trans 'Your estimated yearly recurring charges, not including tax are' %} <strong>{{ estimated_yearly_charges }}</strong>.</p>{% endif %}
+{% endif %}
+
+<h3>{% trans 'Previous Invoices' %}</h3>
+
+{% if invoice_list.count < 1 %}
+    {% trans 'You have no previous invoices' %}
+{% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="20%">{% trans 'Date' %}</th>
+                <th width="30%">{% trans 'Company' %}</th>
+                <th width="25%">{% trans 'Invoice' %}</th>
+                {% comment %}
+                <th width="25%">{% trans 'Amount (ex. VAT)' %}</th>
+                <th width="25%">{% trans 'Amount (incl. VAT)' %}</th>
+                {% endcomment %}
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in invoice_list %}
+                <tr>
+                    <td>{{ item.invoice_date|date:"M d, Y" }}</td>
+                    <td>{{ item.invoicing_company }}</td>
+                    <td>{{ item.description }}</td>
+                    {% comment %}
+                    <td>{{ item.invoice_total_ex_tax }}</td>
+                    <td>{{ item.invoice_total_incl_tax }}</td>
+                    {% endcomment %}
+                    <td><a href="{% url 'accounts_products_invoice' item.id %}">{% trans 'View details' %}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

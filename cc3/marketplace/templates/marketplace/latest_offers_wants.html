@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<!-- Latest {{latest_type|capfirst}} -->
+                <div class="content-row {{latest_type}} tabContents {% ifequal latest_type 'offers' %}show{%else %}item_counter{% endifequal %}">
+                    {% for ad in object_list %}
+                        {% include 'includes/ad_item.html' %}
+                    {% endfor %}
+                    <div class="clearfix"><br /></div>
+                    <a href="{% url 'marketplace' %}?adtype={{latest_type}}" class="element more button"><span class="l"></span><span class="c">{% ifequal latest_type 'offers' %}{% trans 'View all offers' %}{% else %}{% ifequal latest_type 'wants' %}{% trans 'View all wants' %}{% endifequal %}{% endifequal %}</span><span class="r"></span></a>
+                </div><!-- end content-row {{latest_type}}s -->

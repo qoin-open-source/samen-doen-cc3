@@ -1,0 +1,10 @@
+{# This can be overridden at project templates level. Override it in templates/cmscontent/news_detail.html. #}
+
+{% load i18n %}
+
+<h2>{{ object.title }}</h2>
+
+<p>{% trans 'By' %} {{ object.created_by }} {% trans 'at' %} {{ object.creation_date }}</p>
+<div>
+    {{ object.content }}
+</div>

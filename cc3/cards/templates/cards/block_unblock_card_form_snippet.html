@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% if card.status == 'A' %}
+    <form id="block_card_form_{{ card.pk }}" action="{% url "owner_block_card" pk=card.pk %}" method="post">
+        {% csrf_token %}{{ form.errors }}
+    </form>
+    <button class="btn btn-rounded btn-green" id="block_card_form_button_{{ card.pk }}">{% trans 'Block' %}</button>
+{% elif card.status == 'B' %}  {# 'Blocked' #}
+    <form id="unblock_card_form_{{ card.pk }}" action="{% url "owner_unblock_card" pk=card.pk %}" method="post">
+        {% csrf_token %}{{ form.errors }}
+    </form>
+    <button class="btn btn-rounded btn-green" id="unblock_card_form_button_{{ card.pk }}">{% trans 'Unblock' %}</button>
+{% endif %}
+

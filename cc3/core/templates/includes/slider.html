@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+{% if user.is_authenticated %}{% else %}
+        <div class="slider-overlay gradient"></div>
+        <div class="slider-shade"></div>
+        <div class="slider-container">
+            <div class="royalSlider rsDefault">
+                <img class="rsImg" src="{% static 'images/slider/slide-01.png' %}" alt="image desc" />
+                <img class="rsImg" src="{% static 'images/slider/slide-02.png' %}" alt="image desc" />
+                <img class="rsImg" src="{% static 'images/slider/slide-03.png' %}" alt="image desc" />
+            </div>
+        </div><!-- slider-container -->
+{% endif %}

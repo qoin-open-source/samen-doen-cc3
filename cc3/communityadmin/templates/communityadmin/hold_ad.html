@@ -1,0 +1,43 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags %}
+
+{% block title %}{% trans 'Hold / Release Ad' %}{% endblock %}
+
+{% block content %}
+
+{% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'communityadmin/sidemenu.html' %}
+            </div>
+        </div>
+{% endblock %}
+
+       <div class="eleven columns">
+            <h4>{% trans 'Hold / Release Ad' %}</h4>
+            <form id="place-ad-form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="element label">
+                    <label>{% trans 'Title' %}</label>
+                    <div>{{object}}</div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="element label{% if form.keywords.errors %} error{% endif %}">
+                    <label>{{form.on_hold.label}}</label>
+                    <div class="field">
+                        <div class="element field">
+                            {{form.on_hold}}
+                            {% if form.on_hold.errors %}<span>{% for error in form.on_hold.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>                                      
+
+                <hr>
+                <button class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Hold / Release Ad' %}</span><span class="r"></span></button>
+            </form>
+
+            <a href="{% url 'communityadmin_ns:wantsoffers' %}">{% trans 'Back to list' %}</a>
+        </div><!-- end eleven columns -->
+
+{% endblock %}

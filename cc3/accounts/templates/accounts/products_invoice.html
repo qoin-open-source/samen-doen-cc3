@@ -1,0 +1,8 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Invoice of ' %}{% endblock %}
+
+{% block content %}
+    {% include "accounts/includes/products/invoice.html" %}
+{% endblock %}

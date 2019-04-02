@@ -1,0 +1,57 @@
+{% extends "marketplace/base.html" %}
+{% load i18n %}
+{% block title %}{% trans 'Content List' %}{% endblock %}
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'communityadmin/sidemenu.html' %}
+        </div>{# end sidebar menu #}
+    </div>{# end five columns sidebar #}
+
+    <div class="eleven columns">
+        <h2>{% trans 'Content' %} - {{ community }}</h2>
+
+        <table class="listing account zebra">
+            {% if community_messages %}
+                <thead>
+                    <tr>
+                        <th>{% trans 'page url'|capfirst %}</th>
+                        <th>{% trans 'placeholder'|capfirst %}</th>
+                        <th>{% trans 'language'|capfirst %}</th>
+                        <th>{% trans 'content'|capfirst %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in community_messages %}
+                        <tr>
+                            <td><a href="{{ message.plugin.page.get_absolute_url }}">{{ message.plugin.page.get_absolute_url }}</a></td>
+                            <td>{{ message.plugin.placeholder }}</td>
+                            <td>{{ message.plugin.language }}</td>
+                            <td>{{ message.body|truncatewords_html:10|safe }}</td>
+                            <td>
+                                <ul class="item-menu">
+                                    <li class="edit"><a href="{% url 'communityadmin_ns:edit-content' message.id %}">{% trans 'Edit' %}</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% else %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="clearfix"></div>
+                            <div>{% trans 'No content found' %}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            {% endif %}
+        </table>
+
+        {# Pagination #}
+        {% include "includes/paginator.html" %}
+
+    </div>{# eleven columns #}
+{% endblock %}

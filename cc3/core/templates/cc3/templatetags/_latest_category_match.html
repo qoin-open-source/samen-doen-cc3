@@ -1,0 +1,10 @@
+{% load i18n %}
+{% if matches %}
+    <div class="notification"><p style='width: 100%; background-image: none; padding-left: 10px;'><strong>
+        {% for match in matches|slice:":2" %}{% trans "New match" %}:
+        <a href="{{ match.profile.get_absolute_url }}">{{ match.profile.business_name }}</a>
+        {% ifequal match.category_type 'offer' %}{% trans "is offering" %}{% else %}{% trans "wants" %}{% endifequal %}
+        {{ match.category }}<br />
+    {% endfor %}</strong></p>
+    </div>
+{% endif %}

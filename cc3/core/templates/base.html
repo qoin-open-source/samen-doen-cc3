@@ -1,0 +1,560 @@
+{% load cms_tags sekizai_tags staticfiles menu_tags i18n google_analytics %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="{{ LANGUAGE_CODE|default:"en-gb" }}"> <!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <title>{% trans 'TradeQoin' %} {% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Meta ================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Add Default CSS ================================= -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+
+    <!-- Add CSS for Slider Plugin -->
+    {% comment %}
+    <link rel="stylesheet" href="{% static 'css/plugins/royalslider/royalslider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/royalslider/skins/default/rs-default.css' %}">
+    {% endcomment %}
+
+    <!-- Add CSS for Cookie Cuttr -->
+    <link rel="stylesheet" href="{% static 'css/cookiecuttr.css' %}">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <style>.gradient { filter: none; }</style>
+        <link rel="stylesheet" href="{% static 'css/ie.css' %}" />
+    <![endif]-->
+
+    <!--[if (gte IE 6)&(lte IE 8)]>
+         <script type="text/javascript" src="{% static 'js/plugins/selectivizr-min.js' %}"></script>
+     <![endif]-->
+
+    <!-- Favicon ================================= -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+
+    {% render_block "css" %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+    <script>window.jQuery || document.write("<script src='{% static 'js/lib/jquery-1.9.1.min.js' %}'>\x3C/script>")</script>
+    <script src="{% static 'js/plugins/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.cookiecuttr.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.cookieCuttr({
+                cookieDeclineButton: true,
+                //cookieResetButton: true,
+                cookiePolicyPageMessage:"{% trans "This website uses cookies to enhance the user-experience." %}",
+                cookieAcceptButtonText: "{% trans "THAT'S FINE" %}",
+                cookieDeclineButtonText: "{% trans "I DON'T AGREE" %}",
+                cookieMessage: "{% trans "This website uses cookies to enhance the user-experience." %}"
+            });
+        });
+    </script>
+    {% block extrahead %}{% endblock %}
+</head>
+
+
+<body {% block extrabody %}class="page-with-sidebar"{% endblock %}>
+    {% cms_toolbar %}
+    <div id="page">
+        {% comment %}
+        <div class="notifications">
+            <div class="container">
+                <div class="row">
+                    <div class="sixteen columns">
+                        <div class="inner">
+                            <span>{% trans 'This website uses cookies to enhance the user-experience.' %}</span>
+                            <a href="#">{% trans "I don't agree" %}</a> | <a class="agree" href="#">{% trans "That's fine" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end notifications -->
+        {% endcomment %}
+
+        <div class="slider">{% block slider %}{% endblock %}</div><!-- end slider -->
+
+        <header class="header container">
+
+            <div class="top-bar">
+                <div class="row">
+                    <div class="logo">
+                        <a href="/{{ request.LANGUAGE_CODE }}/"><img src="{% static 'images/general/logo.png' %}" alt="logo" /></a>
+                    </div>
+                    <nav class="menu">
+                        <ul class="clearfix add_first">{% show_menu_below_id 'home' 0 0 0 0 'menu/topmenu.html' %}</ul>
+                    </nav>
+                    <div class="search">
+                        <div class="search-box"><form action="{% url 'marketplace' %}" method="get">
+                            <input id="id_search" name="search" class="txt" type="text" placeholder="{% trans 'Search for businesses, offers or wants' %}"{% if search %} value="{{ search }}"{% endif %} />
+                            <input type="submit" value="{% trans 'Submit' %}">
+                        </form>
+                        </div>
+                        <ul class="buttons">
+                            <li class="join">{% if user.is_authenticated %}<a href="{% url 'accounts-update-profile' %}">{% trans 'Profile' %}</a>{% else %}<a href="#">{% trans 'Join' %}</a>{% endif %}</li>
+                            <li class="login">{% if user.is_authenticated %}<a href="{% url 'auth_logout' %}?next=/">{% trans "Logout" %}</a>{% else %}<a href="#">{% trans "Login" %}</a>{% endif %}</li>
+                            <li class="lang"><a href="#">{% language_chooser 'menu/current_language.html' %}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div><!-- end menu-block -->
+
+            <div class="middle-bar">
+                {% if not user.is_authenticated %}
+                <div class="join">
+                    <script type="text/javascript" >
+                        var registration_submit_in_progress = false;
+                        $(function(){
+                            var csrftoken = $.cookie('csrftoken');
+
+                            function csrfSafeMethod(method) {
+                                {# these HTTP methods do not require CSRF protection #}
+                                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                            }
+                            $.ajaxSetup({
+                                crossDomain: false, // obviates need for sameOrigin test
+                                beforeSend: function(xhr, settings) {
+                                    if (!csrfSafeMethod(settings.type)) {
+                                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                                    }
+                                }
+                            });
+
+                            /* attach a submit handler to the form */
+                            $("#registration_register_form").submit(function(event) {
+                                if (!registration_submit_in_progress) {
+                                    var $reg_form_errors = $( "#registration_register_form_errors" );
+
+                                    // prevent double clicks / enter buttons
+                                    registration_submit_in_progress = true;
+                                    $reg_form_errors.html('');
+                                    $reg_form_errors.addClass ( 'hide' );
+                                    $('#reg_form_button').hide();
+                                    $('#reg_form_spinner').show();
+
+                                    /* stop form from submitting normally */
+                                    event.preventDefault();
+
+                                    /* Send the data using post */
+                                    var posting = $.post( "{% url 'registration_register' %}", $("#registration_register_form").serialize() );
+
+                                    /* Put the results in a div */
+                                    posting.done(function( data ) {
+                                        var $reg_form_errors = $( "#registration_register_form_errors" );
+                                        $reg_form_errors.html('');
+                                        $reg_form_errors.addClass ( 'hide' );
+                                        $("#registration_register_form").html('<div class="element info-box"><h4>{% trans "Registered" %}</h4><p>{% trans "You are now registered. Please check your email for your activation instructions" %}</p></div>');
+                                        registration_submit_in_progress = false;
+                                    });
+                                    // deal with form errors
+                                    posting.fail(function( data ) {
+                                        var parsedResponse= $.parseJSON( data.responseText );
+                                        var errorMessage = "";
+                                        $.each(parsedResponse, function(i, val) {
+                                            errorMessage += "<p>" + val + "</p>";
+                                        });
+
+                                        $reg_form_errors.html( errorMessage );
+                                        $reg_form_errors.addClass ( 'element form-error' );
+                                        $reg_form_errors.removeClass ( 'hide' );
+                                        $('#reg_form_button').show();
+                                        $('#reg_form_spinner').hide();
+
+                                        registration_submit_in_progress = false;
+
+                                    });
+                                }
+                            });
+                        });
+                    </script>
+
+                    <form id="registration_register_form" action="{% url 'registration_register' %}" method="post" class="inner">
+                        {% csrf_token %}
+
+                        <fieldset>
+                            <h3>{% trans "Register to join TradeQoin today!" %}</h3>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" class="large" placeholder="{% trans 'Email address' %}" id="id_email" maxlength="75" name="email">
+                            <input type="password" class="small" placeholder="{% trans 'Password' %}" id="id_reg_password" name="reg_password" >
+                            <div class="checkbox">
+                                <input type="checkbox" value="1" id="id_tandc_confirmation" name="tandc_confirmation">{% blocktrans with tandc_url=tandc_url %}I've read and accepted the<br />TradeQoin <a href="{{tandc_url}}">terms &amp; conditions{% endblocktrans %}</a>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" class="large" placeholder="{% trans 'Confirm Email' %}" id="id_email_confirmation" maxlength="75" name="email_confirmation" >
+                            <input type="password" class="small" placeholder="{% trans 'Confirm Password' %}" id="id_password_confirmation" name="password_confirmation">
+                            <input type="text" class="small" placeholder="{% trans 'Community Code' %}" id="id_communitycode" name="community_code">
+                            <div id="reg_form_spinner" class="element spinner hide" style="float:left; background-color:white;"></div>
+                            <button id="reg_form_button">{% trans 'Submit' %} <i></i></button>
+                        </fieldset>
+                    </form><div id="registration_register_form_errors" class="hide"></div>
+                </div>
+                <div class="login">
+                    <form action="{% url 'login' %}" method="post" class="inner">
+                        {% csrf_token %}
+
+                        <fieldset>
+                            <input type="text" id="id_username" name="username" placeholder="{% trans 'Email address' %}">
+                            <input type="password" id="id_password" name="password" placeholder="{% trans 'Password' %}">
+                            <input type="submit" value="{% trans 'Submit' %}">
+                            <input type="hidden" name="next" value="{{ request.path }}" />
+                        </fieldset>
+                    </form>
+                </div>
+                {% endif %}
+                <div class="lang">
+                    <div class="inner">
+                        <p>{% trans "Language" %}</p>
+                        {% language_chooser 'menu/language_chooser.html' %}
+                    </div>
+                </div>
+
+                {% block subnavigation %}
+                <div class="sub-navigation">
+                    <ul class="clearfix">
+                    {% show_menu 2 2 0 100 "menu/topsubmenu.html"%}
+                    </ul>
+                </div>
+                {% endblock %}
+            </div>
+
+            {% block joinblock %}
+            {% if user.is_authenticated %}{% include 'includes/middlebar.html' %}
+            {% endif %}
+
+            {% endblock %}
+        </header>
+
+        <header class="header only300">
+            <div class="container">
+                <div class="sixteen columns">
+                    <div class="row expand-top">
+                        <a class="logo" href="/{{ request.LANGUAGE_CODE }}/"><img src="{% static 'images/general/logo-300.png' %}" alt="logo" /></a>
+                        <div class="pull-right">
+                            <a class="lang" href="#">{{ request.LANGUAGE_CODE|upper }}</a>
+                            <a class="search" href="#"></a>
+                        </div>
+                    </div>
+
+                    <div class="top-overlay">
+                        <div class="lang">
+                            <div class="inner">
+                                <p>{% trans "Language" %}</p>
+                                {% include 'menu/language_chooser.html' %}
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="search">
+                            <form method="get" action="/{{ request.LANGUAGE_CODE }}/marktplaats/">
+                                <input class="txt" type="text" name="search" placeholder="{% trans 'Search for businesses, offers or wants' %}" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row buttons expand-middle">
+                        <ul>
+                            <li>{% if user.is_authenticated %}<a class="join" href="{% url 'accounts-update-profile' %}">{% trans 'Profile' %}</a>{% else %}<a class="join expander" href="#">{% trans 'Join' %}</a>{% endif %}</li>
+                            {% if user.is_authenticated %}<li><a class="login" href="{% url 'auth_logout' %}?next={{ request.path }}">{% trans 'Logout' %}</a></li>{% else %}<li><a class="login expander" href="#">{% trans 'Login' %}</a></li>{% endif %}
+                            <li><a class="menu expander" href="#">{% trans 'Menu' %} +</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="middle-bar">{% if user.is_authenticated %}{% else %}
+                        <div class="join">
+                            <form action="{% url 'registration_register' %}" method="post" class="inner">
+                                {% csrf_token %}
+
+                                <fieldset>
+                                    <h3>{% trans "Register to join TradeQoin today!" %}</h3>
+                                </fieldset>
+                                <fieldset>
+                                    <input type="text" class="large" placeholder="{% trans 'Email address' %}" id="id_email_mobile" maxlength="75" name="email">
+                                    <input type="text" class="large" placeholder="{% trans 'Confirm Email' %}" id="id_email_confirmation_mobile" maxlength="75" name="email_confirmation" >
+
+                                    <input type="password" class="small" placeholder="{% trans 'Password' %}" id="id_reg_password_mobile" name="reg_password" >
+                                    <input type="password" class="small" placeholder="{% trans 'Confirm Password' %}" id="id_password_confirmation_mobile" name="password_confirmation">
+
+        
+                                    <input type="text" class="small" placeholder="{% trans 'Community Code' %}" id="id_communitycode_mobile" name="community_code">
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="tandc_confirmation" value="1">{% blocktrans with tandc_url=tandc_url %}I’ve read and accepted the<br />TradeQoin <a href="{{tandc_url}}">terms &amp; conditions{% endblocktrans %}</a>
+                                    </div>
+                                    <button>{% trans 'Submit' %} <i></i></button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="login">
+                            <form action="{% url 'login' %}" method="post" class="inner">
+                                <fieldset>
+                                    {% csrf_token %}
+                                    <input type="text" class="large" id="id_username" name="username" placeholder="{% trans 'Email address' %}">
+                                    <input type="password" class="small" id="id_password" name="password" placeholder="{% trans 'Password' %}">
+                                    <input type="hidden" name="next" value="{{ request.path }}" />
+                                    <button>{% trans 'Submit' %} <i></i></button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        {% endif %}
+                        <div class="menu">
+                            <ul>
+                                <li><a href="{% page_url 'marketplace' %}">{% trans 'Marketplace' %}</a></li>
+                                <li{% if user.is_authenticated %} class="active"{% endif %}>
+                                    <a href="{% page_url 'benefits' %}">{% trans 'About' %}</a>
+
+                                    <ul class="sub">
+                                        <li><a href="{% page_url 'theconcept' %}">{% trans "General Information" %}</a></li>
+                                        <li><a href="{% page_url 'benefits' %}">{% trans "Businesses" %}</a></li>
+                                        {% comment %}
+                                        <li><a href="{% page_url 'about_business' %}">Matchmakers</a></li>
+                                        <li><a href="{% page_url 'about_communities' %}">{% trans "Communities" %}</a></li>
+                                        <li><a href="{% page_url 'about_policy_makers' %}">{% trans "Policy Makers" %}</a></li>
+                                        {% endcomment %}
+                                    </ul>
+                                </li>
+                                <li><a href="{% page_url 'contact' %}">{% trans "Contact" %}</a></li>
+                                <li><a href="{% page_url 'faq' %}">{% trans 'FAQ' %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                        <div class="container">
+                            <div class="row">
+                                <div class="tagline eight columns">
+                                    <h1>{% blocktrans with cc3_profile_full_name as cc3_profile_full_name %}Welcome <span>{{ cc3_profile_full_name }}</span>{% endblocktrans %}</h1>
+                                </div>
+                                <div class="balance eight columns">
+                                    <span class="my-balance">{% trans "My Balance" %}</span>
+                                    <span class="icon">{{ currency_symbol }}</span>
+                                    <span class="amount">{{ balance|floatformat:"-2" }}</span>
+                                    <a class="button" href="{% url 'accounts_home' %}">{% trans "My account" %}</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="block sidebar-menu">
+                                    <div class="company not-mobile">
+                                        <div class="logo">
+                                            <img src="{% static 'images/content/sp-account-logo.png' %}" alt="logo" />
+                                        </div>
+                                        <span>{{ user }}</span>
+                                    </div>
+                                    <div class="row active-item account .only-mobile">
+                                        <a href="#">{% trans "Choose a page" %}</a>
+                                    </div>
+                                    <ul class="sbmenu">
+                                        <li class="account">
+                                            <a href="#"><span></span>{% trans "Account" %}</a>
+                                            <ul class="not-mobile">
+                                                <li>
+                                                    <form action="/" method="post" class="inner">
+                                                        <fieldset>
+                                                            <input type="text" class="large" placeholder="{% trans "Description" %}">
+                                                            <input type="text" class="large" placeholder="{% trans "From/To" %}">
+                                                            <input type="text" class="large" placeholder="{% trans "From date" %}">
+                                                            <input type="text" class="large" placeholder="{% trans "To date" %}">
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <button>{% trans "Submit" %}<i></i></button>
+                                                        </fieldset>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="pay-direct{% ifequal sbmenu 'pay-direct' %} active{% endifequal %}">
+                                            <a href="{% url 'accounts_pay_direct' %}"><span></span>{% trans 'Pay direct' %}</a>
+                                        </li>
+
+                                        <li class="credit{% ifequal sbmenu 'credit' %} active{% endifequal %}">
+                                            <a href="{% url 'accounts-credit' %}"><span></span>{% trans 'Credit' %}</a>
+                                        </li>
+
+                                        <li class="my-ads{% ifequal sbmenu 'my-ads' %} active{% endifequal %}">
+                                            <a href="{% url 'accounts_my_ads' %}"><span></span>{% trans 'My ads' %}</a>
+                                            {% ifequal sbmenu 'my-ads' %}
+                                            <ul>
+                                                <li><a href="{% url 'accounts_place_ad' %}">{% trans 'Place Ad' %}</a></li>
+                                                {% comment %}
+                                                <li><a href="{# % url 'accounts_place_ad' % #}#">Favourites</a></li>
+                                                {% endcomment %}
+                                            </ul>
+                                            {% endifequal %}
+                                        </li>
+                                        {% comment %}
+                                        <!--
+                                        <li class="pay-direct">
+                                            <a href="#"><span></span>{% trans "Pay direct" %}</a>
+                                        </li>
+                                        <li class="credit">
+                                            <a href="#"><span></span>{% trans "Credit" %}</a>
+                                        </li>
+                                        <li class="my-ads">
+                                            <a href="#"><span></span>{% trans "My ads" %}</a>
+                                        </li>
+                                            -->
+                                        <!--<li class="invoices">
+                                            <a href="#"><span></span>{% trans "Invoices" %}</a>
+                                        </li>
+                                        <li class="community">
+                                            <a href="#"><span></span>{% trans "Community" %}</a>
+                                        </li>
+                                        <li class="contacts">
+                                            <a href="#"><span></span>{% trans "Contacts" %}</a>
+                                        </li>
+                                        -->
+                                        {% endcomment %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="tagline">
+                                <h1>{% trans "Meet TradeQoin" %}</h1>
+                                <h2>{% trans "New opportunities in times of downturn" %}</h2>
+                                <span class="arrow"><a href="#" class="show">i</a></span>
+                            </div>
+                            <div class="tagline hide">
+                                <nav class="lower-menu">
+                                    <ul class="item_counter">
+                                        <li><a href="#">{% trans "Find new <br />clients" %}</a></li>
+                                        <li><a href="#">{% trans "Increase <br />turnover" %}</a></li>
+                                        <li><a href="#">{% trans "Improve <br />profit" %}</a></li>
+                                        <li><a href="#">{% trans "Improve <br />cash position" %}</a></li>
+                                    </ul>
+                                    <span class="arrow"></span>
+                                </nav>
+                            </div>
+                            <div class="tagline hide">
+                                <a class="join" href="#"><span>{% trans "Join now!" %}</span></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <section id="main" class="container{% block extramainclasses %}{% endblock %}">
+            {% placeholder 'top_text' %}
+
+            {% block content %}{% endblock %}
+
+        </section><!-- end main -->
+
+        <footer id="footer">
+            <div class="top">
+                <div class="container">
+                    <div class="row footer-center">
+                        <ul class="footer-menu">{% show_menu_below_id 'home' 0 0 0 0 'menu/footer.html' %}</ul>
+
+                        <ul class="social">
+                            <li class="follow">{% trans "Follow us" %}</li>
+                            <li><a href="https://twitter.com/TradeQoin" class="twitter" target="_blank"></a></li>
+                            <li><a href="https://www.linkedin.com/company/tradeqoin" class="linkedin" target="_blank"></a></li>
+                            <li><a href="https://www.facebook.com/tradeqoin" class="facebook" target="_blank"></a></li>
+                        </ul>
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </div><!-- end top -->
+
+            <div class="blocks clearfix container">
+                <div class="container">
+                    <div class="sixteen columns">
+                        <ul class="block">
+                            <li><h2>{% trans "Marketplace" %}</h2></li>
+                            <li><a href="{% url 'marketplace-targetted' 'businesses' %}">{% trans "Businesses" %}</a></li>
+                            <li><a href="{% url 'marketplace-targetted' 'products-and-services' %}">{% trans "Products &amp; Services" %}</a></li>
+                        </ul><!-- end block -->
+                        <ul class="block">
+                            <li><h2>{% trans "About" %}</h2></li>
+                            <li>{% trans "General Information" %}</li>
+                            {% show_menu_below_id 'general_information' %}
+                        </ul><!-- end block -->
+                        <ul class="block no-header">
+                            <li>{% trans "Businesses" %}</li>
+                            {% show_menu_below_id 'about_business' %}
+                        </ul><!-- end block -->
+                        <!--ul class="block no-header">
+                            <li>{% trans "Communities" %}</li>
+                            {% show_menu_below_id 'about_communities' %}
+                        </ul--><!-- end block -->
+                        <!--ul class="block no-header">
+                            <li>{% trans "Policy Makers" %}</li>
+                            {% show_menu_below_id 'about_policy_makers' %}
+                        </ul--><!-- end block -->
+                        <ul class="block no-header">
+                            <li><a href="{% page_url "contact" %}">{% trans "Contact" %}</a></li>
+                        </ul><!-- end block -->
+                        <ul class="block no-header">
+                            <li><a href="{% page_url "faq" %}">{% trans "FAQ" %}</a></li>
+                        </ul><!-- end block -->
+                    </div><!-- end sixteen columns -->
+                </div><!-- end sixteen columns -->
+            </div><!-- end blocks -->
+
+            <div class="bottom">
+                <div class="container">
+                    <div class="eight columns">
+                        <a href="http://www.nweurope.eu/index.php" title="Interreg"><img src="{% static 'images/content/interreg_rgb.png' %}" width="120" height="83" style="width:120px;height:83px;" alt="Interreg" /></a>
+                        <a href="http://www.ccia.eu" title="CCIA"><img src="{% static 'images/content/footer-logo-3.png' %}" alt="CCIA" /></a>
+                        <a href="http://www.doen.nl/" title="DOEN"><img src="{% static 'images/content/footer-logo-2.png' %}" alt="DOEN" /></a>
+                    </div>
+
+                    <div class="eight columns questions">
+                        {% trans "Questions? Call us: +31 (0)20 717 3505" %}<br />
+                        <a href="mailto:info@tradeqoin.com">info@tradeqoin.com</a>
+                    </div>
+                </div><!-- end container -->
+            </div><!-- end bottom -->
+
+        </footer><!-- end footer -->
+
+    </div><!-- end page -->
+
+
+    <script src="{% static 'js/lib/css3-mediaqueries.js' %}"></script>
+    <script src="{% static 'js/lib/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/plugins/checkbox.min.js' %}"></script>
+    <!--script src="{% static 'js/plugins/jquery.royalslider.min.js' %}"></script-->
+    <script src="{% static 'js/plugins/jquery.placeholder.js' %}"></script>
+    <!--script src="{% static 'js/lib/typeahead.min.js' %}"></script-->
+    <script src="{% static 'js/lib/typeahead.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.fs.selecter.min.js' %}"></script>
+    <script src="{% static 'js/plugins/tooltip.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.modal.min.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.fileinput.js' %}"></script>
+    <script src="{% static 'js/lib/galleria-1.2.9.min.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.ui.datepicker-en.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.ui.datepicker-nl.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.ui.datepicker-fr.js' %}"></script>
+    <script type="text/javascript">
+        var language = "{{request.LANGUAGE_CODE}}";
+        jQuery(function($){
+            $.datepicker.setDefaults( $.datepicker.regional[language] );
+        });
+    </script>
+    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+    <script src="{% static 'js/master.js' %}"></script>
+    {% render_block "js" %}
+    {% block extrajs %}{% endblock %}
+    {% google_analytics %}
+    </body>
+</html>

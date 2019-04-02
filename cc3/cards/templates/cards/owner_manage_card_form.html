@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans 'Manage card' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+            <h2>{% trans 'Manage Card' %}</h2>
+            {% include 'includes/messages.html' %}
+
+            {% if owners_cards %}
+            {% for card in owners_cards %}
+            <p>{{ card }}</p>
+            {% endfor %}
+            {% else %}
+            {% trans 'You do not have any cards yet.' %}
+            {% endif %}
+
+        </div>
+        <div class="col-md-6 col-lg-5">
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}<!--
+    <script type="text/javascript">
+        $(function() {
+          $(".checkbox-container").addClass("checkbox");
+        });
+    </script>
+    -->
+{% endblock %}

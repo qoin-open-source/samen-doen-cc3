@@ -1,0 +1,18 @@
+{# This can be overridden at project templates level. Override it in templates/cmscontent/homepage_notice_column.html. #}
+
+<div class="col-sm-4">
+    <h2>{{ instance.title }}</h2>
+
+    <p>
+        <strong>{{ instance.paragraph_1 }}</strong>
+    </p>
+
+    <p>{{ instance.paragraph_2 }}</p>
+
+    <p>
+        <br/>
+        <span class="register-btn">
+            <a href="{{ instance.link }}">{{ instance.link_text }}</a>
+        </span>
+    </p>
+</div>

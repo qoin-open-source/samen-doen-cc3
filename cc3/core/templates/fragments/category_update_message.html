@@ -1,0 +1,9 @@
+{% load i18n %}
+{% ifequal type 'want' %}{% trans "Matches found for your newly added Offer categories" %}{% else %}{% trans "Matches found for your newly added Want categories" %}{% endifequal %}:
+<ul>
+    {% for match in matches|slice:":2" %}
+        <li><a href="{{ match.profile.get_absolute_url }}">{{ match.profile.business_name }}</a>
+        {% ifequal type 'want' %}{% trans "wants" %}{% else %}{% trans "is offering" %}{% endifequal %}
+        {{ match.categories|join:", " }}</li>
+    {% endfor %}
+</ul>

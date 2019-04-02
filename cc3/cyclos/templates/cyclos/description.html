@@ -1,0 +1,3 @@
+{% if transaction.sender.cc3_profile %}
+<a target="cyclos" href="{{ cyclos_base }}?transferId={{ transaction.transfer_id }}&typeId=5&memberId={{ transaction.sender.cc3_profile.cyclos_account.cyclos_id }}">{{ transaction.description }}{{ transaction.title }}</a>
+{% else %}{{ transaction.description }}{{ transaction.title }}{% endif %}

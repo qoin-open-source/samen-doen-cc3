@@ -1,0 +1,43 @@
+{% load i18n cms_tags %}
+
+{% if user.is_authenticated %}
+        <div class="lower-bar clearfix container">
+            <div class="row">
+                <div class="tagline eight columns">
+                    <h1>{% blocktrans with cc3_profile_full_name as cc3_profile_full_name %}Welcome 
+                        <span>{{ cc3_profile_full_name }}</span>{% endblocktrans %}
+                        {% if perms.cyclos.change_cc3community %}<span>({{ user_cc3_profile.community }})</span>{% endif %}</h1>
+                </div>
+                <div class="balance eight columns">
+                    {% if user.is_community_admin %}
+                        <a href="{% url 'communityadmin_ns:memberlist' %}" class="element button my-account"><span class="l"></span><span class="c">{% trans "Community admin" %}</span><span class="r"></span></a>
+                    {% else %}
+                    <span class="my-balance">{% trans "My Balance" %}</span>
+                    <span class="icon">{{currency_symbol}}</span>
+                    <span class="amount">{{ balance|floatformat:"-2" }}</span>
+                    <a href="{% url 'accounts_home' %}" class="element button my-account"><span class="l"></span><span class="c">{% trans "My account" %}</span><span class="r"></span></a>
+                    {% endif %}
+                </div>
+            </div><!-- end row -->
+        </div><!-- end lower-bar -->
+        {% else %}
+        <div class="lower-bar clearfix">
+            <div class="tagline">
+                <h1>{% trans "Meet TradeQoin" %}</h1>
+                <h2>{% trans "New opportunities in times of downturn" %}</h2>
+                <span class="arrow"></span>
+            </div>
+
+            <nav class="lower-menu">
+                <ul class="clearfix item_counter">
+                    <li><a href="{% page_url 'benefits' %}">{% trans "Find new <br />clients" %}</a></li>
+                    <li><a href="{% page_url 'benefits' %}">{% trans "Increase <br />turnover" %}</a></li>
+                    <li><a href="{% page_url 'benefits' %}">{% trans "Improve <br />profit" %}</a></li>
+                    <li><a href="{% page_url 'benefits' %}">{% trans "Improve <br />cash position" %}</a></li>
+                </ul>
+                <span class="arrow"></span>
+            </nav>
+
+            <a class="join" id="join_now" href="#"><span>{% trans "Join now!" %}</span></a>
+        </div><!-- end lower-bar -->
+{% endif %}

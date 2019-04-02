@@ -1,0 +1,18 @@
+{% load i18n %}
+{% if campaign.has_finished %}
+    {% trans "This activity is finished" %}
+{% else %}
+    {% if campaign.in_progress %}
+        {% trans "This activity has started" %}
+    {% else %}
+        {% if campaign.is_cancelled %}
+            {% trans "This activity has been cancelled" %}
+        {% else %}
+            {% if campaign.num_participants_required %}
+                {% blocktrans count num_reqd=campaign.num_participants_required %}Still {{ num_reqd }} participant needed{% plural %}Still {{ num_reqd }} participants needed{% endblocktrans %}!
+            {% else %}
+                {% trans "This activity is full" %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endif %}

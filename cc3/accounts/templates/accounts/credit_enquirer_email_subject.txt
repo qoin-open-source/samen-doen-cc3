@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with site=site %}Credit Application sent through {{ site }}{% endblocktrans %}

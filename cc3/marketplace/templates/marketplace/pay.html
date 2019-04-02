@@ -1,0 +1,177 @@
+{% extends "marketplace/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Pay' %}{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" >
+
+$(function() {
+    var pay_url = "{% url 'marketplace-pay' ad.id %}";
+    var csrftoken = $.cookie('csrftoken');
+    var payment_in_progress = false;
+    
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    /* attach a submit handler to the payment form */
+    $("#payment_form").submit(function(event) {
+        // if the confirmed input #id_confirmed has been added, submit form normally
+        if ($("#id_confirmed").length) {
+            return true;
+        }
+
+        if (!payment_in_progress) {
+            var $payment_form_errors = $( "#payment_form_errors" );
+            
+            // prevent double clicks / enter buttons
+            payment_in_progress = true;
+            $payment_form_errors.html('');
+            $payment_form_errors.addClass ( 'hide' );
+            $('#payment_form_button').hide();
+            $('#payment_form_spinner').show();
+            
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* Send the data using post */
+            var posting = $.post( pay_url, $("#payment_form").serialize() );
+
+{% verbatim %}
+            /* Put the results in a div */
+            posting.done(function( data ) {
+                
+                $payment_form_errors.html('');
+                $payment_form_errors.addClass ( 'hide' );
+                $('#modal_dialog').modal();
+                $('#payment_form_button').show();
+                $('#payment_form_spinner').hide();
+                payment_in_progress = false;
+            });
+{% endverbatim %}
+            // deal with form errors
+            posting.fail(function( data ) {
+                var parsedResponse= $.parseJSON( data.responseText );
+                var errorMessage = "";
+                $.each(parsedResponse, function(i, val) {
+                    errorMessage += "<p>" + val + "</p>";
+                });
+                
+                $payment_form_errors.html( errorMessage );
+                $payment_form_errors.addClass ( 'element form-error' );
+                $payment_form_errors.removeClass ( 'hide' );
+                $('#payment_form_button').show();
+                $('#payment_form_spinner').hide();
+
+                payment_in_progress = false;
+
+            });
+        }
+    });
+
+    // confirm the payment - if modal dialog has been used (ie there is javascript!)
+    $("#confirm_payment").click(function(event) {
+        if($(this).data('lastClick') + 10000 > new Date().getTime()){
+
+            e.stopPropagation();
+            return false;
+        }
+        $(this).data('lastClick', new Date().getTime());        
+        var confirmed_input = $("<input>").attr("type", "hidden").attr("id", "id_confirmed").attr("name", "confirmed").val(1);
+        $('#payment_form').append($(confirmed_input));
+        $('#payment_form').submit();
+    });
+    
+});
+</script>
+{% endblock %}
+
+{% block content %}
+
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->           
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+            <h4>{% trans 'Pay for item' %}</h4>
+            {% include 'includes/messages.html' %}
+            {% if form %}
+            <div id="payment_form_errors" class="hide"></div>
+            <form id="payment_form" method="post" action="." class="element form">{% csrf_token %}
+                <fieldset>
+                    <p>
+                    {% blocktrans with ad.title as ad_title %}Please check the details for your purchase, and click Process Payment if you are happy. <br />
+
+                    You are purchasing <strong>{{ad_title}}</strong>.<br />
+                    {% endblocktrans %}
+                    </p>            
+                    <div class="element label{% if form.amount.errors %} error{% endif %}">                       
+                        <label for="id_amount">{{form.amount.label}}</label>
+                        <div class="field">
+                            <div class="element field input-price">
+                                <span class="icon">{{currency_symbol}}</span>
+                                <input type="text" disabled=True class="input-text large" value="{% if form.amount.value %}{{form.amount.value}}{% endif %}">
+                                <input id="id_amount" disabled=True name="amount" type="hidden" class="input-text large" readonly value="{% if form.amount.value %}{{form.amount.value}}{% endif %}">{% if form.amount.errors %}<span>{% for error in form.amount.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="element label{% if form.contact_name.errors %} error{% endif %}">
+                        <label>{{form.contact_name.label|safe}} <a href="#" class="element tp" title="{% trans 'You can enter either a company name or the name of the person you are doing business with.' %}"></a></label>
+                        <div class="element field">
+                            <input type="text" disabled=True value="{{form.contact_name.value}}" />
+                            <input id="id_contact_name" name="contact_name" type="hidden" value="{% if form.contact_name.value %}{{form.contact_name.value}}{% endif %}">{% if form.contact_name.errors %}<span>{% for error in form.contact_name.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {{form.email}}
+                    <div class="element label{% if form.description.errors %} error{% endif %}">
+                        <label for="id_description">{{form.description.label}}</label>
+                        <div class="element field">
+                            <textarea disabled=True>{{form.description.value|striptags|safe}}</textarea>
+                        <input type="hidden" id="id_description" name="description" value="{{form.description.value}}"/>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {{form.ad}}
+                    <hr>
+                    <div id="payment_form_spinner" class="element spinner hide pull-right"></div>
+                    <button id="payment_form_button" class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Process Payment' %}</span><span class="r"></span></button>
+                </fieldset>
+            </form>
+            {% endif %}
+            <div id="modal_dialog" class="modal_dialog">
+                <div class="title">YOU’RE ABOUT TO COMPLETE A PAYMENT</div>
+                <div class="highlight" id="pay_highlight">
+{% blocktrans with name=form.contact_name.value amount=form.amount.value %}Pay {{name}} an amount of <span class="icon">{{currency_symbol}}</span> {{amount}}{% endblocktrans %}</div>
+                <div class="options">
+                    <a href="#" class="element button my-account" rel="modal:close">
+                        <span class="l"></span>
+                        <span class="c">{% trans 'Cancel' %}</span>
+                        <span class="r"></span>
+                    </a>
+                    <a id="confirm_payment" href="#" class="element button my-account">
+                        <span class="l"></span>
+                        <span class="c">{% trans 'Confirm' %}</span>
+                        <span class="r"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div><!-- end eleven columns -->
+
+{% endblock %}
+

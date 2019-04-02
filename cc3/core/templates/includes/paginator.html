@@ -1,0 +1,49 @@
+{% load i18n %}
+
+{% if is_paginated %}
+    <div class="pagination not-mobile">
+        {% if page_obj.has_previous %}
+            <a class="element button prev" href="?page={{ page_obj.previous_page_number }}{{ getvars }}">
+                <span class="disabled l"></span>
+                <span class="c">{% trans "previous" %}</span>
+                <span class="r"></span>
+            </a>
+        {% else %}
+            <a class="element button prev">
+                <span class="disabled l"></span>
+                <span class="c">{% trans "previous" %}</span>
+                <span class="r"></span>
+            </a>
+        {% endif %}
+
+        <div class="numbers">
+            <ul>
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page %}
+                        {% ifequal page page_obj.number %}
+                            <li class="active"><a>{{ page }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ page }}{{ getvars }}">{{ page }}</a></li>
+                        {% endifequal %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if page_obj.has_next %}
+            <a class="element button next" href="?page={{ page_obj.next_page_number }}{{ getvars }}">
+                <span class="disabled l"></span>
+                <span class="c">{% trans "next" %}</span>
+                <span class="r"></span>
+            </a>
+        {% else %}
+            <a class="element button next">
+                <span class="disabled l"></span>
+                <span class="c">{% trans "next" %}</span>
+                <span class="r"></span>
+            </a>
+        {% endif %}
+    </div>
+{% endif %}

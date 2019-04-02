@@ -1,0 +1,26 @@
+{% load staticfiles menu_tags cms_tags %}
+            
+            <div class="block sidebar-menu">
+
+                <div class="inner only-mobile">
+
+                    <!--h1 class="sb-title">{% page_attribute "page_title" request.current_page.parent_id %}</h1-->
+
+                    <div class="row active-item" style="margin-bottom: 0px;">
+                        <a href="#"><span></span>{% page_attribute "page_title" %}</a>
+                    </div>
+
+                    <ul class="sbmenu about">
+                         {% show_sub_menu 1 3 0 "menu/sidebar.html" %}
+                         {% show_menu 2 2 0 100 "menu/topsubmenu.html" %}
+                    </ul>
+
+                </div>
+
+                <div class="inner not-mobile">
+                    <ul class="sbmenu about">
+                         {% show_sub_menu 1 3 0 "menu/sidebar.html" %}
+                    </ul>
+                </div>
+
+            </div><!-- end sidebar menu -->

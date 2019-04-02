@@ -1,0 +1,84 @@
+{% load i18n staticfiles pagination_tags thumbnail cc3_tags %}
+
+<table class="listing myads zebra {% if not show_on_mobile %}not-mobile{% endif %}">
+    <thead>
+        <tr>
+            <th class="not-mobile">{% trans 'Image' %}</th>
+            <th>
+                {% trans 'Title' %}
+                {% if sort %}
+                    <a class="sort{% ifequal myads_field 'title' %} selected{% endifequal %}" href="{% url "accounts_my_ads' %}title/{% include 'includes/my_ads_direction.html' %}/"></a>
+                {% endif %}
+            </th>
+            <th class="not-mobile">
+                {% trans 'Description' %}
+                {% if sort %}
+                    <a class="sort{% ifequal myads_field 'description' %} selected{% endifequal %}" href="{% url 'accounts_my_ads' %}description/{% include 'includes/my_ads_direction.html' %}/"></a>
+                {% endif %}
+            </th>
+            <th>
+                {% trans 'Price' %}
+                {% if sort %}
+                    <a class="sort{% ifequal myads_field 'price' %} selected{% endifequal %}" href="{% url 'accounts_my_ads' %}price/{% include 'includes/my_ads_direction.html' %}/"></a>
+                {% endif %}
+            </th>
+            <th>
+                {% trans 'Type' %}
+                {% if sort %}
+                    <a class="sort{% ifequal myads_field 'adtype' %} selected{% endifequal %}" href="{% url 'accounts_my_ads' %}adtype/{% include 'includes/my_ads_direction.html' %}/"></a>
+                {% endif %}
+            </th>
+            <th>
+                {% trans 'Views' %}
+                {% if sort %}
+                    <a class="sort{% ifequal myads_field 'views' %} selected{% endifequal %}" href="{% url 'accounts_my_ads' %}views/{% include 'includes/my_ads_direction.html' %}/"></a>
+                {% endif %}
+            </th>
+            <th>
+                {% trans 'Status' %}
+            </th>
+            <th class="blue not-mobile">&nbsp;
+                <span></span>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for ad in ad_list %}
+            {% with ad.id as ad_id %}
+                <tr class="status-{{ ad.status }}">
+                    <td class="img not-mobile">
+                        <a href="{% url 'marketplace-detail' ad_id %}">
+                            {% if ad.adimage_set.all.count == 0 or not ad|adimage_set_exists %}
+                                <img src="{% static 'images/backgrounds/avatar-placeholder.png' %}" width="44" height="44" alt="logo" />
+                            {% else %}
+                                <img src="{{ ad.adimage_set.all.0.image|thumbnail_url:'marketplacethumb' }}" alt="" />
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td class="title"><a href="{% url 'marketplace-detail' ad_id %}">{{ ad.title }}</a></td>
+                    <td class="description not-mobile"><a href="{% url 'marketplace-detail' ad_id %}">{{ ad.description|safe }}</a></td>
+                    <td class="price">
+                        <span class="icon">{{ currency_symbol }}</span>
+                        <span class="amount"><a href="{% url 'marketplace-detail' ad_id %}">{{ ad.get_price }}</a></span>
+                    </td>
+                    <td class="type"><a href="{% url 'marketplace-detail' ad_id %}">{{ ad.adtype }}</a></td>
+                    <td class="views"><a href="{% url 'marketplace-detail' ad_id %}">{{ ad.views }}</a></td>
+                    <td class="status">
+                        <span class="{{ ad.status }}">{{ ad.get_status_display }}
+                            {% if ad.status == 'onhold' %}
+                                <a title="" class="element tp" href="#" data-original-title="{% blocktrans %}The administrator has temporarily placed your advert on hold. Please contact {{ admin_name }} &lt;{{ admin_email }}&gt;{% endblocktrans %}"></a>
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td class="edit-buttons not-mobile">
+                        <ul class="item-menu">
+                            <li class="edit"><a href="{% url 'accounts_edit_ad' ad_id %}">{% trans 'Edit' %}</a></li>
+                            <li class="disable"><a href="{%url 'accounts-disable-ad' ad_id %}">{% trans 'Disable' %}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,10 @@
+{% load endless %}
+
+{% paginate 3 ad_list %}
+{% for entry in ad_list %}
+    {# your code to show the entry #}
+    {{entry}}
+{% endfor %}
+{% show_pages %}
+{# % get_pages % #}
+{# { pages.previous } #} {# { pages.next } #}

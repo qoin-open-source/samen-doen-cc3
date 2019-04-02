@@ -1,0 +1,162 @@
+{% extends "marketplace/base.html" %}
+{% load i18n staticfiles thumbnail cyclos_tags endless %}
+
+{% block title %}{% trans 'Marketplace' %}{% endblock %}
+
+{# to use sekizai style - would need to use SekizaiContext #}
+{% block extrajs %}
+    <script type="text/javascript">
+    <!--
+        var defaultLocation = "{% url 'marketplace' %}";
+
+    //-->
+    </script>
+    <script type="text/javascript" src="{% static 'js/goback.js' %}"></script>
+
+    <script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $.endlessPaginate();
+
+            $("a#filter-refresh").click(function()
+            {
+                $("#filter-form").submit();
+                return false;
+            });
+        });
+
+        /* auto submit form if it changes */
+        $(function() {
+            $('#filter-form *:input').change(function (){
+                $('#filter-form').submit();
+            });
+
+            $('.tabContainer a').unbind('click');
+
+            $('#tab_products_and_services_link').click(function() {
+                window.location.replace("{% url 'marketplace-targetted' 'products_and_services' %}");
+            });
+
+            $('#tab_businesses_link').click(function() {
+                window.location.replace("{% url 'marketplace-targetted' 'businesses' %}");
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+        <div class="eleven columns">
+            <div class="info-block marketplace clearfix">
+                {% user_status %}
+                <div class="page-title">
+                    <h2><span id="tab_title">{% ifequal start_tab 'products_and_services' %}{% trans 'Products &amp; Services' %}{% else %}{% trans 'Businesses' %}{% endifequal %}</span> 
+                    {% if request.session.marketplace_adtype %}
+                        {% ifequal request.session.marketplace_adtype.count 1 %}: {% ifequal request.session.marketplace_adtype.0.code 'O' %}{% trans 'Offers' %}{% else %}{% trans 'Wants' %}{% endifequal %}{% endifequal %}
+                    {% endif %}
+
+                    {% if request.session.marketplace_categories %}
+                        {% with request.session.marketplace_categories.count as category_count %}
+                            {% ifequal category_count 1 %}: {{ request.session.marketplace_categories.0 }}{% else %}: {% trans 'You have selected multiple categories' %}{% endifequal %}
+                        {% endwith %}
+                    {% endif %}
+
+                    {% if request.session.marketplace_from_price and request.session.marketplace_to_price%}: {{ currency_symbol }}{{ request.session.marketplace_from_price }} - {{ currency_symbol }}{{ request.session.marketplace_to_price }}{% else %}
+                    {% if request.session.marketplace_from_price %}: {{ currency_symbol }}{{ request.session.marketplace_from_price }} - {% endif %}
+                    {% if request.session.marketplace_to_price %}: - {{ currency_symbol }}{{ request.session.marketplace_to_price }}{% endif %}
+                    {% endif %}
+
+                    {% if search %}: {{ search }}{% endif %}
+                    {% if not marketplace_form %}: {{ business.business_name }}:
+                        {% ifequal offers_wants 'offers' %}{% trans 'Offers' %}{% else %}{% trans 'Wants' %}{% endifequal %}
+                    {% endif %}</h2>
+
+                    <div class="view not-mobile">
+                        <a href="#" class="grid active"></a>
+                        <a href="#" class="list"></a>
+                    </div>
+                    <div class="separator clearfix"></div>
+                    <p>
+                        {% include 'includes/messages.html' %}
+                    </p>
+                </div>
+
+                {% comment %}
+                <div class="element select only-mobile">
+                    <select name="">
+                        <option value="">Sort/Filter</option>
+                        <option value="">Option #1</option>
+                        <option value="">Option #2</option>
+                        <option value="">Option #3</option>
+                    </select>
+                </div>
+                {% endcomment %}
+
+                <div class="clearfix"></div>
+
+                <div class="left-menu tabContainer">
+                    <a href="{% if business %}{% url 'marketplace-targetted-business' 'offers' business.slug %}{% else %}{% url 'marketplace-targetted' 'products_and_services' %}{% endif %}" id="tab_products_and_services_link" class="title products-services{% ifequal start_tab 'products_and_services' %} {% ifnotequal offers_wants 'wants' %}show{% endifnotequal %}{% else %}{% ifequal offers_wants 'offers' %} show{% endifequal %}{% endifequal %}"><!--  data-target="products-services" -->
+                        <span class="pie"></span>
+                        <span class="title">{% if business_list %}{% trans 'Products &amp; services' %}{% else %}{% if business %}{% trans 'Offers' %}{% else %}{% trans 'Products &amp; services' %}{% endif %}{% endif %}</span>
+                    </a>
+
+                    <a href="{% if business %}{% url 'marketplace-targetted-business' 'wants' business.slug %}{% else %}{% url 'marketplace-targetted' 'businesses' %}{% endif %}" id="tab_businesses_link" class="title businesses{% ifequal offers_wants 'wants' %} show{% else %}{% ifequal start_tab 'businesses' %} show{% endifequal %}{% endifequal %}"><!-- data-target="businesses" -->
+                        <span class="pie"></span>
+                        <span class="title">{% if business_list %}{% trans 'Businesses' %}{% else %}{% if business %}{% trans 'Wants' %}{% else %}{% trans 'Businesses' %}{% endif %}{% endif %}</span>
+                    </a>
+                </div>
+
+                <!-- products and services -->
+                <div class="content-row products-services tabContents endless_page_template{% ifequal start_tab 'products_and_services' %} show{% endifequal %}">
+                    {% if not business_list %}
+                        {% include "marketplace/products_and_services_page.html" %}
+                    {% endif %}
+                </div>
+
+                {% if business_list %}
+                    <!-- businesses -->
+                    <div class="content-row businesses tabContents endless_page_template{% ifequal start_tab 'businesses' %} show{% endifequal %}">
+                        {% include "marketplace/businesses_page.html" %}
+                    </div><!-- end content-row wants -->
+                {% endif %}
+            </div><!-- end businesses -->
+
+            <div class="separator clearfix"></div>
+        </div>
+
+        <div><br />{% if marketplace_form %}{% include 'includes/ad_list_marketplace_form.html' %}{% else %}
+        <form action="." method="post" class="element form marketplace-filter">
+            {% csrf_token %}
+            <fieldset>
+                <div class="element">
+                    {% if business.get_picture %}
+                        <img class="" alt="{% trans 'Profile picture' %}" src="{{business.picture|thumbnail_url:'profilepicture'}}">
+                    {% else %}
+                        <img class="" alt="{% trans 'Profile picture' %}" src="{% static 'images/backgrounds/avatar-placeholder.png' %}">
+                    {% endif %}
+                </div>
+                <div class="element">
+                    <a href="{% url 'marketplace-business-profile' business.slug %}">{{ business.business_name }}</a><br />
+                    {% if business.address %}{{ business.address }}<br />{% endif %}
+                    {% if business.city %}{{ business.city }}<br />{% endif %}
+                    {% if business.postal_code %}{{ business.postal_code }}<br />{% endif %}
+                    {% if business.country %}{{ business.country }}<br />{% endif %}
+                    <br />
+                    {% if business.registration_number %}{{ business.registration_number }}<br />{% endif %}
+                    <br />
+                    Contact:<br />
+                    {% if business.first_name or business.last_name %}{{ business.first_name }} {{ business.last_name }}<br />{% endif %}
+                    {% if business.job_title %}{{ business.job_title }}<br />{% endif %}
+                    {% if business.company_website %}<a href="http://{{ business.company_website }}">{{ business.company_website }}</a><br />{% endif %}
+                    {{ business.company_description|truncatewords:10 }}<br /><a href="{% url 'marketplace-business-profile' business.slug %}">more...</a><br /><br />
+
+                    {% if business.address %}{{ business.phone_number }}<br />{% endif %}
+                    {% if business.address %}{{ business.mobile_number }}<br />{% endif %}
+
+                    <a class="element button not-mobile"><span class="l"></span><span class="c" onclick="goBack();">{% trans 'Back' %}</span><span class="r"></span></a>
+                </div>
+            </fieldset>
+        </form>
+{% endif %}
+    </div>
+
+{% endblock %}

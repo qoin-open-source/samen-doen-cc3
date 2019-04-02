@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags i18n marketplace_tags cyclos_tags %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block extrabody %}class="page-with-sidebar{% if user.is_authenticated %} main-content{% endif %}"{% endblock %}
+
+{% block slider %}{% include 'includes/slider.html' %}{% endblock %}
+
+{% block subnavigation %}{% endblock %}
+
+
+{% block joinblock %}
+{% include 'includes/middlebar.html' %}
+{% endblock %}
+
+{% block content %}
+        <div class="eleven columns placeholder">
+            {% user_status %}
+            {% include 'includes/messages.html' %}
+            {% placeholder 'content' %}
+            <br clear="all" />
+            <div class="info-block clearfix">
+
+                <div class="left-menu tabContainer">
+                    <a href="#" data-target="offers" class="title offers show">
+                        <span class="pie"></span>
+                        <span class="title">{% trans "Latest offers" %}</span>
+                    </a>
+
+                    <a href="#" data-target="wants" class="title wants">
+                        <span class="pie"></span>
+                        <span class="title">{% trans "Latest wants" %}</span>
+                    </a>
+                </div>
+
+                {% latest_offers_wants 'offers' 6 %}
+                {% latest_offers_wants 'wants' 6 %}
+                
+            </div><!-- end info-block -->
+
+            <div class="separator clearfix"></div>
+
+
+<!--
+            <div class="contentTabs size_960">
+                <div class="tabs">
+                    <div class="tab active">
+                        <div class="tab-label news"><span class="icon"></span>News</div>
+                        <div class="tab-content">
+                            <ul class="items news">
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <div class="tab-label feeds"><span class="icon"></span>Feeds</div>
+                        <div class="tab-content">
+                            <ul class="items feeds">
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Parturient Etiam</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <div class="tab-label buzz"><span class="icon"></span>Buzz</div>
+                        <div class="tab-content">
+                            <ul class="items buzz">
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Maecenas sed diam eget risus varius.</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="date">28<span>/02</span></div>
+                                    <div class="content">
+                                        <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                        <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="tab-display"></div>
+                <a href="#" class="element button"><span class="l"></span><span class="c">Newsarchive</span><span class="r"></span></a>
+            </div>
+-->
+
+
+<!--
+            <div class="contentBlocks size_1218">
+
+                <div class="newsBlock">
+                    <h2><span class="icon"></span>News</h2>
+                    <ul class="inner">
+                        <li>
+                            <div class="date">28<span>/02</span></div>
+                            <div class="content">
+                                <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="date">28<span>/02</span></div>
+                            <div class="content">
+                                <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+-->
+                <!-- end newsBlock -->
+<!--
+                <div class="feedsBlock">
+                    <h2><span class="icon"></span>Feeds</h2>
+                    <ul class="inner">
+                        <li>
+                            <div class="date">28<span>/02</span></div>
+                            <div class="content">
+                                <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="date">28<span>/02</span></div>
+                            <div class="content">
+                                <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+-->
+                <!-- end feedsBlock -->
+<!--
+                <div class="buzzBlock">
+                    <h2><span class="icon"></span>Buzz</h2>
+                    <ul class="inner">
+                        <li>
+                            <div class="date">28<span>/02</span></div>
+                            <div class="content">
+                                <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="date">28<span>/02</span></div>
+                            <div class="content">
+                                <p class="title"><a href="#">Lorem ipsum dolor sit amet</a></p>
+                                <p class="excerpt">Quisque luctus metus venenatis odio hendrerit sodales...</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+-->
+                <!-- end buzzBlock -->
+<!--                <a href="#" class="element button"><span class="l"></span><span class="c">Newsarchive</span><span class="r"></span></a> 
+            </div>
+-->
+            <!-- end contentBlocks -->
+        </div>
+
+                <div class="five columns">
+            <div class="block">
+                <div class="video-widget placeholder">{% placeholder 'video' %}</div><!-- end block -->
+            </div>
+
+            <div class="block">
+                <div class="ts-blocks">
+                    <ul class="add_last add_first item_counter">
+                        <li>
+                            {% placeholder 'block_1' %}
+                        </li>
+                        <li>
+                            {% placeholder 'block_2' %}
+                        </li>
+                        
+                        <li>
+                            {% placeholder 'block_3' %}
+                        </li>
+                        <li>
+                            {% placeholder 'block_4' %}
+                        </li>
+                    </ul>
+                </div><!-- end ts-blocks -->
+            </div><!-- end block -->
+        </div><!-- end five columns sidebar -->
+
+{% endblock %}

@@ -1,0 +1,287 @@
+{% extends "marketplace/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Pay Direct' %}{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" >
+
+var contact_name_auto_url = '{% url 'contact_name_auto' request.user.cc3_profile.community.pk %}';
+$(function() {
+
+    var csrftoken = $.cookie('csrftoken');
+    var initial_ajax_payment_text = $('#pay_highlight').text();
+
+    var add_user_does_not_exist_error = function () {
+        $('#id_profile').val('');
+        $('#contact_name_section').addClass('error');
+        if ($('#receiver-error')) {
+            $('#receiver-error').remove();
+        }
+        $('#id_contact_name').after(' <span id="receiver-error" class="error">{% trans "This user does not exist" %}</span>');
+        $('#pay_direct_form_button').attr('disabled', 'true');
+    };
+
+    var remove_user_does_not_exist_error = function () {
+         $('#contact_name_section').removeClass('error');
+         $('#receiver-error').remove();
+        $('#pay_direct_form_button').removeAttr('disabled');
+    };
+
+    $('#id_contact_name').typeahead([
+    {
+        name: 'contact_name',
+        remote: contact_name_auto_url + '?contact_name=%QUERY',
+        minLength: {{ min_contact_auto }}
+    }]);
+    // When a new receiver has been selected insert the profile PK into the
+    // the hidden profile field.
+    $('#id_contact_name').on('typeahead:selected', function(e, selected) {
+        remove_user_does_not_exist_error();
+        $('#id_profile').val(selected.pk);
+    });
+    // this covers the case when only one match is found, so the user
+    // doesn't have to select
+    $('#id_contact_name').on('typeahead:autocompleted', function(e, selected) {
+        remove_user_does_not_exist_error();
+        $('#id_profile').val(selected.pk);
+    });
+    // and this is when the user tabs out without selecting
+    $('#id_contact_name').focusout(function() {
+
+        var typeahead_span = $('.tt-dropdown-menu');
+
+        // This is meant to prevent unnecessary calls, but I think it's
+        // also preventing a necessary one (when profile_id has been set, then
+        // contact name is changed to something that doesn't match that id)
+        // so it's commented out for now
+        //if(typeahead_span.css('display') == 'block')
+        //    return;
+
+        // manually try and find the contact names ID
+        $.ajax({
+            type: "GET",
+            url: contact_name_auto_url + '?contact_name=' + $('#id_contact_name').val()
+        })
+        .done(function (msg) {
+            console.log('msg: ' + msg);
+            if (msg.length == 0) {
+                add_user_does_not_exist_error();
+            } else {
+                remove_user_does_not_exist_error();
+                // only one returned, then use it
+
+                if (msg.length == 1) {
+                    $('#id_contact_name').val(msg[0].value);
+                    $('#id_profile').val(msg[0].pk);
+                } else {
+                    // anything already selected?
+                    var selected_profile_id = $('#id_profile').val();
+                    // nothing selected
+                    if (selected_profile_id == "") {
+                        // use first in list
+                        $('#id_contact_name').val(msg[0].value);
+                        $('#id_profile').val(msg[0].pk);
+                    } else {
+                        // selected - so find in msg (belt and braces
+                        for (var i = 0; i < msg.length; i++) {
+                            if (selected_profile_id == msg[i].pk) {
+                                $('#id_contact_name').val(msg[i].value);
+                                break;
+                            }
+                        }
+                        // TODO: should probably clear contact name if no match is found
+                    }
+                }
+            }
+        })
+        .fail(function() {
+            add_user_does_not_exist_error();
+        });
+    });
+
+    var pay_direct_in_progress = false;
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+    /* attach a submit handler to the payment form */
+    $("#pay_direct_form").submit(function(event) {
+        // if the confirmed input #id_confirmed has been added, submit form normally
+        if ($("#id_confirmed").length) {
+            return true;
+        }
+
+        if (!pay_direct_in_progress) {
+            var $pay_direct_form_errors = $( "#pay_direct_form_errors" );
+
+            // prevent double clicks / enter buttons
+            pay_direct_in_progress = true;
+            $pay_direct_form_errors.html('');
+            $pay_direct_form_errors.addClass ( 'hide' );
+            $('#pay_direct_form_button').hide();
+            $('#pay_direct_form_spinner').show();
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* Send the data using post */
+            var posting = $.post( "{% url 'accounts_pay_direct' %}", $("#pay_direct_form").serialize() );
+
+{% verbatim %}
+            /* Put the results in a div */
+            posting.done(function( data ) {
+                $pay_direct_form_errors.html('');
+                $pay_direct_form_errors.addClass ( 'hide' );
+
+                // update the modal warning with current form values
+                var template_text = initial_ajax_payment_text;
+
+                var name_start = template_text.indexOf("{{name}}");
+                template_text = template_text.substring(0, name_start) + data.full_name + template_text.substring(name_start+8);
+
+                var amount_start = template_text.indexOf("{{value}}");
+                var amount = $('#id_amount').val();
+                template_text = template_text.substring(0, amount_start) + amount + template_text.substring(amount_start+9);
+
+                $('#pay_highlight').text(template_text);
+
+
+                $('#modal_dialog').modal();
+                $('#pay_direct_form_button').show();
+                $('#pay_direct_form_spinner').hide();
+                pay_direct_in_progress = false;
+            });
+{% endverbatim %}
+            // deal with form errors
+            posting.fail(function( data ) {
+                var parsedResponse= $.parseJSON( data.responseText );
+                var errorMessage = "";
+                $.each(parsedResponse, function(i, val) {
+                    errorMessage += "<p>" + val + "</p>";
+                });
+
+                $pay_direct_form_errors.html( errorMessage );
+                $pay_direct_form_errors.addClass ( 'element form-error' );
+                $pay_direct_form_errors.removeClass ( 'hide' );
+                $('#pay_direct_form_button').show();
+                $('#pay_direct_form_spinner').hide();
+
+                pay_direct_in_progress = false;
+
+            });
+        }
+    });
+
+    // confirm the payment - if modal dialog has been used (ie there is javascript!)
+    $("#confirm_payment").click(function(e) {
+        if($(this).data('lastClick') + 10000 > new Date().getTime()){
+
+            e.stopPropagation();
+            return false;
+        }
+        $(this).data('lastClick', new Date().getTime());
+
+        var confirmed_input = $("<input>").attr("type", "hidden").attr("id", "id_confirmed").attr("name", "confirmed").val(1);
+        $('#pay_direct_form').append($(confirmed_input));
+        $('#pay_direct_form').submit();
+    });
+
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+            <h4>{% trans 'Make A Payment' %}</h4>
+            {% include 'includes/messages.html' %}
+            <div id="pay_direct_form_errors" class="hide"></div>
+            <form id="pay_direct_form" method="post" action="." class="element form">{% csrf_token %}
+
+                <fieldset>
+                    {# Spit out the hidden profile field used to store the CC3Profile pk. #}
+                    {{ form.profile }}
+
+                    <div class="element label{% if form.amount.errors %} error{% endif %}">
+                        <label for="id_amount">{{form.amount.label}}{% if form.amount.field.required %} *{% endif %}</label>
+                        <div class="field">
+                            <div class="element field input-price">
+                                <span class="icon">{{currency_symbol}}</span>
+                                <input id="id_amount" name="amount" type="text" class="input-text large" placeholder="{{ form.amount.help_text }}" value="{% if form.amount.value %}{{form.amount.value}}{% endif %}">{% if form.amount.errors %}<span>{% for error in form.amount.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {% if split_payments %}
+                    <div class="element label{% if form.total_value.errors %} error{% endif %}">
+                        <label for="id_total_value">{{form.total_value.label}}</label>
+                        <div class="field">
+                            <div class="element field input-price">
+                                <input id="id_total_value" name="total_value" type="text" class="input-text large" value="{% if form.total_value.value %}{{form.total_value.value}}{% endif %}">{% if form.total_value.errors %}<span>{% for error in form.total_value.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {% endif %}
+                    <div id="contact_name_section" class="element label{% if form.contact_name.errors %} error{% endif %}">
+                        <label>{{form.contact_name.label|safe}}{% if form.contact_name.field.required %} *{% endif %} <a href="#" class="element tp" title="{% trans 'You can enter either a company name or the name of the person you are doing business with.' %}"></a></label>
+                        <div class="element field typeahead-div">
+                            <input id="id_contact_name" name="contact_name" class="search typeahead" type="text" value="{% if form.contact_name.value %}{{form.contact_name.value}}{% endif %}">{% if form.contact_name.errors %}<span>{% for error in form.contact_name.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {{form.email}}
+                    <div class="element label{% if form.description.errors %} error{% endif %}">
+                        <label for="id_description">{{form.description.label}}{% if form.description.field.required %} *{% endif %}</label>
+                        <div class="field">
+                            <textarea id="id_description" name="description" class="input-text large" cols="30" rows="10" placeholder="{{ form.description.help_text }}">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>{% if form.description.errors %}<span>{% for error in form.description.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <hr>
+                    <div id="pay_direct_form_spinner" class="element spinner hide pull-right"></div>
+                    <button class="element button pull-right" id="pay_direct_form_button"><span class="l"></span><span class="c">{% trans 'Process Payment' %}</span><span class="r"></span></button>
+                </fieldset>
+            </form>
+
+            <div id="modal_dialog" class="modal_dialog">
+                <div class="title">{% trans "YOU'RE ABOUT TO COMPLETE A PAYMENT" %}</div>
+                <div class="highlight" id="pay_highlight">
+    {% blocktrans with name='{{name}}' amount='{{value}}' %}Pay {{name}} an amount of <span class="icon">{{currency_symbol}}</span> {{amount}}{% endblocktrans %}</div>
+                <div class="options">
+                    <a href="#" class="element button my-account" rel="modal:close">
+                        <span class="l"></span>
+                        <span class="c">{% trans 'Cancel' %}</span>
+                        <span class="r"></span>
+                    </a>
+                    <a id="confirm_payment" href="#" class="element button my-account">
+                        <span class="l"></span>
+                        <span class="c">{% trans 'Confirm' %}</span>
+                        <span class="r"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div><!-- end eleven columns -->
+
+{% endblock %}

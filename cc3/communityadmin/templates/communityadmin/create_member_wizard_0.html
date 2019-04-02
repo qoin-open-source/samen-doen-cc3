@@ -1,0 +1,56 @@
+{% extends "marketplace/base.html" %}
+{% load i18n %}
+
+{% block extrahead %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block title %}{% trans 'Add Member' %}{% endblock %}
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+                
+
+<div class="eleven columns communityadmin">
+  <div class="inner">
+    <h2>{% trans 'Add Member' %}{% if community %} - {{ community }}{% endif %}</h2>
+    {% include 'includes/messages.html' %}
+
+    <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+    <form id="registration_register_form" action="" method="post" class="element form">{% csrf_token %}
+    {{ wizard.management_form }}
+    {% if wizard.form.non_field_errors %}<div class="element form-error">{{ wizard.form.non_field_errors }}</div>{% endif %}
+    <fieldset>
+      {% with field=wizard.form.email %}
+        {% include 'fragments/forms/_field.html' %}
+      {% endwith %}
+      {% with field=wizard.form.email_confirmation %}
+        {% include 'fragments/forms/_field.html' %}
+      {% endwith %}
+      {% with field=wizard.form.reg_password %}
+        {% include 'fragments/forms/_field.html' %}
+      {% endwith %}
+      {% with field=wizard.form.password_confirmation %}
+        {% include 'fragments/forms/_field.html' %}
+      {% endwith %}
+
+      <input id="id_0-tandc_confirmation" name="0-tandc_confirmation" type="hidden" class="rc-hidden" value="1">
+      <input class="required" id="id_0-community_code" maxlength="75" name="0-community_code" placeholder="Community Code" type="hidden" value="{{community_code}}">
+
+    </fieldset>
+
+
+    {% if wizard.steps.prev %}
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+    {% endif %}
+    <input type="submit" value="{% trans "submit" %}"/>
+    </form>
+  </div>
+</div><!-- eleven columns -->
+{% endblock %}

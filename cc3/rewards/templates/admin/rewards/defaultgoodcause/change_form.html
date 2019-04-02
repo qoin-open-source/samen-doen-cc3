@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+
+{% load static %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript">
+    var admin_causes_list_url = "{% url 'admin_causes_list' %}";
+</script>
+<script type="text/javascript" src="{% static 'js/defaultgoodcause_admin.js' %}"></script>
+{% endblock %}
+

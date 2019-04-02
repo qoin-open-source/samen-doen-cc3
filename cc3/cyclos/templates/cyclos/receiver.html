@@ -1,0 +1,11 @@
+{% with transaction.receiver.get_profile.full_name as receiver %}
+    {% if receiver %}
+        {{ receiver }}
+    {% else %}
+        {% if transaction.receiver.first_name %}
+            {{ transaction.receiver.first_name }} {{ transaction.receiver.last_name }}
+        {% else %}
+            {{ transaction.receiver }}
+        {% endif %}
+    {% endif %}
+{% endwith %}

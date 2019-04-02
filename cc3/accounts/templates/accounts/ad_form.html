@@ -1,0 +1,182 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags %}
+
+{% block title %}{% trans 'Place Ad' %}{% endblock %}
+{# APPEARS TO NOT BE IN USE - see place_ad.html instead #}
+
+{% block extrahead %}
+{{ block.super }}
+    <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+    {{ form.media }}
+    <!-- use jquery.form.js as jquery post not sending file -->
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+
+    <script type="text/javascript">
+        var browse_translation = "{{ browse }}";
+        var return_url = '{% url 'accounts_my_ads' %}';
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->           
+        </div><!-- end five columns sidebar -->
+    {% endblock %}
+
+        <div class="eleven columns">
+            <h4>
+                {% if ad.pk %}
+                    {% trans 'Edit Ad' %}
+                {% else %}
+                    {% trans 'Place Ad' %}
+                {% endif %}
+            </h4>
+            {% include 'includes/messages.html' %}
+            <div id="place_ad_form_errors" class="hide"></div>
+            <form id="place_ad_form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+                {% block created_by %}{% endblock %}
+                <div class="element label{% if form.title.errors %} error{% endif %}">                       
+                    <label for="id_title">{{ form.title.label }}</label>
+                    <div class="field">
+                        <div class="element field">
+                            <input id="id_title" name="title" type="text" class="input-text large" value="{% if form.title.value %}{{ form.title.value }}{% endif %}">{% if form.title.errors %}<span>{% for error in form.title.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="element label{% if form.adtype.errors %} error{% endif %}">
+                    <label>{{ form.adtype.label }}</label>
+                    <div class="field">
+                        <div class="element select">
+                            {{ form.adtype }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <fieldset class="formset">
+                    {{ adimages_formset.management_form }}
+                    <div class="element label{% if form.adimages_formset.errors %} error{% endif %}">
+                        <label>{% trans 'Attach images' %} <a title="" class="element tp" href="#" data-original-title="{% trans 'Image Instructions...' %}"></a></label>
+                        <div class="field attach-images">
+                        {% for adimage_form in adimages_formset %}
+                            {% if ad.pk %}
+                                {% include 'includes/edit_ad_image_widget.html' %}
+                            {% else %}
+                                {% include 'includes/place_ad_image_widget.html' %}
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </fieldset>
+
+                <div class="element label{% if form.description.errors %} error{% endif %}">
+                    <label>{{ form.description.label }}</label>
+                    <div class="field">
+                        <div class="element field tinymce">
+                            {{ form.description }}
+                            {% if form.description.errors %}<span>{% for error in form.description.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                            
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                </div>
+
+                <div class="element label{% if form.price.errors %} error{% endif %}">                       
+                    <label for="id_price">{{ form.price.label }}</label>
+                    <div class="field">
+                        <div class="element field input-price">
+                            <span class="icon">{{ currency_symbol }}</span>
+                            <input id="id_price" name="price" type="text" class="input-text large" value="{% if form.price.value %}{{ form.price.value }}{% endif %}">{% if form.price.errors %}<span>{% for error in form.price.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                </div>          
+
+                <div class="element label{% if form.category.errors %} error{% endif %}">
+                    <label>{{ form.category.label }}</label>
+                    <div class="field categories">
+                        <div class="element small checkbox-container">
+                            {{ form.category }}
+                        </div>
+                    <div class="clearfix"></div>
+                    <div class="element">
+                            {% if form.category.errors %}<span>{% for error in form.category.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}  
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                </div>
+
+                <div class="element label{% if form.keywords.errors %} error{% endif %}">
+                    <label>{{ form.keywords.label }}</label>
+                    <div class="field">
+                        <div class="element field">
+                            {{ form.keywords }}
+                            {% if form.keywords.errors %}<span>{% for error in form.keywords.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="element label{% if form.status.errors %} error{% endif %}">
+                    <label>{{ form.status.label }}</label>
+                    <div class="field">
+                        <div class="element select">
+                            {{ form.status }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <hr>
+                    <div id="place_ad_form_spinner" class="element spinner hide pull-right"></div>
+                    <button class="element button pull-right" id="place_ad_form_button"><span class="l"></span><span class="c">{% if ad.pk %}{% trans 'Edit Ad' %}{% else %}{% trans 'Place Ad' %}{% endif %}</span><span class="r"></span></button>
+                </fieldset>
+            </form>
+        </div><!-- end eleven columns -->
+
+{% endblock %}
+
+
+{% block extrajs %}
+<script type="text/javascript">
+
+// Disable the price option select box if we've entered anything in the price input field,
+// and disable the price input field if an option in the price option select box has been chosen
+
+function check_price_fields() {
+  if ($("#price_option_select option:selected").val()) {
+    $("#id_price").prop('disabled', true);
+  }
+  else {
+    $("#id_price").prop('disabled', false);
+  }
+
+  if ($("#id_price").val()) {
+    $("#id_price_option").selecter("disable", "1");
+  }
+  else {
+    $("#id_price_option").selecter("enable", "1");
+  }
+}
+
+$("#id_price").keyup(function() {
+  check_price_fields();
+});
+
+$("#price_option_select").change(function() {
+  check_price_fields();
+});
+
+check_price_fields();
+
+</script>
+
+{% endblock %}

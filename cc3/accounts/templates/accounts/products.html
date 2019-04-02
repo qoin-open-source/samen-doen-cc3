@@ -1,0 +1,8 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags thumbnail %}
+
+{% block title %}{% trans 'My Products' %}{% endblock %}
+
+{% block content %}
+    {% include "accounts/includes/products/list.html" %}
+{% endblock %}

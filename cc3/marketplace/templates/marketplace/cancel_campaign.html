@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Cancel Activity' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{% trans 'Cancel Activity' %}</h2>
+
+            <hr>
+
+            <form id="cancel-campaign-form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label>{{ object }}</label>
+                </div>
+                <p>{% trans "Are you sure you want to cancel this activity?" %}</p>
+                <p>{% trans "Any participants will be informed by email." %}</p>
+                <p>{% trans "You can give an explanation here and we'll include it in the email:" %}</p>
+                <div class="form-group {% if form.why_cancelled.errors %}has-error{% endif %}">
+                    {{ form.why_cancelled }}
+                </div>
+
+                <button class="btn btn-rounded btn-blue">{% trans 'Cancel Activity' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

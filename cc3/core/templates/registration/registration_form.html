@@ -1,0 +1,98 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Register' %}{% endblock %}
+
+{% block content %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->
+
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+
+{% if user.is_authenticated %}
+<p>{% trans 'You are logged in' %}</p>
+<br />
+<a href="{% url 'accounts-update-profile' %}">{% trans 'Edit my profile' %}</a>
+
+{% else %}
+    <form id="registration_register_form" action="{% url 'registration_register' %}" method="post" class="element form">
+        {{ form.non_field_errors }}
+        {% csrf_token %}
+
+        <h4>{% trans "Register to join today!" %}</h4>
+
+    <div class="element label{% if form.email.errors %} error{% endif %}">
+        <label for="id_email">{% trans 'Email' %}</label>
+        <div class="field">
+            <input type="text" id="id_email" maxlength="254" name="email"{% if form.email.value %} value="{{form.email.value}}"{% endif %} class="input-text large" placeholder="{% trans 'Email Address' %}">{% if form.email.errors %}<span class="myerrors">{{ form.email.errors }}</span>{% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    <div class="element label{% if form.email_confirmation.errors %} error{% endif %}">
+        <label for="id_email_confirmation">{% trans 'Confirm Email' %}</label>
+        <div class="field">
+            <input type="text" id="id_email_confirmation" maxlength="254" name="email_confirmation"{% if form.email_confirmation.value %} value="{{form.email_confirmation.value}}"{% endif %} class="input-text large" placeholder="{% trans 'Confirm Email' %}">{% if form.email_confirmation.errors %}<span class="myerrors">{{ form.email_confirmation.errors }}</span>{% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="element label{% if form.reg_password.errors %} error{% endif %}">
+        <label for="id_reg_password">{% trans 'Password' %}</label>
+        <div class="field">
+            <input type="password" id="id_reg_password" maxlength="254" name="reg_password"{% if form.reg_password.value %} value="{{form.reg_password.value}}"{% endif %} class="input-text large" placeholder="{% trans 'Password' %}">{% if form.reg_password.errors %}<span class="myerrors">{{ form.reg_password.errors }}</span>{% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    <div class="element label{% if form.password_confirmation.errors %} error{% endif %}">
+        <label for="id_password_confirmation">{% trans 'Confirm Password' %}</label>
+        <div class="field">
+            <input type="password" id="id_password_confirmation" maxlength="254" name="password_confirmation"{% if form.password_confirmation.value %} value="{{form.password_confirmation.value}}"{% endif %} class="input-text large" placeholder="{% trans 'Confirm Password' %}">{% if form.password_confirmation.errors %}<span class="myerrors">{{ form.password_confirmation.errors }}</span>{% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="element label{% if form.tandc_confirmation.errors %} error{% endif %}">
+        <label for="id_tandc_confirmation">{% trans 'Terms and Conditions' %}</label>
+        <div class="field">
+            <div class="checkbox">
+            <input type="checkbox" value="1" id="id_tandc_confirmation" name="tandc_confirmation"{% if form.tandc_confirmation.value %} checked=checked{% endif %}>{% blocktrans with tandc_url=tandc_url %}I've read and accepted the<br />{{site_name}} <a href="{{tandc_url}}">terms &amp; conditions{% endblocktrans %}</a>
+            </div>
+            {% if form.tandc_confirmation.errors %}
+            <div class="element form-error">
+              {% for error in form.tandc_confirmation.errors %}
+                {{ error }}<br/>
+              {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <br />
+    {% if community_code %}
+        <input type="hidden" name="community_code" value="{{community_code}}"/>
+    {% else %}
+        <div class="element label{% if form.community_code.errors %} error{% endif %}">
+            <label for="id_community_code">{% trans 'Community Code' %}</label>
+            <div class="field">
+                <input type="text" id="id_community_code" maxlength="75" name="community_code"{% if form.community_code.value %} value="{{form.community_code.value}}"{% endif %} class="input-text large" placeholder="{% trans 'Community Code' %}">{% if form.community_code.errors %}<span class="myerrors">{{ form.community_code.errors }}</span>{% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        {% endif %}
+
+        <div id="reg_form_spinner" class="element spinner hide" style="float:left; background-color:white;"></div>
+
+        <button class="element button pull-right" id="reg_form_button"><span class="l"></span><span class="c">{% trans 'Submit' %}</span><span class="r"></span></button>
+    </form>
+
+{% endif %}
+</div>
+{% endblock %}

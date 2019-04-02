@@ -1,0 +1,11 @@
+{% load i18n %}
+{% blocktrans with title=ad.title id=ad.id body=body cc3_system_name=cc3_system_name %}
+
+Dear {{name}},
+
+Thank you for your credit application, an email has been sent to the administrators, who will be in touch with you shortly.
+
+Regards,
+
+{{ cc3_system_name }}
+{% endblocktrans %}

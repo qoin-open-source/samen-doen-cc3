@@ -1,0 +1,102 @@
+{% extends "marketplace/base.html" %}
+{% load i18n staticfiles thumbnail cyclos_tags %}
+
+{% block title %}{% trans 'Marketplace detail' %}{% endblock %}
+
+{% block extrajs %}{% ifequal ad.adimage_set.all.count 0 %}{% else %}<script>
+        jQuery(document).ready(function($) {
+            if ($('#galleria')) {
+
+                // Load the classic theme
+                Galleria.loadTheme('{% static 'galleria/galleria.classic.min.js' %}');
+
+                // Initialize Galleria
+                Galleria.run('#galleria');
+            }
+        });
+    </script>
+{% endifequal %}{% endblock %}
+
+{% block content %}
+
+        <div class="eight columns">
+            {% include 'includes/messages.html' %}
+            {% user_status %}
+
+            <div class="marketplace-detail">
+                <h2 class="page-title">{{object.title}}</h2>
+{% ifequal ad.adimage_set.all.count 0 %}{% else %}
+                <div id="galleria">                    
+                    {% for adimage in ad.adimage_set.all %}{% with adimage.image as im %}{% with adimage.caption as cap %}{% if im %}
+                        <img src="{{ im|thumbnail_url:'marketplacedetail' }}" alt="{{cap}}" />
+                        {% endif %}
+                    {% endwith %}{% endwith %}{% endfor %}
+                </div>{% endifequal%}
+
+</div>
+
+        </div>
+
+        <div class="eight columns">
+            <div class="marketplace-detail">
+                <div class="company">
+                    <div class="top">
+                        <div class="logo">{% if object.business_picture %}<img class="" alt="{{object.business_name}}" src="{{object.business_picture|thumbnail_url:'marketplacedetailprofile'}}">{% else %}<img class="" alt="{{object.business_name}}" src="{% static 'images/backgrounds/avatar-placeholder.png' %}" width="44" height="44">{% endif %}</div>
+                        <ul>
+                            <li class="name"><a href="{{ object.created_by.get_absolute_url }}">{{object.business_name}}</a></li>
+                            <li class="contact">
+
+                            <a href="{% url 'marketplace-enquire' ad.id %}" class="element add-button">{% trans 'enquire' %}</a>
+                        </ul>
+                    </div>
+                    <!--
+                    <div class="bottom">
+                        <ul>
+                            <li><a href="#" class="points"><span>25</span> Reputation points</a></li>
+                            <li><a href="#" class="reviews"><span>5</span> Reviews</a></li>
+                        </ul>
+                    </div>
+                -->
+                </div>
+
+                <div class="clearfix"></div>
+
+                <ul class="info">
+                    <li class="price"><strong>{% trans 'Price' %}</strong> <span class="q">{{currency_symbol}}</span> <span class="a">{{object.get_price}}</span></li>
+                    <li class="detail">{{object.description|safe}}
+                    </li>
+                    {% ifequal object.category.all.count 0 %}{% else %}
+                    <li class="tags not-mobile">
+                        <strong>{% trans 'Categories' %}</strong>
+
+                        <ul>
+                            {% for category in object.category.all %}
+                             <li> {{ category.get_title }} </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endifequal %}
+                    {% ifequal object.keywords.all.count 0 %}{% else %}
+                    <li class="tags not-mobile">
+                        <strong>{% trans 'Keywords' %}</strong>
+
+                        <ul>
+                            {% for tag in object.keywords.all %}
+                             <li> {{ tag.name }} </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endifequal %}
+                    <li class="community"><strong>{% trans 'Community' %}</strong> <span class="c">{{ object.created_by.community }}</span>
+                </ul>
+
+                <a href="{% url 'marketplace' %}" class="element button not-mobile"><span class="l"></span><span class="c">{% trans 'Back to Overview' %}</span><span class="r"></span></a>
+            
+
+            </div>
+
+            <div class="only-mobile">
+                <p><a href="{% url 'marketplace' %}" class="element button"><span class="l"></span><span class="c">Back to Overview   </span><span class="r"></span></a></p>
+            </div>
+        </div>
+{% endblock %}

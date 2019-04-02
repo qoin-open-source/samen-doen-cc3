@@ -1,0 +1,28 @@
+{% load staticfiles thumbnail i18n cc3_tags %}
+
+<div class="item">
+     <div class="inner">
+         {% with ad.id as ad_id %}
+             {% with ad.adtype.code as adtype_code %}
+                <a href="#" class="img">
+                    {% if ad.adimage_set.all.count == 0 or not ad|adimage_set_exists %}
+                        <img src="{% static 'images/backgrounds/avatar-placeholder.png' %}" width="44" height="44" alt="logo" />
+                    {% else %}
+                        <img src="{{ ad.adimage_set.all.0.image|thumbnail_url:'marketplacethumb' }}" alt="" />
+                    {% endif %}
+                </a>
+                <div class="info">
+                    <span class="item_title short"><a href="{% url 'marketplace-detail' ad_id %}" title="{{ ad }}">{{ ad|truncatechars:28 }}</a></span>
+                    <span class="item_title long"><a href="{% url 'marketplace-detail' ad_id %}" title="{{ ad }}">{{ ad|truncatechars:120 }}</a></span>
+                    <a href="{% url 'marketplace-business-profile' ad.business_slug %}" class="company" title="{{ ad.business_name }}">{{ ad.business_name|truncatechars:40 }}</a>
+                </div>
+                <a href="#" class="amount">{{ currency_symbol }}<span>{{ ad.get_price }}</span></a>
+                {% ifequal adtype_code 'O' %}
+                    <a href="{% url 'marketplace-detail' ad_id %}" class="label offer"><span>{% trans 'offer' %}</span></a>
+                {% else %}
+                    <a href="{% url 'marketplace-detail' ad_id  %}" class="label want"><span>{% trans 'demand' %}</span></a>
+                {% endifequal %}
+             {% endwith %}
+         {% endwith %}
+     </div>{# end inner #}
+</div>{# end item #}

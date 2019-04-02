@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block extrabody %}class="page-with-sidebar main-content about"{% endblock %}
+{% block extramainclasses %} content-page{% endblock %}
+
+{% block content %}
+        <div class="sixteen columns">
+            <div class="inner placeholder">
+                <h1 class="sb-title">{% page_attribute "page_title" %}</h1>
+                {% include 'includes/messages.html' %}
+            </div>
+        </div>
+
+        <div class="row add_first add_last placeholder">
+
+            <div class="sixteen columns">
+                <div class="inner placeholder">
+                    <h2 class="column-title">{% placeholder 'column-title-1' %}</h2>
+            {% placeholder 'content-col-1' %}
+                </div>
+            </div>
+
+        </div><!-- end row -->
+
+        <div class="row add_first add_last placeholder">
+
+            <div class="content-half">
+                <div class="inner placeholder">
+                    <h2 class="column-title">{% placeholder 'column-title-2' %}</h2>
+            {% placeholder 'content-col-2' %}
+                </div>
+            </div>
+
+            <div class="content-half">
+                <div class="inner placeholder">
+                        <h2 class="column-title">{% placeholder 'column-title-3' %}</h2>
+            {% placeholder 'content-col-3' %}
+                </div>
+            </div>
+
+        </div><!-- end row -->        
+{% endblock %}

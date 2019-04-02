@@ -1,0 +1,536 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="pos" targetNamespace="http://pos.webservices.cyclos.strohalm.nl/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://pos.webservices.cyclos.strohalm.nl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <xs:schema elementFormDefault="unqualified" targetNamespace="http://pos.webservices.cyclos.strohalm.nl/" version="1.0" xmlns:tns="http://pos.webservices.cyclos.strohalm.nl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="chargeback" type="tns:chargeback"/>
+            <xs:element name="chargebackResponse" type="tns:chargebackResponse"/>
+            <xs:element name="getAccountStatus" type="tns:getAccountStatus"/>
+            <xs:element name="getAccountStatusResponse" type="tns:getAccountStatusResponse"/>
+            <xs:element name="getInitializationData" type="tns:getInitializationData"/>
+            <xs:element name="getInitializationDataResponse" type="tns:getInitializationDataResponse"/>
+            <xs:element name="makePayment" type="tns:makePayment"/>
+            <xs:element name="makePaymentResponse" type="tns:makePaymentResponse"/>
+            <xs:element name="receivePayment" type="tns:receivePayment"/>
+            <xs:element name="receivePaymentResponse" type="tns:receivePaymentResponse"/>
+            <xs:element name="searchAccountHistory" type="tns:searchAccountHistory"/>
+            <xs:element name="searchAccountHistoryResponse" type="tns:searchAccountHistoryResponse"/>
+            <xs:complexType name="makePayment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="params" type="tns:makePaymentParameters"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="makePaymentParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:basePaymentParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="toMemberPrincipalType" type="xs:string"/>
+                            <xs:element minOccurs="0" name="toMemberPrincipal" type="xs:string"/>
+                            <xs:element minOccurs="0" name="posPin" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="basePaymentParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:basePosParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="transferTypeId" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="basePosParameters">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="posId" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="makePaymentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:paymentResult"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="paymentResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="status" type="tns:paymentStatus"/>
+                    <xs:element minOccurs="0" name="transfer" type="tns:transfer"/>
+                    <xs:element minOccurs="0" name="fromAccountStatus" type="tns:accountStatus"/>
+                    <xs:element minOccurs="0" name="toAccountStatus" type="tns:accountStatus"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="transfer">
+                <xs:complexContent>
+                    <xs:extension base="tns:basePaymentVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="transactionNumber" type="xs:string"/>
+                            <xs:element minOccurs="0" name="traceNumber" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="basePaymentVO">
+                <xs:complexContent>
+                    <xs:extension base="tns:basePaymentDataVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="transferType" type="tns:transferType"/>
+                            <xs:element minOccurs="0" name="description" type="xs:string"/>
+                            <xs:element minOccurs="0" name="fromMember" type="tns:member"/>
+                            <xs:element minOccurs="0" name="member" type="tns:member"/>
+                            <xs:element minOccurs="0" name="fromSystemAccountName" type="xs:string"/>
+                            <xs:element minOccurs="0" name="systemAccountName" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="fields" nillable="true" type="tns:fieldValue"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="basePaymentDataVO">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+                            <xs:element minOccurs="0" name="formattedDate" type="xs:string"/>
+                            <xs:element minOccurs="0" name="processDate" type="xs:dateTime"/>
+                            <xs:element minOccurs="0" name="formattedProcessDate" type="xs:string"/>
+                            <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="formattedAmount" type="xs:string"/>
+                            <xs:element minOccurs="0" name="status" type="tns:paymentStatusVO"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="entityVO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="transferType">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="from" type="tns:accountType"/>
+                            <xs:element minOccurs="0" name="to" type="tns:accountType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="accountType">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="currency" type="tns:currency"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="currency">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="symbol" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="pattern" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="member">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityWithCustomFieldsVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="username" type="xs:string"/>
+                            <xs:element minOccurs="0" name="email" type="xs:string"/>
+                            <xs:element minOccurs="0" name="groupId" type="xs:long"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="images" nillable="true" type="tns:image"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="entityWithCustomFieldsVO">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="fields" nillable="true" type="tns:fieldValue"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="image">
+                <xs:complexContent>
+                    <xs:extension base="tns:entityVO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="caption" type="xs:string"/>
+                            <xs:element minOccurs="0" name="thumbnailUrl" type="xs:string"/>
+                            <xs:element minOccurs="0" name="fullUrl" type="xs:string"/>
+                            <xs:element minOccurs="0" name="lastModified" type="xs:dateTime"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="fieldValue">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="internalName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fieldId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="displayName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="value" type="xs:string"/>
+                    <xs:element minOccurs="0" name="possibleValueId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="memberValueId" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="accountStatus">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="balance" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="formattedBalance" type="xs:string"/>
+                    <xs:element minOccurs="0" name="availableBalance" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="formattedAvailableBalance" type="xs:string"/>
+                    <xs:element minOccurs="0" name="reservedAmount" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="formattedReservedAmount" type="xs:string"/>
+                    <xs:element minOccurs="0" name="creditLimit" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="formattedCreditLimit" type="xs:string"/>
+                    <xs:element minOccurs="0" name="upperCreditLimit" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="formattedUpperCreditLimit" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getAccountStatus">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="params" type="tns:accountStatusPosParameters"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="accountStatusPosParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:posPinParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="accountTypeId" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="posPinParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:basePosParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="posPin" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getAccountStatusResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:accountStatus"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="searchAccountHistory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="params" type="tns:accountHistoryPosParameters"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="accountHistoryPosParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:posPinParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="accountTypeId" type="xs:long"/>
+                            <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="searchAccountHistoryResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:accountHistoryResultPage"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="accountHistoryResultPage">
+                <xs:complexContent>
+                    <xs:extension base="tns:resultPage">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="accountStatus" type="tns:accountStatus"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="transfers" type="tns:transfer"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="resultPage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+                    <xs:element minOccurs="0" name="totalCount" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="chargeback">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="params" type="tns:chargebackParameters"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="chargebackParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:posPinParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="transferId" type="xs:long"/>
+                            <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="chargebackResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:chargebackResult"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="chargebackResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="status" type="tns:chargebackStatus"/>
+                    <xs:element minOccurs="0" name="originalTransfer" type="tns:transfer"/>
+                    <xs:element minOccurs="0" name="chargebackTransfer" type="tns:transfer"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getInitializationData">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="params" type="tns:initializationParameters"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="initializationParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:posPinParameters">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getInitializationDataResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:posInitializationVO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="posInitializationVO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="owner" type="tns:member"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="principalTypes" nillable="true" type="tns:wsPrincipalTypeVO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="accountTypes" nillable="true" type="tns:detailedAccount"/>
+                    <xs:element minOccurs="0" name="transactionNumber" type="tns:transactionNumberVO"/>
+                    <xs:element minOccurs="0" name="decimalDigits" type="xs:int"/>
+                    <xs:element minOccurs="0" name="maxSchedulingPayments" type="xs:int"/>
+                    <xs:element minOccurs="0" name="numberOfCopies" type="xs:int"/>
+                    <xs:element minOccurs="0" name="resultPageSize" type="xs:int"/>
+                    <xs:element minOccurs="0" name="allowMakePayment" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="wsPrincipalTypeVO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="principal" type="tns:wsPrincipal"/>
+                    <xs:element minOccurs="0" name="customFieldInternalName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="label" type="xs:string"/>
+                    <xs:element minOccurs="0" name="isDefault" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="detailedAccount">
+                <xs:complexContent>
+                    <xs:extension base="tns:accountType">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="isDefault" type="xs:boolean"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="transferTypes" nillable="true" type="tns:transferType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="transactionNumberVO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="prefix" type="xs:string"/>
+                    <xs:element minOccurs="0" name="padLength" type="xs:int"/>
+                    <xs:element minOccurs="0" name="suffix" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="receivePayment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="params" type="tns:receivePaymentParameters"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="receivePaymentParameters">
+                <xs:complexContent>
+                    <xs:extension base="tns:basePaymentParameters">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="fromMemberPrincipalType" type="xs:string"/>
+                            <xs:element minOccurs="0" name="fromMemberPrincipal" type="xs:string"/>
+                            <xs:element minOccurs="0" name="fromMemberCredentials" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="receivePaymentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:paymentResult"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="paymentStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PROCESSED"/>
+                    <xs:enumeration value="PENDING_AUTHORIZATION"/>
+                    <xs:enumeration value="INVALID_CREDENTIALS"/>
+                    <xs:enumeration value="BLOCKED_CREDENTIALS"/>
+                    <xs:enumeration value="INVALID_CHANNEL"/>
+                    <xs:enumeration value="INVALID_PARAMETERS"/>
+                    <xs:enumeration value="FROM_NOT_FOUND"/>
+                    <xs:enumeration value="TO_NOT_FOUND"/>
+                    <xs:enumeration value="NOT_ENOUGH_CREDITS"/>
+                    <xs:enumeration value="MAX_DAILY_AMOUNT_EXCEEDED"/>
+                    <xs:enumeration value="RECEIVER_UPPER_CREDIT_LIMIT_REACHED"/>
+                    <xs:enumeration value="NOT_PERFORMED"/>
+                    <xs:enumeration value="UNKNOWN_ERROR"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="paymentStatusVO">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PENDING"/>
+                    <xs:enumeration value="PROCESSED"/>
+                    <xs:enumeration value="DENIED"/>
+                    <xs:enumeration value="CANCELED"/>
+                    <xs:enumeration value="SCHEDULED"/>
+                    <xs:enumeration value="FAILED"/>
+                    <xs:enumeration value="BLOCKED"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="chargebackStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SUCCESS"/>
+                    <xs:enumeration value="TRANSFER_NOT_FOUND"/>
+                    <xs:enumeration value="TRANSFER_ALREADY_CHARGEDBACK"/>
+                    <xs:enumeration value="INVALID_PARAMETERS"/>
+                    <xs:enumeration value="TRANSFER_CANNOT_BE_CHARGEDBACK"/>
+                    <xs:enumeration value="NOT_PERFORMED"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="wsPrincipal">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="USER"/>
+                    <xs:enumeration value="CARD"/>
+                    <xs:enumeration value="EMAIL"/>
+                    <xs:enumeration value="CUSTOM_FIELD"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="makePaymentResponse">
+        <wsdl:part element="tns:makePaymentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="receivePayment">
+        <wsdl:part element="tns:receivePayment" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="receivePaymentResponse">
+        <wsdl:part element="tns:receivePaymentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountStatus">
+        <wsdl:part element="tns:getAccountStatus" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="searchAccountHistory">
+        <wsdl:part element="tns:searchAccountHistory" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountStatusResponse">
+        <wsdl:part element="tns:getAccountStatusResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="chargebackResponse">
+        <wsdl:part element="tns:chargebackResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="chargeback">
+        <wsdl:part element="tns:chargeback" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="makePayment">
+        <wsdl:part element="tns:makePayment" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getInitializationData">
+        <wsdl:part element="tns:getInitializationData" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getInitializationDataResponse">
+        <wsdl:part element="tns:getInitializationDataResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="searchAccountHistoryResponse">
+        <wsdl:part element="tns:searchAccountHistoryResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="PosWebService">
+        <wsdl:operation name="makePayment">
+            <wsdl:input message="tns:makePayment" name="makePayment"/>
+            <wsdl:output message="tns:makePaymentResponse" name="makePaymentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountStatus">
+            <wsdl:input message="tns:getAccountStatus" name="getAccountStatus"/>
+            <wsdl:output message="tns:getAccountStatusResponse" name="getAccountStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="searchAccountHistory">
+            <wsdl:input message="tns:searchAccountHistory" name="searchAccountHistory"/>
+            <wsdl:output message="tns:searchAccountHistoryResponse" name="searchAccountHistoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="chargeback">
+            <wsdl:input message="tns:chargeback" name="chargeback"/>
+            <wsdl:output message="tns:chargebackResponse" name="chargebackResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getInitializationData">
+            <wsdl:input message="tns:getInitializationData" name="getInitializationData"/>
+            <wsdl:output message="tns:getInitializationDataResponse" name="getInitializationDataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="receivePayment">
+            <wsdl:input message="tns:receivePayment" name="receivePayment"/>
+            <wsdl:output message="tns:receivePaymentResponse" name="receivePaymentResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="posSoapBinding" type="tns:PosWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="makePayment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="makePayment">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="makePaymentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountStatus">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getAccountStatus">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getAccountStatusResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="chargeback">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="chargeback">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="chargebackResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="searchAccountHistory">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="searchAccountHistory">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="searchAccountHistoryResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getInitializationData">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getInitializationData">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getInitializationDataResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="receivePayment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="receivePayment">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="receivePaymentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="pos">
+        <wsdl:port binding="tns:posSoapBinding" name="posPort">
+            <soap:address location="http://localhost:8080/cyclos/services/pos"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

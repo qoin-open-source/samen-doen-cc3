@@ -1,0 +1,53 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans 'Edit My Details' %}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    <script type="text/javascript">
+        var return_url = '{% url 'accounts-update-profile' %}';
+    </script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+
+    {{ form.media }}
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div> {# end sidebar menu #}
+    </div> {# end five columns sidebar #}
+
+    <div class="eight columns">
+        <h4>{% trans 'My Profile' %}</h4>
+
+        {% if user.is_superuser %}
+            {% trans 'Super users cannot have profiles' %}
+        {% else %}
+            {% if cc3_profile %}
+              {% include 'accounts/profile_form_include.html' %}
+            {% else %}
+                {% trans "Cannot find a profile for the logged in user, please contact the site administrators" %}
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="five columns">
+        {% if cc3_profile %}
+        <div class="four columns">
+            <div class="element label">
+                <h4>{% trans 'Change Password' %}</h4>
+                <div class="field" style="width:initial">
+                    <a href="{% url 'password_change' %}" class="element button"><span class="l"></span><span class="c">{% trans 'CHANGE PASSWORD' %}</span><span class="r"></span></a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        {% endif %}
+    </div> {# end five columns sidebar #}
+{% endblock %}

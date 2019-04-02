@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' 'prizedraw' %}">Prize Draws</a>
+    &rsaquo; <a href="{% url 'admin:prizedraw_draw_changelist' %}">Draws</a>
+    &rsaquo; <a href="{% url 'admin:prizedraw_draw_change' draw.pk %}">{{ draw }}</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    
+    <div>Draw status: {{ draw.status }}</div>
+
+    {% if form %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div>
+            <input type="submit" value="{% trans 'Generate winning numbers' %}" />
+        </div>
+    </form>
+    {% endif %}
+
+{% endblock %}

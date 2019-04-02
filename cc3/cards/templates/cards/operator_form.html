@@ -1,0 +1,73 @@
+{% extends "accounts/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'New Operator' %}{% endblock %}
+
+
+{% block content %}
+    {% url 'operator_create' as url_operator_create %}
+
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div> {# end sidebar menu #}
+    </div> {# end five columns sidebar #}
+
+    <div class="eleven columns">
+        {% ifequal request.path url_operator_create %}
+            <h4>{% trans 'Create a new Terminal Operator' %}</h4>
+        {% else %}
+            <h4>{% trans 'Terminal Operator' %} {{ operator.name }}</h4>
+        {% endifequal %}
+
+        <form id="operator_form" method="post" action="." class="element form">
+            {% csrf_token %}
+
+            <fieldset>
+                <div class="element label{% if form.name.errors %} error{% endif %}">
+                    <label for="id_name">{{ form.name.label }}</label>
+                    <div class="field">
+                        <div class="element field">
+                            <input id="id_name" name="name" type="text" class="input-text large" value="{% if form.name.value %}{{ form.name.value }}{% endif %}">
+                            {% if form.name.errors %}
+                                <span>
+                                    {% for error in form.name.errors %}
+                                        {{ error }}<br />
+                                    {% endfor %}
+                                </span>
+                                <br />
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="element label{% if form.pin.errors %} error{% endif %}">
+                    <label for="id_pin">{{ form.pin.label }}</label>
+                    <div class="field">
+                        <div class="element field">
+                            <input id="id_pin" name="pin" type="text" class="input-text small" value="{% if form.pin.value %}{{ form.pin.value }}{% endif %}">
+                            {% if form.pin.errors %}
+                                <span>
+                                    {% for error in form.pin.errors %}
+                                        {{ error }}<br />
+                                    {% endfor %}
+                                </span>
+                                <br />
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <hr>
+                <div id="operator_form_spinner" class="element spinner hide pull-right"></div>
+                <button class="element button pull-right" id="operator_form_button">
+                    <span class="l"></span>
+                    <span class="c">{% trans 'Save Operator' %}</span>
+                    <span class="r"></span>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

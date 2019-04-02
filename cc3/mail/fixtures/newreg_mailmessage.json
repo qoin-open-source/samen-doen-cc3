@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "mail.mailmessage", "fields": {"body": "A new user has been registered:\r\n\r\nName: {{ user_profile.first_name }}  {{ user_profile.last_name }} \r\nBusiness: {{ user_profile.business_name }}\r\nCommunity: {{ user_profile.community }}\r\nGroupset: {{ user_profile.groupset }}\r\n", "lang": "", "type": "newreg", "subject": "A new user has been registered"}}]

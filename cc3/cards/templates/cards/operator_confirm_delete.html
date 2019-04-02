@@ -1,0 +1,26 @@
+{% extends "accounts/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'New Operator' %}{% endblock %}
+
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div> {# end sidebar menu #}
+    </div> {# end five columns sidebar #}
+
+    <div class="eleven columns">
+        <h4>{% trans 'Delete Terminal Operator' %} {{ operator.name }}</h4>
+
+        <form action="" method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <button class="element button pull-right" id="delete_operator_button">
+                <span class="l"></span>
+                <span class="c">{% trans 'Delete Operator' %}</span>
+                <span class="r"></span>
+            </button>
+        </form>
+    </div>
+{% endblock %}

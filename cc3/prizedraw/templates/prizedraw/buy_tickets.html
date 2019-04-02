@@ -1,0 +1,93 @@
+{% extends "prizedraw/base.html" %}
+{% load i18n static %}
+
+{% block extrahead %}
+<script type="text/javascript" >
+var buy_tickets_url = '{% url 'prizedraw_buy_tickets' %}';
+var add_funds_url = '{% url 'add-funds' %}';
+</script>
+{{ form.media }}
+
+
+{% endblock %}
+
+
+{% block page-content %}
+    {% if draw %}
+        <h4>{% trans 'Buy tickets for the draw of ' %} {{ draw.draw_ends }}</h4>
+    {% else %}
+        <h4>{% trans 'Buy draw tickets' %}</h4>
+    {% endif %}
+
+    {% include 'includes/messages.html' %}
+
+    {% if form %}
+        <p>{% trans "You can still buy up to" %} {{ max_tickets_to_buy }} {% trans "tickets in this draw" %}</p>
+
+        <div id="buy_tickets_form_errors" class="hide"></div>
+        <form id="buy_tickets_form" method="post" action="." class="element form">{% csrf_token %}
+
+            <fieldset>
+                {% with form.num_tickets as field %}
+                    {% include 'fragments/forms/_field.html' %}
+                {% endwith %}
+                {{ form.amount }}
+            <hr />
+                {% with form.repeat_purchase as field %}
+                    {% include 'fragments/forms/_field.html' %}
+                {% endwith %}
+                {% with form.run_indefinitely as field %}
+                    {% include 'fragments/forms/_field.html' %}
+                {% endwith %}
+                <div class="element med info-box">
+                <p>{% trans 'You can always manage your recurring purchases after setting them up.' %}</p>
+                </div>
+                <div class="clearfix"></div>
+
+                {% with form.num_months as field %}
+                    {% include 'fragments/forms/_field.html' %}
+                {% endwith %}
+
+                <div class="element med info-box">
+                <p>{% trans 'Your repeat purchase starts on the 23rd day of the next month. Please ensure you have sufficient balance in time for your monthly ticket purchase.' %}</p>
+                </div>
+
+
+                <hr>
+                <div id="buy_tickets_form_spinner" class="element spinner hide pull-right"></div>
+                <button class="element button pull-right" id="buy_tickets_form_button"><span class="l"></span><span class="c">{% trans 'Process Payment' %}</span><span class="r"></span></button>
+            </fieldset>
+        </form>
+
+        <div id="modal_dialog" class="modal_dialog">
+            <div class="title">{% trans "YOU'RE ABOUT TO COMPLETE A PAYMENT" %}</div>
+            <div class="highlight" id="pay_highlight">
+{% blocktrans with num_tickets='{{num_tickets}}' amount='{{amount}}' %}You are about to buy {{num_tickets}} ticket(s) for a total amount of <span class="icon">{{currency_symbol}}</span> {{amount}}{% endblocktrans %}</div>
+            <div class="highlight" id="pay_repeat_highlight">
+                {% blocktrans with add_funds_link='{{add_funds_link}}' num_tickets='{{num_tickets}}' amount='{{amount}}' monthly_draws='{{monthly_draws}}' total_num_tickets='{{total_num_tickets}}' %}
+    You are about to buy {{num_tickets}} Brixton Bonus tickets for {{monthly_draws}} monthly draws.
+    This will total {{total_num_tickets}} at a cost of <span class="icon">{{currency_symbol}}</span> {{amount}}.
+
+    You can always manage your recurring ticket purchase after setting it up.
+
+    <strong>Your future repeat purchases will occur on the 23rd day of each month.
+        Please ensure you have sufficient B£ balance by creating a standing order of at least
+        the value of your purchase to reach our reserve sterling account by the 20th day of each month
+        {{add_funds_link}}</strong>
+{% endblocktrans %}</div>
+            <div class="options">
+                <a href="#" class="element button my-account" rel="modal:close">
+                    <span class="l"></span>
+                    <span class="c">{% trans 'Cancel' %}</span>
+                    <span class="r"></span>
+                </a>
+                <a id="confirm_payment" href="#" class="element button my-account">
+                    <span class="l"></span>
+                    <span class="c">{% trans 'Confirm' %}</span>
+                    <span class="r"></span>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

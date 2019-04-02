@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail cc3_tags %}
+
+{% block title %}{% trans 'New activity' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}{% with user.cc3_profile as user_profile %}
+    <div class="row">
+        <div class="col-md-10">
+            <h2>{% if form.instance.pk %}
+            {% trans 'Edit activity' %}
+            {% else %}
+            {% trans 'New activity' %}
+            {% endif %}</h2>
+
+            <hr>
+
+            {% include 'includes/messages.html' %}
+            <div id="place_ad_form_errors" class="hide"></div>
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form id="place_ad_form" method="post" action="." class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% block created_by %}{% endblock %}
+
+                {% with formfield=form.title %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_description">{% trans 'Description' %} * - <span id="max_chars_warning">{% trans 'Number of characters left' %}</span> [<span id="max_chars">max. 900</span>]</label>
+                    {% for error in form.description.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <textarea id="id_description" name="description" class="form-control" cols="30" rows="10" placeholder="{{ form.description.help_text }}" onkeyup="countChar(this)">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+                </div>
+
+                <div class="form-group {% if form.image.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_image">{% trans 'Image' %}</label>
+                    {% for error in form.image.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+
+                    {% if form.instance.image %}
+                        {% thumbnail form.instance.image 150x150 upscale as thumb %}
+                        <img class="" alt="{% trans 'Profile picture' %}" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+                    {% else %}
+                        <img style="border: 1px solid black;" alt="{% trans 'Image' %}" src="http://placehold.it/150x150" width="150" height="150">
+                    {% endif %}
+
+                    <br><br>
+                    <input type="file" id="id_image" name="image" class="form-control">
+                </div>
+
+            {% with group=user_profile.get_cyclos_group %}
+                {% if group and group|is_goededoelen_group %}
+                    {% comment %}good causes can't pick community{% endcomment %}
+
+                <input type="hidden" id="id_communities" name="communities" value="{{user_profile.community.pk}}" />
+
+                {% else %}
+                {% trans "Select at least one community. Only members of your selected communities will be shown this activity." as extra %}
+                {% with formfield=form.communities is_checkbox=True sub_info=extra %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+                {% endif  %}
+            {% endwith %}
+                <hr/>
+
+                <h3>{% trans "Location of activity" %}</h3>
+
+                {% include "marketplace/campaign_form_location_snippet.html"%}   {# override in project if necessary #}
+
+                <hr/>
+
+                {% with formfield=form.start_date %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% with formfield=form.start_time %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% with formfield=form.end_time %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% trans "Select the appropriate category/ies for the activity you are creating" as extra %}
+                {% with formfield=form.categories is_checkbox=True sub_info=extra %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+
+                {% with formfield=form.max_participants %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% with formfield=form.reward_per_participant %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                <div class="form-group">
+                    <label class="control-label">{% trans 'Maximum cost' %}</label>
+                    <span ><i class="icon-samendoen"></i><span id="maximum-cost"></span></span>
+                </div>
+
+                {% trans "If your planned activity has any restrictions, for example in terms of age or gender, you can specify it here. If you leave this field blank the criteria will be shown as: 'None'" as extra %}
+                {% with formfield=form.criteria sub_info=extra %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% with formfield=form.contact_name %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% with formfield=form.contact_telephone %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                {% with formfield=form.contact_email %}
+                    {% include 'marketplace/formfield_snippet.html' %}
+                {% endwith %}
+
+                <hr>
+                {% if is_published %}
+                   <button class="btn btn-rounded btn-blue" id="save_campaign_form_button">{% if form.instance.pk %}{% trans 'Save changes to published activity' %}{% else %}{% trans 'Publish' %}{% endif %}</button>
+                {% else %}
+                    <button class="btn btn-rounded btn-blue" id="save_concept_campaign_form_button" name="save_hidden">{% if form.instance.pk %}{% trans 'Save changes to unpublished activity' %}{% else %}{% trans "Save (unpublished)" %}{% endif %}</button>
+                    <button class="btn btn-rounded btn-blue" id="save_published_campaign_form_button" name="save_published">{% if form.instance.pk %}{% trans 'Save changes and publish' %}{% else %}{% trans 'Publish' %}{% endif %}</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endwith %} {% endif %}
+{% endblock %}
+
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.cookie.js' %}"></script>
+
+
+    <script type="text/javascript">
+
+	$(function() {
+		update_max_cost();
+	});
+
+        $("input#id_max_participants").change(function() {
+	    update_max_cost();
+        });
+
+        $("input#id_reward_per_participant").change(function() {
+	    update_max_cost();
+        });
+
+	function update_max_cost() {
+            var max_p = $("input#id_max_participants").val();
+            var reward_pp = $("input#id_reward_per_participant").val();
+            if (max_p && reward_pp) {
+                var max_cost = max_p * reward_pp;
+                $("#maximum-cost").text(max_cost);
+            } else {
+                $("#maximum-cost").text("");
+            }
+	};
+
+        {# Check the maximum characters allowed in the `description` field (900). #}
+        function countChar(description) {
+            var chars = $(description).val().length;
+            var remaining = 900 - chars;
+
+            $('#max_chars').html(remaining.toString());
+
+            {# Warn the user about max number of characters passed. #}
+            if(remaining < 0) {
+                $("form label[for=id_description]").parent().addClass('has-error');
+                $("#max_chars_warning").html('{% trans "Only 900 characters allowed" %}');
+                $('#place_ad_form_button').attr('disabled', 'true');
+            }
+            else {
+                $("form label[for=id_description]").parent().removeClass('has-error');
+                $("#max_chars_warning").html('{% trans "Number of characters left" %}');
+
+                $('#place_ad_form_button').removeAttr('disabled');
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+
+{% endblock %}
+
+
+{% block extrajs %}
+
+{% endblock %}

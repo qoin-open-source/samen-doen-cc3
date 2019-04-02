@@ -1,0 +1,15 @@
+{% load i18n %}
+{% blocktrans with title=ad.title id=ad.id body=body cc3_system_name=cc3_system_name %}
+
+Dear {{ cc3_system_name }} Credit Admin,
+
+A Credit Application has been made by {{name}} ({{email}}) for {{amount}}.
+
+The purpose: {{body}}
+
+The earn back: {{earn_back}}
+
+Regards,
+
+{{ cc3_system_name }}
+{% endblocktrans %}

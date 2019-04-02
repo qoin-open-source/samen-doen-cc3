@@ -1,0 +1,52 @@
+{% extends "marketplace/base.html" %}
+{% load i18n thumbnail staticfiles %}
+{% block title %}{% trans 'Edit Member' %}{% endblock %}
+
+{% block extrahead %}
+{{block.super}}
+<script type="text/javascript">
+    var return_url = '{% url 'communityadmin_ns:editmember' username=cc3_profile.user.username %}';
+</script>
+<script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+{{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+                
+
+<div class="eleven columns">
+<h4>{% trans 'Edit Member' %} - {{ cc3_profile }}</h4>
+                {% include 'includes/messages.html' %}
+                {% include 'accounts/profile_form_include.html' %}
+
+                <a href="{% url 'communityadmin_ns:memberlist' %}">{% trans 'Back to list' %}</a>
+
+</div>
+
+<div class="memberlinks">
+    <h4>{% trans 'Account Type' %}: {{ cc3_profile.get_simple_account_type }}</h4>
+
+    <ul class="memberlinks-list">
+        <li class="member_transactions"><a href="{% url 'communityadmin_ns:membertransactions' username=cc3_profile.user.username %}">{% trans 'transactions'%}</a></li>
+        <li class="member_changepassword"><a href="{% url 'communityadmin_ns:changepassword' username=cc3_profile.user.username %}">{% trans 'reset password'%}</a></li>
+        <li class="member_wantsoffers"><a href="{% url 'communityadmin_ns:memberwantsoffers' username=cc3_profile.user.username %}">{% trans 'wants &amp; offers'%}</a></li>
+        <li class="member_changegroup"><a href="{% url 'communityadmin_ns:changegroup' username=cc3_profile.user.username %}">{% trans 'change group'%}</a></li>
+    </ul>
+
+    {% if comms_url %}
+    <h5>{% trans 'Advanced backoffice functions' %}</h5>
+    <ul class="memberlinks-list">
+        <li class="cyclos_commslog"><a href="{{ comms_url }}" target="cyclos">{% trans 'communications log'%}</a></li>
+        <li class="cyclos_limit"><a href="{{ limit_url }}" target="cyclos">{% trans 'debit/credit limit'%}</a></li>
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

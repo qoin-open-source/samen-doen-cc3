@@ -1,0 +1,32 @@
+{% extends "prizedraw/base.html" %}
+{% load i18n static pagination_tags %}%}
+
+{% block page-content %}
+    {% include 'includes/messages.html' %}
+
+    <div class="prizedraw">
+
+    <p><a href="{% url 'prizedraw_home' %}">{% blocktrans %}Back to {{ lottery_name}} overview{% endblocktrans %}</a></p>
+
+    <h4>{% trans 'All your past draw results' %}</h4>
+    <p>You've won <span class="highlight">{{ currency_symbol }} {{ my_winnings_to_date|floatformat:2|default:0 }}</span> to date<br/>
+       You've won <span class="highlight">{{ my_prizes_to_date|default:0 }}</span> prize{{ my_prizes_to_date|pluralize }} in total</p>
+
+    <table class="zebra">
+        <thead><tr><th>Ticket number</th> <th>Prize</th><th>Prize amount</th><th>Date of draw</th></tr></thead>
+
+        {% for ticket in object_list %}
+            {% with prize=ticket.prizes.all.0 %}<tr>
+                <td{% if prize %} class="highlight"{% endif %}>{{ ticket }}</td>
+                <td{% if prize %} class="highlight"{% endif %}>{{ prize.name|default:'no' }}</td>
+                <td{% if prize %} class="highlight"{% endif %}>{{ prize.amount_paid_summary }}</td>
+                <td>{{ ticket.draw.draw_ends }}</td>
+            </tr>{% endwith %}
+        {% endfor %}
+    </table>
+
+    <div class="clearfix"><br /></div>
+    {% paginate %}
+
+    </div>
+{% endblock %}

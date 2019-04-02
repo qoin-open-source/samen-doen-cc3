@@ -1,0 +1,78 @@
+{% extends "accounts/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'NFC Terminals' %}{% endblock %}
+
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div> {# end sidebar menu #}
+    </div> {# end five columns sidebar #}
+
+    <div class="eight columns">
+        <h4>{{ user.username }} {% trans 'NFC Terminals' %}</h4>
+
+        {% if terminals %}
+            <table class="listing account zebra">
+                <thead>
+                    <tr>
+                        <th>{% trans "IMEI number" %}</th>
+                        <th>{% trans "Creation date" %}</th>
+                        <th>{% trans "Last seen" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for terminal in terminals %}
+                        <tr>
+                            <td>{{ terminal.name }}</td>
+                            <td>{{ terminal.creation_date }}</td>
+                            <td>{{ terminal.last_seen_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="warning">{% trans 'No terminals registered' %}</div>
+        {% endif %}
+
+        <hr />
+
+        <h4>{{ user.username }} {% trans 'NFC Operators' %}</h4>
+
+        {% if operators %}
+            <table class="listing account zebra">
+                <thead>
+                    <tr>
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Creation date" %}</th>
+                        <th>{% trans "Last login" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for operator in operators %}
+                        <tr>
+                            <td><a href="{% url 'operator_update' operator.pk %}">{{ operator.name }}</a></td>
+                            <td>{{ operator.creation_date }}</td>
+                            <td>{{ operator.last_login_date }}</td>
+                            <td><a href="{% url 'operator_delete' operator.pk %}"><span class="icon">X</span></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="warning">{% trans 'No operators registered' %}</div>
+        {% endif %}
+
+        <hr />
+        <a href="{% url 'operator_create' %}">
+            <button class="element button pull-right" id="operator_form_button">
+                <span class="l"></span>
+                <span class="c">{% trans 'New Operator' %}</span>
+                <span class="r"></span>
+            </button>
+        </a>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->
+
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+
+{% if user.is_authenticated %}
+<p>{% trans 'You are logged in' %}</p>
+<br />
+<a href="{% url 'accounts-update-profile' %}">{% trans 'Edit my profile' %}</a>
+
+{% else %}
+
+<h4>Login</h4>
+
+{% if form.non_field_errors %}
+<div class="element form-error">
+    <p>{{ form.non_field_errors }} </p>
+</div>
+{% endif %}
+
+<form method="post" action="?next={% url 'accounts_home' %}" class="element form">{% csrf_token %}
+    <div class="element label{% if form.username.errors %} error{% endif %}">
+        <label for="id_username">{% trans 'Email' %}</label>
+        <div class="field">
+            <input type="text" id="id_username" name="username"{% if form.username.value %} value="{{form.username.value}}"{% endif %} class="input-text large">{% if form.username.errors %}<span class="myerrors">{{ form.username.errors }}</span>{% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="element label{% if form.password.errors %} error{% endif %}">
+        <label for="id_password">{% trans 'Password' %}</label>
+        <div class="field">
+            <input type="password" id="id_password" maxlength="254" name="password"{% if form.password.value %} value="{{form.password.value}}"{% endif %} class="input-text large">{% if form.password.errors %}<span class="myerrors">{{ form.password.errors }}</span>{% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    <button class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Log in' %}</span><span class="r"></span></button>
+    <input type="hidden" name="next" value="">
+</form>
+
+<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+{% endif %}
+</div>
+{% endblock %}

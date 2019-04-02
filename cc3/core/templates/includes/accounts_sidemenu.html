@@ -1,0 +1,132 @@
+{% load i18n staticfiles thumbnail %}
+
+{% if user.is_authenticated %}
+    <div class="company">
+        <div class="logo">
+            {% if user_cc3_profile.get_picture %}
+                <img class="" alt="{% trans 'Profile picture' %}" src="{{ user_cc3_profile.picture|thumbnail_url:'profilepicture' }}">
+            {% else %}
+                <img class="" alt="{% trans 'Profile picture' %}" src="{% static 'images/backgrounds/avatar-placeholder.png' %}">
+            {% endif %}
+        </div>
+
+        <span>{{ cc3_profile_full_name }}</span>
+        <span>{{ user_cc3_profile.get_account_type | safe }}</span>
+    </div>{# end company #}
+
+    <ul class="sbmenu">
+        {% url 'accounts_home' as accounts_home_url %}
+        {% url 'accounts_transactions_search' as accounts_transactions_search_url %}
+
+        <li class="account{% ifequal request.path accounts_home_url %} active{% endifequal %}{% ifequal request.path accounts_transactions_search_url %} active{% endifequal %}">
+            <a href="{{ accounts_home_url }}"><span></span>{% trans 'Account' %}</a>
+
+                <div>
+                    <ul>
+                        <li>
+                            <form action="{% url 'accounts_transactions_search' %}" method="get" id="search_transactions_form">
+                            {% csrf_token %}
+                                {% if menu_form and menu_form.non_field_errors %}
+                                <div class="element form-error">
+                                    {% for err in menu_form.non_field_errors %}
+                                        <p>{{ err }} </p>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <fieldset>
+                                    <div class="element datepicker">
+                                        <input id="id_from_date" name="from_date" type="text" class="input-text{% if menu_form.from_date.errors %} error{% endif %}" placeholder="{% trans 'From date' %}" {% if menu_form.from_date.value %} value="{{ menu_form.from_date.value }}"{% endif %}/>
+                                        {% if menu_form.from_date.errors %}
+                                            {% for err in menu_form.from_date.errors %}
+                                                <span class="error">{{ err }}</span><br />
+                                            {% endfor %}
+                                        {% endif %}
+                                        </div>
+                                        <div class="element datepicker">
+                                            <input id="id_to_date" name="to_date" type="text" class="input-text{% if menu_form.to_date.errors %} error{% endif %}" placeholder="{% trans 'To date' %}" {% if menu_form.to_date.value %} value="{{ menu_form.to_date.value }}"{% endif %}/>
+                                        {% if menu_form.to_date.errors %}
+                                            {% for err in menu_form.to_date.errors %}
+                                                <span class="error">{{ err }}</span><br />
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <button class="element button" name="reset" value="reset">
+                                        <span class="l"></span>
+                                        <span class="c">{% trans 'Reset' %}</span>
+                                        <span class="r"></span>
+                                    </button>
+                                    <button class="element button" type="submit" value="Submit">
+                                        <span class="l"></span>
+                                        <span class="c">{% trans 'Search' %}</span>
+                                        <span class="r"></span>
+                                    </button>
+                                </fieldset>
+                                <div class="clearfix"></div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+        </li>
+
+        {% if user_cc3_profile.groupset.may_view_invoices %}
+            {% url 'invoice_list' as invoice_list_url %}
+            <li class="invoices{% ifequal request.path invoice_list_url %} active{% endifequal %}">
+                <a href="{{ invoice_list_url }}"><span></span>{% trans 'Invoices' %}</a>
+            </li>
+        {% endif %}
+
+        {% url 'accounts_pay_direct' as accounts_pay_direct_url %}
+        <li class="pay-direct{% ifequal request.path accounts_pay_direct_url %} active{% endifequal %}">
+            <a href="{{ accounts_pay_direct_url }}"><span></span>{% trans 'Pay direct' %}</a>
+        </li>
+
+        {% url 'accounts-credit' as accounts_credit %}
+        <li class="credit {% ifequal request.path accounts_credit %} active{% endifequal %}">
+            <a href="{{ accounts_credit }}"><span></span>{% trans 'Credit' %}</a>
+        </li>
+
+        {% if user_cc3_profile.groupset.may_add_ads %}
+            {% url 'accounts_my_ads' as accounts_my_ads_url %}
+            {% url 'accounts_place_ad' as accounts_place_ad_url %}
+
+            <li class="my-ads-tq{% ifequal request.path accounts_my_ads_url %} active{% endifequal %}{% ifequal request.path accounts_place_ad_url %} active{% endifequal %}{% ifequal sbmenu 'editad' %} active{% endifequal %}">
+                <a href="{{ accounts_my_ads_url }}"><span></span>{% trans 'My ads' %}</a>
+                {% ifequal request.path accounts_my_ads_url %}
+                <ul>
+                    <li{% ifequal request.path accounts_place_ad_url %} class="active"{% endifequal %}><a href="{% url 'accounts_place_ad' %}">{% trans 'Place Ad' %}</a></li>
+                </ul>
+                {% endifequal %}
+
+                {% ifequal sbmenu 'editad' %}
+                <ul>
+                    <li><a href="{% url 'accounts_place_ad' %}">{% trans 'Place Ad' %}</a></li>
+                </ul>
+                {% endifequal %}
+
+                {% ifequal request.path accounts_place_ad_url %}
+                <ul>
+                    <li class="active"><a href="{% url 'accounts_place_ad' %}">{% trans 'Place Ad' %}</a></li>
+                </ul>
+                {% endifequal %}
+            </li>
+        {% endif %}
+
+        {% if user_cc3_profile.groupset.is_business or request.user.is_community_admin %}
+            {% url 'terminals_list' as terminals_list_url %}
+            <li class="terminals{% ifequal request.path terminals_list_url %} active{% endifequal %}">
+                <a href="{{ terminals_list_url }}"><span></span>{% trans "Business Terminals" %}</a>
+            </li>
+        {% endif %}
+
+        {% if user_cc3_profile.groupset.is_business %}
+            {% url 'causes_list' as causes_list_url %}
+            <li class="causes{% ifequal request.path causes_list_url %} active{% endifequal %}">
+                <a href="{{ causes_list_url }}"><span></span>{% trans "Good causes" %}</a>
+            </li>
+        {% endif %}
+    </ul>
+{% else %}
+    <div class="company"></div>
+{% endif %}

@@ -1,0 +1,277 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags %}
+
+{% block title %}{% if ad.pk %}{% trans 'Edit Ad' %}{% else %}{% trans 'Place Ad' %}{% endif %}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {{ form.media }}
+    {# use jquery.form.js as jquery post not sending file #}
+    <script type="text/javascript">
+        var browse_translation = "{% trans 'Browse' %}...";
+        var return_url = '{% url 'accounts_my_ads' %}';
+
+        {% block notcommunityadmin %}
+        $(function() {
+            repopulate_categories('');
+        });
+
+    {% endblock %}
+    </script>
+
+    {% if want_categories_adtype %}
+    <script type="text/javascript">
+        /* if adtype changes, clear and then repopulate category checkboxes */
+        $(function() {
+            $("#id_adtype").change(function() {
+                var ad_type = $("#id_adtype").val();
+                if (ad_type == {{ want_categories_adtype }}) {
+                    repopulate_categories('W')
+                } else {
+                    repopulate_categories('')
+                }
+            });
+        });
+
+        function repopulate_categories(adtype_code) {
+            /* clear and re-populate categories checkboxes */
+            $("input[name='category']").each(function() {
+                if($(this).prop("checked"))
+                    $(this).prop("checked", false).trigger('change.crc');
+            });
+            $.ajax({
+                type: "GET",
+                url: "{% url 'communityadmin_ns:categories_auto' %}",
+                data: {
+                    profile_id: {{ user.cc3_profile.id }},
+                    ad_code: adtype_code
+                }
+            })
+            .done(function( msg ) {
+                for (var category_index in msg) {
+                    var category_id = msg[category_index].id;
+                    var $category_checkbox = $("input[value=" + category_id + "]");
+                    if(!$category_checkbox.prop("checked"))
+                        $category_checkbox.prop("checked", true).trigger('change.crc');
+                }
+            });
+        }
+
+    </script>
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+    {% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div>{# end sidebar menu #}
+        </div>{# end five columns sidebar #}
+    {% endblock %}
+
+    <div class="eleven columns">
+        <h4>{% if form.instance.pk %}
+            {% trans 'Edit Ad' %}
+            {% else %}
+            {% trans 'Place Ad' %}
+            {% endif %}
+        </h4>
+        {% include 'includes/messages.html' %}
+        <div id="place_ad_form_errors" class="hide"></div>
+        <form id="place_ad_form" method="post" action="." class="element form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% block created_by %}{% endblock %}
+
+            <div class="element label required{% if form.title.errors %} error{% endif %}">
+                <label for="id_title">{{ form.title.label }} *</label>
+                <div class="field">
+                    <div class="element field">
+                        <input id="id_title" name="title" type="text" class="input-text large" value="{% if form.title.value %}{{ form.title.value }}{% endif %}">
+                        {% if form.title.errors %}
+                            <span>
+                                {% for error in form.title.errors %}
+                                    {{ error }}<br />
+                                {% endfor %}
+                            </span>
+                            <br />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="element label{% if form.adtype.errors %} error{% endif %}">
+                <label>{{ form.adtype.label }}</label>
+                <div class="field">
+                    <div class="element select">
+                        <select id="id_adtype" name="adtype">
+                            <option value="1"{% ifequal form.adtype.value '1' %} selected="selected"{% endifequal %}>{% trans 'Offer' %}</option>
+                            <option value="2"{% ifequal form.adtype.value '2' %} selected="selected"{% endifequal %}>{% trans 'Want' %}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="element label">
+                        <label for="id_ad_images">{% trans "Images" %}</label>
+                        <div class="field">
+                            <div class="dropzone" style=""></div>
+                        </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="element label required{% if form.description.errors %} error{% endif %}">
+                <label>{{ form.description.label }} *</label>
+                <div class="field">
+                    <div class="element field tinymce">
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                            <span>
+                                {% for error in form.description.errors %}
+                                    {{ error }}<br />
+                                {% endfor %}
+                            </span>
+                            <br />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+
+            <div class="element label{% if form.price.errors %} error{% endif %}">
+                <label for="id_price">{{ form.price.label }} *</label>
+                <div class="field" style="margin-top: 10px;">
+                    <div class="element field input-price" style="width: 160px; margin-top: 10px; padding-right: 40px;">
+                        <span style="position: absolute; top: -20px; font-style: italic;">{% trans "Fixed price or other pricing option" %}</span>
+
+                        <span class="icon">{{ currency_symbol }}</span>
+                        <input id="id_price" name="price" type="text" class="input-text med" value="{% if form.price.value %}{{ form.price.value }}{% endif %}">{% if form.price.errors %}<span>{% for error in form.price.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                        {% if form.price.errors %}
+                            <span>
+                                {% for error in form.price.errors %}
+                                    {{ error }}<br />
+                                {% endfor %}
+                            </span>
+                            <br />
+                        {% endif %}
+                    </div>
+                    <div class="element" style="width: 20px; float: left; margin: 16px 10px 0px 10px;">{% trans "Or" %}</div>
+                    <div class="element select" id="price_option_select" style="width: 200px; float: left;">
+                        {{ form.price_option }}
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <br />
+            </div>
+
+            <div class="element label required filter-box{% if form.category.errors %} error{% endif %}">
+                <span class="toggle-field target_toggle" data-activate="true" data-target=".filter-box .field">&nbsp;</span>
+                <label>{{ form.category.label }} *</label>
+                <div class="field">
+                    <div class="element small checkbox-container checkbox-tree">
+                        {{ form.category }}
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="element">
+                        {% if form.category.errors %}
+                            <span>
+                                {% for error in form.category.errors %}
+                                    {{ error }}<br />
+                                {% endfor %}
+                            </span>
+                            <br />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+            <div class="element label{% if form.keywords.errors %} error{% endif %}">
+                <label>{{ form.keywords.label }}</label>
+                <div class="field">
+                    <div class="element field">
+                        {{ form.keywords }}
+                        {% if form.keywords.errors %}
+                            <span>
+                                {% for error in form.keywords.errors %}
+                                    {{ error }}<br />
+                                {% endfor %}
+                            </span>
+                            <br />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            {% if form.status.is_hidden %}
+                {{ form.status }}
+            {% else %}
+                <div class="element label{% if form.status.errors %} error{% endif %}">
+                    <label>{{ form.status.label }}</label>
+                    <div class="field">
+                        <div class="element select">
+                            {{ form.status }}
+                            {% if form.status.errors %}
+                                <span>
+                                    {% for error in form.status.errors %}
+                                        {{ error }}<br />
+                                    {% endfor %}
+                                </span>
+                                <br />
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            {% endif %}
+
+            <hr>
+
+            <div id="place_ad_form_spinner" class="element spinner hide pull-right"></div>
+            <button class="element button pull-right" id="place_ad_form_button">
+                <span class="l"></span>
+                <span class="c">{% if form.instance.pk %}{% trans 'Edit Ad' %}{% else %}{% trans 'Place Ad' %}{% endif %}</span>
+                <span class="r"></span>
+            </button>
+
+            <fieldset>
+                <div class="element label">
+                    <label style="width:initial !important;"></label>
+                </div>
+                <div class="element label">
+                    <label style="color:red;width: 250px;">&nbsp;* {% trans 'Indicates mandatory field' %}</label>
+                </div>
+                <div class="clearfix"></div>
+            </fieldset>
+
+        </form>
+        <div id="modal_dialog" class="modal_dialog">
+            <div class="title">{% trans "Images Uploading" %}</div>
+            <div class="highlight" id="pay_highlight">{% trans "Please wait for your images to finish uploading before submitting your advert" %}</div>
+            <div class="options">
+                <a href="#" class="element button my-account" rel="modal:close">
+                    <span class="l"></span>
+                    <span class="c">{% trans 'OK' %}</span>
+                    <span class="r"></span>
+                </a>
+            </div>
+        </div>
+    </div>{# end eleven columns #}
+{% endblock %}
+
+
+{% block extrajs %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/dropzone.js' %}"></script>
+
+    {% url 'api_marketplace_new_ad_images' as image_endpoint %}
+    {% include "includes/filefield_dropzone.html" %}
+{% endblock %}

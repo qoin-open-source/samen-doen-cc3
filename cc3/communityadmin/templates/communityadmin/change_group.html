@@ -1,0 +1,32 @@
+{% extends "marketplace/base.html" %}
+{% load i18n %}
+{% block title %}{% trans 'Change group' %}{% endblock %}
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+                
+
+<div class="eleven columns">
+    <h4>{% trans 'Change group' %} - {{ cc3_profile }}</h4>
+
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form }}
+        <button class="element button" type="submit">
+            <span class="l"></span>
+            <span class="c">{% trans 'Change Group' %}</span>
+            <span class="r"></span>
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+
+

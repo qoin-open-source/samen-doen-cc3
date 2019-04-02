@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n l10n staticfiles thumbnail cc3_tags map_tags %}
+
+{% block title %}{% trans 'Manage participants' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+
+	{% include 'includes/messages.html' %}
+
+		<div class="col-sm-9">
+			<section class="content">
+				<div class="row marketplace-buttons">
+				    <div class="col-sm-6">
+					{% url 'accounts_my_campaigns' as my_campaigns_url %}
+					{% if my_campaigns_url in request.META.HTTP_REFERER %}
+					    <a href="{{ my_campaigns_url }}">&lt; {% trans 'back to my activities' %}</a>
+					{% else %}
+					    <a href="{% url 'accounts_my_managed_campaigns' %}">&lt; {% trans 'back to activities summary' %}</a>
+					{% endif %}
+				    </div>
+				</div>
+
+				<div class="row marketplace-detail">
+					<div class="col-sm-12">
+
+						{% with campaign=object %}
+							{% include 'marketplace/campaign_details_snippet.html' %}
+						{% endwith %}
+
+
+						{% with participants=object.participants.all %}
+						<div class="col-sm-12">
+							{% if participants %}
+								<table width="100%">
+								{% for participant in participants %}
+									{% with profile=participant.profile %}
+									<tr>
+										<td style="padding-bottom: 10px">
+										{% if profile.get_picture %}
+											{% if profile.is_visible %}
+												{% thumbnail profile.picture "70x70" crop="center" as im %}
+												<div><a href="{{ profile.get_absolute_url }}"><img src="{{ im.url }}" class="img-responsive img-inline" alt=""/></a></div>
+											{% else %}
+												<div><img src="https://placehold.it/70x70" class="img-responsive img-inline" alt=""/></div>
+											{% endif %}
+										{% else %}
+											<div><img src="https://placehold.it/70x70" class="img-responsive img-inline" alt=""/></div>
+										{% endif %}
+										</td>
+										<td>{{ profile.full_name }}</td>
+										<td>{{ profile.user.email }}</td>
+										<td>{{ profile.mobile_number|default:profile.phone_number }}</td>
+										{% if object.is_live %}
+											<td><a href="{% url 'accounts-remove-campaign-participant' pk=participant.pk %}">{% trans "Remove this participant" %}</a></td>
+										{% else %}
+											<td>{% if participant.reward_is_pending %}
+												{% trans "Not yet rewarded" %}
+											    {% else %}
+												<span><i class="icon-samendoen"></i>{{ participant.reward_amount|default:0|floatformat:"0" }}</span> {% trans "reward paid" %}
+											    {% endif %}
+											</td>
+										{% endif %}
+									</tr>
+									{% endwith %}
+								{% endfor %}
+								</table>
+							{% endif %}
+						</div>
+						{% endwith %}
+					</div>
+
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}

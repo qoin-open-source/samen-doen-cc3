@@ -1,0 +1,51 @@
+{% extends "marketplace/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Want' %}{% endblock %}
+
+{% block content %}
+    <h4>{% trans 'Enquire' %}</h4>
+
+    {% include 'includes/messages.html' %}
+
+    {% if form %}
+        <form action="." method="post" class="element form">{% csrf_token %}
+            <fieldset>
+                <div class="element label{% if form.name.errors %} error{% endif %}">
+                    <label for="id_name">{{ form.name.label }}</label>
+                    <div class="field">
+                        <div class="element field">
+                            <input id="id_name" name="name" type="text" class="input-text large" value="{% if form.name.value %}{{ form.name.value }}{% endif %}">{% if form.name.errors %}<span>{% for error in form.name.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                {% if not user.is_authenticated %}
+			        {# Entering an emailaddress is mandatory for anonymous users #}
+                    <div class="element label{% if form.email.errors %} error{% endif %}">
+                        <label for="id_email">{{ form.email.label }}</label>
+                        <div class="field">
+                            <div class="element field">
+                                <input id="id_email" name="email" type="text" class="input-text large" value="{% if form.email.value %}{{ form.email.value }}{% endif %}">{% if form.email.errors %}<span>{% for error in form.email.errors %}{{ error }}<br />{% endfor %}</span><br />{% endif %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+				{% endif %}
+
+                <div class="element label{% if form.body.errors %} error{% endif %}">
+                    <label for="id_body">{{ form.body.label }}</label>
+                    <div class="element field">
+                        <textarea id="id_body" name="body" class="input-text large" cols="30" rows="10">{% if form.body.value %}{{ form.body.value }}{% endif %}</textarea>{{ form.ad_id }}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>                  
+
+                <hr>
+
+                <button id="send_button" class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Send enquiry' %}</span><span class="r"></span></button>
+              </fieldset>
+        </form>
+    {% endif %}
+{% endblock %}

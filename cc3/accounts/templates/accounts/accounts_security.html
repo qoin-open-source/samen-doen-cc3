@@ -1,0 +1,57 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Account Security' %}{% endblock %}
+
+{% block extrahead %}{{block.super}}
+<link rel="stylesheet" href="{% static 'css/onoffswitch.css' %}">
+<script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/plugins/jquery.blockUI.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/account_security.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->           
+        </div><!-- end five columns sidebar -->
+    {% endblock %}
+
+        <div class="eleven columns">
+            <h4>{% trans 'Account Security' %}</h4>
+            {% include 'includes/messages.html' %}
+            {% url 'password_change' as password_change_url %}
+            <p>{% blocktrans %}Do you need to restrict usage of your account, because a payment card has been lost or stolen, or you suspect unauthorised access to your account? You can do that here. We recommend that you <a href="{{ password_change_url }}">change your password</a> as an additional security measure.
+            {% endblocktrans %}</p>
+
+            <form action="." name="account_security_form" id="account_security_form" method="post">{% csrf_token %}
+                {{form.non_form_errors}}
+                {{form}}
+            </form>
+
+            <br clear="all" />
+            <hr style="width:50%" />
+            <div>
+                <div class="onoffswitch-iconlabel"><strong>{% trans 'All account activity' %}</strong></div>
+                <div class="onoffswitch-wrap">
+                    <div class="onoffswitch-text">{% trans 'unblocked' %}</div>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="allonoffswitch" class="onoffswitch-checkbox" id="id_allonoffswitch">
+                        <label class="onoffswitch-label" for="id_allonoffswitch">
+                            <div class="onoffswitch-inner"></div>
+                            <div class="onoffswitch-switch"></div>
+                        </label>
+                    </div>
+                    <div class="onoffswitch-text">{% trans 'blocked' %}</div>
+                </div>
+            </div>
+            <br clear="all" />
+
+            {% block back-link %}
+            {% endblock %}
+        </div><!-- end eleven columns -->
+
+{% endblock %}
+

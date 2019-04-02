@@ -1,0 +1,13 @@
+{% comment %}{% if object.created_by.userprofile.slug %}<a href="{% url 'marketplace-business-profile' object.created_by.userprofile.slug %}">{% endif %}
+    {% if object.created_by.userprofile.get_profile_type == 'individual' %}
+        {{ object.created_by.userprofile.first_name }} {% if object.created_by.userprofile.tussenvoegsel %}{{ object.created_by.userprofile.tussenvoegsel }} {% endif %}{{ object.created_by.userprofile.last_name }}
+    {% else %}
+        {{ object.created_by.business_name }}
+    {% endif %}
+{% if object.created_by.userprofile.slug %}</a>{% endif %}</p>
+{% endcomment %}
+<p>
+        {{ object.address }} {{ object.num_street }} {{ object.extra_address }}<br/>
+        {{ object.postal_code }}<br/>
+        {{ object.city }}<br/>
+</p>

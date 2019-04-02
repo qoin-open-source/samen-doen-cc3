@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans 'Register card' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+            <h2>{% trans 'Order Card' %}</h2>
+            {% include 'includes/messages.html' %}
+
+            {% with user.get_profile as profile %}
+            {% if profile.is_individual_profile or profile.is_charity_profile %}
+                {% if not profile.can_order_card %}
+                {% url 'accounts-update-profile' as update_profile_url %}
+                {% blocktrans with update_profile_url=update_profile_url %}You cannot order a card.
+                Please check you have completed your address, BIC and IBAN number from your
+                <a href="{{update_profile_url}}">profile</a>{% endblocktrans %}
+                {% endif %}
+
+            {% if form %}
+            {% url 'owner_register_card' as register_card_url %}
+            <form action="{{ register_card_url }}" class="form" method="post" id="register_card_form">{% csrf_token %}
+
+                <div class="radio">
+                    {% for error in form.registration_choice.errors %}
+                    <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    {{form.registration_choice}}
+                </div>
+                <!--input type="submit" value="Submit" / -->
+            </form>
+            {# Place this out of the form. Data will be POSTed via Javascript. #}
+            <button class="btn btn-rounded btn-blue" id="register_card_form_button">{% trans 'Register Card' %}</button>
+
+            {# Modal popup for payment confirmation #}
+            <div class="modal fade" id="modal-register-send" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{% trans 'Order card' %}</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="highlight" id="register_send_highlight">
+                                {% blocktrans %}Door op 'Bestellen' te klikken gaat u ermee akkoord dat Samen-Doen eenmalig €5,95 van uw rekening afschrijft.{% endblocktrans %}
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                            <button type="button" id="confirm_register_send" class="btn btn-rounded btn-green">{% trans 'Order' %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% else %}{% with user.card_registration_set.all.0 as current_card_choice %}
+            {% if current_card_choice %}
+            {% trans 'You have registered your card already' %}
+            {% endif %}{% endwith %}
+
+            {% endif %}{# end if form #}
+            {% else %}
+                    {% trans 'Only Individuals can register cards' %}
+            {% endif %}{# end if individual profile #}
+            {% endwith %}
+        </div>
+
+
+        <div class="col-md-6 col-lg-5">
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/bootstrap/modal.js' %}"></script>
+    {# 'card number' field initially hidden. Show it when i have a card is chosen. #}
+    {# icheck issues https://github.com/fronteed/iCheck/issues/68 #}
+    <script type="text/javascript">
+
+        $(function() {
+            {# 'Submit' button clicked. #}
+            $('#register_card_form_button').on('click', function()  {
+                var reg_choice = $('div.checked input[name=registration_choice]').val();
+                var pays_for_card = '{{cc3_profile_pays_for_card}}';
+                if(reg_choice == 'Send' && pays_for_card == 'True') {
+                    {# Show the modal confirmation form. #}
+                    $('#modal-register-send').modal('show');
+                } else {
+                    $('#register_card_form').submit();
+                }
+            });
+
+            {# POST the contents of the form. #}
+            $('#confirm_register_send').click(function() {
+                $('#register_card_form').submit();
+            });
+
+        });
+
+    </script>
+{% endblock %}
+

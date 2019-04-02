@@ -1,0 +1,19 @@
+{# This can be overridden at project templates level. Override it in templates/cmscontent/homepage_news_column.html. #}
+
+<div>
+    <h2>{{ instance.title }}</h2>
+
+    <ul>
+        {% for entry in news_list %}
+            <li>
+                <a href="{{ entry.get_absolute_url }}">
+                    <span>{{ entry.creation_date|date:"d-m" }}</span>
+                </a>
+                <div>
+                    <h3>
+                        <a href="{{ entry.get_absolute_url }}">{{ entry.content|truncatechars:150 }}</a></h3>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

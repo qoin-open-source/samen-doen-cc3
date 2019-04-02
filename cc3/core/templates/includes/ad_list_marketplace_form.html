@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<form action="." id="filter-form" method="get" class="element form marketplace-filter not-mobile">
+    <fieldset>
+        {% with user.cc3_profile.community.community_view as community_view %}
+        {% if community_view == '1' or community_view == '2' or not_all_communities_no_filter %}
+            <div class="filter-box active">
+                <div class="title">{% trans 'Community' %}</div>
+                <div class="options">{{ marketplace_form.community }}</div>
+            </div>
+        {% endif %}
+        {% endwith %}
+        <div class="element filter-select results">
+            <span>{% trans 'Results per page' %}</span>
+            {{ marketplace_form.paginate_by }}
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="element filter-select sort">
+            <span>{% trans 'Sort' %}</span>
+            {{ marketplace_form.sort_by }}
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="filter-box active">
+            <div class="title">{% trans 'Type' %}</div>
+            <div class="options">{{ marketplace_form.adtype }}</div>
+        </div>
+
+        <div class="filter-box active">
+            <div class="title">{% trans 'Category' %}</div>
+            <div class="options categories">{{ marketplace_form.categories }}</div>
+        </div>
+
+        <div class="filter-box active">
+            <div class="title">{% trans 'Price range' %}</div>
+            <div class="options price-range">
+                {{ marketplace_form.from_price }}
+                <span>{% trans 'To' %}</span>
+                {{ marketplace_form.to_price }}
+                <a class="element refresh" href="#" id="filter-refresh" title="refresh"></a>
+                <div class="border"></div>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

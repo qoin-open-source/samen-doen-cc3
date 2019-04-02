@@ -1,0 +1,1 @@
+{% if user_status_message %}<div class="notification"><p style='width: 100%; background-image: none; padding-left: 10px;'><strong>{{user_status_message|safe}}</strong> {% if user_status_link %} <a href="{{user_status_link}}">{{user_status_link_text}}</a>{% endif %}</p></div>{% endif %}

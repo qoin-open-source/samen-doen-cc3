@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load i18n l10n staticfiles thumbnail cc3_tags map_tags %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+
+	{% include 'includes/messages.html' %}
+
+		<div class="col-sm-12">
+			<section class="content">
+				<div class="row marketplace-buttons">
+				    <div class="col-sm-6">
+					{% url 'accounts_my_campaigns' as my_campaigns_url %}
+					{% if my_campaigns_url in request.META.HTTP_REFERER %}
+					    <a href="{{ my_campaigns_url }}">&lt; {% trans 'back to my activities' %}</a>
+					{% else %}
+					    <a href="{% url 'campaign-list' %}">&lt; {% trans 'back to all activities' %}</a>
+					{% endif %}
+				    </div>
+				</div>
+
+				<div class="row marketplace-detail">
+					<div class="col-sm-7">
+					<div class="col-sm-12">
+						<h2>{{ object.title }}</h2>
+
+						<div class="marketplace-campaign-times">
+							{% with object.start_date|date:"l j F Y" as start_date %}
+							<table width="100%">
+							<tr><td width="20%">{% trans "Start" %}:</td><td>{{ start_date }} {% trans "at" %} {{ object.start_time|date:"H:i" }}</td></tr>
+							<tr><td>{% trans "End" %}:</td><td>{{ start_date }} {% trans "at" %} {{ object.end_time|date:"H:i" }}</td></tr>
+							</table>
+							{% endwith %}
+						</div>
+					</div>
+					<div class="clearfix"></div>
+
+					<div class="col-sm-4">
+					    {% if object.get_image %}
+						{% thumbnail object.image "165x165" crop="center" as im %}
+						<img class="img-responsive" src="{{ im.url }}" alt="{{ object.title }}"/>
+					    {% else %}
+						<img class="img-responsive" src="https://placehold.it/165x165" alt=""/>
+					    {% endif %}
+					</div>
+
+					<div class="col-sm-offset-4">
+						<table class="marketplace-campaign-table">
+						<tr>
+							<td width="30%"><span class="marketplace-campaign-label">{% trans "Where" %}:</span></td>
+							<td>{% include "marketplace/campaign_location.html" %}</td>
+						</tr>
+						<tr>
+							<td><span class="marketplace-campaign-label">{% trans "Restrictions" %}:</span></td>
+							<td>{% if object.criteria %}{{ object.criteria }}{% else %}{% trans "None" %}{% endif %}</td>
+						</tr>
+						<tr><td><span class="marketplace-campaign-label">{% trans "Contact" %}:</span></td>
+							<td>{{ object.contact_name }}
+								{% if object.contact_telephone %}<br/>{% trans "tel" %}: {{ object.contact_telephone }}{% endif %}
+								{% if object.contact_email %}<br/>{% trans "mail" %}: {{ object.contact_email }}{% endif %}
+							</td>
+						</tr>
+						</table>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="col-sm-12" style="margin-top: 20px">
+						<p><span class="marketplace-campaign-label">{% trans "Description" %}:</span></p>
+						<p>{{ object.description|safe }}</p>
+
+					</div>
+					<div class="clearfix"></div>
+
+
+					<div class="col-sm-6">
+					{% with num_reqd=object.num_participants_required participants=object.participants.all %}
+					    <div class="marketplace-campaign-participants">
+						{% with campaign=object %}
+							{% include 'marketplace/campaign_status_snippet.html' %}
+						{% endwith %}
+					    </div>
+					</div>
+
+					<div class="col-sm-offset-6" style="vertical-align: middle">
+					    <p class="text-right">
+						{% if object.is_live %}
+							{% if not logged_in %}
+								<p>{% trans "You need to log in to sign up for this activity" %}</p>
+							{% else %}
+								{% if already_subscribed %}
+									<form method="post" action="{% url 'campaign-unsubscribe' object.id  %}">{% csrf_token %}
+									<button class="btn btn-rounded btn-green" type="submit" name="action" value="unsubscribe">{% trans 'Unsubscribe' %}</button>
+									</form>
+
+								{% elif num_reqd %}
+									{% if not is_consumer_member %}
+										<p class="errors">{% trans "Only consumers can sign up for activities" %}</p>
+									{% elif not is_same_community %}
+										<p class="errors">{% trans "You can't sign up for an activity from a different community" %}</p>
+									{% else %}
+										<form method="post" action="{% url 'campaign-subscribe' object.id %}">{% csrf_token %}
+										<button class="btn btn-rounded btn-green" type="submit" name="action" value="subscribe">{% trans 'Sign up' %}</button>
+										</form>
+									{% endif %}
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					    </p>
+					</div>
+                    {% if not already_subscribed %}
+                        <div class="col-md-8">
+                            <div class="alert alert-info" role="alert">
+                                {% trans 'Signing up for an activity will make your profile visible to others' %}
+                            </div>
+                        </div>
+                    {% endif %}
+					{% if logged_in %}
+					<div class="col-sm-12">
+						{% if participants %}
+							<p>{% trans "Taking part:" %}</p>
+							{% for participant in participants %}{% with participant.profile.cyclos_group as cyclos_group %}
+							{% if participant.profile.get_picture %}
+								{% if participant.profile.is_visible %}
+									{% thumbnail participant.profile.picture "70x70" crop="center" as im %}
+									<div><a href="{{ participant.profile.get_absolute_url }}"><img src="{{ im.url }}" class="img-circle img-responsive img-inline" alt=""/></a></div>
+								{% else %}
+									<div>
+                        {%   if cyclos_group|is_organisaties_group %} <img src="{% static "img/SD-icoon-winkelier-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% elif cyclos_group|is_instituties_group  %} <img src="{% static "img/SD-icoon-instelling-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% elif cyclos_group|is_goededoelen_group  %} <img src="{% static "img/SD-icoon-spaardoel-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% elif cyclos_group|is_consumenten_group  %} <img src="{% static "img/SD-icoon-spaarder-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% else                                                         %} <i class="icon icon-star"></i> {% endif %}
+
+{#                                          <img src="https://placehold.it/70x70" class="img-circle img-responsive img-inline" alt=""/> #}
+                                    </div>
+								{% endif %}
+							{% else %}
+								<div>
+                        {%   if cyclos_group|is_organisaties_group %} <img src="{% static "img/SD-icoon-winkelier-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% elif cyclos_group|is_instituties_group  %} <img src="{% static "img/SD-icoon-instelling-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% elif cyclos_group|is_goededoelen_group  %} <img src="{% static "img/SD-icoon-spaardoel-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% elif cyclos_group|is_consumenten_group  %} <img src="{% static "img/SD-icoon-spaarder-70.png" %}" class="img-responsive img-inline" alt=""/>
+                        {% else                                                         %} <i class="icon icon-star"></i> {% endif %}
+
+                                {#    <img src="https://placehold.it/70x70" class="img-circle img-responsive img-inline" alt=""/>#}
+                                </div>
+							{% endif %}{% endwith %}
+							{% endfor %}
+						{% endif %}
+					</div>
+					{% endif %}
+					{% endwith %}
+					</div>
+
+					<div class="col-sm-offset-7">
+						<p class="text-left">
+						    <div style="font-size: 25px; color: #904397; font-weight: bold;">
+							<span><i class="icon-samendoen"></i>{% if object.reward_per_participant %}{{ object.reward_per_participant|floatformat:"0" }}{% else %}&nbsp;{% endif %}</span>
+						    </div>
+						    {% trans "This is the maximum amount of Positoos you can earn" %}
+						</p>
+						{% comment%}
+						<div class="marketplace-detail-map">
+							<div class="profile_map">
+							    {% static_map object.created_by.userprofile.get_address_with_street_num object.created_by.city object.created_by.postal_code "Netherlands" %}
+							</div>
+						</div>
+						{% endcomment %}
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load i18n l10n staticfiles thumbnail cc3_tags map_tags %}
+
+{% block title %}{% trans 'Manage rewards' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+
+		{% include 'includes/messages.html' %}
+
+		<div class="col-sm-12">
+			<section class="content">
+				<div class="row marketplace-buttons">
+				    <div class="col-sm-6">
+					{% url 'accounts_my_campaigns' as my_campaigns_url %}
+					{% if my_campaigns_url in request.META.HTTP_REFERER %}
+					    <a href="{{ my_campaigns_url }}">&lt; {% trans 'back to my activities' %}</a>
+					{% else %}
+					    <a href="{% url 'accounts_my_managed_campaigns' %}">&lt; {% trans 'back to activities summary' %}</a>
+					{% endif %}
+				    </div>
+				</div>
+
+
+				<div class="row marketplace-detail">
+					<div class="col-sm-10">
+
+
+						{% if confirmation_required %}
+							<div class="col-sm-6">
+								<h2>{% trans "Confirm reward payment" %}</h2>
+								{% blocktrans with title=object.title date=object.start_date %}
+								You are about to make the following rewards payments for the '{{ title }}'
+								activity that took place on {{ date }}:
+								{% endblocktrans %}
+
+								<form id="reward-participants-form" action="" method="post">
+									{% csrf_token %}
+									{{ formset.management_form }}
+									<p>
+									{% for form in formset %}
+										{{ form.id }}
+										{{ form.start_time.as_hidden }}
+										{{ form.end_time.as_hidden }}
+										<br/>{{ form.instance.profile.name }}: <span><i class="icon-samendoen"></i>{{ reward_amounts|lookup:form.instance.pk }}</span>
+									{% endfor %}
+									</p>
+									<p>{% trans "The total amount of these transactions is" %} <span><i class="icon-samendoen"></i>{{ total_amount }}</span></p>
+									<button class="btn btn-rounded btn-blue" name="payment_cancelled">{% trans 'Cancel' %}</button>
+									<button class="btn btn-rounded btn-blue pull-right" name="payment_confirmed">{% trans 'Confirm' %}</button>
+								</form>
+						{% else %}
+							{% with campaign=object %}
+								{% include 'marketplace/campaign_details_snippet.html' %}
+							{% endwith %}
+
+							{% with participants=object.participants.all %}
+							<div class="col-sm-12">
+								{% if participants %}
+									<form id="reward-participants-form" action="" method="post">
+										{% csrf_token %}
+										{{ formset.management_form }}
+										{% for dict in formset.errors %}
+											{% for error in dict.values %}
+												{{ error }}
+											{% endfor %}
+										{% endfor %}
+										<table width="100%">
+											<tr style="vertical-align: text-top">
+												<th>{% trans "Participant" %}</th>
+												<th colspan="2">{% trans "Attendance" %}{% if not object.rewards_all_paid %}<br/>{% trans "Adjust the times if the participant did not attend the whole session" %}{% endif %}</th>
+												<th>{% trans "Individual reward" %}</th>
+											</tr>
+											<tr>
+												<th> </th>
+												<th>{% trans "From" %}</th>
+												<th>{% trans "To" %}</th>
+												<th> </th>
+											</tr>
+										{% for form in formset %}
+											{{ form.id }}
+											<tr id="participant-{{ forloop.counter0 }}" class="participant-row">
+												<td>{{ form.instance.profile.name }}{% if form.errors %}<br/>
+												<div class="has-error">
+													{% for error in form.errors.values %}
+														<div class=" control-label">{{ error }}</div>
+													{% endfor %}
+												</div>
+												{% endif %}</td>
+												<td><span class="start-time">{{ form.start_time }}</span></td>
+												<td><span class="end-time">{{ form.end_time }}</span></td>
+												<td><span ><i class="icon-samendoen"></i><span class="reward-amount"></span></span></td>
+											</tr>
+											{% if forloop.last %}
+												<tr>
+													<td></td>
+													<td></td>
+													<th style="text-align:right">{% trans "Total" %}:</th>
+													<td><span ><i class="icon-samendoen"></i><span id="overall-total"></span></span><br/></td>
+												</tr>
+											{% endif %}
+										{% endfor %}
+
+										{% if not object.rewards_all_paid %}
+											<tr>
+												<th colspan=4><button class="btn btn-rounded btn-blue" id="pay_rewards_form_button">{% trans 'Pay rewards' %}</button></th>
+											</tr>
+										{% endif %}
+
+										{% for participant in paid_participants %}
+											{% if forloop.first %}
+												<tr>
+													<th><br/>{% trans "Already rewarded" %}</th>
+													<th> </th>
+													<th> </th>
+													<th> </th>
+												</tr>
+											{% endif %}
+											<tr>
+												<td>{{ participant.profile.name }}</td>
+												<td>{{ participant.start_time }}</td>
+												<td>{{ participant.end_time }}</td>
+												<td><span><i class="icon-samendoen"></i>{{ participant.reward_amount|default:0|floatformat:decimal_places }}</span></td>
+											</tr>
+										{% endfor %}
+										</table>
+									</form>
+								{% endif %}
+							</div>
+							{% endwith %}
+						{% endif %}
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript">
+        var defaultStartTime = "{{ default_start_time }}";
+        var defaultEndTime = "{{ default_end_time }}";
+        var totalSeconds = {{ default_seconds }};
+        var defaultPayment = {{ default_payment }};
+	var populateFields = {{ populate_fields }};
+	var decimalPlaces = {{ decimal_places }};
+
+	$(function() {
+		if (populateFields) {
+			populate_empty_times();
+		}
+		$("tr.participant-row").each(function() {
+		    do_total($(this));
+		});
+		update_overall_total();
+	});
+
+	$(".start-time input").change(function() {
+		do_total($(this).closest('tr'));
+		update_overall_total();
+        });
+
+	$(".end-time input").change(function() {
+		do_total($(this).closest('tr'));
+		update_overall_total();
+        });
+
+	function do_total(participant) {
+		var start_time = $(participant).find(".start-time input").val();
+		var end_time = $(participant).find(".end-time input").val();
+		reward = calculate_reward(start_time, end_time);
+                $(participant).find('.reward-amount').text(reward.replace("NaN", "??"));
+	};
+
+	function calculate_reward(start_time, end_time) {
+		// TODO: might be better done as ajax call to django?
+		if (start_time && end_time) {
+			var seconds = seconds_between(start_time, end_time);
+			var reward = (seconds / totalSeconds) * defaultPayment;
+			return reward.toFixed(decimalPlaces);
+		}
+		if (start_time || end_time) {
+			return '';
+		}
+		return '0';
+	};
+
+	function seconds_between(start_time, end_time) {
+		var start_t = start_time.split(':');
+		var end_t = end_time.split(':');
+		var start_d = new Date(2000, 1, 1, start_t[0], start_t[1]);
+		var end_d = new Date(2000, 1, 1, end_t[0], end_t[1]);
+		return (end_d - start_d) / 1000;
+	};
+
+        function populate_empty_times() {
+            /* clear and re-populate categories checkboxes */
+            $(".start-time input").each(function() {
+		if (!$(this).val()) {
+			$(this).val(defaultStartTime);
+		}
+            });
+            $(".end-time input").each(function() {
+		if (!$(this).val()) {
+			$(this).val(defaultEndTime);
+		}
+            });
+	};
+
+	function update_overall_total() {
+		var total = 0.0;
+		$(".reward-amount").each(function() {
+			if ($(this).text) {
+				total += parseFloat($(this).html());
+			}
+			$("#overall-total").text(total.toFixed(decimalPlaces).replace("NaN", "??"));
+		})
+	};
+
+    </script>
+{% endblock %}

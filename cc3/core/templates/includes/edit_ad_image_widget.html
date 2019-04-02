@@ -1,0 +1,11 @@
+{% load staticfiles thumbnail %}
+<div class="attachment form-row inline {{ adimages_formset.prefix }}">
+    <div class="preview">
+        <img src="{% if adimage_form.image.value %}{{ adimage_form.image.value|thumbnail_url:'profilepicture' }}{% else %}{% static 'images/backgrounds/avatar-placeholder.png' %}{% endif %}" alt="{% if adimage_form.caption.value %}{{adimage_form.caption.value}}{% endif %}">
+    </div>
+    <div class="input">
+      <!--input type="file"-->
+      {% for field in adimage_form %}{{ field }}{% endfor %}
+    </div>
+    <div class="clearfix"></div>
+</div>

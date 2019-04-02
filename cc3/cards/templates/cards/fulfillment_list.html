@@ -1,0 +1,80 @@
+{% extends "communityadmin/base.html" %}
+{% load i18n %}
+{% block title %}{% trans 'Fulfillment List' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Fulfillment' %} - {{ community }}</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            <table class="table rwd-table">
+                {% if fulfillment_list %}
+                <thead>
+                    <tr class="table-head">
+
+                        <th>{% trans 'Applicant name'|capfirst %}</th>
+                        <th>{% trans 'Address'|capfirst %}</th>
+                        <th>{% trans 'Email'|capfirst %}</th>
+                        <th>{% trans 'Stadlander'|capfirst %}</th>
+                        <th>{% trans 'SEPA details'|capfirst %}</th>
+                        <th>{% trans 'Date'|capfirst %}</th>
+                        <th>{% trans 'Replace old scheme card?' %}</th>
+                        <th>{% trans 'Last modified' %}</th>
+                        <th>{% trans 'Status' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fulfillment in fulfillment_list %}
+                        <tr>{% with fulfillment.profile.user.cc3_profile as user_profile %}
+                            <td>{{ user_profile.name }}</td>
+                            <td>{{ user_profile.address }}<br />
+                                {{ user_profile.num_street }}<br />
+                                {{ user_profile.extra_address }}<br />
+                                {{ user_profile.postal_code }}<br />
+                                {{ user_profile.city }}</td>
+                            <td>{{ user_profile.user.email }}</td>
+                            <td>{{ user_profile.is_stadlander_sso_user }}</td>
+                            <td>{{ user_profile.individual_profile.iban }}<br />
+                                {{ user_profile.individual_profile.bic_code }}<br />
+                                {{ user_profile.individual_profile.account_holder }}</td>
+                            <td>{{ fulfillment.card_registration.creation_date }}</td>
+                            <td>{% with fulfillment.card_registration.registration_choice as card_choice %}{% if card_choice == 'Send' %}{% trans 'True' %} {% else %}{% trans 'False' %}{% endif %}{% endwith %}</td>
+                            <td>{{ fulfillment.last_modified }}</td>
+                            <td>{% with fulfillment.status as fulfillment_status %}{{fulfillment.get_status_display}}<br /><br />
++                                {% if fulfillment_status == 'New' %}
+                                <form action="." method="post" class="mark_processed" id="mark_processed_{{fulfillment.id}}">{% csrf_token %}
+                                <input type="hidden" name="mark_processed" id="id_mark_processed" value="{{fulfillment.id}}" />
+                                <button class="btn btn-rounded btn-blue">Mark Processed</button>
+                            </form>
+                            {% endif %}{% endwith %}
+                            </td>{% endwith %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="clearfix"></div>
+                            <div>{% trans 'No fulfillment list found' %}</div>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </table>
+
+        {# Pagination #}
+        {% include "includes/paginator.html" %}
+
+            <form action="{% url 'cardfulfillment' %}" method="post" class="form">
+                {% csrf_token %}
+                <button id="export" name="export" value="export" class="btn btn-rounded btn-blue">{% trans 'Export' %}</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

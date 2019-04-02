@@ -1,0 +1,94 @@
+{% load staticfiles thumbnail i18n l10n pagination_tags %} {# endless % #}
+
+{% block extrahead %}
+
+    <!-- For geo-location -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript">
+        var map_centre_lat = {{ map_centre_lat }},
+            map_centre_lng = {{ map_centre_lng }};
+    </script>
+    <script src="{% static 'js/geo/map_field.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/geo/map_field.css' %}">
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var buildInfoContent = function (name, address, phone, image_url, link) {
+              var buf = [];
+              {# name #}
+              buf.push("<h4>");
+              buf.push(name)
+              buf.push("</h4>")
+              {# profile image #}
+              if (image_url.length > 0) {
+                buf.push('<img height="84" src="' + image_url + '"/>');
+              }
+              {# address #}
+              if (address.length > 0) {
+                buf.push("<p>");
+
+                for (var i = 0; i < address.length; i++) {
+                  if (address[i].length > 0) {
+                    buf.push(address[i]);
+                    buf.push("<br>");
+                  }
+                }
+                buf.push("</p>");
+              }
+              {# phone #}
+              if (phone.length > 0) {
+                buf.push("<p> {% trans 'Telephone' %}: ");
+                buf.push(phone);
+                buf.push("</p>");
+              }
+              {# link #}
+              if (link.length > 0) {
+                buf.push('<p><a href="' + link + '">{% trans "View" %}</a></p>');
+              }
+              return buf.join("");
+            };
+
+            map_centre = new google.maps.LatLng({{ map_centre_lat }}, {{ map_centre_lng }});
+            {# Would be nicer to do this in JSON but this way we can use the existing filtering without too much hassle. #}
+            var locations = [
+              {% for business in business_list %}[
+                buildInfoContent(
+                  "{{ business.business_name }}",
+                  ["{{ business.cc3_profile.userprofile.num_street }} " + "{{ business.cc3_profile.userprofile.street }}", "{{ business.cc3_profile.userprofile.extra_address }}", "{{ business.cc3_profile.city }}", "{{ business.cc3_profile.postal_code }}"],
+                  "{{ business.cc3_profile.phone_number }}",
+                  "{% if business.get_picture %}{{ business.cc3_profile.picture|thumbnail_url:'profilepicture' }}{% endif %}",
+                  "{% url 'marketplace-business-profile' business.cc3_profile.slug %}"
+                ),
+                {{ business.cc3_profile.latitude|unlocalize }},
+                {{ business.cc3_profile.longitude|unlocalize }}
+              ]{% if not forloop.last %},{% endif %}{% endfor %}
+            ];
+
+            var map = new google.maps.Map(document.getElementById('businesses_map'), {
+              zoom: 11,
+              center: map_centre,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var marker, i;
+            var infowindow = new google.maps.InfoWindow();
+
+            for (i = 0; i < locations.length; i++) {
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                popupContent: locations[i][0]
+              });
+
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                  infowindow.setContent(marker.popupContent);
+                  infowindow.open(map, marker);
+                }
+              })(marker, i));
+            }
+        });
+    </script>
+{% endblock extrahead %}
+
+<div id="businesses_map" class="gmap"></div>

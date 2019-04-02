@@ -1,0 +1,20 @@
+[
+    {
+        "fields": {
+            "active": true,
+            "code": "O",
+            "title": "Offer"
+        },
+        "model": "marketplace.adtype",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "active": true,
+            "code": "W",
+            "title": "Want"
+        },
+        "model": "marketplace.adtype",
+        "pk": 2
+    }
+]

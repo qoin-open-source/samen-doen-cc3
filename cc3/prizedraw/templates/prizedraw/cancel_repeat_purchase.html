@@ -1,0 +1,31 @@
+{% extends "prizedraw/base.html" %}
+{% load i18n staticfiles pagination_tags %}
+
+{% block title %}{% trans 'Cancel Repeat Purchase' %}{% endblock %}
+
+
+{% block page-content %}
+
+        <div class="eleven columns">
+            <h4>{% trans 'Cancel Repeat Purchase' %}</h4>
+            <form id="toggle-ad-status-form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="element label{% if form.id.errors %} error{% endif %}">
+                    <label>{{form.id.label}}</label>
+                    <div class="field">
+                        <div class="element field">
+                            {{form.id}}
+                            {% if form.id.errors %}<span>{% for error in form.id.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            {{ form }}
+
+                <hr>
+                <button class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Cancel Repeat Purchase' %}</span><span class="r"></span></button>
+            </form>
+            {% block back-link %}
+            {% endblock %}
+        </div><!-- end eleven columns -->
+
+{% endblock %}

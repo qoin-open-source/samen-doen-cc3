@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="col-sm-12">
+        <h2>{{ campaign.title }}</h2>
+        <div class="marketplace-campaign-times">
+                {% with campaign.start_date|date:"l j F Y" as start_date %}
+                <table width="100%">
+                <tr><td width="20%">{% trans "Start" %}:</td><td>{{ start_date }} {% trans "at" %} {{ campaign.start_time|date:"H:i" }}</td></tr>
+                <tr><td>{% trans "End" %}:</td><td>{{ start_date }} {% trans "at" %} {{ campaign.end_time|date:"H:i" }}</td></tr>
+                <tr><td>{% trans "Max participants" %}:</td><td>{{ campaign.max_participants }}</td></tr>
+                <tr><td>{% trans "Signed up" %}:</td><td>{{ campaign.participants.count }}</td></tr>
+                {% with float_dp=decimal_places|default_if_none:0 %}
+                <tr><td>{% trans "Reward per participant" %}:</td><td><span ><i class="icon-samendoen"></i></span>{{ campaign.reward_per_participant|floatformat:float_dp }}</td></tr>
+                {% endwith %}
+                </table>
+                {% endwith %}
+        </div>
+</div>
+<div class="clearfix"></div>
+
+
+<div class="col-sm-6">
+    <div class="marketplace-campaign-participants">
+        {% include 'marketplace/campaign_status_snippet.html' %}
+    </div>
+</div>

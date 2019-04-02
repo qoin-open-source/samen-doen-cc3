@@ -1,0 +1,11 @@
+{# This can be overridden at project templates level. Override it in templates/cmscontent/social_media_links.html. #}
+
+<ul class="footer-social">
+    {% for link in instance.socialmedialink_set.all %}
+        <li><a href="{{ link.link_target }}"><span class="{{ link.css_icon_class }}"></span>{{ link.link_text }}</a></li>
+    {% endfor %}
+{#    <li><a href="#"><span class="icon-linkedin"></span></a></li>#}
+{#    <li><a href="#"><span class="icon-twitter"></span></a></li>#}
+{#    <li><a href="#"><span class="icon-youtube"></span></a></li>#}
+{#    <li><a href="#"><span class="icon-mail-alt"></span></a></li>#}
+</ul>

@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<div class="attachment form-row inline {{ adimages_formset.prefix }}">
+    <div class="preview">
+        <img src="{% static 'images/backgrounds/avatar-placeholder.png' %}" alt="">
+    </div>
+    <div class="input">
+        <!--input type="file"-->
+        {{ adimage_form.image }}
+        {% if adimage_form.image.errors %}{{ adimage_form.image.errors }}{% endif %}
+        {{ adimage_form.caption }}
+        {% if adimage_form.caption.errors %}{{ adimage_form.caption.errors }}{% endif %}
+        {% if adimages_formset.can_delete %}{{ adimage_form.DELETE }}{% endif %}
+    </div>
+    <div class="clearfix"></div>
+</div>

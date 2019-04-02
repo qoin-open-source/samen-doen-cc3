@@ -1,0 +1,88 @@
+{% extends "accounts/base.html" %}
+{% load i18n %}
+{% load cmscontent_tags %}
+{% block title %}{% trans 'Credit Application' %}{% endblock %}
+
+
+
+{% block content %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->           
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+        <ul class="element credits">
+        <li>{% trans 'Current Spending Limit' %} <span><i>{{currency_symbol}}</i>{{available_balance|floatformat:"-2"}}</span></li>
+        </ul>
+        <ul class="element credits">
+        <li class="left">{% trans 'Available Credit Line' %} <span><i>{{currency_symbol}}</i>{{credit_limit|floatformat:"-2"}}</span></li>
+        </ul>
+        <br />
+        <h4>{% trans 'Information on credit facilities' %}</h4>
+        <div class="element accordion">
+            <h3>{% trans 'Eligibility criteria' %}</h3>
+            <div>
+                 {% render_identifier 'accounts_credit_eligibility_criterea' %}
+            </div>
+            <h3>{% trans 'Application procedure' %}</h3>
+            <div>
+                 {% render_identifier 'accounts_credit_application_procedure' %}
+            </div>
+            <h3>{% trans 'Peer review and confidentiality' %}</h3>
+            <div>
+                 {% render_identifier 'accounts_credit_review' %}
+            </div>
+        </div>
+        <div class="element info-box">
+            <h4>{% trans '0800-Credit!' %}</h4>
+              {% render_identifier 'accounts_credit_further_questions' %}
+        </div>        
+        <br />
+        <br />
+
+        {% include 'includes/messages.html' %}
+        {% if form %}
+        
+          <form action="." method="post" class="element form">{% csrf_token %}
+             <fieldset>
+                <div class="element label{% if form.amount.errors %} error{% endif %}">                       
+                    <label for="id_amount">{{form.amount.label}}</label>
+                    <div class="field">
+                        <div class="element field input-price">
+                            <span class="icon">{{currency_symbol}}</span>
+                            <input id="id_amount" name="amount" type="text" class="input-text large" value="{% if form.amount.value %}{{form.amount.value}}{% endif %}">{% if form.amount.errors %}<span>{% for error in form.amount.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                            <input id="id_name" name="name" type="hidden" value="{{form.name.value}}" />
+                            <input id="id_email" name="email" type="hidden" value="{{form.email.value}}" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="element label{% if form.purpose.errors %} error{% endif %}">
+                    <label for="id_body">{{form.body.label}}</label>
+                    <div class="element field">
+                        <textarea id="id_body" name="body" class="input-text large" cols="30" rows="3" placeholder="{% trans 'Where do you intend to spend the additional credit on?' %}">{% if form.body.value %}{{form.body.value}}{% endif %}</textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="element label{% if form.earn_back.errors %} error{% endif %}">
+                    <label for="id_earn_back">{{form.earn_back.label}}</label>
+                    <div class="element field">
+                        <textarea id="id_earn_back" name="earn_back" class="input-text large" cols="30" rows="3" placeholder="{% trans 'Which services or products are you going to offer to earn back the loan?' %}">{% if form.earn_back.value %}{{form.earn_back.value}}{% endif %}</textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>     
+                    <hr>
+                    <button id="send_button" class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Send' %}</span><span class="r"></span></button>
+                </fieldset>                               
+          </form>
+        {% endif %}
+
+        
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% ifequal action 'block' %}{% trans 'Block Card' %}{% else %}{% trans 'Unblock Card' %}{% endifequal %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            <h2>{% trans 'Manage Card' %}</h2>
+
+            <form action="" method="post" class="form">
+                {% csrf_token %}{{ form.errors }}
+                <p>
+                {% ifequal action 'block' %}
+                    {% blocktrans with card_desc=object.number.number %}Are you sure you want to block card number {{ card_desc }}?{% endblocktrans %}
+                {% else %}
+                    {% blocktrans with card_desc=object.number.number %}Are you sure you want to unblock card number {{ card_desc }}?{% endblocktrans %}
+                {% endifequal %}
+                </p>
+                <a class="btn btn-rounded" href="{% url "owner_manage_card" %}">{% trans 'Cancel' %}</a>
+                <input type="submit" class="btn btn-rounded btn-green" id="operator_form_button" value="{% ifequal action 'block' %}{% trans 'Block Card' %}{% else %}{% trans 'Unblock Card' %}{% endifequal %}">
+            </form>
+        </div>
+    </div>
+{% endblock %}

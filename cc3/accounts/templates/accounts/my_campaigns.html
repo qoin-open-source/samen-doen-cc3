@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail cc3_tags %}
+
+{% block title %}{% trans 'My activities' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{% trans 'My activities' %}</h2>
+
+            <hr>
+
+            <div class="marketplace-list">
+                {% include "marketplace/campaigns_page.html" %}
+
+                {% if expired_campaigns %}
+                    <div class="clearfix"></div>
+                    <hr/>
+                    <h3>{% trans 'Completed activities' %}</h3>
+                    {% with object_list=expired_campaigns %}
+                        {% include "marketplace/campaigns_page.html" %}
+                    {% endwith %}
+                    <div class="clearfix"></div>
+                {% else %}
+                    {% if not object_list %}
+                        <div class="alert alert-warning" role="alert">
+                            {% trans "You haven't signed up to any activities yet." %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/paginator.html' %}
+{% endblock %}

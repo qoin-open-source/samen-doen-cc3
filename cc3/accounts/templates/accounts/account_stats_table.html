@@ -1,0 +1,39 @@
+{% load i18n cc3_tags %}
+<table class="table rwd-table">
+    <thead>
+        <tr><th>&nbsp;</th><th>{% trans "This month" %}</th><th>{% trans "Last month" %}</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>{% blocktrans %}{{ currency_name }} amount redeemed by customers{% endblocktrans %}</td>
+            <td class="number">{% currency_icon amount_redeemed.this 0 %}</td>
+            <td class="number">{% currency_icon amount_redeemed.previous 0 %}</td>
+        </tr>
+        <tr><td>{% blocktrans %}{{ currency_name }} amount spent by business{% endblocktrans %}</td>
+            <td class="number">{% currency_icon amount_spent.this 0 %}</td>
+            <td class="number">{% currency_icon amount_spent.previous 0 %}</td>
+        </tr>
+        <tr><td>{% trans "Number of unique customers" %}</td>
+            <td class="number">{{ unique_customers.this }}</td>
+            <td class="number">{{ unique_customers.previous }}</td>
+        </tr>
+        <tr><td>{% trans "Number of transactions" %}</td>
+            <td class="number">{{ num_transactions.this }}</td>
+            <td class="number">{{ num_transactions.previous }}</td>
+        </tr>
+        <tr><td>{% trans "Total euro amount spent by customers" %}</td>
+            <td class="number">{{ total_euros.this|floatformat:2 }} &euro;</td>
+            <td class="number">{{ total_euros.previous|floatformat:2 }} &euro;</td>
+        </tr>
+        <tr><td>{% trans "Average euro amount spent per transaction" %}</td>
+            <td class="number">{{ average_euros.this|floatformat:2 }} &euro;</td>
+            <td class="number">{{ average_euros.previous|floatformat:2 }} &euro;</td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr><th>&nbsp;</th><th colspan="2">{% blocktrans %}Since joining {{ platform_name }}{% endblocktrans %}</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>{% trans "Total amount contributed to good causes by customers" %}</td>
+            <td colspan="2" class="number">{% currency_icon total_donations 0 %}</td></tr>
+    </tbody>
+</table>

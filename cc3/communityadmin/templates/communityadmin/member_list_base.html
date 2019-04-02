@@ -1,0 +1,132 @@
+{% extends "marketplace/base.html" %}
+{% load pagination_tags i18n cc3_tags %}
+{% block title %}{% trans 'Member List' %}{% endblock %}
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+
+
+<div class="eleven columns communityadmin">
+  <div class="inner">
+    <h2>{% trans 'Members' %}{% if community %} - {{ community }}{% endif %}</h2>
+    {% include 'includes/messages.html' %}
+    <form method="get">
+    <div class="row add_first add_last">
+      <a href="{% url 'communityadmin_ns:addmember' %}" class="element button add"><span class="l"></span><span class="c">{% trans "Add" %}</span><span class="r"></span></a>
+        <div class="element typeahead-div">
+          <a class="element button reset" href="{% url 'communityadmin_ns:memberlist' %}">
+            <span class="l"></span>
+            <span class="c">{% trans "reset" %}</span>
+            <span class="r"></span>
+          </a>
+          <button class="element button searchbutton" type="submit">
+            <span class="l"></span>
+            <span class="c">{% trans 'Search' %}</span>
+            <span class="r"></span>
+          </button>
+          <input name="q" type="text" class="search" placeholder="{% trans 'Search contact or business name' %}" value="{{ request.GET.q }}" style=""/>
+        </div>
+      </div><!-- end row -->
+    </form>
+  </div>
+
+    <table class="listing account zebra">
+{% if members %}
+        <thead>
+            <tr>
+                <th>{% trans 'contact'|capfirst %}<br/>{% trans 'job title'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'last_name' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}last_name/{% include 'includes/sort_direction.html' %}/"></a>
+                </th>
+                <th>{% trans 'business name'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'business_name' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}business_name/{% include 'includes/sort_direction.html' %}/"></a></th>
+                {% block cyclos_group_header %}
+                    <th>{% trans 'Cyclos group' %}</th>
+                {% endblock %}
+                <th>{% trans 'website'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'company_website' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}company_website/{% include 'includes/sort_direction.html' %}/"></a></th>
+                </th>
+                {% comment %}
+                <th>{% trans 'offers'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'offers' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}offers/{% include 'includes/sort_direction.html' %}/"></a>
+                </th>
+                <th>{% trans 'wants'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'wants' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}wants/{% include 'includes/sort_direction.html' %}/"></a>
+                </th>
+                {% endcomment %}
+                <th>{% trans 'status'|capfirst %}</th>
+                {% block active_ads_header %}
+                    <th>{% trans 'active ads'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'active_ads' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}active_ads/{% include 'includes/sort_direction.html' %}/"></a>
+                    </th>
+                {% endblock %}
+                <th>{% trans 'M2M TX' %}</th>
+                <th nowrap="nowrap">{% trans 'account balance'|capfirst %}</th>
+                <th>{% trans 'registration date'|capfirst %}
+                    <a class="sort{% ifequal sort_field 'date_joined' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}date_joined/{% include 'includes/sort_direction.html' %}/"></a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+                <tr>{% with member.member_username as username %}{% with member.member as member_cc3_profile %}
+                    <td><a href="{% url 'communityadmin_ns:editmember' username=username %}">
+                            {% if member.first_name %}
+                                {{ member.first_name }} {{ member.last_name }}<br/>{{ member.job_title }}
+                            {% else %}
+                                {% trans 'UNCOMPLETED REGISTRATION' %}{% with member.member_email as member_email %}
+                                {% if member_email %}({{ member_email}}){% else %}({% trans 'no email given, could be comm admin' %}){% endif %}
+                                {% endwith %}
+                            {% endif %}
+                    </a></td>
+                    <td><a href="{% url 'communityadmin_ns:editmember' username=username %}">
+                            {% if member.business_name %}
+                                {{ member.business_name }}
+                            {% else %}
+                                {% trans 'UNCOMPLETED REGISTRATION' %}
+                                {% with member.member_email as member_email %}
+                                {% if member_email %}({{ member_email}}){% else %}({% trans 'no email given, could be comm admin' %}){% endif %}
+                                {% endwith %}
+                            {% endif %}
+                    </a></td>
+                    {% block cyclos_group_entry %}
+                        <td>{{member_cc3_profile.cyclos_group}}</td>
+                    {% endblock %}
+                    <td>{% with member.company_website as website %}{% if website %}<a href="{{ member.company_website }}">{{ member.company_website }}</a>{% endif %}{% endwith %}</td>
+                    {% comment %}
+                    <td><a href="{% url 'communityadmin_ns:memberwantsoffers' username=username %}">{{ member.count_offers }}</a></td>
+                    <td><a href="{% url 'communityadmin_ns:memberwantsoffers' username=username %}">{{ member.count_wants }}</a></td>
+                    {% endcomment %}
+                    <td>{% if member_cc3_profile.has_full_account %}{% trans 'Full' %}{% else %}{% trans 'New' %}{% endif %}</td>
+                    {% block active_ads_entry %}
+                        <td><a href="{% url 'communityadmin_ns:memberwantsoffers' username=username %}">{{ member.count_active_ads }}</a></td>
+                    {% endblock %}
+                    <td>{% with member_cc3_profile.number_member_to_member_transactions as num_transactions %}{% if num_transactions %}<a href="{% url 'communityadmin_ns:membertransactions' username=username %}">{{num_transactions}}</a>{% endif %}{% endwith %}</td>
+                    <td class="number">{% currency_icon member_cc3_profile.current_balance alert_if_over=balance_alert_limit %}</td>
+                    <td>{{member.date_joined}}</td>
+<!--                    <td>{{member.total_payments_outgoing}}</td>
+                    <td>{{member.total_payments_incoming}}</td>
+                    -->
+                    {% endwith %}{% endwith %}
+                </tr>
+            {% endfor %}
+        </tbody>
+{% else %}
+<tbody>
+    <tr><td>
+    <div class="clearfix"></div>
+    <div>{% trans 'No members were found' %}</div
+</td></tr>
+</tbody>
+{% endif %}
+    </table>
+
+{% paginate %}
+
+</div><!-- eleven columns -->
+
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends "prizedraw/base.html" %}
+{% load i18n static pagination_tags %}%}
+
+
+{% block extrahead %}
+<script type="text/javascript" >
+
+$(function() {
+    var csrftoken = $.cookie('csrftoken');
+    var cancellation_id = -1;
+    var cancellation_in_progress = false;
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    $(".cancel_repeat_purchase_form").submit(function(event) {
+        cancellation_id = $(this).find(".cancellation_id").val();
+
+        // if the confirmed input #id_confirmed has been added, submit form normally
+        if ($(this).find(".confirmed").length) {
+            return true;
+        }
+
+        if (!cancellation_in_progress) {
+
+            // prevent double clicks / enter buttons
+            cancellation_in_progress = true;
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* Send the data using post */
+            var posting = $.post(
+                "{% url 'prizedraw_cancel_repeat_purchase' %}",
+                $(this).serialize()
+            );
+
+            /* Put the results in a div */
+            posting.done(function( data ) {
+                $('#modal_dialog').modal();
+                cancellation_in_progress = false;
+            });
+
+            // deal with form errors
+            posting.fail(function( data ) {
+                var parsedResponse= $.parseJSON( data.responseText );
+                var errorMessage = "";
+                $.each(parsedResponse, function(i, val) {
+                    errorMessage += "<p>" + val + "</p>";
+                });
+                alert(errorMessage);
+                cancellation_in_progress = false;
+            });
+        }
+    });
+
+    // confirm the payment - if modal dialog has been used (ie there is javascript!)
+    $("#confirm_repeat_purchase").click(function(event) {
+        var confirmed_input = $("<input>").attr(
+            "type", "hidden").attr("id", "id_confirmed").attr("name", "confirmed").addClass('confirmed').val(1);
+        var form_id = '#cancel_repeat_purchase_form_' + cancellation_id;
+        $(form_id).append($(confirmed_input));
+        $(form_id).submit();
+    });
+
+
+    /* attach a click handler to the repeat purchase link */
+    $("#cancel_repeat_purchase").click(function(event) {
+        cancellation_id = -1;
+    });
+});
+</script>
+{% endblock %}
+
+
+
+
+{% block page-content %}
+    {% include 'includes/messages.html' %}
+
+    <div class="prizedraw">
+
+    <p><a href="{% url 'prizedraw_home' %}">{% blocktrans %}Back to {{ lottery_name}} overview{% endblocktrans %}</a></p>
+
+    <h4>{% trans 'Your repeat purchases' %}</h4>
+
+    <table class="listing zebra">
+        <thead><tr><th>Purchase Type</th> <th>Runs until</th><th>Tickets per interval</th>
+            <th>Purchases left</th><th>Tickets bought to date</th><th>Cancel</th></tr></thead>
+
+        {% for repeat_purchase in object_list %}{% if not repeat_purchase.cancelled_date %}
+            <tr>
+                <td>{% if repeat_purchase.num_months %}Monthly{% else %}Indefinite{% endif %}</td>
+                <td>{{ repeat_purchase.end_month }}</td>
+                <td>{{ repeat_purchase.num_tickets }}</td>
+                <td>{{ repeat_purchase.purchases_left }}</td>
+                <td>{{ repeat_purchase.purchases_to_date }}</td>
+                <td class="edit-buttons not-mobile">
+                    <ul>
+                        <li class="disable">
+                            <form class="cancel_repeat_purchase_form"
+                                  id="cancel_repeat_purchase_form_{{ repeat_purchase.id }}"
+                                  name="cancel_repeat_purchase_form_{{ repeat_purchase.id }}"
+                                  action="{% url 'prizedraw_cancel_repeat_purchase' %}"
+                                  method="post">{% csrf_token %}
+                                <input type="hidden" name="pk" id="id_pk" class="cancellation_id" value="{{ repeat_purchase.id }}">
+                                <input type="submit" value="Cancel">
+                            </form>
+                        </li>
+                    </ul>
+                </td>
+            </tr>{% endif %}
+        {% endfor %}
+    </table>
+
+    <div class="clearfix"><br /></div>
+    <h4>{% trans 'Cancelled repeat purchases' %}</h4>
+
+        <table class="listing zebra">
+        <thead><tr><th>Purchase Type</th> <th>Runs until</th><th>Tickets per interval</th>
+            <th>Purchases left</th><th>Tickets bought to date</th><th>When purchased</th><th>Cancelled</th></tr></thead>
+
+        {% for repeat_purchase in object_list %}{% if repeat_purchase.cancelled_date %}
+            <tr>
+                <td>{{ repeat_purchase.purchase_type }}</td>
+                <td>{{ repeat_purchase.end_month }}</td>
+                <td>{{ repeat_purchase.num_tickets }}</td>
+                <td>{{ repeat_purchase.purchases_left }}</td>
+                <td>{{ repeat_purchase.purchases_to_date }}</td>
+                <td>{{ repeat_purchase.when_purchased }}</td>
+                <td>{{ repeat_purchase.cancelled_date }}</td>
+            </tr>{% endif %}
+        {% endfor %}
+        </table>
+
+    </div>
+
+    <div id="modal_dialog" class="modal_dialog">
+        <div class="title">{% trans "YOU'RE ABOUT TO CANCEL A REPEAT PURCHASE" %}</div>
+
+        <div class="options">
+            <a id="cancel_repeat_purchase" href="#" class="element button my-account" rel="modal:close">
+                <span class="l"></span>
+                <span class="c">{% trans 'Cancel' %}</span>
+                <span class="r"></span>
+            </a>
+            <a id="confirm_repeat_purchase" href="#" class="element button my-account">
+                <span class="l"></span>
+                <span class="c">{% trans 'Confirm' %}</span>
+                <span class="r"></span>
+            </a>
+        </div>
+    </div>
+{% endblock %}

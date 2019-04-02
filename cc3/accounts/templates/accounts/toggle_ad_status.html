@@ -1,0 +1,39 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles pagination_tags %}
+
+{% block title %}{% trans 'Toggle Ad Status' %}{% endblock %}
+
+
+
+{% block content %}
+
+    {% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->
+        </div><!-- end five columns sidebar -->
+    {% endblock %}
+
+        <div class="eleven columns">
+            <h4>{% trans 'Toggle Ad Status' %}</h4>
+            <form id="toggle-ad-status-form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="element label{% if form.status.errors %} error{% endif %}">
+                    <label>{{form.status.label}}</label>
+                    <div class="field">
+                        <div class="element field">
+                            {{form.status}}
+                            {% if form.status.errors %}<span>{% for error in form.status.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <hr>
+                <button class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Toggle Ad Status' %}</span><span class="r"></span></button>
+            </form>
+            {% block back-link %}
+            {% endblock %}
+        </div><!-- end eleven columns -->
+
+{% endblock %}

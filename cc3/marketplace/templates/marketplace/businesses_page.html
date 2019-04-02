@@ -1,0 +1,38 @@
+                    <div class="items">
+{% load staticfiles thumbnail i18n %} {# endless % #}
+
+{# % paginate businesses using businesses_page  % #}
+{# % for entry in entries % #}{# {entry} #}
+    {# your code to show the entry #}
+{# % endfor % #}
+{# % show_pages % #}
+{% load pagination_tags %}
+                        {% for business in object_list %}
+                        <div class="item">
+                            <div class="inner">
+                                <a href="#" class="img">{% if business.cc3_profile.get_picture %}<img class="marketplace-business-thumb" alt="{{business.business_name}}" src="{{business.cc3_profile.picture|thumbnail_url:'marketplacethumb'}}">{% else %}<img class="" alt="{{business.business_name}}" src="{% static 'images/backgrounds/avatar-placeholder.png' %}" width="44" height="44">{% endif %}</a>
+                                <div class="info">
+                                    <span class="item_title"><a href="{{ business.cc3_profile.get_absolute_url }}" title="{{business.business_name}}">{{business.business_name|truncatechars:40}}</a></span>
+                                    <!--span class="item_subtitle">Agency in Creativity</span-->
+                                    {% if business.cc3_profile.community %}<a href="#" class="location">{{business.cc3_profile.community.title}}</a>{% endif %}
+                                </div>
+
+                                {% if business.cc3_profile.get_absolute_url %}
+                                <div class="offers">
+                                    <a href="{% url 'marketplace-targetted-business' 'offers' business.cc3_profile.slug %}" class="l"><span>{% trans 'Offers' %}</span></a>
+                                    <a href="{% url 'marketplace-targetted-business' 'offers' business.cc3_profile.slug %}" class="a">{{business.offers}}</a>
+                                </div>
+
+                                <div class="wants">
+                                    <a href="{% url 'marketplace-targetted-business' 'wants' business.cc3_profile.slug %}" class="l"><span>{% trans 'Wants' %}</span></a>
+                                    <a href="{% url 'marketplace-targetted-business' 'wants' business.cc3_profile.slug %}" class="a">{{business.wants}}</a>
+                                </div>
+                                {% endif %}
+
+                            </div><!-- end inner -->
+                        </div><!-- end item -->
+                        {% endfor %}
+
+                        <div class="clearfix"><br /></div>
+                        {% paginate %}
+                    </div>

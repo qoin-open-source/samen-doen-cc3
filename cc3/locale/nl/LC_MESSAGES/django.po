@@ -1,0 +1,6154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Positoos\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-17 10:31+0200\n"
+"PO-Revision-Date: 2015-12-14 18:31+0100\n"
+"Last-Translator: GM - Qoin ops <gert.meeder@qoin.org>\n"
+"Language-Team: LANGUAGE <stephen.wolff@qoin.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: accounts/cms_app.py:7 accounts/templates/accounts/accounts_home.html:4
+msgid "Accounts"
+msgstr "Rekeningen"
+
+#: accounts/forms.py:33 accounts/forms.py:80 registration/forms.py:111
+msgid "Please enter a password that is at least 8 characters long."
+msgstr "Kies een wachtwoord van tenminste 8 karakters lang"
+
+#: accounts/forms.py:38 accounts/forms.py:85 registration/forms.py:116
+msgid "Please enter a password that contains at least 1 number."
+msgstr "Kies een wachtwoord dat tenminste 1 cijfer bevat"
+
+#: accounts/forms.py:45
+msgid "Your old password was entered incorrectly. Please enter it again."
+msgstr "Het oude wachtwoord is niet correct."
+
+#: accounts/forms.py:49
+msgid "Old password"
+msgstr "Oud wachtwoord"
+
+#: accounts/forms.py:53
+msgid "New password"
+msgstr "Nieuw wachtwoord"
+
+#: accounts/forms.py:54
+msgid "The password must contain at least 8 character and include a number"
+msgstr "Voer a.u.b. een wachtwoord in van tenminste 8 karakters lang"
+
+#: accounts/forms.py:57
+msgid "New password confirmation"
+msgstr "Nieuw wachtwoord (nogmaals)"
+
+#: accounts/forms.py:64
+msgid "the current password is required"
+msgstr "Het huidige wachtwoord is vereist"
+
+#: accounts/forms.py:66
+msgid "the new password is required"
+msgstr "Het nieuwe wachtwoord is vereist"
+
+#: accounts/forms.py:68
+msgid "the new password confirmation is required"
+msgstr "Nogmaals het nieuwe wachtwoord ingeven is vereist"
+
+#: accounts/forms.py:76
+msgid "The new password must be different"
+msgstr "Nieuw wachtwoord moet anders zijn."
+
+#: accounts/forms.py:114 accounts/forms.py:504 accounts/pdf.py:139
+#: accounts/tests/test_views.py:241 accounts/tests/test_views.py:303
+#: invoices/templates/invoices/invoice_list.html:20 marketplace/forms.py:329
+#: rules/models.py:105
+msgid "Amount"
+msgstr "Bedrag"
+
+#: accounts/forms.py:115
+msgid "Amount to pay"
+msgstr "Bedrag te betalen"
+
+#: accounts/forms.py:119
+msgid "Please enter an amount to pay"
+msgstr "Vul een bedrag in"
+
+#: accounts/forms.py:123 marketplace/forms.py:334
+msgid "Contact Name <br />(business)"
+msgstr "Contactpersoon <br />(bedrijf)"
+
+#: accounts/forms.py:124
+msgid "Person to contact"
+msgstr "Contactpersoon"
+
+#: accounts/forms.py:126 marketplace/forms.py:335
+msgid "Please enter the Contact Name at the company you wish to pay"
+msgstr ""
+"Voer a.u.b. de contactpersoon van het bedrijf dat u wenst te betalen in"
+
+#: accounts/forms.py:136 accounts/pdf.py:139 billing/models.py:582
+#: billing/models.py:686 communityadmin/forms.py:53 communityadmin/forms.py:109
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:32
+#: communityadmin/templates/communityadmin/offers_wants.html:32
+#: core/templates/base.html:373 core/templates/includes/ad_list.html:14
+#: invoices/pdf.py:117 invoices/templates/invoices/invoice_list.html:19
+#: marketplace/forms.py:70 marketplace/forms.py:338 marketplace/forms.py:557
+#: marketplace/models.py:169
+#: marketplace/templates/marketplace/campaign_detail.html:72
+#: marketplace/templates/marketplace/campaign_form.html:43 rewards/forms.py:137
+msgid "Description"
+msgstr "Beschrijving"
+
+#: accounts/forms.py:137
+msgid "Give a clear description of the payment"
+msgstr "Geef een heldere betaalomschrijving op"
+
+#: accounts/forms.py:139 marketplace/forms.py:339
+msgid "Please enter a description for the payment"
+msgstr "Geef een betaalomschrijving op"
+
+#: accounts/forms.py:154 accounts/serializers.py:138
+#: accounts/tests/test_forms.py:129
+msgid "You cannot pay this member as their account is still pending."
+msgstr ""
+"Deze gebruiker kan niet betaald worden omdat zijn account nog geactiveerd "
+"moet worden"
+
+#: accounts/forms.py:164
+msgid "You have not selected a valid recipient for your payment"
+msgstr "Geen geldige begunstigde geselecteerd"
+
+#: accounts/forms.py:175 accounts/tests/test_views.py:242
+msgid "Total value of this trade"
+msgstr "Totale transactiewaarde"
+
+#: accounts/forms.py:187
+#, python-brace-format
+msgid "Total value may not be less than the number of {0}s"
+msgstr "Totale waarde mag niet minder zijn dan het aantal {0}s"
+
+#: accounts/forms.py:201 accounts/forms.py:250
+#: accounts/templates/accounts/my_managed_campaigns.html:50
+#: cyclos/models/account.py:647
+msgid "Paid"
+msgstr "Betaald"
+
+#: accounts/forms.py:202 accounts/forms.py:251
+msgid "Received"
+msgstr "Ontvangen"
+
+#: accounts/forms.py:213 accounts/forms.py:219 accounts/tests/test_forms.py:156
+#: accounts/tests/test_forms.py:173
+msgid "Please enter a date in the past"
+msgstr "Voer een datum uit het verleden in"
+
+#: accounts/forms.py:235 accounts/tests/test_forms.py:203
+msgid "The from date is after the to date. Please correct"
+msgstr "De vanaf datum ligt na de tot datum"
+
+#: accounts/forms.py:261
+msgid "Required amount"
+msgstr "Vereist bedrag"
+
+#: accounts/forms.py:263
+msgid "Please specify an amount"
+msgstr "Geef een bedrag op"
+
+#: accounts/forms.py:266
+msgid "Specify purpose"
+msgstr "Bestedingsdoel"
+
+#: accounts/forms.py:268
+msgid "Specify earn back"
+msgstr "Terugverdienopties"
+
+#: accounts/forms.py:312 accounts/templates/accounts/apply.html:4
+#: accounts/templates/accounts/credit.html:4
+msgid "Credit Application"
+msgstr "Aanvraag leverancierskrediet"
+
+#: accounts/forms.py:349
+msgid "Please check this box to agree to our terms and conditions"
+msgstr "Vink aan om de algemene voorwaarden te accepteren"
+
+#: accounts/forms.py:390
+msgid "Full Account Application"
+msgstr "Volledige account aanvraag"
+
+#: accounts/forms.py:420
+msgid ""
+"I've read and accepted the terms &amp; conditions for closing my account"
+msgstr "Ik heb de Algemene Voorwaarden gelezen en geaccepteerd"
+
+#: accounts/forms.py:423
+msgid "You must accept the terms & conditions to close your account"
+msgstr "U moet de Algemene Voorwaarden accepteren om te registreren"
+
+#: accounts/forms.py:440
+msgid "Your balance is negative. You cannot close your account."
+msgstr "U heeft een negatief saldo. U kunt daarom uw account niet sluiten"
+
+#: accounts/forms.py:458
+msgid "Security Options"
+msgstr "Beveiligingsmogelijkheden"
+
+#: accounts/forms.py:505
+msgid "Please enter an amount to convert."
+msgstr "Voer a.u.b. een geldige bedrag in om om te rekenen"
+
+#: accounts/forms.py:516
+msgid "You do not have sufficient credit."
+msgstr ""
+"Het saldo of de kredietruimte is onvoldoende om de betaling te voltrekken"
+
+#: accounts/middleware.py:17
+msgid "You must change your password before you can continue."
+msgstr "Het wachtwoord moet worden gewijzigd om verder te kunnen"
+
+#: accounts/pdf.py:110
+#, python-format
+msgid "Transactions for: %(date)s"
+msgstr "Transacties voor: %(date)s"
+
+#: accounts/pdf.py:114
+msgid "Last 10 transactions"
+msgstr "Laatste 10 transacties"
+
+#: accounts/pdf.py:115
+msgid "Current balance:"
+msgstr "Huidig saldo"
+
+#: accounts/pdf.py:131
+msgid "Recipient:"
+msgstr "Betaald aan:"
+
+#: accounts/pdf.py:136
+msgid "Sender:"
+msgstr "Ontvangen van:"
+
+#: accounts/pdf.py:139
+#: accounts/templates/accounts/includes/products/list.html:46
+#: cards/templates/cards/fulfillment_list.html:24
+msgid "Date"
+msgstr "Datum"
+
+#: accounts/pdf.py:139 core/templates/base.html:374
+msgid "From/To"
+msgstr "van/naar"
+
+#: accounts/pdf.py:148
+msgid "No transactions in this month"
+msgstr "Geen transacties deze maand"
+
+#: accounts/serializers.py:125 accounts/tests/test_forms.py:109
+#: accounts/utils.py:103 marketplace/forms.py:353
+#: marketplace/tests/test_forms.py:94
+msgid "You do not have sufficient credit to complete the payment"
+msgstr ""
+"U heeft niet afdoende saldo of kredietruimte om de betaling te voltrekken"
+
+#: accounts/templates/accounts/account_stats_summary.html:4
+#: accounts/templates/accounts/account_stats_summary.html:14
+msgid "Account Statistics"
+msgstr "Account statistieken"
+
+#: accounts/templates/accounts/account_stats_table.html:4
+msgid "This month"
+msgstr "Deze maand"
+
+#: accounts/templates/accounts/account_stats_table.html:4
+msgid "Last month"
+msgstr "Vorige maand"
+
+#: accounts/templates/accounts/account_stats_table.html:7
+#, python-format
+msgid "%(currency_name)s amount redeemed by customers"
+msgstr "%(currency_name)s verzilverd door klanten"
+
+#: accounts/templates/accounts/account_stats_table.html:11
+#, python-format
+msgid "%(currency_name)s amount spent by business"
+msgstr "%(currency_name)s door mij uitgegeven"
+
+#: accounts/templates/accounts/account_stats_table.html:15
+msgid "Number of unique customers"
+msgstr "Aantal unieke klanten"
+
+#: accounts/templates/accounts/account_stats_table.html:19 billing/common.py:51
+msgid "Number of transactions"
+msgstr "Aantal transacties"
+
+#: accounts/templates/accounts/account_stats_table.html:23
+msgid "Total euro amount spent by customers"
+msgstr "Totale euro bedrag besteed door klanten"
+
+#: accounts/templates/accounts/account_stats_table.html:27
+msgid "Average euro amount spent per transaction"
+msgstr "Gemiddeld bedrag besteed per transactie"
+
+#: accounts/templates/accounts/account_stats_table.html:33
+#, python-format
+msgid "Since joining %(platform_name)s"
+msgstr "Sinds deelname aan %(platform_name)s"
+
+#: accounts/templates/accounts/account_stats_table.html:36
+msgid "Total amount contributed to good causes by customers"
+msgstr "Totale bijdrage van mijn klanten aan spaardoelen"
+
+#: accounts/templates/accounts/accounts_home.html:25
+#: communityadmin/templates/communityadmin/membertransactions.html:21
+msgid "Transactions Made"
+msgstr "Uitgevoerde Transacties"
+
+#: accounts/templates/accounts/accounts_home.html:28
+#: accounts/templates/accounts/credit.html:17
+msgid "Current Spending Limit"
+msgstr "Huidig Betalings Limiet"
+
+#: accounts/templates/accounts/accounts_home.html:34 accounts/views.py:357
+#: accounts/views.py:668 cards/views.py:390
+#: communityadmin/templates/communityadmin/membertransactions.html:32
+#: communityadmin/templates/communityadmin/transactions.html:27
+msgid "date"
+msgstr "datum"
+
+#: accounts/templates/accounts/accounts_home.html:38 accounts/views.py:358
+#: accounts/views.py:668
+#: communityadmin/templates/communityadmin/membertransactions.html:33
+msgid "from/to"
+msgstr "van/naar"
+
+#: accounts/templates/accounts/accounts_home.html:41 accounts/views.py:359
+#: accounts/views.py:668 cards/models.py:295
+#: communityadmin/templates/communityadmin/membertransactions.html:34
+#: communityadmin/templates/communityadmin/transactions.html:30
+msgid "description"
+msgstr "beschrijving"
+
+#: accounts/templates/accounts/accounts_home.html:44 accounts/views.py:360
+#: accounts/views.py:668
+#: communityadmin/templates/communityadmin/membertransactions.html:35
+#: communityadmin/templates/communityadmin/transactions.html:31
+msgid "amount"
+msgstr "bedrag"
+
+#: accounts/templates/accounts/accounts_home.html:79
+#: communityadmin/templates/communityadmin/membertransactions.html:59
+msgid "No matching transactions were found"
+msgstr "Geen transacties gevonden"
+
+#: accounts/templates/accounts/accounts_home.html:83
+msgid "You're not logged in"
+msgstr "U bent niet ingelogd"
+
+#: accounts/templates/accounts/accounts_security.html:4
+#: accounts/templates/accounts/accounts_security.html:23
+msgid "Account Security"
+msgstr "Rekening beveiliging"
+
+#: accounts/templates/accounts/accounts_security.html:26
+#, python-format
+msgid ""
+"Do you need to restrict usage of your account, because a payment card has "
+"been lost or stolen, or you suspect unauthorised access to your account? You "
+"can do that here. We recommend that you <a href=\"%(password_change_url)s"
+"\">change your password</a> as an additional security measure.\n"
+"            "
+msgstr ""
+"Wilt u uw pas blokkeren omdat deze gestolen of kwijtgeraakt is? Dat kunt u "
+"hier doen. We adviseren u <a href=\"%(password_change_url)s\">uw wachtwoord "
+"te veranderen</a> als aanvullende veiligheidsmaatregel."
+
+#: accounts/templates/accounts/accounts_security.html:37
+msgid "All account activity"
+msgstr "Alle account activiteit"
+
+#: accounts/templates/accounts/accounts_security.html:39 accounts/widgets.py:66
+msgid "unblocked"
+msgstr "Blokkering opgeheven"
+
+#: accounts/templates/accounts/accounts_security.html:47 accounts/widgets.py:67
+msgid "blocked"
+msgstr "Geblokkeerd"
+
+#: accounts/templates/accounts/ad_form.html:4
+#: accounts/templates/accounts/ad_form.html:34
+#: accounts/templates/accounts/ad_form.html:140
+#: accounts/templates/accounts/place_ad.html:4
+#: accounts/templates/accounts/place_ad.html:78
+#: accounts/templates/accounts/place_ad.html:240
+#: communityadmin/templates/communityadmin/sidemenu_base.html:32
+#: communityadmin/templates/communityadmin/sidemenu_base.html:36
+#: communityadmin/templates/communityadmin/sidemenu_base.html:40
+#: core/templates/base.html:397
+#: core/templates/includes/accounts_sidemenu.html:98
+#: core/templates/includes/accounts_sidemenu.html:104
+#: core/templates/includes/accounts_sidemenu.html:110
+msgid "Place Ad"
+msgstr "Plaats advertentie"
+
+#: accounts/templates/accounts/ad_form.html:32
+#: accounts/templates/accounts/ad_form.html:140
+#: accounts/templates/accounts/place_ad.html:4
+#: accounts/templates/accounts/place_ad.html:76
+#: accounts/templates/accounts/place_ad.html:240
+#: communityadmin/templates/communityadmin/edit_ad.html:4
+#: communityadmin/templates/communityadmin/edit_ad.html:32
+msgid "Edit Ad"
+msgstr "Bewerk advertentie"
+
+#: accounts/templates/accounts/ad_form.html:63
+msgid "Attach images"
+msgstr "Afbeelding toevoegen"
+
+#: accounts/templates/accounts/ad_form.html:63
+msgid "Image Instructions..."
+msgstr "Afbeeldingsinstructies..."
+
+#: accounts/templates/accounts/apply.html:38 core/templates/base.html:107
+#: core/templates/base.html.py:207 core/templates/base.html:218
+#: core/templates/base.html.py:302 core/templates/base.html:313
+#: core/templates/base.html.py:379
+#: core/templates/registration/password_change_form.html:53
+#: core/templates/registration/password_reset_confirm.html:11
+#: core/templates/registration/password_reset_form.html:35
+#: core/templates/registration/registration_form.html:93
+msgid "Submit"
+msgstr "Verstuur"
+
+#: accounts/templates/accounts/apply_sent.html:5
+msgid "Thank You For Your Application"
+msgstr "Dank voor uw aanmelding"
+
+#: accounts/templates/accounts/apply_sent.html:8
+#: accounts/templates/accounts/credit_sent.html:8
+#: marketplace/templates/marketplace/enquire_sent.html:8
+msgid "Thank You"
+msgstr "Bedankt"
+
+#: accounts/templates/accounts/apply_sent.html:10
+msgid ""
+"Thank you for your application. An email has been sent to the adminstrators"
+msgstr "Dank voor uw aanmelding. Een e-mail is verstuurd aan de beheerders"
+
+#: accounts/templates/accounts/applyfull_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(cc3_system_name)s Credit Admin,\n"
+"\n"
+"A Full Account Application has been made by %(name)s (%(email)s).\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Beste %(cc3_system_name)s kredietbeheerder,\n"
+"\n"
+"%(name)s (%(email)s) heeft zich aangemeld voor een volwaardig lidmaatschap.\n"
+"\n"
+"Groet,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: accounts/templates/accounts/applyfull_email_subject.txt:1
+#, python-format
+msgid "Full Account Application by %(name)s sent through %(site)s"
+msgstr ""
+"Aanmelding voor volwaardig lidmaatschap door %(name)s verstuurd via %(site)s"
+
+#: accounts/templates/accounts/applyfull_enquirer_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(name)s,\n"
+"\n"
+"Thank you for your application, an email has been sent to the "
+"administrators, who will be in touch with you shortly.\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Beste %(name)s,\n"
+"\n"
+"Bedankt voor je aanmelding. Een bericht is verstuurd aan de beheerders, die "
+"spoedig contact met je zullen opnemen.\n"
+"\n"
+"Met vriendelijke groeten,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: accounts/templates/accounts/applyfull_enquirer_email_subject.txt:1
+#, python-format
+msgid "Full Account Application sent through %(site)s"
+msgstr "Aanmelding voor volwaardig lidmaatschap verstuurd via %(site)s"
+
+#: accounts/templates/accounts/close_account.html:4
+#: accounts/templates/accounts/close_account.html:18
+#: accounts/templates/accounts/close_account.html:28
+#: accounts/templates/accounts/really_close_account.html:4
+#: accounts/templates/accounts/really_close_account_done.html:4
+msgid "Close Account"
+msgstr "Sluit Account"
+
+#: accounts/templates/accounts/close_account.html:22
+msgid "Your account is pending closure"
+msgstr "Uw account zal worden gesloten"
+
+#: accounts/templates/accounts/credit.html:20
+msgid "Available Credit Line"
+msgstr "Beschikbare kredietlijn"
+
+#: accounts/templates/accounts/credit.html:23
+msgid "Information on credit facilities"
+msgstr "Informatie over kredietmogelijkheden"
+
+#: accounts/templates/accounts/credit.html:25
+msgid "Eligibility criteria"
+msgstr "Kredietvoorwaarden"
+
+#: accounts/templates/accounts/credit.html:29
+msgid "Application procedure"
+msgstr "Aanmeldprocedure"
+
+#: accounts/templates/accounts/credit.html:33
+msgid "Peer review and confidentiality"
+msgstr "Peer-review en vertrouwelijkheid"
+
+#: accounts/templates/accounts/credit.html:39
+msgid "0800-Credit!"
+msgstr "0800-Credit!"
+
+#: accounts/templates/accounts/credit.html:65
+msgid "Where do you intend to spend the additional credit on?"
+msgstr "Waaraan ben je van plan het extra krediet uit te geven?"
+
+#: accounts/templates/accounts/credit.html:73
+msgid ""
+"Which services or products are you going to offer to earn back the loan?"
+msgstr ""
+"Welke producten of diensten bied je aan in het netwerk om de lening terug te "
+"verdienen?"
+
+#: accounts/templates/accounts/credit.html:78
+msgid "Send"
+msgstr "Verzenden"
+
+#: accounts/templates/accounts/credit_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(cc3_system_name)s Credit Admin,\n"
+"\n"
+"A Credit Application has been made by %(name)s (%(email)s) for %(amount)s.\n"
+"\n"
+"The purpose: %(body)s\n"
+"\n"
+"The earn back: %(earn_back)s\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Beste TradeQoin kredietbeheerder,\n"
+"\n"
+"%(name)s (%(email)s) heeft een kredietaanvraag gedaan voor %(amount)s.\n"
+"\n"
+"Bestedingsdoel: %(body)s\n"
+"\n"
+"Terugverdienopties: %(earn_back)s\n"
+"\n"
+"Groet,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: accounts/templates/accounts/credit_email_subject.txt:1
+#, python-format
+msgid "Credit Application by %(name)s sent through %(site)s"
+msgstr "Kredietaanvraag van %(name)s verstuurd via %(site)s"
+
+#: accounts/templates/accounts/credit_enquirer_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(name)s,\n"
+"\n"
+"Thank you for your credit application, an email has been sent to the "
+"administrators, who will be in touch with you shortly.\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Beste %(name)s,\n"
+"\n"
+"Bedankt voor je kredietaanvraag. Een email is verstuurd aan de beheerders, "
+"die op korte termijn met je in contact zullen treden.\n"
+"\n"
+"Groet,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: accounts/templates/accounts/credit_enquirer_email_subject.txt:1
+#, python-format
+msgid "Credit Application sent through %(site)s"
+msgstr "Krediet aanvraag verzonden via %(site)s"
+
+#: accounts/templates/accounts/credit_sent.html:5
+msgid "Thank You For Your Credit Application"
+msgstr "Bedankt voor je kredietaanvraag"
+
+#: accounts/templates/accounts/credit_sent.html:10
+msgid ""
+"Thank you for your credit application. An email has been sent to the "
+"adminstrators"
+msgstr ""
+"Bedankt voor je kredietaanvraag. Een e-mail is gestuurd aan de beheerders"
+
+#: accounts/templates/accounts/disable_ad.html:4
+#: accounts/templates/accounts/disable_ad.html:19
+#: accounts/templates/accounts/disable_ad.html:39
+msgid "Enable / Disable Ad"
+msgstr "Inschakelen / uitschakelen advertentie"
+
+#: accounts/templates/accounts/disable_ad.html:22
+#: accounts/templates/accounts/my_managed_campaigns.html:22
+#: communityadmin/templates/communityadmin/hold_ad.html:20
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:31
+#: communityadmin/templates/communityadmin/offers_wants.html:31
+#: core/templates/includes/ad_list.html:8 marketplace/models.py:166
+#: marketplace/models.py:531
+msgid "Title"
+msgstr "Titel"
+
+#: accounts/templates/accounts/includes/products/invoice.html:3
+#: accounts/templates/accounts/includes/products/list.html:3
+msgid "My products"
+msgstr "Rekeningen"
+
+#: accounts/templates/accounts/includes/products/invoice.html:8
+msgid "There are no items on this invoice"
+msgstr "Er staan geen artikelen op deze rekening"
+
+#: accounts/templates/accounts/includes/products/invoice.html:14
+msgid "Unit price (ex. tax)"
+msgstr "Prijs per stuk (ex. btw)"
+
+#: accounts/templates/accounts/includes/products/invoice.html:15
+msgid "Line total (ex. tax)"
+msgstr "Totaal (ex. btw)"
+
+#: accounts/templates/accounts/includes/products/invoice.html:16
+msgid "Line total (incl. tax)"
+msgstr "Totaal (inc. btw)"
+
+#: accounts/templates/accounts/includes/products/invoice.html:40
+#: communityadmin/views.py:214 invoices/pdf.py:118
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:103
+msgid "Total"
+msgstr "Totaal"
+
+#: accounts/templates/accounts/includes/products/list.html:5
+msgid "Recurring charges"
+msgstr "Rekening deze maand (in opbouw)"
+
+#: accounts/templates/accounts/includes/products/list.html:8
+msgid "You have no assigned products"
+msgstr "Er worden geen producten afgenomen"
+
+#: accounts/templates/accounts/includes/products/list.html:13
+#: billing/models.py:250 billing/models.py:316
+msgid "Product"
+msgstr "Product"
+
+#: accounts/templates/accounts/includes/products/list.html:14
+#: billing/models.py:325 billing/models.py:739
+msgid "Quantity"
+msgstr "Aantal"
+
+#: accounts/templates/accounts/includes/products/list.html:15
+#: communityadmin/forms.py:57 communityadmin/forms.py:113
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:33
+#: communityadmin/templates/communityadmin/offers_wants.html:33
+#: core/templates/includes/ad_list.html:20 marketplace/forms.py:74
+#: marketplace/models.py:171 marketplace/templates/marketplace/detail.html:65
+msgid "Price"
+msgstr "Prijs"
+
+#: accounts/templates/accounts/includes/products/list.html:17
+msgid "Expires"
+msgstr "Verloopt"
+
+#: accounts/templates/accounts/includes/products/list.html:27
+msgid "discount applies"
+msgstr "korting geldt"
+
+#: accounts/templates/accounts/includes/products/list.html:34
+msgid "Your estimated monthly recurring charges, not including tax are"
+msgstr "Geschatte maandelijkse kosten (ex. btw)"
+
+#: accounts/templates/accounts/includes/products/list.html:35
+msgid "Your estimated yearly recurring charges, not including tax are"
+msgstr "Geschatte maandelijkse kosten (ex. btw)"
+
+#: accounts/templates/accounts/includes/products/list.html:38
+msgid "Previous Invoices"
+msgstr "Oudere rekeningen"
+
+#: accounts/templates/accounts/includes/products/list.html:41
+msgid "You have no previous invoices"
+msgstr "Er zijn geen oudere rekeningen"
+
+#: accounts/templates/accounts/includes/products/list.html:47
+msgid "Company"
+msgstr "Bedrijf"
+
+#: accounts/templates/accounts/includes/products/list.html:48
+#: billing/models.py:737
+msgid "Invoice"
+msgstr "Facturen"
+
+#: accounts/templates/accounts/includes/products/list.html:69
+msgid "View details"
+msgstr "Toon details"
+
+#: accounts/templates/accounts/my_ads.html:4
+msgid "My Ads"
+msgstr "Mijn advertenties"
+
+#: accounts/templates/accounts/my_campaigns.html:4
+#: accounts/templates/accounts/my_campaigns.html:14
+#: accounts/templates/accounts/my_managed_campaigns.html:4
+msgid "My activities"
+msgstr "Mijn activiteiten"
+
+#: accounts/templates/accounts/my_campaigns.html:24
+msgid "Completed activities"
+msgstr "Afgelopen activiteiten"
+
+#: accounts/templates/accounts/my_campaigns.html:32
+msgid "You haven't signed up to any activities yet."
+msgstr "U heeft zich nog niet aangemeld voor een activiteit"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:14
+msgid "Activities summary"
+msgstr "Overzicht activiteiten"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:23
+#: marketplace/templates/marketplace/campaign_detail.html:33
+#: marketplace/templates/marketplace/campaign_details_snippet.html:7
+msgid "Start"
+msgstr "Start"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:24
+#: marketplace/templates/marketplace/campaign_detail.html:34
+#: marketplace/templates/marketplace/campaign_details_snippet.html:8
+msgid "End"
+msgstr "Eind"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:25
+msgid "Participants needed"
+msgstr "Deelnemers nodig"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:26
+#: marketplace/templates/marketplace/campaign_details_snippet.html:10
+msgid "Signed up"
+msgstr "Aanmeldingen"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:27
+msgid "Reward p.p."
+msgstr "Waardering per deelnemer"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:28
+#: marketplace/templates/marketplace/campaign_form.html:116
+msgid "Maximum cost"
+msgstr "Max. kosten"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:29
+msgid "Actual cost"
+msgstr "Uiteindelijke kosten"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:30
+#: marketplace/models.py:555
+msgid "Contact name"
+msgstr "Aanspreekpunt"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:31 cards/excel.py:70
+#: cards/models.py:125 cards/models.py:337
+#: cards/templates/cards/fulfillment_list.html:27
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:36
+#: communityadmin/templates/communityadmin/offers_wants.html:36
+#: communityadmin/templates/communityadmin/offers_wants.html:57
+#: core/templates/includes/ad_list.html:38 files/models.py:119
+#: files/models.py:135
+msgid "Status"
+msgstr "Status"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:32
+msgid "Rewards"
+msgstr "Waarderen"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:50
+msgid "Pay now"
+msgstr "Waardeer nu"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:51
+#: marketplace/templates/marketplace/campaign_form.html:15
+msgid "Edit activity"
+msgstr "Activiteit bewerken"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:52
+msgid "Cancel activity"
+msgstr "Activiteit annuleren"
+
+#: accounts/templates/accounts/my_managed_campaigns.html:61
+msgid "You haven't created any activities yet."
+msgstr "U heeft nog geen activiteiten aangemaakt."
+
+#: accounts/templates/accounts/pay_direct.html:4
+msgid "Pay Direct"
+msgstr "Betaal direct"
+
+#: accounts/templates/accounts/pay_direct.html:21
+msgid "This user does not exist"
+msgstr "Deze gebruiker bestaat niet"
+
+#: accounts/templates/accounts/pay_direct.html:215
+#: accounts/tests/test_views.py:240 accounts/tests/test_views.py:302
+msgid "Make A Payment"
+msgstr "Voer een betaling uit"
+
+#: accounts/templates/accounts/pay_direct.html:246
+#: marketplace/templates/marketplace/pay.html:132
+msgid ""
+"You can enter either a company name or the name of the person you are doing "
+"business with."
+msgstr "U kunt een bedrijfsnaam of de naam van een contactpersoon invoeren"
+
+#: accounts/templates/accounts/pay_direct.html:263
+#: marketplace/templates/marketplace/pay.html:152
+#: prizedraw/templates/prizedraw/buy_tickets.html:58
+msgid "Process Payment"
+msgstr "Verwerk Betaling"
+
+#: accounts/templates/accounts/pay_direct.html:268
+#: prizedraw/templates/prizedraw/buy_tickets.html:63
+msgid "YOU'RE ABOUT TO COMPLETE A PAYMENT"
+msgstr "JE STAAT OP HET PUNT EEN TRANSACTIE TE VOLTOOIEN"
+
+#: accounts/templates/accounts/pay_direct.html:270
+#: marketplace/templates/marketplace/pay.html:159
+#, python-format
+msgid ""
+"Pay %(name)s an amount of <span class=\"icon\">%(currency_symbol)s</span> "
+"%(amount)s"
+msgstr ""
+"Betaal %(name)s <span class=\"icon\">%(currency_symbol)s</span> %(amount)s"
+
+#: accounts/templates/accounts/pay_direct.html:274
+#: accounts/templates/accounts/really_close_account.html:60
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:19
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:40
+#: cards/templates/cards/owner_block_card_form.html:24
+#: cards/templates/cards/owner_register_card_form.html:56
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:54
+#: marketplace/templates/marketplace/pay.html:163
+#: prizedraw/templates/prizedraw/buy_tickets.html:81
+#: prizedraw/templates/prizedraw/my_repeat_purchases.html:154
+#: rewards/templates/rewards/bulk_upload_form_base.html:75
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: accounts/templates/accounts/pay_direct.html:279
+#: accounts/templates/accounts/really_close_account.html:61
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:55
+#: marketplace/templates/marketplace/pay.html:168
+#: prizedraw/templates/prizedraw/buy_tickets.html:86
+#: prizedraw/templates/prizedraw/my_repeat_purchases.html:159
+msgid "Confirm"
+msgstr "Bevestig"
+
+#: accounts/templates/accounts/place_ad.html:11
+#: core/templates/includes/edit_ad_js.html:6
+msgid "Browse"
+msgstr "Zoeken…"
+
+#: accounts/templates/accounts/place_ad.html:111
+#: communityadmin/templates/communityadmin/offer_want_row.html:19
+#: marketplace/models.py:43
+msgid "Offer"
+msgstr "Aanbod"
+
+#: accounts/templates/accounts/place_ad.html:112
+#: communityadmin/templates/communityadmin/offer_want_row.html:19
+#: marketplace/models.py:43 marketplace/templates/marketplace/enquire.html:4
+msgid "Want"
+msgstr "Vraag"
+
+#: accounts/templates/accounts/place_ad.html:120
+#: communityadmin/templates/communityadmin/edit_ad.html:53
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: accounts/templates/accounts/place_ad.html:150
+msgid "Fixed price or other pricing option"
+msgstr "Bedrag of andere prijsoptie"
+
+#: accounts/templates/accounts/place_ad.html:163
+msgid "Or"
+msgstr "Of"
+
+#: accounts/templates/accounts/place_ad.html:249
+#: communityadmin/templates/communityadmin/edit_ad.html:113
+msgid "Indicates mandatory field"
+msgstr "Verplichte velden"
+
+#: accounts/templates/accounts/place_ad.html:256
+msgid "Images Uploading"
+msgstr "Afbeeldingen worden geupload"
+
+#: accounts/templates/accounts/place_ad.html:257
+msgid ""
+"Please wait for your images to finish uploading before submitting your advert"
+msgstr "Wacht a.u.b. tot uw afbeelding klaar is met uploaden"
+
+#: accounts/templates/accounts/place_ad.html:261
+msgid "OK"
+msgstr "OK"
+
+#: accounts/templates/accounts/products.html:4
+msgid "My Products"
+msgstr "Mijn Producten"
+
+#: accounts/templates/accounts/products_invoice.html:4
+#, fuzzy
+#| msgid "Invoice no: {0}"
+msgid "Invoice of "
+msgstr "Factuurnummer.: {0}"
+
+#: accounts/templates/accounts/profile_form_include.html:11
+#: accounts/templates/accounts/profile_form_include.html:17
+#: accounts/templates/accounts/profile_form_include.html:19
+#: core/templates/includes/accounts_sidemenu.html:7
+#: core/templates/includes/accounts_sidemenu.html:9
+#: marketplace/templates/marketplace/ad_list.html:133
+#: marketplace/templates/marketplace/ad_list.html:135
+#: marketplace/templates/marketplace/business_profile.html:31
+#: marketplace/templates/marketplace/business_profile.html:37
+#: marketplace/templates/marketplace/business_profile.html:39
+#: marketplace/templates/marketplace/campaign_form.html:58
+msgid "Profile picture"
+msgstr "Profielafbeelding"
+
+#: accounts/templates/accounts/profile_form_include.html:11
+msgid "Upload a profile image"
+msgstr "Profielafbeelding uploaden"
+
+#: accounts/templates/accounts/profile_form_include.html:30
+#: core/templates/includes/ad_list_marketplace_form.html:8
+#: cyclos/models/account.py:390
+#: marketplace/templates/marketplace/detail.html:90
+msgid "Community"
+msgstr "Gemeente"
+
+#: accounts/templates/accounts/profile_form_include.html:40
+#: accounts/templates/accounts/profile_form_include.html:80 cards/excel.py:68
+#: cards/templates/cards/fulfillment_list.html:21
+#: core/templates/registration/login.html:33
+#: core/templates/registration/password_reset_form.html:27
+#: core/templates/registration/registration_form.html:29
+msgid "Email"
+msgstr "E-mailadres"
+
+#: accounts/templates/accounts/profile_form_include.html:50
+#: communityadmin/views.py:219 cyclos/models/account.py:317
+msgid "Business name"
+msgstr "Organisatienaam"
+
+#: accounts/templates/accounts/profile_form_include.html:63
+#: marketplace/templates/marketplace/business_profile.html:49
+msgid "Contact person"
+msgstr "Contactpersoon"
+
+#: accounts/templates/accounts/profile_form_include.html:66
+#: cyclos/models/account.py:313
+msgid "First name"
+msgstr "Voornaam"
+
+#: accounts/templates/accounts/profile_form_include.html:69
+#: cyclos/models/account.py:315
+msgid "Last name"
+msgstr "Achternaam"
+
+#: accounts/templates/accounts/profile_form_include.html:76
+#: accounts/templates/accounts/profile_form_include.html:78
+msgid "Job Title"
+msgstr "Functie"
+
+#: accounts/templates/accounts/profile_form_include.html:95 core/models.py:139
+#: cyclos/models/account.py:330
+#: marketplace/templates/marketplace/business_profile.html:73
+msgid "Country"
+msgstr "Land"
+
+#: accounts/templates/accounts/profile_form_include.html:105 cards/excel.py:68
+#: core/models.py:140 cyclos/models/account.py:331 invoices/pdf.py:50
+#: marketplace/templates/marketplace/business_profile.html:85
+msgid "City"
+msgstr "Stad"
+
+#: accounts/templates/accounts/profile_form_include.html:113 cards/excel.py:68
+#: cards/templates/cards/fulfillment_list.html:20 core/models.py:143
+#: cyclos/models/account.py:333
+#: marketplace/templates/marketplace/business_profile.html:93
+msgid "Address"
+msgstr "Adres"
+
+#: accounts/templates/accounts/profile_form_include.html:121 core/models.py:146
+#: cyclos/models/account.py:335
+#: marketplace/templates/marketplace/business_profile.html:101
+msgid "Postal code"
+msgstr "Postcode"
+
+#: accounts/templates/accounts/profile_form_include.html:129
+#: marketplace/templates/marketplace/business_profile.html:110
+msgid "Registration number"
+msgstr "Registratienummer"
+
+#: accounts/templates/accounts/profile_form_include.html:137
+#: cyclos/models/account.py:337
+#: marketplace/templates/marketplace/business_profile.html:118
+msgid "Phone number"
+msgstr "Telefoon nummer"
+
+#: accounts/templates/accounts/profile_form_include.html:145
+#: cyclos/models/account.py:339
+#: marketplace/templates/marketplace/business_profile.html:126
+msgid "Mobile number"
+msgstr "Mobiele telefoonnummer"
+
+#: accounts/templates/accounts/profile_form_include.html:153
+#: cyclos/models/account.py:341
+#: marketplace/templates/marketplace/business_profile.html:135
+msgid "Company website"
+msgstr "website"
+
+#: accounts/templates/accounts/profile_form_include.html:163
+#: cyclos/models/account.py:343
+#: marketplace/templates/marketplace/business_profile.html:145
+msgid "Company description"
+msgstr "Bedrijfsomschrijving"
+
+#: accounts/templates/accounts/profile_form_include.html:165
+msgid ""
+"Give a clear indication of your areas of expertise so that other companies "
+"can easily find you."
+msgstr ""
+"Geef een duidelijke indicatie van uw expertise zodat andere bedrijven u "
+"eenvoudig kunnen vinden."
+
+#: accounts/templates/accounts/profile_form_include.html:170
+msgid "Company categories"
+msgstr "advertentiecategorieën"
+
+#: accounts/templates/accounts/profile_form_include.html:217
+msgid "SAVE PROFILE CHANGES"
+msgstr "PROFIEL WIJZIGINGEN OPSLAAN"
+
+#: accounts/templates/accounts/really_close_account.html:13
+#: accounts/templates/accounts/really_close_account.html:41
+msgid "Close My Account"
+msgstr "Sluit mijn account"
+
+#: accounts/templates/accounts/really_close_account.html:24
+msgid ""
+"If you no longer wish to use your account, you can close it by clicking the "
+"button below. Please note that once your account is closed:"
+msgstr ""
+"Klik op onderstaande knop om uw account te sluiten. Met het sluiten van uw "
+"account:"
+
+#: accounts/templates/accounts/really_close_account.html:28
+#, python-format
+msgid ""
+"\n"
+"                <li>You will not be able to log in or make any more "
+"transactions;</li>\n"
+"                <li>Any positive balance you have remaining will be reset to "
+"zero;</li>\n"
+"                <li>You can no longer earn or redeem %(currency_name)s;</"
+"li>\n"
+"                <li>Any cards associated with this account will "
+"automatically be cancelled;</li>\n"
+"                <li>Any adverts will be removed.</li>\n"
+"                "
+msgstr ""
+"\n"
+"                <li>Kunt u niet meer inloggen;</li>\n"
+"                <li>Vervalt uw saldo;</li>\n"
+"                <li>Kunt u niet meer sparen of verzilveren %(currency_name)s;"
+"</li>\n"
+"                <li>Worden uw passen geblokkeerd en uw pasaanvragen "
+"geannuleerd;</li>\n"
+"                <li>Worden uw advertenties verwijderd.</li>\n"
+"                "
+
+#: accounts/templates/accounts/really_close_account.html:49
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:8
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:29
+#: cards/templates/cards/owner_register_card_form.html:45
+msgid "Close"
+msgstr "Sluiten"
+
+#: accounts/templates/accounts/really_close_account.html:50
+msgid "Close my account"
+msgstr "Sluit mijn account"
+
+#: accounts/templates/accounts/really_close_account.html:55
+msgid ""
+"Are you sure you want to close your account? This action can not be undone."
+msgstr ""
+"Weet u zeker dat u uw account wilt sluiten? Deze handeling kan niet ongedaan "
+"worden gemaakt"
+
+#: accounts/templates/accounts/really_close_account_done.html:13
+msgid "Account Closed"
+msgstr "Account gesloten"
+
+#: accounts/templates/accounts/really_close_account_done.html:18
+msgid "Thank you. We have now closed your account and logged you out."
+msgstr "Uw account is gesloten en u bent uitgelogd"
+
+#: accounts/templates/accounts/really_close_account_done.html:20
+msgid "Thank you for using"
+msgstr "Bedankt voor het gebruik"
+
+#: accounts/templates/accounts/really_close_account_done.html:20
+msgid "We hope to see you again in the future."
+msgstr "We hopen u in de toekomst terug te zien"
+
+#: accounts/templates/accounts/toggle_ad_status.html:4
+#: accounts/templates/accounts/toggle_ad_status.html:19
+#: accounts/templates/accounts/toggle_ad_status.html:33
+msgid "Toggle Ad Status"
+msgstr "Verander advertentie status"
+
+#: accounts/templates/accounts/update_my_profile.html:4
+msgid "Edit My Details"
+msgstr "Wijzig mijn gegevens"
+
+#: accounts/templates/accounts/update_my_profile.html:27
+msgid "My Profile"
+msgstr "Mijn Profiel"
+
+#: accounts/templates/accounts/update_my_profile.html:30
+#: marketplace/templates/marketplace/business_profile.html:23
+msgid "Super users cannot have profiles"
+msgstr "Super Administrators kunnen geen profiel hebben"
+
+#: accounts/templates/accounts/update_my_profile.html:35
+msgid ""
+"Cannot find a profile for the logged in user, please contact the site "
+"administrators"
+msgstr ""
+"We konden geen profiel vinden voor de ingelogde gebruiker. Neem contact op "
+"met de supportafdeling"
+
+#: accounts/templates/accounts/update_my_profile.html:44
+msgid "Change Password"
+msgstr "Wijzig wachtwoord"
+
+#: accounts/templates/accounts/update_my_profile.html:46
+msgid "CHANGE PASSWORD"
+msgstr "WIJZIG WACHTWOORD"
+
+#: accounts/tests/test_forms.py:47 accounts/utils.py:88
+msgid "Only integer amounts are allowed."
+msgstr "Alleen ronde getallen zijn toegestaan."
+
+#: accounts/tests/test_forms.py:61
+msgid "Only amounts greater or equal to 0.01 are allowed."
+msgstr "Alleen bedragen groter of gelijk aan 0.01 zijn toegestaan"
+
+#: accounts/tests/test_forms.py:187
+msgid "Please complete at least one search field"
+msgstr "Maak a.u.b. tenminste één zoekveld compleet"
+
+#: accounts/utils.py:93
+#, python-brace-format
+msgid "Only amounts greater or equal to {0} are allowed."
+msgstr "Alleen bedragen groter dan of gelijk aan {0} zijn toegestaan"
+
+#: accounts/views.py:77 communityadmin/views.py:444
+msgid "Details saved successfully."
+msgstr "Gegevens succesvol opgeslagen"
+
+#: accounts/views.py:97
+msgid ""
+"Unable to save your changes -\n"
+"                    Please enter all required information and try again"
+msgstr ""
+"Opslaan van wijzigingen mislukt -\n"
+"                       Voer a.u.b. gevraagde informatie in en probeer opnieuw"
+
+#: accounts/views.py:108
+msgid ""
+"Unable to save your changes -\n"
+"                        Please enter all required information and try again"
+msgstr ""
+"Opslaan van wijzigingen mislukt -\n"
+"                       Voer a.u.b. gevraagde informatie in en probeer opnieuw"
+
+#: accounts/views.py:121
+msgid ""
+"You must complete your profile in order to view other areas of your account"
+msgstr ""
+"U moet uw profiel invullen alvorens u andere onderdelen van uw account kunt "
+"inzien"
+
+#: accounts/views.py:414 accounts/views.py:519
+msgid "monthly_statement"
+msgstr "Maandelijks_afschrift"
+
+#: accounts/views.py:432 accounts/views.py:535
+msgid "last_10_transactions"
+msgstr "laatste_10_transacties"
+
+#: accounts/views.py:597 communityadmin/views.py:277 marketplace/views.py:1013
+#, python-format
+msgid "Empty list and '%(class_name)s.allow_empty' is False."
+msgstr "Lege lijst en '%(class_name)s.allow_empty' is onjuist."
+
+#: accounts/views.py:780 marketplace/views.py:1158 prizedraw/utils.py:188
+msgid "Payment made successfully."
+msgstr "Betaling succesvol voltrokken"
+
+#: accounts/views.py:783 marketplace/views.py:1162 marketplace/views.py:1205
+#: prizedraw/utils.py:190
+msgid "Could not make payment at this time."
+msgstr "Betaling niet gelukt op dit moment"
+
+#: accounts/views.py:786 marketplace/views.py:1165
+msgid ""
+"You do not have sufficient credit to complete the payment plus the "
+"transaction fee."
+msgstr ""
+"U heeft niet afdoende saldo of kredietruimte om de betaling te voltrekken en "
+"de transactiekosten te voldoen"
+
+#: accounts/views.py:1092
+msgid "Transaction successful"
+msgstr "Transactie geslaagd"
+
+#: accounts/views.py:1133
+msgid "This is only available to web pages"
+msgstr ""
+
+#: accounts/views.py:1367
+msgid "You have been logged out, following a period of inactivity."
+msgstr "U bent automatisch uitgelogd wegens inactiviteit"
+
+#: billing/admin.py:40
+msgid "Assign selected Product(s) to all users in its user groups"
+msgstr ""
+
+#: billing/admin.py:84
+#, python-brace-format
+msgid "Invoiced {0} of {1} items; Created {2} invoices"
+msgstr ""
+
+#: billing/admin.py:95
+msgid "Generate and send ad-hoc invoice(s) for selected items"
+msgstr ""
+
+#: billing/admin.py:100
+msgid "Generate ad-hoc invoice(s) for selected items"
+msgstr ""
+
+#: billing/admin.py:106
+msgid "TESTING ONLY: reset next payment date to 15-Sept-2016"
+msgstr ""
+
+#: billing/admin.py:176
+msgid "Files generated"
+msgstr ""
+
+#: billing/admin.py:178
+msgid "(Re-)Generate Twinfield files"
+msgstr ""
+
+#: billing/admin.py:192
+msgid "Files sent"
+msgstr ""
+
+#: billing/admin.py:193
+msgid "(Re-)Send Twinfield files"
+msgstr ""
+
+#: billing/common.py:10
+msgid "One-off"
+msgstr ""
+
+#: billing/common.py:11
+msgid "Yearly"
+msgstr ""
+
+#: billing/common.py:12 prizedraw/models.py:402
+msgid "Monthly"
+msgstr ""
+
+#: billing/common.py:24
+msgid "When terminal assigned to user"
+msgstr ""
+
+#: billing/common.py:26
+msgid "When terminal unassigned from user"
+msgstr ""
+
+#: billing/common.py:28
+msgid "To all terminal holders (excl. free ones)"
+msgstr ""
+
+#: billing/common.py:30
+msgid "To all SIM card holders"
+msgstr ""
+
+#: billing/common.py:32
+msgid "To all users in product's User Groups"
+msgstr ""
+
+#: billing/common.py:45
+#, fuzzy
+#| msgid "Number of transactions"
+msgid "Number of terminals assigned"
+msgstr "Aantal transacties"
+
+#: billing/common.py:47
+msgid "Number of extra terminals assigned (first is free)"
+msgstr ""
+
+#: billing/common.py:49
+#, fuzzy
+#| msgid "Number of characters left"
+msgid "Number of SIM cards assigned"
+msgstr "Aantal resterende karakters"
+
+#: billing/common.py:53
+#, fuzzy
+#| msgid "Number of transactions"
+msgid "Value of transactions (euros)"
+msgstr "Aantal transacties"
+
+#: billing/common.py:55
+#, fuzzy
+#| msgid "Number of transactions"
+msgid "Value of transactions (points)"
+msgstr "Aantal transacties"
+
+#: billing/models.py:44
+#, fuzzy
+#| msgid "Description"
+msgid "Subscriptions"
+msgstr "Beschrijving"
+
+#: billing/models.py:45
+#, fuzzy
+#| msgid "NFC Terminals"
+msgid "Cards and terminals"
+msgstr "NFC Terminals"
+
+#: billing/models.py:46
+#, fuzzy
+#| msgid "transaction percentage"
+msgid "Transaction charges"
+msgstr "Beloning percentage"
+
+#: billing/models.py:47
+msgid "Other"
+msgstr ""
+
+#: billing/models.py:73 billing/models.py:88 billing/models.py:111
+#: billing/models.py:755 cards/excel.py:68 cards/models.py:263
+#: cards/templates/cards/business_terminals.html:48
+msgid "Name"
+msgstr "Naam"
+
+#: billing/models.py:75 billing/models.py:757
+#, python-format
+msgid "% rate"
+msgstr ""
+
+#: billing/models.py:77
+msgid "2-letter Twinfield code"
+msgstr ""
+
+#: billing/models.py:107
+#, fuzzy
+#| msgid "Unit Price"
+msgid "Unit price"
+msgstr "Prijs per stuk"
+
+#: billing/models.py:108
+#, fuzzy
+#| msgid "Please enter a price"
+msgid "Percentage of value"
+msgstr "Voer een prijs in"
+
+#: billing/models.py:113
+#, fuzzy
+msgid "Sub-name"
+msgstr "naam"
+
+#: billing/models.py:115
+#, fuzzy
+#| msgid "Postal code"
+msgid "Article code"
+msgstr "Postcode"
+
+#: billing/models.py:117
+msgid "Sub-article code"
+msgstr ""
+
+#: billing/models.py:119
+#: communityadmin/templates/communityadmin/offers_wants.html:67
+#: core/templates/includes/ad_list_marketplace_form.html:33
+msgid "Category"
+msgstr "Categorie"
+
+#: billing/models.py:122
+#, fuzzy
+#| msgid "Most recent"
+msgid "Cost centre"
+msgstr "Meest recent"
+
+#: billing/models.py:126
+#, fuzzy
+#| msgid "Change group"
+msgid "User groups"
+msgstr "Wijzig groep"
+
+#: billing/models.py:128
+#, fuzzy
+#| msgid "Price range"
+msgid "Price type"
+msgstr "Prijsbereik"
+
+#: billing/models.py:131
+msgid "Tax regime"
+msgstr ""
+
+#: billing/models.py:133
+#, fuzzy
+#| msgid "Maximum cost"
+msgid "Maximum discount (%)"
+msgstr "Max. kosten"
+
+#: billing/models.py:136
+msgid "Minimum quantity"
+msgstr ""
+
+#: billing/models.py:137
+msgid "Mimimum for Assigned Product quantity"
+msgstr ""
+
+#: billing/models.py:139
+#, fuzzy
+#| msgid "Maximum cost"
+msgid "Maximum quantity"
+msgstr "Max. kosten"
+
+#: billing/models.py:140
+msgid "Maximum for Assigned Product quantity -- leave blank if no limit"
+msgstr ""
+
+#: billing/models.py:143
+msgid "Billing frequency"
+msgstr ""
+
+#: billing/models.py:146
+msgid "Auto-assign type"
+msgstr ""
+
+#: billing/models.py:147
+msgid "Leave blank if assigned manually by admins"
+msgstr ""
+
+#: billing/models.py:149
+msgid "Auto-quantity/value type"
+msgstr ""
+
+#: billing/models.py:150
+msgid "Leave blank if set manually by admins"
+msgstr ""
+
+#: billing/models.py:152 billing/models.py:690
+msgid "Invoicing company"
+msgstr ""
+
+#: billing/models.py:177
+msgid "No price set"
+msgstr ""
+
+#: billing/models.py:250
+#, fuzzy
+#| msgid "Price"
+msgid "prices"
+msgstr "Prijs"
+
+#: billing/models.py:251
+msgid "Valid from"
+msgstr ""
+
+#: billing/models.py:252
+msgid "Valid to"
+msgstr ""
+
+#: billing/models.py:254
+#, fuzzy
+#| msgid "Unit Price"
+msgid "Unit price (Euro)"
+msgstr "Prijs per stuk"
+
+#: billing/models.py:256
+#, fuzzy
+#| msgid "Please enter a price"
+msgid "Percentage price"
+msgstr "Voer een prijs in"
+
+#: billing/models.py:295
+msgid "'Valid from' cannot be before 'Valid to'"
+msgstr ""
+
+#: billing/models.py:300
+msgid "Valid-from and -to dates overlap an existing price"
+msgstr ""
+
+#: billing/models.py:319
+msgid "Assigned to user"
+msgstr ""
+
+#: billing/models.py:320
+#, fuzzy
+#| msgid "Start time"
+msgid "Start date"
+msgstr "Starttijd"
+
+#: billing/models.py:321
+#, fuzzy
+#| msgid "End time"
+msgid "End date"
+msgstr "Eindtijd"
+
+#: billing/models.py:323
+msgid "Date of next payment"
+msgstr ""
+
+#: billing/models.py:326
+msgid "Auto-calculated for rentals and subsciptions"
+msgstr ""
+
+#: billing/models.py:328
+msgid "Value"
+msgstr ""
+
+#: billing/models.py:329
+#, fuzzy
+#| msgid "Please enter a price"
+msgid "For percentage-based prices only"
+msgstr "Voer een prijs in"
+
+#: billing/models.py:331
+msgid "Discount (%)"
+msgstr ""
+
+#: billing/models.py:380
+#, python-brace-format
+msgid "Max discount allowed for this product is {0}"
+msgstr ""
+
+#: billing/models.py:386
+#, python-brace-format
+msgid "'{0}' is not available to users in group {1}"
+msgstr ""
+
+#: billing/models.py:393
+msgid "End date cannot be before Start date"
+msgstr ""
+
+#: billing/models.py:397
+msgid "Next Payment date cannot be before Start date"
+msgstr ""
+
+#: billing/models.py:401
+#, python-brace-format
+msgid "Quantity should be >= {0}"
+msgstr ""
+
+#: billing/models.py:405
+#, python-brace-format
+msgid "Quantity should be <= {0}"
+msgstr ""
+
+#: billing/models.py:413
+msgid "This product is already assigned with overlapping dates"
+msgstr ""
+
+#: billing/models.py:584
+#, fuzzy
+#| msgid "Start time"
+msgid "Period start date"
+msgstr "Starttijd"
+
+#: billing/models.py:585 billing/models.py:588
+msgid "Blank for ad-hoc invoices"
+msgstr ""
+
+#: billing/models.py:587
+#, fuzzy
+#| msgid "Creation date"
+msgid "Period end date"
+msgstr "Aanmaakdatum"
+
+#: billing/models.py:590
+#, fuzzy
+#| msgid "Invoice Date: {0}"
+msgid "Invoices created at"
+msgstr "Factuurdatum: {0}"
+
+#: billing/models.py:592
+msgid "Files generated at"
+msgstr ""
+
+#: billing/models.py:594
+msgid "Files sent at"
+msgstr ""
+
+#: billing/models.py:595
+msgid "Files sent to"
+msgstr ""
+
+#: billing/models.py:681 billing/models.py:777
+#, fuzzy
+#| msgid "Invoices"
+msgid "Invoice set"
+msgstr "Facturen"
+
+#: billing/models.py:682
+#, fuzzy
+#| msgid "Invoice Date: {0}"
+msgid "Invoice date"
+msgstr "Factuurdatum: {0}"
+
+#: billing/models.py:685
+#, fuzzy
+#| msgid "profile"
+msgid "User profile"
+msgstr "profiel"
+
+#: billing/models.py:688
+msgid "Date exported to TwinField"
+msgstr ""
+
+#: billing/models.py:735
+msgid "Assigned product"
+msgstr ""
+
+#: billing/models.py:738
+msgid "Date payment is for"
+msgstr ""
+
+#: billing/models.py:741
+msgid "Unit price excl. tax (Euro)"
+msgstr ""
+
+#: billing/models.py:744
+msgid "Discount excl. tax (Euro)"
+msgstr ""
+
+#: billing/models.py:746 billing/models.py:754
+msgid "This is a negative amount (or zero)"
+msgstr ""
+
+#: billing/models.py:750
+msgid "Unit price incl. tax (Euro)"
+msgstr ""
+
+#: billing/models.py:752
+msgid "Discount incl. tax (Euro)"
+msgstr ""
+
+#: billing/models.py:769
+#, python-brace-format
+msgid "Discount on '{0}' at {1}%"
+msgstr "{1}% korting op '{0}'"
+
+#: billing/models.py:779
+#, fuzzy
+#| msgid "Price range"
+msgid "File type"
+msgstr "Prijsbereik"
+
+#: billing/models.py:829 cards/models.py:165 cards/models.py:265
+#: registration/forms.py:9
+msgid "Business"
+msgstr "Organisatie"
+
+#: billing/models.py:831
+#, fuzzy
+#| msgid "terminal"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: billing/models.py:860
+msgid "Twinfield Project Code"
+msgstr ""
+
+#: billing/models.py:862
+msgid "Twinfield GL account for Products"
+msgstr ""
+
+#: billing/models.py:864
+msgid "Twinfield GL account for Users"
+msgstr ""
+
+#: billing/models.py:866
+msgid "Twinfield credit manager"
+msgstr ""
+
+#: billing/models.py:868
+msgid "Twinfield user code template"
+msgstr ""
+
+#: billing/models.py:870
+msgid "Twinfield invoice type"
+msgstr ""
+
+#: billing/models.py:872
+msgid "Mail Twinfield data files to"
+msgstr ""
+
+#: billing/models.py:874
+msgid "Email address(es), comma separated if more than one"
+msgstr ""
+
+#: billing/models.py:891
+#, fuzzy
+#| msgid "Change group"
+msgid "Sender group"
+msgstr "Wijzig groep"
+
+#: billing/models.py:894
+#, fuzzy
+#| msgid "Change group"
+msgid "Receiver group"
+msgstr "Wijzig groep"
+
+#: billing/models.py:896
+#, fuzzy
+#| msgid "Transactions Made"
+msgid "Transaction Type ID"
+msgstr "Uitgevoerde Transacties"
+
+#: billing/models.py:897
+#, fuzzy
+#| msgid "Invoice Date: {0}"
+msgid "Invoice sender?"
+msgstr "Factuurdatum: {0}"
+
+#: billing/models.py:898
+#, fuzzy
+#| msgid "Invoice Date: {0}"
+msgid "Invoice recipient?"
+msgstr "Factuurdatum: {0}"
+
+#: billing/models.py:900
+#, fuzzy
+#| msgid "Make transactions"
+msgid "Negate transaction amounts?"
+msgstr "Transacties uitvoeren"
+
+#: billing/utils.py:119
+msgid ".. Performing pre-invoicing actions"
+msgstr ""
+
+#: billing/utils.py:124
+msgid ".. Completed pre-invoicing actions"
+msgstr ""
+
+#: billing/utils.py:130
+#, python-brace-format
+msgid "{0}, next payment date {1}..."
+msgstr ""
+
+#: billing/utils.py:148
+msgid "...Failed (missing price?)"
+msgstr ""
+
+#: billing/utils.py:161
+#, python-brace-format
+msgid "Monthly invoice run for {0:02d}-{1} ({2} invoices)"
+msgstr ""
+
+#: billing/utils.py:190
+#, python-brace-format
+msgid "Ad-hoc invoice generated on {0}"
+msgstr ""
+
+#: billing/utils.py:201
+#, python-brace-format
+msgid "'{0}' has no payment due (next payment date is blank)"
+msgstr ""
+
+#: billing/utils.py:208
+#, python-brace-format
+msgid "'{1}' product cannot be invoiced ad hoc"
+msgstr ""
+
+#: billing/utils.py:229
+#, python-brace-format
+msgid "{0} ad-hoc invoice(s) generated on {1}"
+msgstr ""
+
+#: cards/admin.py:73
+msgid "Import Card numbers from CSV"
+msgstr "Pasnummer importeren uit een CSV bestand"
+
+#: cards/admin.py:134 core/templates/base.html:196
+#: core/templates/base.html.py:216 core/templates/base.html:291
+#: core/templates/base.html.py:310 cyclos/admin.py:357 rewards/common.py:16
+msgid "Email address"
+msgstr "E-mailadres"
+
+#: cards/excel.py:68
+msgid "Num Street"
+msgstr "Huisnummer"
+
+#: cards/excel.py:68
+msgid "Extra Address"
+msgstr "Huisnummer toevoeging"
+
+#: cards/excel.py:68 invoices/pdf.py:51
+msgid "Postal Code"
+msgstr "Postcode"
+
+#: cards/excel.py:69 cards/templates/cards/fulfillment_list.html:22
+msgid "Stadlander"
+msgstr "Stadlander"
+
+#: cards/excel.py:69
+msgid "IBAN"
+msgstr "IBAN nummer"
+
+#: cards/excel.py:69
+msgid "BIC Code"
+msgstr "BIC code"
+
+#: cards/excel.py:69
+msgid "Account Holder"
+msgstr "Rekeninghouder"
+
+#: cards/excel.py:69 cards/models.py:268
+msgid "Creation Date"
+msgstr "Aanmaakdatum"
+
+#: cards/excel.py:69
+msgid "Send / Old"
+msgstr "Verstuurd / oud"
+
+#: cards/forms.py:24 cards/tests/test_views.py:156
+msgid "The user name is already in use. Please provide a unique user name."
+msgstr "De gebruikersnaam is al in gebruik. Vul een unieke gebruikersnaam in."
+
+#: cards/forms.py:36
+msgid "CSV file"
+msgstr "CSV bestand"
+
+#: cards/forms.py:42 cards/tests/test_forms.py:23
+msgid "File uploaded must be a .csv file"
+msgstr "U moet een .csv bestand uploaden"
+
+#: cards/forms.py:85 cards/tests/test_forms.py:42
+msgid ""
+"Please fill in the necessary information in your profile for direct debit"
+msgstr "Vul a.u.b. noodzakelijk gegevens in voor automatische incasso"
+
+#: cards/models.py:32
+msgid "Active"
+msgstr "Geactiveerd"
+
+#: cards/models.py:33
+msgid "Pending"
+msgstr "In behandling"
+
+#: cards/models.py:34
+msgid "Blocked"
+msgstr "Geblokkeerd"
+
+#: cards/models.py:35
+msgid "Denied"
+msgstr "Afgewezen"
+
+#: cards/models.py:42 cards/models.py:48
+msgid "I have an old card to replace"
+msgstr "Ik wil mijn oude pas vervangen"
+
+#: cards/models.py:43
+msgid "Order a new card"
+msgstr "Een nieuwe pas bestellen"
+
+#: cards/models.py:49
+msgid "Order another card"
+msgstr "Ik wil een extra pas aanvragen"
+
+#: cards/models.py:56
+msgctxt "fulfillment"
+msgid "New"
+msgstr "In Behandeling"
+
+#: cards/models.py:57
+msgid "Manually Processed"
+msgstr "Pas gekoppeld"
+
+#: cards/models.py:58
+msgid "Cancelled (Account closed)"
+msgstr "Geannuleerd"
+
+#: cards/models.py:68
+msgid "Card UID"
+msgstr "Pas UID"
+
+#: cards/models.py:70 cards/models.py:115 rewards/common.py:17
+msgid "Card number"
+msgstr "Pasnummer"
+
+#: cards/models.py:84
+msgid "Card name"
+msgstr "Pas naam"
+
+#: cards/models.py:113
+msgid "Card type"
+msgstr "Pas type"
+
+#: cards/models.py:123 cards/models.py:307
+msgid "Owner"
+msgstr "Eigenaar"
+
+#: cards/models.py:163
+msgid "IMEI"
+msgstr "Terminal-nummer (IMEI)"
+
+#: cards/models.py:168
+msgid "ICCID"
+msgstr "SIM-kaartnummer (ICCID)"
+
+#: cards/models.py:169
+msgid "Comments/Notes"
+msgstr "Opmerkingen"
+
+#: cards/models.py:170 core/models.py:123 files/models.py:116
+msgid "Date created"
+msgstr "Aanmaakdatum"
+
+#: cards/models.py:172
+msgid "Date last seen"
+msgstr "Laatste keer gebruikt"
+
+#: cards/models.py:173
+#, fuzzy
+#| msgid "Date created"
+msgid "Date removed"
+msgstr "Aanmaakdatum"
+
+#: cards/models.py:270
+msgid "Last Login Date"
+msgstr "Laatste keer ingelogd"
+
+#: cards/models.py:288 cards/views.py:391
+msgid "operator"
+msgstr "Operator"
+
+#: cards/models.py:291
+msgid "terminal"
+msgstr "Terminal"
+
+#: cards/models.py:293
+msgid "card"
+msgstr "pas"
+
+#: cards/models.py:310
+msgid "Registration Choice"
+msgstr ""
+
+#: cards/models.py:332 core/templates/base.html:111
+#: core/templates/base.html.py:276
+#: marketplace/templates/marketplace/business_profile.html:4
+msgid "Profile"
+msgstr "Profiel"
+
+#: cards/models.py:340
+#, fuzzy
+#| msgid "Card UID"
+msgid "Card"
+msgstr "Pas UID"
+
+#: cards/models.py:344 cards/templates/cards/fulfillment_list.html:10
+msgid "Fulfillment"
+msgstr "Pasaanvragen"
+
+#: cards/models.py:345
+msgid "Fulfillments"
+msgstr "Pasaanvragen"
+
+#: cards/templates/admin/cards/card/change_form.html:6
+msgid "Related CC3Profile"
+msgstr ""
+
+#: cards/templates/admin/cards/cardnumber/change_list.html:6
+msgid "Import CSV cards file"
+msgstr "Importeer een CSV bestand met pasnummers en pas UID’s"
+
+#: cards/templates/admin/cards/cardnumber/import_csv.html:6
+#: core/templates/registration/original_registration_base.html:14
+#: prizedraw/templates/admin/prizedraw/draw/award_prizes.html:6
+msgid "Home"
+msgstr "Home"
+
+#: cards/templates/admin/cards/cardnumber/import_csv.html:19
+msgid "Upload CSV file"
+msgstr "Upload een CSV bestand"
+
+#: cards/templates/cards/block_unblock_card_form_snippet.html:7
+msgid "Block"
+msgstr "Blokkeer"
+
+#: cards/templates/cards/block_unblock_card_form_snippet.html:12
+msgid "Unblock"
+msgstr "Activeren"
+
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:9
+msgid "Block card"
+msgstr "Blokkeer pas"
+
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:14
+#: cards/templates/cards/owner_block_card_form.html:19
+#, python-format
+msgid "Are you sure you want to block card number %(card_desc)s?"
+msgstr "Weet u zeker dat u uw pas met nummer %(card_desc)s wilt blokkeren?"
+
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:20
+#: cards/templates/cards/owner_block_card_form.html:4
+#: cards/templates/cards/owner_block_card_form.html:25
+msgid "Block Card"
+msgstr "Blokkeer pas"
+
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:30
+msgid "Unblock card"
+msgstr "Pas activeren"
+
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:35
+#: cards/templates/cards/owner_block_card_form.html:21
+#, python-format
+msgid "Are you sure you want to unblock card number %(card_desc)s?"
+msgstr ""
+"Weet u zeker dat u uw pas met nummer %(card_desc)s weer wilt activeren?"
+
+#: cards/templates/cards/block_unblock_card_modals_snippet.html:41
+#: cards/templates/cards/owner_block_card_form.html:4
+#: cards/templates/cards/owner_block_card_form.html:25
+msgid "Unblock Card"
+msgstr "Pas activeren"
+
+#: cards/templates/cards/business_terminals.html:4
+#: cards/templates/cards/business_terminals.html:15
+msgid "NFC Terminals"
+msgstr "NFC Terminals"
+
+#: cards/templates/cards/business_terminals.html:21
+msgid "IMEI number"
+msgstr "IMEI nummer"
+
+#: cards/templates/cards/business_terminals.html:22
+#: cards/templates/cards/business_terminals.html:49
+msgid "Creation date"
+msgstr "Aanmaakdatum"
+
+#: cards/templates/cards/business_terminals.html:23
+msgid "Last seen"
+msgstr "Laatst gezien"
+
+#: cards/templates/cards/business_terminals.html:37
+msgid "No terminals registered"
+msgstr "Geen Terminals gekoppeld"
+
+#: cards/templates/cards/business_terminals.html:42
+msgid "NFC Operators"
+msgstr "Terminal operators"
+
+#: cards/templates/cards/business_terminals.html:50
+msgid "Last login"
+msgstr "Laatste inlog"
+
+#: cards/templates/cards/business_terminals.html:66
+msgid "No operators registered"
+msgstr "Geen operators aangemaakt"
+
+#: cards/templates/cards/business_terminals.html:73
+#: cards/templates/cards/operator_confirm_delete.html:4
+#: cards/templates/cards/operator_form.html:4
+msgid "New Operator"
+msgstr "Nieuwe Operator"
+
+#: cards/templates/cards/fulfillment_list.html:3
+msgid "Fulfillment List"
+msgstr "Lijst pasaanvragen"
+
+#: cards/templates/cards/fulfillment_list.html:19
+msgid "Applicant name"
+msgstr "Naam aanvrager"
+
+#: cards/templates/cards/fulfillment_list.html:23
+msgid "SEPA details"
+msgstr "Bankgegevens voor automatisch incasso"
+
+#: cards/templates/cards/fulfillment_list.html:25
+msgid "Replace old scheme card?"
+msgstr "Oude pas vervangen?"
+
+#: cards/templates/cards/fulfillment_list.html:26
+msgid "Last modified"
+msgstr "Laatst Aangepaste"
+
+#: cards/templates/cards/fulfillment_list.html:45
+msgid "True"
+msgstr "Ja"
+
+#: cards/templates/cards/fulfillment_list.html:45
+msgid "False"
+msgstr "Nee"
+
+#: cards/templates/cards/fulfillment_list.html:63
+msgid "No fulfillment list found"
+msgstr "Geen passen verzendlijst gevonden"
+
+#: cards/templates/cards/fulfillment_list.html:75
+#: communityadmin/templates/communityadmin/transactions.html:61
+msgid "Export"
+msgstr "Exporteer"
+
+#: cards/templates/cards/operator_confirm_delete.html:15
+msgid "Delete Terminal Operator"
+msgstr "Operator verwijderen"
+
+#: cards/templates/cards/operator_confirm_delete.html:21
+msgid "Delete Operator"
+msgstr "Operator verwijderen"
+
+#: cards/templates/cards/operator_form.html:18
+msgid "Create a new Terminal Operator"
+msgstr "Een nieuwe Terminal Operator aanmaken"
+
+#: cards/templates/cards/operator_form.html:20
+msgid "Terminal Operator"
+msgstr "Terminal Operator"
+
+#: cards/templates/cards/operator_form.html:67
+msgid "Save Operator"
+msgstr "Operator opslaan"
+
+#: cards/templates/cards/owner_block_card_form.html:13
+#: cards/templates/cards/owner_manage_card_form.html:13
+msgid "Manage Card"
+msgstr "Pas beheren"
+
+#: cards/templates/cards/owner_manage_card_form.html:4
+msgid "Manage card"
+msgstr "Pas beheren"
+
+#: cards/templates/cards/owner_manage_card_form.html:21
+msgid "You do not have any cards yet."
+msgstr "U heeft nog geen pas"
+
+#: cards/templates/cards/owner_register_card_form.html:4
+#: cards/templates/cards/owner_register_card_success.html:4
+msgid "Register card"
+msgstr "Registreer pas"
+
+#: cards/templates/cards/owner_register_card_form.html:13
+#: cards/templates/cards/owner_register_card_success.html:13
+msgid "Order Card"
+msgstr "Pas aanvragen"
+
+#: cards/templates/cards/owner_register_card_form.html:20
+#, python-format
+msgid ""
+"You cannot order a card.\n"
+"                Please check you have completed your address, BIC and IBAN "
+"number from your\n"
+"                <a href=\"%(update_profile_url)s\">profile</a>"
+msgstr ""
+"U kunt geen pas aanvragen.\n"
+"                Controleer of u uw adres en bankgegevens volledig heeft "
+"ingevuld in uw profiel\n"
+"                <a href=\"%(update_profile_url)s\">profile</a>"
+
+#: cards/templates/cards/owner_register_card_form.html:38
+msgid "Register Card"
+msgstr "Registreer pas"
+
+#: cards/templates/cards/owner_register_card_form.html:46
+msgid "Order card"
+msgstr "Pas aanvragen"
+
+#: cards/templates/cards/owner_register_card_form.html:51
+#, fuzzy
+msgid ""
+"Door op 'Bestellen' te klikken gaat u ermee akkoord dat Samen-Doen eenmalig "
+"€5,95 van uw rekening afschrijft."
+msgstr ""
+"Door op ‘Aanvragen’ te klikken gaat u ermee akkoord dat er eenmalig €5,95 "
+"van uw rekening wordt afgeschreven"
+
+#: cards/templates/cards/owner_register_card_form.html:57
+msgid "Order"
+msgstr "Aanvragen"
+
+#: cards/templates/cards/owner_register_card_form.html:66
+msgid "You have registered your card already"
+msgstr "U heeft reeds een pas aangevraagd"
+
+#: cards/templates/cards/owner_register_card_form.html:71
+msgid "Only Individuals can register cards"
+msgstr "Alleen spaarders kunnen een pas aanvragen"
+
+#: cards/tests/test_api.py:1028 rewards/transactions.py:77
+msgid "Cause donation"
+msgstr "Spaardoeldonatie"
+
+#: cards/validators.py:9
+msgid "Enter a valid ICCID (19 or 20 digits)"
+msgstr "Vul een geldig ICCID in van 19 of 20 cijfers"
+
+#: cards/validators.py:13
+msgid "PIN must be 4 digits"
+msgstr "Vul een viercijferige PIN code in"
+
+#: cards/validators.py:17
+msgid "Enter a valid card number (up to 16 digits)"
+msgstr "Vul een geldig pasnummer in van maximaal 16 cijfers"
+
+#: cards/validators.py:21
+msgid "Enter a valid IMEI number (15 digits)"
+msgstr "Vul een geldig IMEI nummer in van 15 cijfers"
+
+#: cards/views.py:101
+msgid "You have blocked your card"
+msgstr "Uw pas is geblokkeerd"
+
+#: cards/views.py:105
+msgid "You have re-activated your card"
+msgstr "Uw pas is weer geactiveerd"
+
+#: cards/views.py:158
+#, python-brace-format
+msgid "Empty list and '{class_name}.allow_empty' is False."
+msgstr "Lege lijst en '{class_name}.allow_empty' is onjuist."
+
+#: cards/views.py:196 cards/views.py:200 cards/views.py:315 cards/views.py:319
+msgid ""
+"Your request for a new card has been received. It will be delivered within "
+"three working days at the address you specified."
+msgstr ""
+"Uw pasaanvraag is ontvangen. We zullen de pas zo spoedig mogelijk \n"
+"per post laten bezorgen naar het adres vermeld in uw profiel."
+
+#: cards/views.py:205 cards/views.py:323
+msgid ""
+"Your request for a new card has been received. It will be delivered within "
+"three working days at the address you specified. We will deduct the fee for "
+"this card by direct debit."
+msgstr ""
+"Uw pasaanvraag is ontvangen. We zullen de pas zo spoedig mogelijk \n"
+"per post laten bezorgen naar het adres vermeld in uw profiel."
+
+#: cards/views.py:392
+msgid "amount +"
+msgstr "bedrag +"
+
+#: cards/views.py:393
+msgid "amount -/-"
+msgstr "bedrag -/-"
+
+#: cards/views_api.py:370
+msgid "Card does not exist"
+msgstr "Deze pas wordt niet herkend"
+
+#: cards/views_api.py:376 cards/views_api.py:487 cards/views_api.py:698
+msgid "Card is blocked or not yet activated"
+msgstr "Deze pas is geblokkeerd of nog niet geactiveerd"
+
+#: cards/views_api.py:383
+msgid "User does not have a CC3 Profile, unable to handle transactions"
+msgstr ""
+"Deze gebruiker heeft geen CC3 profiel. Transacties konden niet worden "
+"uitgevoerd"
+
+#: cards/views_api.py:651 cards/views_api.py:660 prizedraw/views_api.py:224
+#: prizedraw/views_api.py:233
+msgid "Terminal or operator name invalid"
+msgstr "Naam van terminal of operator ongeldig"
+
+#: cards/views_api.py:684 prizedraw/views_api.py:255
+msgid "Invalid amount, must be positive"
+msgstr ""
+"Ongeldig bedrag. Voer een positief bedrag in om de betaling uit te voeren"
+
+#: cards/views_api.py:691 prizedraw/views_api.py:261
+msgid "Must be authenticated as either sending or receiving party"
+msgstr "Moet worden geverifieerd als betalende of ontvangende partij"
+
+#: cards/views_api.py:704 prizedraw/views_api.py:268
+msgid "Unable to create payment with same sender as receiver"
+msgstr ""
+"Kan geen transacties uitvoeren waarbij de betaler gelijk is aan de "
+"begunstigde"
+
+#: cards/views_api.py:710 prizedraw/views_api.py:274
+msgid "Card must be linked to one of the payment parties"
+msgstr ""
+"De pas moet gelinkt zijn aan een van de bij de betaling betrokken partijen"
+
+#: cards/views_api.py:716 prizedraw/views_api.py:280
+msgid "Sender doesn't have CC3 profile"
+msgstr "Afzender/betaler heeft geen CC3 profiel"
+
+#: cards/views_api.py:731
+msgid "You cannot make transactions outside your community"
+msgstr "U kunt geen transacties doen buiten uw gemeente"
+
+#: cards/views_api.py:742
+msgid "Sender has insufficient balance for the payment"
+msgstr "Betaler heeft onvoldoende saldo voor de betaling"
+
+#: cards/views_api.py:762 cards/views_api.py:784
+msgid ""
+"Spaardoelen kunnen geen waardering van Winkeliers of Instellingen ontvangen"
+msgstr ""
+
+#: cards/views_api.py:802
+msgid "Unable to perform the transaction"
+msgstr "Transactie kon niet worden uitgevoerd"
+
+#: cards/views_api.py:936
+#, python-brace-format
+msgid "{0} {1} were credited and the good cause {2} received {3} {4}"
+msgstr "Er zijn {0} {1} bijgeschreven en het spaardoel {2} ontving {3} {4}"
+
+#: cards/views_api.py:951
+#, python-brace-format
+msgid "{0} {1} were credited"
+msgstr "Er zijn {0} {1} bijgeschreven"
+
+#: cmscontent/cms_plugins.py:18
+msgid "Notification plugin"
+msgstr ""
+
+#: cmscontent/cms_plugins.py:31
+msgid "Homepage header"
+msgstr ""
+
+#: cmscontent/cms_plugins.py:44
+msgid "Homepage block"
+msgstr ""
+
+#: cmscontent/cms_plugins.py:64
+msgid "Section Carousel"
+msgstr ""
+
+#: cmscontent/cms_plugins.py:78
+msgid "Homepage notice column"
+msgstr ""
+
+#: cmscontent/cms_plugins.py:91
+msgid "Homepage news list column"
+msgstr ""
+
+#: cmscontent/cms_plugins.py:113
+msgid "Social Media links"
+msgstr ""
+
+#: cmscontent/models.py:82
+msgid "Near event"
+msgstr "Naderend evenement"
+
+#: cmscontent/models.py:83
+msgid "Alert"
+msgstr ""
+
+#: cmscontent/models.py:84
+msgid "Information"
+msgstr "Informatie"
+
+#: cmscontent/models.py:109
+msgid "You should provide a notification link label."
+msgstr ""
+
+#: cmscontent/models.py:136
+msgid "You should provide a button link text."
+msgstr ""
+
+#: cmscontent/models.py:170 cmscontent/models.py:272
+msgid "name"
+msgstr "naam"
+
+#: cmscontent/models.py:190
+msgid "title line 1"
+msgstr ""
+
+#: cmscontent/models.py:191
+msgid "title line 2"
+msgstr ""
+
+#: cmscontent/models.py:192
+msgid "image"
+msgstr "Afbeelding"
+
+#: cmscontent/models.py:194
+#, fuzzy
+#| msgid "image"
+msgid "image alt"
+msgstr "Afbeelding"
+
+#: cmscontent/models.py:220 cmscontent/models.py:238 cmscontent/models.py:258
+msgid "title"
+msgstr "Titel"
+
+#: cmscontent/models.py:225
+msgid "link text"
+msgstr ""
+
+#: cmscontent/models.py:236
+msgid "created by"
+msgstr "Gecreëerd door"
+
+#: cmscontent/models.py:237
+msgid "creation Date"
+msgstr "Aanmaakdatum"
+
+#: cmscontent/models.py:239
+#: communityadmin/templates/communityadmin/content_list.html:22
+msgid "content"
+msgstr "Inhoud"
+
+#: cmscontent/models.py:244
+msgid "News entry"
+msgstr ""
+
+#: cmscontent/models.py:245
+msgid "News entries"
+msgstr ""
+
+#: cmscontent/templates/cmscontent/news_detail.html:7
+msgid "By"
+msgstr "Door"
+
+#: cmscontent/templates/cmscontent/news_detail.html:7
+#: cmscontent/templates/cmscontent/news_page.html:7
+#: marketplace/templates/marketplace/campaign_detail.html:33
+#: marketplace/templates/marketplace/campaign_detail.html:34
+#: marketplace/templates/marketplace/campaign_details_snippet.html:7
+#: marketplace/templates/marketplace/campaign_details_snippet.html:8
+msgid "at"
+msgstr "op"
+
+#: cmscontent/templates/cmscontent/notification.html:5
+msgid "More info"
+msgstr "Meer info"
+
+#: communityadmin/cms_app.py:8
+msgid "CommunityAdmin"
+msgstr "CommunityAdmin"
+
+#: communityadmin/forms.py:44 communityadmin/forms.py:103
+#: marketplace/forms.py:60 marketplace/forms.py:536 marketplace/models.py:179
+#: marketplace/models.py:549 marketplace/templates/marketplace/detail.html:70
+msgid "Categories"
+msgstr "Categorie"
+
+#: communityadmin/forms.py:45 communityadmin/forms.py:104
+msgid "Please select a category"
+msgstr "Selecteer een categorie"
+
+#: communityadmin/forms.py:58
+msgid "Please enter a price"
+msgstr "Voer een prijs in"
+
+#: communityadmin/forms.py:73 communityadmin/forms.py:125
+#: marketplace/admin.py:29 marketplace/forms.py:138
+msgid "Either a price or a price option is required."
+msgstr "Vul een bedrag in of kies voor N.O.T.K."
+
+#: communityadmin/forms.py:82
+msgid "The member is not part of your community"
+msgstr "Deze gebruiker maakt geen deel uit van uw community"
+
+#: communityadmin/forms.py:85
+#, python-brace-format
+msgid "The member may not have ads, based on their groupset ({0})"
+msgstr ""
+
+#: communityadmin/forms.py:157
+msgid "Reason for group change"
+msgstr "Reden voor groepsaanpassing"
+
+#: communityadmin/forms.py:170
+msgid "You have not changed the group"
+msgstr "U heeft de groep niet aangepast"
+
+#: communityadmin/logentry_auditlog_admin.py:63
+msgid "Created"
+msgstr "Gecreëerd door"
+
+#: communityadmin/logentry_auditlog_admin.py:65
+msgid "Modified"
+msgstr "Gewijzigd"
+
+#: communityadmin/logentry_auditlog_admin.py:67
+msgid "Deleted"
+msgstr "Verwijdert"
+
+#: communityadmin/logentry_auditlog_admin.py:69
+#: communityadmin/logentry_auditlog_admin.py:71
+msgid "Action"
+msgstr "Actie"
+
+#: communityadmin/logentry_auditlog_admin.py:75
+msgid "Message"
+msgstr "Bericht"
+
+#: communityadmin/logentry_auditlog_admin.py:114
+#, python-format
+msgid "Changed %s."
+msgstr "Gewijzigd %s."
+
+#: communityadmin/logentry_auditlog_admin.py:114
+msgid "and"
+msgstr "en"
+
+#: communityadmin/templates/communityadmin/change_group.html:3
+#: communityadmin/templates/communityadmin/change_group.html:15
+msgid "Change group"
+msgstr "Wijzig groep"
+
+#: communityadmin/templates/communityadmin/change_group.html:24
+msgid "Change Group"
+msgstr "Wijzig groep"
+
+#: communityadmin/templates/communityadmin/change_password.html:3
+#: communityadmin/templates/communityadmin/change_password.html:15
+msgid "Change member password"
+msgstr "Wijzig wachtwoord"
+
+#: communityadmin/templates/communityadmin/change_password.html:17
+msgid ""
+"Clicking the button below will generate a new random password for this user "
+"and sends it to them in an email."
+msgstr ""
+"Hiermee wordt willekeurig een nieuw wachtwoord aangemaakt en per e-mail naar "
+"de gebruiker gestuurd"
+
+#: communityadmin/templates/communityadmin/change_password.html:23
+msgid "Send new password"
+msgstr "Verstuur nieuw wachtwoord"
+
+#: communityadmin/templates/communityadmin/content_edit.html:8
+#: communityadmin/templates/communityadmin/content_edit.html:21
+msgid "Edit Content"
+msgstr "Inhoud aanpassen"
+
+#: communityadmin/templates/communityadmin/content_edit.html:23
+#, python-format
+msgid ""
+"\n"
+"<p>\n"
+"You are editing content for the placeholder '%(placeholder)s'\n"
+"on page <a href=\"%(page_url)s\">%(page_url)s</a>\n"
+"in the language '%(language)s'\n"
+"</p>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"Je past inhoud aan van het veld '%(placeholder)s'\n"
+"op de pagina <a href=\"%(page_url)s\">%(page_url)s</a>\n"
+"in de taal '%(language)s'\n"
+"</p>\n"
+
+#: communityadmin/templates/communityadmin/content_edit.html:41
+msgid "Save"
+msgstr "Opslaan"
+
+#: communityadmin/templates/communityadmin/content_edit.html:47
+#: communityadmin/templates/communityadmin/disable_ad.html:7
+#: communityadmin/templates/communityadmin/edit_ad.html:19
+#: communityadmin/templates/communityadmin/edit_member.html:29
+#: communityadmin/templates/communityadmin/hold_ad.html:40
+#: communityadmin/templates/communityadmin/place_ad.html:54
+msgid "Back to list"
+msgstr "Terug naar lijst"
+
+#: communityadmin/templates/communityadmin/content_list.html:3
+msgid "Content List"
+msgstr "Inhoud lijst"
+
+#: communityadmin/templates/communityadmin/content_list.html:13
+#: communityadmin/templates/communityadmin/sidemenu_base.html:48
+msgid "Content"
+msgstr "Inhoud"
+
+#: communityadmin/templates/communityadmin/content_list.html:19
+msgid "page url"
+msgstr "pagina url"
+
+#: communityadmin/templates/communityadmin/content_list.html:20
+msgid "placeholder"
+msgstr "placeholder"
+
+#: communityadmin/templates/communityadmin/content_list.html:21
+msgid "language"
+msgstr "Taal"
+
+#: communityadmin/templates/communityadmin/content_list.html:35
+#: communityadmin/templates/communityadmin/offer_want_row.html:26
+#: core/templates/includes/ad_list.html:76
+msgid "Edit"
+msgstr "Bewerk"
+
+#: communityadmin/templates/communityadmin/content_list.html:46
+msgid "No content found"
+msgstr "Geen Inhoud gevonden"
+
+#: communityadmin/templates/communityadmin/create_member_wizard_0.html:8
+#: communityadmin/templates/communityadmin/create_member_wizard_0.html:21
+#: communityadmin/templates/communityadmin/create_member_wizard_1.html:12
+#: communityadmin/templates/communityadmin/create_member_wizard_1.html:25
+msgid "Add Member"
+msgstr "Gebruiker toevoegen"
+
+#: communityadmin/templates/communityadmin/create_member_wizard_0.html:49
+#: communityadmin/templates/communityadmin/create_member_wizard_1.html:122
+msgid "first step"
+msgstr "Eerste stap"
+
+#: communityadmin/templates/communityadmin/create_member_wizard_0.html:50
+#: communityadmin/templates/communityadmin/create_member_wizard_1.html:123
+msgid "prev step"
+msgstr "Vorige stap"
+
+#: communityadmin/templates/communityadmin/create_member_wizard_0.html:52
+#: communityadmin/templates/communityadmin/create_member_wizard_1.html:125
+msgid "submit"
+msgstr "verstuur"
+
+#: communityadmin/templates/communityadmin/create_member_wizard_1.html:56
+msgid "Contact Person"
+msgstr "Contactpersoon"
+
+#: communityadmin/templates/communityadmin/edit_ad.html:122
+msgid "Update Ad"
+msgstr "Advertentie bijwerken"
+
+#: communityadmin/templates/communityadmin/edit_member.html:3
+#: communityadmin/templates/communityadmin/edit_member.html:25
+msgid "Edit Member"
+msgstr "Gebruiker bewerken"
+
+#: communityadmin/templates/communityadmin/edit_member.html:34
+msgid "Account Type"
+msgstr "Rekening Type"
+
+#: communityadmin/templates/communityadmin/edit_member.html:37
+msgid "transactions"
+msgstr "transacties"
+
+#: communityadmin/templates/communityadmin/edit_member.html:38
+msgid "reset password"
+msgstr "vernieuw wachtwoord"
+
+#: communityadmin/templates/communityadmin/edit_member.html:39
+msgid "wants &amp; offers"
+msgstr "vraag &amp; aanbod"
+
+#: communityadmin/templates/communityadmin/edit_member.html:40
+msgid "change group"
+msgstr "wijzig groep"
+
+#: communityadmin/templates/communityadmin/edit_member.html:44
+msgid "Advanced backoffice functions"
+msgstr "geavanceerde backoffice functies"
+
+#: communityadmin/templates/communityadmin/edit_member.html:46
+msgid "communications log"
+msgstr "Communicatielogbestand"
+
+#: communityadmin/templates/communityadmin/edit_member.html:47
+msgid "debit/credit limit"
+msgstr "debit/credit limiet"
+
+#: communityadmin/templates/communityadmin/hold_ad.html:4
+#: communityadmin/templates/communityadmin/hold_ad.html:17
+#: communityadmin/templates/communityadmin/hold_ad.html:37
+msgid "Hold / Release Ad"
+msgstr "Verberg / Publiceer advertentie"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:3
+#: communityadmin/templates/communityadmin/transactions.html:4
+msgid "Member List"
+msgstr "Lijst van gebruikers"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:16
+#: communityadmin/templates/communityadmin/sidemenu_base.html:8
+msgid "Members"
+msgstr "Gebruikers"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:20
+msgid "Add"
+msgstr "Toevoegen"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:24
+msgid "reset"
+msgstr "opnieuw instellen"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:29
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:20
+#: communityadmin/templates/communityadmin/offers_wants.html:20
+#: core/templates/includes/accounts_sidemenu.html:62
+msgid "Search"
+msgstr "Zoeken"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:32
+msgid "Search contact or business name"
+msgstr "Zoek contact of organisatie"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:42
+msgid "contact"
+msgstr "contact"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:42
+msgid "job title"
+msgstr "Functie"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:45
+msgid "business name"
+msgstr "organisatienaam"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:48
+msgid "Cyclos group"
+msgstr "cyclos groep"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:50
+msgid "website"
+msgstr "website"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:62
+msgid "status"
+msgstr "status"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:64
+msgid "active ads"
+msgstr "actieve advertenties"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:68
+msgid "M2M TX"
+msgstr "Transacties van spaarder naar spaarder"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:69
+msgid "account balance"
+msgstr "Rekening saldo"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:70
+msgid "registration date"
+msgstr "registratiedatum"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:82
+#: communityadmin/templates/communityadmin/member_list_base.html:91
+msgid "UNCOMPLETED REGISTRATION"
+msgstr "ONVOLLEDIGE REGISTRATIE"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:83
+#: communityadmin/templates/communityadmin/member_list_base.html:93
+msgid "no email given, could be comm admin"
+msgstr "geen e-mail, kan comm admin zijn"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:106
+msgid "Full"
+msgstr "Volwaardig"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:106
+#: cyclos/common.py:83
+msgid "New"
+msgstr "Nieuw"
+
+#: communityadmin/templates/communityadmin/member_list_base.html:124
+msgid "No members were found"
+msgstr "Geen leden gevonden"
+
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:3
+msgid "Member Wants and offers"
+msgstr "Gebruikers vraag en aanbod"
+
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:15
+msgid "Member Wants and Offers"
+msgstr "Gebruikers vraag en aanbod"
+
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:29
+#: communityadmin/templates/communityadmin/offers_wants.html:29
+#: core/templates/includes/ad_list.html:6 marketplace/models.py:534
+#: marketplace/templates/marketplace/campaign_form.html:51
+#: marketplace/templates/marketplace/campaign_form.html:60
+msgid "Image"
+msgstr "Afbeelding"
+
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:30
+#: communityadmin/templates/communityadmin/offers_wants.html:30
+#: core/templates/base.html:335 core/templates/base.html.py:509
+#: marketplace/templates/marketplace/campaign_detail.html:60
+msgid "Contact"
+msgstr "Contact"
+
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:34
+#: communityadmin/templates/communityadmin/offers_wants.html:34
+#: communityadmin/templates/communityadmin/offers_wants.html:62
+#: core/templates/includes/ad_list.html:26
+#: core/templates/includes/ad_list_marketplace_form.html:28
+msgid "Type"
+msgstr "Type"
+
+#: communityadmin/templates/communityadmin/memberoffers_wants.html:35
+#: communityadmin/templates/communityadmin/offers_wants.html:35
+#: core/templates/includes/ad_list.html:32 marketplace/models.py:181
+msgid "Views"
+msgstr "Bekeken"
+
+#: communityadmin/templates/communityadmin/membertransactions.html:3
+msgid "Member Transactions"
+msgstr "Gebruikerstransacties"
+
+#: communityadmin/templates/communityadmin/membertransactions.html:24
+msgid "Total Payments Made"
+msgstr "Totaal Uitgevoerde Betalingen"
+
+#: communityadmin/templates/communityadmin/membertransactions.html:25
+msgid "Total Payments Received"
+msgstr "Totaal Ontvangen Betalingen"
+
+#: communityadmin/templates/communityadmin/new_password_email.txt:1
+#, python-format
+msgid ""
+"Dear %(name)s,\n"
+"\n"
+"Your administrator has reset your password for %(site)s. Please log in and "
+"change it as soon as possible.\n"
+"\n"
+"Your password is: %(password)s\n"
+"\n"
+"Regards,\n"
+"\n"
+"TradeQoin\n"
+msgstr ""
+"Beste %(name)s,\n"
+"\n"
+"Uw beheerder heeft uw wachtwoord voor %(site)s vernieuwd. Log a.u.b. in en "
+"verander uw wachtwoord zo snel mogelijk.\n"
+"\n"
+"Uw wachtwoord is: %(password)s\n"
+"\n"
+"Met vriendelijke groet,\n"
+"\n"
+"TradeQoin\n"
+
+#: communityadmin/templates/communityadmin/new_password_subject.txt:1
+#, python-format
+msgid "New password for %(site)s"
+msgstr "Nieuw wachtwoord voor %(site)s "
+
+#: communityadmin/templates/communityadmin/offers_wants.html:3
+#: communityadmin/templates/communityadmin/sidemenu_base.html:27
+msgid "Wants and offers"
+msgstr "Vraag en aanbod"
+
+#: communityadmin/templates/communityadmin/offers_wants.html:15
+msgid "Community Wants and Offers"
+msgstr "Community Vraag en Aanbod"
+
+#: communityadmin/templates/communityadmin/offers_wants.html:73
+#: core/templates/community_admin/dashboard_change_list.html:17
+msgid "Filter"
+msgstr "Filter"
+
+#: communityadmin/templates/communityadmin/place_ad.html:67
+msgid "Community Member"
+msgstr "Community (of Gemeente) lid"
+
+#: communityadmin/templates/communityadmin/place_ad.html:67
+msgid ""
+"You can enter either a company name or the name of the person you are "
+"placing the advert for."
+msgstr ""
+"Voor een bedrijfsnaam in of de naam van de persoon namens wie de advertentie "
+"wordt geplaatst"
+
+#: communityadmin/templates/communityadmin/sidemenu_base.html:23
+#: communityadmin/templates/communityadmin/transactions.html:14
+msgid "Transactions"
+msgstr "Transacties"
+
+#: communityadmin/templates/communityadmin/transactions.html:28
+msgid "from"
+msgstr "van"
+
+#: communityadmin/templates/communityadmin/transactions.html:29
+msgid "to"
+msgstr "naar"
+
+#: communityadmin/templates/communityadmin/transactions.html:50
+msgid "No transactions were found"
+msgstr "Geen transacties gevonden"
+
+#: communityadmin/views.py:457
+msgid ""
+"Unable to save your changes - Please enter all required information and try "
+"again"
+msgstr ""
+"Uw wijzigingen kunnen niet worden opgeslagen - Vul a.u.b. alle vereiste "
+"informatie in en probeer opnieuw"
+
+#: communityadmin/views.py:467
+msgid "Please correct the form."
+msgstr "Corrigeer het formulier"
+
+#: communityadmin/views.py:545
+msgid "New password sent."
+msgstr "Nieuw wachtwoord verzonden."
+
+#: communityadmin/views.py:598
+msgid "Group changed."
+msgstr "Groep aangepast."
+
+#: communityadmin/views.py:778 marketplace/views.py:136
+#: marketplace/views.py:229
+msgid "Please make sure you have added captions for all your images."
+msgstr "Voorzie alle afbeeldingen van een naam"
+
+#: communityadmin/views.py:815
+msgid "Browse..."
+msgstr "Zoeken..."
+
+#: communityadmin/views.py:816
+msgid "Add Image"
+msgstr "Afbeelding Toevoegen"
+
+#: communityadmin/views.py:817
+msgid "Remove Image"
+msgstr "Verwijder Afbeelding"
+
+#: communityadmin/views.py:1049
+msgid "New Member created successfully."
+msgstr "NIeuwe gebruiker succesvol aangemaakt"
+
+#: core/forms.py:20
+msgid "The field "
+msgstr "Het veld"
+
+#: core/forms.py:20
+msgid " is required."
+msgstr "is vereist"
+
+#: core/forms.py:59
+msgid "Only the following file formats are allowed: "
+msgstr "Alleen de volgende bestandsformaten zijn toegestaan:"
+
+#: core/forms.py:65
+#, python-brace-format
+msgid "The maximum allowed file size is: {0}MB"
+msgstr "De maximale bestandsgrootte is: {0}MB"
+
+#: core/forms.py:72
+msgid "An error occurred reading the uploaded file"
+msgstr "Het bestand kon niet gelezen worden"
+
+#: core/models.py:31 core/models.py:80 marketplace/models.py:460
+#: marketplace/models.py:506
+msgid "Category title"
+msgstr "Categorie titel"
+
+#: core/models.py:33 marketplace/models.py:462
+msgid "Category description"
+msgstr "Categorie-omschrijving"
+
+#: core/models.py:35 marketplace/models.py:464
+msgid "Marks this Category as active"
+msgstr "Markeert deze categorie als actief"
+
+#: core/models.py:38
+msgid "Don't report matching wants/offers for this Category"
+msgstr "Rapporteer niet over matches tussen vraag en aanbod in deze categorie"
+
+#: core/models.py:43 marketplace/models.py:469
+msgid "categories"
+msgstr "Categorieen"
+
+#: core/models.py:126
+msgid "Cyclos transaction ID - can be used for chargeback"
+msgstr "Cyclos transactie ID - kan worden gebruikt voor terugvordering"
+
+#: core/models.py:128
+msgid "Report date"
+msgstr "Rapportage datum"
+
+#: core/templates/404.html:6
+msgid "404 Not Found"
+msgstr "404 - pagina niet gevonden"
+
+#: core/templates/about-business.html:38
+msgid "Find new<br /> clients"
+msgstr ""
+
+#: core/templates/about-business.html:48
+msgid "Increase<br /> turnover"
+msgstr ""
+
+#: core/templates/about-business.html:64
+msgid "Improve<br /> profit"
+msgstr ""
+
+#: core/templates/about-business.html:74
+msgid "Improve<br /> cash position"
+msgstr ""
+
+#: core/templates/base.html:11
+msgid "TradeQoin"
+msgstr "Positoos"
+
+#: core/templates/base.html:60 core/templates/base.html.py:63
+msgid "This website uses cookies to enhance the user-experience."
+msgstr ""
+"Deze website maakt gebruikt van cookies voor een betere gebruikservaring"
+
+#: core/templates/base.html:61
+msgid "THAT'S FINE"
+msgstr "DAT IS PRIMA"
+
+#: core/templates/base.html:62
+msgid "I DON'T AGREE"
+msgstr "DAT WIL IK NIET"
+
+#: core/templates/base.html:106 core/templates/base.html.py:269
+msgid "Search for businesses, offers or wants"
+msgstr "Zoeken"
+
+#: core/templates/base.html:111 core/templates/base.html.py:276
+msgid "Join"
+msgstr "Deelnemen"
+
+#: core/templates/base.html:112 core/templates/base.html.py:277
+msgid "Logout"
+msgstr "Uitloggen"
+
+#: core/templates/base.html:112 core/templates/base.html.py:277
+#: core/templates/registration/login.html:4
+msgid "Login"
+msgstr "Inloggen"
+
+#: core/templates/base.html:164
+msgid "Registered"
+msgstr "Geregistreerd"
+
+#: core/templates/base.html:164
+msgid ""
+"You are now registered. Please check your email for your activation "
+"instructions"
+msgstr ""
+"U bent nu geregistreerd. Controleer a.u.b. uw e-mail voor activatie "
+"instructies"
+
+#: core/templates/base.html:193 core/templates/base.html.py:288
+msgid "Register to join TradeQoin today!"
+msgstr "Registreer en sluit je aan!"
+
+#: core/templates/base.html:197 core/templates/base.html.py:217
+#: core/templates/base.html:294 core/templates/base.html.py:311
+#: core/templates/registration/login.html:41
+#: core/templates/registration/registration_form.html:46
+#: core/templates/registration/registration_form.html:48
+#: registration/forms.py:42 registration/forms.py:43
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: core/templates/base.html:199
+#, python-format
+msgid ""
+"I've read and accepted the<br />TradeQoin <a href=\"%(tandc_url)s\">terms "
+"&amp; conditions"
+msgstr ""
+"Ik heb de <br />Positoos <a href=\"%(tandc_url)s\">algemene voorwaarden "
+"gelezen en geaccepteerd"
+
+#: core/templates/base.html:203 core/templates/base.html.py:292
+#: core/templates/registration/registration_form.html:38
+#: core/templates/registration/registration_form.html:40
+#: registration/forms.py:35
+msgid "Confirm Email"
+msgstr "Bevestig E-mail"
+
+#: core/templates/base.html:204 core/templates/base.html.py:295
+#: core/templates/registration/registration_form.html:55
+#: core/templates/registration/registration_form.html:57
+#: registration/forms.py:48
+msgid "Confirm Password"
+msgstr "Bevestig wachtwoord"
+
+#: core/templates/base.html:205 core/templates/base.html.py:298
+#: core/templates/registration/registration_form.html:83
+#: core/templates/registration/registration_form.html:85
+#: registration/forms.py:62 registration/forms.py:63
+msgid "Community Code"
+msgstr "Community Code"
+
+#: core/templates/base.html:226 core/templates/base.html.py:261
+msgid "Language"
+msgstr "Taal"
+
+#: core/templates/base.html:278
+msgid "Menu"
+msgstr "Menu"
+
+#: core/templates/base.html:300
+#, python-format
+msgid ""
+"I’ve read and accepted the<br />TradeQoin <a href=\"%(tandc_url)s\">terms "
+"&amp; conditions"
+msgstr ""
+"Ik heb de<br />TradeQoin <a href=\"%(tandc_url)s\">voorwaarden</a> gelezen "
+"en stem ermee in"
+
+#: core/templates/base.html:320 core/templates/base.html.py:487
+#: marketplace/cms_app.py:6 marketplace/templates/marketplace/ad_list.html:4
+msgid "Marketplace"
+msgstr "Marktplaats"
+
+#: core/templates/base.html:322 core/templates/base.html.py:492
+msgid "About"
+msgstr "Over"
+
+#: core/templates/base.html:325 core/templates/base.html.py:493
+msgid "General Information"
+msgstr "Algemene informatie"
+
+#: core/templates/base.html:326 core/templates/base.html.py:488
+#: core/templates/base.html:497
+#: marketplace/templates/marketplace/ad_list.html:52
+#: marketplace/templates/marketplace/ad_list.html:105
+msgid "Businesses"
+msgstr "Organisaties"
+
+#: core/templates/base.html:336 core/templates/base.html.py:512
+msgid "FAQ"
+msgstr "Veelgestelde Vragen"
+
+#: core/templates/base.html:345
+#, python-format
+msgid "Welcome <span>%(cc3_profile_full_name)s</span>"
+msgstr "Welkom <span>%(cc3_profile_full_name)s</span>"
+
+#: core/templates/base.html:348 core/templates/includes/middlebar.html:15
+msgid "My Balance"
+msgstr "Mijn saldo"
+
+#: core/templates/base.html:351 core/templates/includes/middlebar.html:18
+msgid "My account"
+msgstr "Mijn Account"
+
+#: core/templates/base.html:364
+msgid "Choose a page"
+msgstr "Kies een pagina"
+
+#: core/templates/base.html:368
+#: core/templates/includes/accounts_sidemenu.html:22
+msgid "Account"
+msgstr "Rekening"
+
+#: core/templates/base.html:375
+#: core/templates/includes/accounts_sidemenu.html:38
+msgid "From date"
+msgstr "van datum"
+
+#: core/templates/base.html:376
+#: core/templates/includes/accounts_sidemenu.html:46
+msgid "To date"
+msgstr "tot datum"
+
+#: core/templates/base.html:386
+#: core/templates/includes/accounts_sidemenu.html:82
+msgid "Pay direct"
+msgstr "Betaal direct"
+
+#: core/templates/base.html:390
+#: core/templates/includes/accounts_sidemenu.html:87
+msgid "Credit"
+msgstr "Krediet"
+
+#: core/templates/base.html:394
+#: core/templates/includes/accounts_sidemenu.html:95
+msgid "My ads"
+msgstr "Mijn advertenties"
+
+#: core/templates/base.html:436 core/templates/includes/middlebar.html:26
+msgid "Meet TradeQoin"
+msgstr "Ontmoet TradeQoin"
+
+#: core/templates/base.html:437 core/templates/includes/middlebar.html:27
+msgid "New opportunities in times of downturn"
+msgstr "Nieuwe kansen in roerige tijden"
+
+#: core/templates/base.html:443 core/templates/includes/middlebar.html:33
+msgid "Find new <br />clients"
+msgstr "Vind nieuwe <br />klanten"
+
+#: core/templates/base.html:444 core/templates/includes/middlebar.html:34
+msgid "Increase <br />turnover"
+msgstr "Verhoog <br />uw omzet"
+
+#: core/templates/base.html:445 core/templates/includes/middlebar.html:35
+msgid "Improve <br />profit"
+msgstr "Verbeter <br />uw winst"
+
+#: core/templates/base.html:446 core/templates/includes/middlebar.html:36
+msgid "Improve <br />cash position"
+msgstr "Verbeter <br />de liquiditeit"
+
+#: core/templates/base.html:452 core/templates/includes/middlebar.html:41
+msgid "Join now!"
+msgstr "Doe nu mee!"
+
+#: core/templates/base.html:474
+msgid "Follow us"
+msgstr "Volg ons"
+
+#: core/templates/base.html:489
+#: marketplace/templates/marketplace/ad_list.html:52
+msgid "Products &amp; Services"
+msgstr "Producten &amp; diensten"
+
+#: core/templates/base.html:501 marketplace/forms.py:545
+msgid "Communities"
+msgstr "Gemeentes"
+
+#: core/templates/base.html:505
+msgid "Policy Makers"
+msgstr "Beleidsmakers"
+
+#: core/templates/base.html:527
+msgid "Questions? Call us: +31 (0)20 717 3505"
+msgstr "Vragen? Bel ons: +31 (0)20 717 3505"
+
+#: core/templates/cc3/templatetags/_large_balance_warning.html:4
+#, python-format
+msgid ""
+"Your current balance is higher than %(limit)s. Please contact us to help "
+"find you spending opportunities."
+msgstr ""
+
+#: core/templates/cc3/templatetags/_latest_category_match.html:4
+msgid "New match"
+msgstr "Nieuwe match"
+
+#: core/templates/cc3/templatetags/_latest_category_match.html:6
+#: core/templates/fragments/category_update_message.html:6
+msgid "is offering"
+msgstr "biedt"
+
+#: core/templates/cc3/templatetags/_latest_category_match.html:6
+#: core/templates/fragments/category_update_message.html:6
+msgid "wants"
+msgstr "vraagt"
+
+#: core/templates/fragments/category_update_message.html:2
+msgid "Matches found for your newly added Offer categories"
+msgstr "Bedrijven die mogelijk op zoek zijn naar uw aanbod"
+
+#: core/templates/fragments/category_update_message.html:2
+msgid "Matches found for your newly added Want categories"
+msgstr "Bedrijven die mogelijk kunnen bieden waarnaar u op zoek bent"
+
+#: core/templates/fragments/forms/_geo.html:4
+msgid "Set your location for the Businesses map by clicking on the map"
+msgstr "Stel uw locatie in door op de kaart te klikken"
+
+#: core/templates/homepage.html:30
+msgid "Latest offers"
+msgstr "Recent aanbod"
+
+#: core/templates/homepage.html:35
+msgid "Latest wants"
+msgstr "Recente vraag"
+
+#: core/templates/includes/accounts_sidemenu.html:57
+msgid "Reset"
+msgstr "reset"
+
+#: core/templates/includes/accounts_sidemenu.html:76
+msgid "Invoices"
+msgstr "Facturen"
+
+#: core/templates/includes/accounts_sidemenu.html:119
+msgid "Business Terminals"
+msgstr "Terminals"
+
+#: core/templates/includes/accounts_sidemenu.html:126
+msgid "Good causes"
+msgstr "Spaardoelen"
+
+#: core/templates/includes/ad_item.html:21
+msgid "offer"
+msgstr "aangeboden"
+
+#: core/templates/includes/ad_item.html:23
+msgid "demand"
+msgstr "gevraagd"
+
+#: core/templates/includes/ad_list.html:70
+#, python-format
+msgid ""
+"The administrator has temporarily placed your advert on hold. Please contact "
+"%(admin_name)s &lt;%(admin_email)s&gt;"
+msgstr ""
+"De administrator heeft uw advertentie tijdelijk geblokkeerd. Neem a.u.b. "
+"contact op met %(admin_name)s &lt;%(admin_email)s&gt;"
+
+#: core/templates/includes/ad_list.html:77
+msgid "Disable"
+msgstr "Uitschakelen"
+
+#: core/templates/includes/ad_list_marketplace_form.html:14
+msgid "Results per page"
+msgstr "Resultaten per pagina"
+
+#: core/templates/includes/ad_list_marketplace_form.html:21
+msgid "Sort"
+msgstr "Sorteer"
+
+#: core/templates/includes/ad_list_marketplace_form.html:38
+msgid "Price range"
+msgstr "Prijsbereik"
+
+#: core/templates/includes/ad_list_marketplace_form.html:41
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:82
+msgid "To"
+msgstr "Aan"
+
+#: core/templates/includes/edit_ad_js.html:100
+msgid "Please check the form for any errors"
+msgstr "Controleer het formulier op fouten"
+
+#: core/templates/includes/middlebar.html:7
+#, python-format
+msgid ""
+"Welcome \n"
+"                        <span>%(cc3_profile_full_name)s</span>"
+msgstr ""
+"Welkom \n"
+"                        <span>%(cc3_profile_full_name)s</span>"
+
+#: core/templates/includes/middlebar.html:13
+msgid "Community admin"
+msgstr "Community admin"
+
+#: core/templates/includes/paginator.html:8
+#: core/templates/includes/paginator.html:14
+msgid "previous"
+msgstr "vorige"
+
+#: core/templates/includes/paginator.html:38
+#: core/templates/includes/paginator.html:44
+msgid "next"
+msgstr "volgende"
+
+#: core/templates/registration/activate.html:8
+#: core/templates/registration/activation_complete.html:9
+msgid "Account successfully activated"
+msgstr "Account met succes geactiveerd"
+
+#: core/templates/registration/activate.html:10
+#: core/templates/registration/activation_complete.html:11
+#: core/templates/registration/login.html:49
+#: core/templates/registration/original_registration_base.html:21
+#: core/templates/registration/password_reset_complete.html:8
+msgid "Log in"
+msgstr "Inloggen"
+
+#: core/templates/registration/activate.html:14
+msgid "Account activation failed"
+msgstr "Account activatie mislukt"
+
+#: core/templates/registration/activation_email.html:2
+#: core/templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr "Activeer account bij"
+
+#: core/templates/registration/activation_email.html:6
+#: core/templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr "Link is geldig gedurende %(expiration_days)s dagen."
+
+#: core/templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr "Account activatie op"
+
+#: core/templates/registration/login.html:17
+#: core/templates/registration/registration_form.html:17
+msgid "You are logged in"
+msgstr "U bent ingelogd"
+
+#: core/templates/registration/login.html:19
+#: core/templates/registration/registration_form.html:19
+msgid "Edit my profile"
+msgstr "Wijzig mijn profiel"
+
+#: core/templates/registration/login.html:53
+msgid "Forgot password"
+msgstr "Wachtwoord vergeten"
+
+#: core/templates/registration/login.html:53
+msgid "Reset it"
+msgstr "Vernieuw"
+
+#: core/templates/registration/login.html:54
+msgid "Not member"
+msgstr "Geen lid"
+
+#: core/templates/registration/login.html:54
+#: core/templates/registration/registration_form.html:4
+msgid "Register"
+msgstr "Registreer"
+
+#: core/templates/registration/logout.html:5
+msgid "Logged out"
+msgstr "Uitgelogd"
+
+#: core/templates/registration/original_registration_base.html:17
+msgid "Logged in"
+msgstr "Ingelogd"
+
+#: core/templates/registration/original_registration_base.html:18
+msgid "Log out"
+msgstr "Uitloggen"
+
+#: core/templates/registration/original_registration_base.html:19
+msgid "Change password"
+msgstr "Wijzig wachtwoord"
+
+#: core/templates/registration/password_change_done.html:14
+#: core/templates/registration/password_change_form.html:18
+msgid "Password change"
+msgstr "Wachtwoord wijzigen"
+
+#: core/templates/registration/password_change_done.html:15
+msgid "Your password has been changed"
+msgstr "Uw wachtwoord is gewijzigd"
+
+#: core/templates/registration/password_change_form.html:29
+#: core/templates/registration/password_change_form.html:31
+msgid "Old Password"
+msgstr "Oud wachtwoord"
+
+#: core/templates/registration/password_change_form.html:38
+#: core/templates/registration/password_change_form.html:40
+msgid "New Password"
+msgstr "Nieuw wachtwoord"
+
+#: core/templates/registration/password_change_form.html:46
+#: core/templates/registration/password_change_form.html:48
+msgid "New Password confirmation"
+msgstr "Nieuw wachtwoord (nogmaals)"
+
+#: core/templates/registration/password_reset_complete.html:6
+msgid "Password reset successfully"
+msgstr "Wachtwoord succesvol vernieuwd"
+
+#: core/templates/registration/password_reset_confirm.html:16
+msgid "Password reset failed"
+msgstr "Wachtwoord kon niet worden vernieuwd"
+
+#: core/templates/registration/password_reset_done.html:4
+#: core/templates/registration/password_reset_form.html:4
+#: core/templates/registration/password_reset_form.html:16
+msgid "Password reset"
+msgstr "Wachtwoord vernieuwen"
+
+#: core/templates/registration/password_reset_done.html:7
+msgid "Email with password reset instructions has been sent."
+msgstr ""
+"E-mail met instructies voor het vernieuwen van uw wachtwoord is verstuurd."
+
+#: core/templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"Dear %(full_name)s, You can reset your %(site_name)s password by following "
+"this link"
+msgstr ""
+"Beste %(full_name)s, U kunt uw %(site_name)s wachtwoord vernieuwen via de "
+"volgende link"
+
+#: core/templates/registration/password_reset_email.html:6
+msgid "If you did not reset your password, you can ignore this message"
+msgstr ""
+"Als u niet uw wachtwoord opnieuw heeft ingesteld, negeer dan dit bericht"
+
+#: core/templates/registration/registration_complete.html:4
+msgid "Registration complete"
+msgstr "Registratie voltooid"
+
+#: core/templates/registration/registration_complete.html:7
+msgid "You are now registered. Activation email sent."
+msgstr "U bent u geregistreerd. Een activatie e-mail is verzonden"
+
+#: core/templates/registration/registration_form.html:26
+msgid "Register to join today!"
+msgstr "Registreer vandaag nog!"
+
+#: core/templates/registration/registration_form.html:31
+#: registration/forms.py:29 registration/forms.py:30
+msgid "Email Address"
+msgstr "E-mailadres"
+
+#: core/templates/registration/registration_form.html:63
+msgid "Terms and Conditions"
+msgstr "Algemene Voorwaarden"
+
+#: core/templates/registration/registration_form.html:66
+#, python-format
+msgid ""
+"I've read and accepted the<br />%(site_name)s <a href=\"%(tandc_url)s"
+"\">terms &amp; conditions"
+msgstr ""
+"Ik heb de <a href=\"%(tandc_url)s\">algemene voorwaarden van<br />"
+"%(site_name)s gelezen en geaccepteerd"
+
+#: currencies/models.py:17
+msgid "ISO code"
+msgstr ""
+
+#: currencies/models.py:20
+msgid "ISO 4217 code, e.g. GBP, if one exists"
+msgstr ""
+
+#: currencies/models.py:29
+msgid "Symbol for currency in cyclos if available, for web service access."
+msgstr ""
+
+#: currencies/models.py:33
+msgid "Is currency available to users as a primary currency?"
+msgstr ""
+
+#: currencies/models.py:37
+msgid "currencies"
+msgstr ""
+
+#: cyclos/admin.py:40
+#, python-brace-format
+msgid "{0} profiles successfully deactivated"
+msgstr "{0} profielen succesvol gedeactiveerd"
+
+#: cyclos/admin.py:67
+msgid "Good Causes Donations: Set percentage rate"
+msgstr "Spaardoel donatiepercentage instellen"
+
+#: cyclos/admin.py:72
+msgid ""
+"Note that these percentages may be overridden by Institutional users when "
+"using the bulk-upload reward feature."
+msgstr ""
+"Let op: van deze percentages kan door gebruikers van het type 'instelling' "
+"worden afgeweken wanneer zij de 'bulk waardering' functie gebruiken."
+
+#: cyclos/admin.py:358
+msgid "User ID"
+msgstr ""
+
+#: cyclos/common.py:84
+msgid "Updated"
+msgstr "Bijgewerkt"
+
+#: cyclos/common.py:85
+msgid "Closed"
+msgstr "Gesloten"
+
+#: cyclos/context_processors.py:39
+msgid "Unable to get account details at present"
+msgstr ""
+
+#: cyclos/forms.py:31
+msgid "Offer Categories"
+msgstr "Aanbod Categorie"
+
+#: cyclos/forms.py:36
+msgid "Want Categories"
+msgstr "Gevraagd Categorie"
+
+#: cyclos/forms.py:106 cyclos/tests/test_forms.py:54
+msgid "Please enter your First Name"
+msgstr "Vul uw voornaam in"
+
+#: cyclos/forms.py:112 cyclos/forms.py:126 cyclos/forms.py:140
+#, python-brace-format
+msgid "Please enter a {1} of {0} or fewer characters"
+msgstr "Vul een {1} in van maximaal {0} karakters"
+
+#: cyclos/forms.py:120 cyclos/tests/test_forms.py:88
+msgid "Please enter your Last Name"
+msgstr "Vul uw achternaam in"
+
+#: cyclos/forms.py:134 cyclos/tests/test_forms.py:111
+msgid "Please enter your Business Name"
+msgstr "Vul uw bedrijfsnaam in"
+
+#: cyclos/forms.py:148 cyclos/tests/test_forms.py:134
+msgid "Please enter your Address"
+msgstr "Vul uw adres in"
+
+#: cyclos/forms.py:160 cyclos/tests/test_forms.py:146
+#: cyclos/tests/test_forms.py:157
+msgid "Please enter a valid Phone Number"
+msgstr "Vul een geldig telefoonnummer in"
+
+#: cyclos/forms.py:175 cyclos/tests/test_forms.py:189
+msgid "Please enter your Mobile Number"
+msgstr "Vul een mobiel telefoonnummer in"
+
+#: cyclos/forms.py:180
+#, python-brace-format
+msgid "Please enter a mobile number of at least {0} digits"
+msgstr "Vul een telefoonnummer van tenminste {0} cijfers in"
+
+#: cyclos/forms.py:186
+#, python-brace-format
+msgid "Please enter a mobile number of at most {0} digits"
+msgstr "Vul een telefoonnummer van maximaal {0} cijfers in"
+
+#: cyclos/forms.py:194 cyclos/tests/test_forms.py:227
+#: cyclos/tests/test_forms.py:238
+msgid "Please enter a valid Mobile Number"
+msgstr "Vul een geldig mobiel telefoonnummer in"
+
+#: cyclos/forms.py:224 cyclos/tests/test_forms.py:340
+msgid "Please check the form for errors"
+msgstr "Controleer het formulier a.u.b. op fouten"
+
+#: cyclos/models/__init__.py:24
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: cyclos/models/account.py:199
+msgid "User (Business)"
+msgstr "Gebruiker (Winkelier)"
+
+#: cyclos/models/account.py:200
+msgid "Users (Businesses)"
+msgstr "Gebruikers (Winkeliers)"
+
+#: cyclos/models/account.py:217
+msgid "User (Institution)"
+msgstr "Gebruiker (Instelling)"
+
+#: cyclos/models/account.py:218
+msgid "Users (Institutions)"
+msgstr "Gebruikers (Instellingen)"
+
+#: cyclos/models/account.py:235
+msgid "User (Charity)"
+msgstr "Gebruiker (Spaardoel)"
+
+#: cyclos/models/account.py:236
+msgid "Users (Charity)"
+msgstr "Gebruikers (spaardoelen)"
+
+#: cyclos/models/account.py:254
+msgid "User (Card Machine)"
+msgstr ""
+
+#: cyclos/models/account.py:255
+msgid "Users (Card Machine)"
+msgstr ""
+
+#: cyclos/models/account.py:274
+#, fuzzy
+msgid "User (Card)"
+msgstr "Gebruiker (Spaardoel)"
+
+#: cyclos/models/account.py:275
+#, fuzzy
+msgid "Users (Card)"
+msgstr "Gebruikers (spaardoelen)"
+
+#: cyclos/models/account.py:310
+msgid "user"
+msgstr "gebruiker"
+
+#: cyclos/models/account.py:321
+msgid "Picture"
+msgstr "Profielafbeelding"
+
+#: cyclos/models/account.py:324
+msgid "Picture height"
+msgstr "Afbeeldingshoogte"
+
+#: cyclos/models/account.py:326
+msgid "Picture width"
+msgstr "Afbeeldingsbreedte"
+
+#: cyclos/models/account.py:328
+msgid "Job title"
+msgstr "Functie"
+
+#: cyclos/models/account.py:346
+msgid "Must reset password"
+msgstr "vernieuw wachtwoord"
+
+#: cyclos/models/account.py:348
+msgid "Is pending closure"
+msgstr "wordt gesloten"
+
+#: cyclos/models/account.py:350
+msgid "Date closure requested"
+msgstr "Sluitingsdatum vereist"
+
+#: cyclos/models/account.py:351
+msgid "Is visible"
+msgstr "Profiel zichtbaar voor andere gebruikers"
+
+#: cyclos/models/account.py:352
+msgid "Marking as visible shows the profile to be shown on the marketplace"
+msgstr ""
+"Wanneer aangevinkt, is het profiel zichtbaar op de website voor andere "
+"gebruikers"
+
+#: cyclos/models/account.py:354
+msgid "Profile approved"
+msgstr "Profiel goedgekeurd"
+
+#: cyclos/models/account.py:355
+msgid ""
+"Approving profile will automatically make it visible; unapproving will make "
+"it invisible"
+msgstr ""
+"Het profiel wordt zichtbaar als het is goedgekeurd - als de goedkeuring "
+"wordt verwijdert wordt het profiel onzichtbaar"
+
+#: cyclos/models/account.py:359
+msgid "Has received activation invoice"
+msgstr "Heeft een activatiefactuur ontvangen"
+
+#: cyclos/models/account.py:361
+msgid "Has notified profile complete"
+msgstr "Heeft aangegeven dat profiel compleet is"
+
+#: cyclos/models/account.py:368
+msgid "Notify me of new matches"
+msgstr ""
+
+#: cyclos/models/account.py:372
+msgid "Notify me about new activities"
+msgstr "Stuur mij e-mailnotificaties over activiteiten"
+
+#: cyclos/models/account.py:375
+msgid "Credit term (months)"
+msgstr "Krediet termijn (in maanden)"
+
+#: cyclos/models/account.py:378
+msgid "Date balance went negative"
+msgstr "Datum negatief saldo"
+
+#: cyclos/models/account.py:380
+msgid "Date negative balance warning was sent"
+msgstr "Datum waarop waarschuwing negatief saldo is verzonden"
+
+#: cyclos/models/account.py:383
+msgid "Date negative balance collection email was sent"
+msgstr ""
+
+#: cyclos/models/account.py:386
+msgid "Date balance exceeded limit"
+msgstr "Datum waarop de saldolimiet is overschreden"
+
+#: cyclos/models/account.py:395
+msgid "Cyclos Group"
+msgstr "Type Gebruiker"
+
+#: cyclos/models/account.py:400
+msgid "Allow user to make payments in the marketplace"
+msgstr ""
+
+#: cyclos/models/account.py:420
+msgid ""
+"Is this the first time a user has logged in? (Defaults to true in save "
+"method)"
+msgstr ""
+
+#: cyclos/models/account.py:424
+msgid "Original Date Joined"
+msgstr ""
+
+#: cyclos/models/account.py:431
+msgid "profile"
+msgstr "profiel"
+
+#: cyclos/models/account.py:432
+msgid "profiles"
+msgstr "profielen"
+
+#: cyclos/models/account.py:645
+msgid "Free"
+msgstr "Gratis"
+
+#: cyclos/models/account.py:660
+msgid "Paid account"
+msgstr "Betaalde Account"
+
+#: cyclos/models/account.py:665
+msgid "Free Account"
+msgstr "Gratis Account"
+
+#: cyclos/models/account.py:667
+msgid "Upgrade"
+msgstr "Opwaarderen"
+
+#: cyclos/models/account.py:1255
+msgid "User closed account"
+msgstr "Gebruiker heeft account opgeheven"
+
+#: cyclos/models/account.py:1337
+msgid "cyclos statuses"
+msgstr "cyclos statussen"
+
+#: cyclos/models/account.py:1346
+msgid "Cyclos account ID"
+msgstr "cyclos account ID"
+
+#: cyclos/models/account.py:1348
+msgid "cc3 profile"
+msgstr "CC3 profiel"
+
+#: cyclos/models/account.py:1351
+msgid "Cyclos Group ID"
+msgstr "cyclos groep ID"
+
+#: cyclos/models/account.py:1352
+msgid "Cyclos backend group ID."
+msgstr "cyclos backend groep ID"
+
+#: cyclos/models/account.py:1709
+#, fuzzy
+#| msgid "Fulfillment"
+msgid "CC3Profile (Fulfillment)"
+msgstr "Pasaanvragen"
+
+#: cyclos/models/account.py:1710
+#, fuzzy
+#| msgid "Fulfillment"
+msgid "Profile (Fulfillment)"
+msgstr "Pasaanvragen"
+
+#: cyclos/models/community.py:37
+msgid "Community members first"
+msgstr "Communityleden eerst"
+
+#: cyclos/models/community.py:38
+msgid "Only community members"
+msgstr "Alleen communityleden"
+
+#: cyclos/models/community.py:39
+msgid "No community filter"
+msgstr "Geen Communityfilter"
+
+#: cyclos/models/community.py:56
+msgid "Community title"
+msgstr "Community titel"
+
+#: cyclos/models/community.py:71
+msgid "Notify upon registration"
+msgstr ""
+
+#: cyclos/models/community.py:74
+msgid "Notify upon completion of profile"
+msgstr ""
+
+#: cyclos/models/community.py:78
+msgid "Notify upon completion of transactions"
+msgstr ""
+
+#: cyclos/models/community.py:82
+msgid "Negative balance warning (days)"
+msgstr "Waarschuwing negatief saldo (in dagen)"
+
+#: cyclos/models/community.py:83
+msgid ""
+"Send negative balance warning emails this many days before credit term "
+"expires"
+msgstr ""
+
+#: cyclos/models/community.py:86
+msgid "Negative balance collection after (months)"
+msgstr ""
+
+#: cyclos/models/community.py:87
+msgid ""
+"Send negative balance collection emails this many months after credit term "
+"expires"
+msgstr ""
+
+#: cyclos/models/community.py:90
+msgid "Email members about new campaigns"
+msgstr "Stuur spaarders een e-mail over nieuwe activiteiten"
+
+#: cyclos/models/community.py:93
+msgid "Default donation percentage"
+msgstr "Standaard (default) percentage voor community"
+
+#: cyclos/models/community.py:96
+msgid "Minimum donation percentage"
+msgstr "Minimale Spaardoel afdracht voor community"
+
+#: cyclos/models/community.py:99
+msgid "Maximum donation percentage"
+msgstr "Maximale Spaardoel afdracht voor community"
+
+#: cyclos/models/community.py:104 rewards/models.py:103
+msgid "community"
+msgstr "community"
+
+#: cyclos/models/community.py:105
+msgid "communities"
+msgstr "communities"
+
+#: cyclos/models/community.py:114
+msgid "Minimum donation percentage must not exceed maximum"
+msgstr ""
+
+#: cyclos/models/community.py:117
+msgid "Default donation percentage must not exceed maximum"
+msgstr ""
+
+#: cyclos/models/community.py:120
+msgid "Default donation percentage must not be less than minimum"
+msgstr ""
+
+#: cyclos/models/community.py:190
+msgid "community registration code"
+msgstr "community code"
+
+#: cyclos/models/security.py:15
+msgid ""
+"Used to identify channel in Cyclos. Must be the same as the internal name in "
+"Cyclos"
+msgstr ""
+
+#: cyclos/models/security.py:19
+msgid ""
+"Displayed to user on their security screen (can be the same as the display "
+"name in Cyclos)"
+msgstr ""
+
+#: cyclos/models/security.py:23
+msgid "Identify web channel, which is only disabled on the Django side"
+msgstr ""
+
+#: cyclos/models/security.py:31
+msgid "channels"
+msgstr "kanalen"
+
+#: cyclos/models/status_message.py:16
+msgid "Default title"
+msgstr "Standaardtitel"
+
+#: cyclos/models/status_message.py:18
+msgid "Default message, shown to user"
+msgstr "Standaardbericht, zichtbaar voor gebruiker"
+
+#: cyclos/models/status_message.py:21
+msgid "Reverse ID of page to link to (ask a system administrator!)"
+msgstr "Reverse ID of page to link to (ask a system administrator!)"
+
+#: cyclos/models/status_message.py:25 cyclos/models/status_message.py:96
+msgid "Text for link"
+msgstr "Hyperlink tekst"
+
+#: cyclos/models/status_message.py:29
+msgid "Number of times a message should appear to a user (optional)."
+msgstr ""
+"Aantal keren dat een bericht moet verschijnen aan gebruiker (optioneel)"
+
+#: cyclos/models/status_message.py:34
+msgid "status messages"
+msgstr "Statusberichten"
+
+#: cyclos/models/status_message.py:91
+msgid "Status Message title"
+msgstr "Titel statusbericht"
+
+#: cyclos/models/status_message.py:93
+msgid "Status message"
+msgstr "Statusberichten"
+
+#: cyclos/models/status_message.py:136
+msgid "user statuses"
+msgstr "gebruikersstatussen"
+
+#: cyclos/templates/admin/cyclos/cc3profile/change_form.html:7
+msgid "Manage Cards"
+msgstr "Beheer passen"
+
+#: cyclos/tests/test_forms.py:66
+msgid "Please enter a First name of 10 or fewer characters"
+msgstr "Vul uw voornaam in"
+
+#: cyclos/tests/test_forms.py:100
+msgid "Please enter a Last name of 10 or fewer characters"
+msgstr "Vul uw achternaam in"
+
+#: cyclos/tests/test_forms.py:123
+msgid "Please enter a Business name of 10 or fewer characters"
+msgstr "Vul uw bedrijfsnaam in"
+
+#: cyclos/tests/test_forms.py:177
+msgid "Please enter a valid Phone Number (Should start with '02')"
+msgstr "Vul een geldig telefoonnummer in"
+
+#: cyclos/tests/test_forms.py:202
+msgid "Please enter a mobile number of at least 8 digits"
+msgstr "Vul een telefoonnummer van tenminste {0} cijfers in"
+
+#: cyclos/tests/test_forms.py:215
+msgid "Please enter a mobile number of at most 8 digits"
+msgstr "Vul een telefoonnummer van maximaal {0} cijfers in"
+
+#: cyclos/tests/test_forms.py:258
+msgid "Please enter a valid Mobile Number (Should start with '06')"
+msgstr "Vul een geldig mobiel telefoonnummer in"
+
+#: cyclos/tests/test_forms.py:285 cyclos/tests/test_forms.py:299
+#: cyclos/tests/test_forms.py:313
+msgid "KvK number should be 8 digits"
+msgstr "Het KVK nummer moet uit 8 cijfers bestaan"
+
+#: cyclos/utils.py:38
+msgid "There is already an account with this e-mail address in our system."
+msgstr "Er is reeds een account met dit e-mailadres in ons systeem"
+
+#: cyclos/utils.py:45
+msgid ""
+"Cannot connect to check email in the backend system at the moment, please "
+"try later."
+msgstr ""
+"Er komt momenteel geen verbinding met backend systeem tot stand om e-mail te "
+"controleren. Probeer a.u.b. later nogmaals."
+
+#: cyclos/utils.py:60
+msgid "There is already an account with this username in our system."
+msgstr "Er is reeds een account met deze gebruikersnaam in ons systeem"
+
+#: cyclos/utils.py:67
+msgid ""
+"Cannot connect to check username in the backend system at the moment, please "
+"try later."
+msgstr ""
+"Er komt momenteel geen verbinding met backend systeem tot stand om e-mail te "
+"controleren. Probeer a.u.b. later nogmaals."
+
+#: cyclos/widgets.py:135 cyclos/widgets.py:187 cyclos/widgets.py:239
+#: cyclos/widgets.py:284
+msgid "Lookup"
+msgstr "Opzoeken"
+
+#: excelexport/templates/excelexport/change_list.html:7
+#, python-format
+msgid "Add %(name)s"
+msgstr "%(name)s toevoegen"
+
+#: files/models.py:23
+msgid "Uploaded"
+msgstr "Uploaded"
+
+#: files/models.py:26
+msgid "Processed"
+msgstr "Verwerkt"
+
+#: files/models.py:58
+msgid "Description of the file format"
+msgstr "Beschrijving van het bestandsformaat"
+
+#: files/models.py:60
+msgid "Expected MIME type of the file"
+msgstr ""
+
+#: files/models.py:62
+msgid "Expected file extension for type"
+msgstr ""
+
+#: files/models.py:75
+msgid "Description of the file type"
+msgstr "Beschrijving van het bestandsformaat"
+
+#: files/models.py:83
+msgid ""
+"If set, validate and if not testint, save data from file to model instances "
+"of this type"
+msgstr ""
+
+#: files/models.py:90
+msgid ""
+"name of (heading) field in process_model to be used as identifier for "
+"get_or_create on import"
+msgstr ""
+
+#: files/models.py:97
+msgid "Empty temp table before uploading data from file?"
+msgstr ""
+
+#: files/models.py:100
+msgid ""
+"If True, duplicate instance sent to model.handle_duplicate() post creation"
+msgstr ""
+
+#: files/models.py:152
+msgid ""
+"Optional list of ip4 ip addresses (comma delimited) where user can access "
+"service from"
+msgstr ""
+
+#: files/models.py:181
+msgid "File Type Set"
+msgstr ""
+
+#: files/models.py:183
+msgid "Name of group of file types which can be processed together"
+msgstr ""
+
+#: files/models.py:189
+msgid "Which set of rules should be used to process these files"
+msgstr ""
+
+#: files/models.py:194
+msgid "Email addresses (comma separated) where an Excel report should be sent"
+msgstr ""
+
+#: files/tests/test_api.py:64 files/tests/test_api.py:104
+#: registration/backends/__init__.py:30
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr ""
+"Voer een correcte gebruikersnaam en wachtwoord in. Let op dat beide velden "
+"hoofdlettergevoelig zijn."
+
+#: files/tests/test_api.py:336
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: files/utils.py:109
+#, python-brace-format
+msgid "No handle_duplicate method on process model class for file upload {0}"
+msgstr ""
+
+#: files/utils.py:123
+#, python-brace-format
+msgid "No process model class for file upload {0}"
+msgstr ""
+
+#: invoices/pdf.py:48
+#, python-brace-format
+msgid "{0}"
+msgstr ""
+
+#: invoices/pdf.py:49
+msgid "Street"
+msgstr "Straat"
+
+#: invoices/pdf.py:63
+msgid "Bank Details: Street address, Town, County, Postal Code"
+msgstr "Bankgegevens: Straatnaam, Plaats, Postcode"
+
+#: invoices/pdf.py:64
+msgid "Sort Code: 00-00-00 Account No: 00000000 (Quote invoice number)."
+msgstr ""
+
+#: invoices/pdf.py:65
+msgid ""
+"Please pay via bank transfer or cheque.\n"
+"        All payments should be made in {}."
+msgstr ""
+"Betaal a.u.b. via bank overboeking of cheque.\n"
+"        All betalingen moeten gedaan worden in {}.a"
+
+#: invoices/pdf.py:67
+#, python-brace-format
+msgid "Make cheques payable to {0}."
+msgstr "Maak cheques betaalbaar aan {0}."
+
+#: invoices/pdf.py:110
+#, python-brace-format
+msgid "Invoice no: {0}"
+msgstr "Factuurnummer.: {0}"
+
+#: invoices/pdf.py:111
+#, python-brace-format
+msgid "Invoice Date: {0}"
+msgstr "Factuurdatum: {0}"
+
+#: invoices/pdf.py:117
+msgid "Qty"
+msgstr "Hoeveelheid"
+
+#: invoices/pdf.py:117
+msgid "Unit Price"
+msgstr "Prijs per stuk"
+
+#: invoices/pdf.py:117
+msgid "Tax"
+msgstr "BTW"
+
+#: invoices/pdf.py:130
+msgid "Sub total:"
+msgstr "Sub-totaal:"
+
+#: invoices/pdf.py:132
+msgid "Tax:"
+msgstr "BTW:"
+
+#: invoices/pdf.py:134
+msgid "Total:"
+msgstr "Totaal:"
+
+#: invoices/templates/invoices/invoice_list.html:13
+msgid "Your Invoices"
+msgstr "Uw facturen"
+
+#: invoices/templates/invoices/invoice_list.html:18
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:81
+msgid "From"
+msgstr "Van"
+
+#: invoices/templates/invoices/invoice_list.html:21
+msgid "Paid?"
+msgstr "Betaald?"
+
+#: invoices/templates/invoices/invoice_list.html:40
+msgid "Yes"
+msgstr "Ja"
+
+#: invoices/templates/invoices/invoice_list.html:42
+msgid "No"
+msgstr "Nee"
+
+#: invoices/templates/invoices/invoice_list.html:51
+msgid "No invoices found."
+msgstr "Geen facturen gevonden"
+
+#: marketplace/common.py:9
+msgid "Regular"
+msgstr "Regelmatig"
+
+#: marketplace/common.py:10
+msgid "Euro"
+msgstr "Euro"
+
+#: marketplace/common.py:20 marketplace/common.py:25
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: marketplace/common.py:21 marketplace/common.py:26
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: marketplace/common.py:27
+msgid "On hold"
+msgstr "In de wacht"
+
+#: marketplace/forms.py:44
+msgid "Most recent"
+msgstr "Meest recent"
+
+#: marketplace/forms.py:45
+msgid "Price (ascending)"
+msgstr "Prijs (oplopend)"
+
+#: marketplace/forms.py:46
+msgid "Price (descending)"
+msgstr "Prijs (aflopend)"
+
+#: marketplace/forms.py:84
+msgid "Change ad status"
+msgstr "Verander status advertentie"
+
+#: marketplace/forms.py:126 marketplace/forms.py:181 marketplace/forms.py:198
+msgid "You are not allowed to change the status of an ad that's On Hold."
+msgstr ""
+"U mag van een advertentie dat in de wacht staat de status niet veranderen"
+
+#: marketplace/forms.py:146 marketplace/forms.py:610
+#, python-brace-format
+msgid "The description must be shorter than {0} letters."
+msgstr "De beschrijving moet korter zijn dan {0} letters."
+
+#: marketplace/forms.py:162 marketplace/tests/test_forms.py:41
+msgid "Please, enter a price"
+msgstr "Voer a.u.b. een prijs in"
+
+#: marketplace/forms.py:205
+msgid "Enter image title"
+msgstr "Voer afbeelding titel in"
+
+#: marketplace/forms.py:330
+msgid "Please an amount to pay"
+msgstr "Vul een bedrag in"
+
+#: marketplace/forms.py:372 marketplace/views.py:1128
+msgid "Please check the company name"
+msgstr "Controleer a.u.b. de bedrijfsnaam"
+
+#: marketplace/forms.py:399
+msgid "Advertiser's name"
+msgstr "Naam adverteerder"
+
+#: marketplace/forms.py:402
+msgid "Your email address"
+msgstr "E-mailadres"
+
+#: marketplace/forms.py:404
+msgid "Any comments about the enquiry?"
+msgstr "Bericht"
+
+#: marketplace/forms.py:482
+#, fuzzy
+#| msgid " is required."
+msgid "This field is required."
+msgstr "is vereist"
+
+#: marketplace/forms.py:538
+msgid "Please select at least one category"
+msgstr "Selecteer een categorie"
+
+#: marketplace/forms.py:547
+msgid "Please select at least one community"
+msgstr "Selecteer tenminste één gemeente"
+
+#: marketplace/forms.py:599
+#, python-brace-format
+msgid "Number of {0} per person"
+msgstr "Aantal {0} per deelnemer"
+
+#: marketplace/forms.py:603
+msgid "Number of participants"
+msgstr "Aantal deelnemers"
+
+#: marketplace/forms.py:619
+msgid "The reward must be > 0"
+msgstr "Een waardering moet hoger dan 0 bedragen"
+
+#: marketplace/forms.py:623
+msgid "The reward must be an integer amount"
+msgstr "Decimalen zijn niet toegestaan"
+
+#: marketplace/forms.py:667
+msgid "From must be before To"
+msgstr "De begindatum moet voor de einddatum liggen"
+
+#: marketplace/forms.py:670
+msgid "Must supply both From and To (or leave both blank)"
+msgstr "U moet zowel een begindatum als einddatum opgeven"
+
+#: marketplace/models.py:44
+msgid "Offer or Want in MVP - to be translated?"
+msgstr "Aanbod of Vraag in MVP - om te vertalen"
+
+#: marketplace/models.py:56
+msgid "Created by"
+msgstr "Gecreëerd door"
+
+#: marketplace/models.py:59
+msgid "A caption to be displayed or used as alt text"
+msgstr "een voorbeeld tekst"
+
+#: marketplace/models.py:72
+msgid ""
+"Not currently in use, but could hide images when unticked if implemented"
+msgstr ""
+"Momenteel niet in gebruik, maar afbeeldingen kunnen verborgen wordenals vink "
+"weggehaald wordt, indien geïmplementeerd."
+
+#: marketplace/models.py:75
+msgid "Not currently in use"
+msgstr "Momenteel niet in gebruik"
+
+#: marketplace/models.py:116 marketplace/models.py:133
+msgid "Pricing option"
+msgstr "Prijsoptie"
+
+#: marketplace/models.py:166
+msgid "Title of the offer/want"
+msgstr "Advertentietitel"
+
+#: marketplace/models.py:168
+msgid "Offer or want"
+msgstr "Type advertentie"
+
+#: marketplace/models.py:174
+msgid "Other pricing option"
+msgstr "Andere prijs optie"
+
+#: marketplace/models.py:176
+msgid "Barter euros"
+msgstr "Barter euros"
+
+#: marketplace/models.py:180 marketplace/templates/marketplace/detail.html:81
+msgid "Keywords"
+msgstr "Kernwoorden"
+
+#: marketplace/models.py:186
+msgid "Only community administrators may change \"on hold\" ads"
+msgstr ""
+"Alleen community administrators kunnene \"on hold\" advertenties veranderen"
+
+#: marketplace/models.py:370
+msgid "Ad related to payment or None if direct payment"
+msgstr "Ad related to payment or None if direct payment"
+
+#: marketplace/models.py:374
+msgid "Total amount, in case of BYB/split-currency payments"
+msgstr "Total amount, in case of BYB/split-currency payments"
+
+#: marketplace/models.py:524
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: marketplace/models.py:525
+msgid "Not published"
+msgstr "Concept"
+
+#: marketplace/models.py:526 prizedraw/models.py:424
+msgid "Cancelled"
+msgstr "Geannuleerd"
+
+#: marketplace/models.py:531
+msgid "Title of the activity"
+msgstr "Titel van de activiteit"
+
+#: marketplace/models.py:532
+msgid "Description of the activity"
+msgstr "Beschrijving van de activiteit"
+
+#: marketplace/models.py:538
+msgid "Image height"
+msgstr "Afbeeldingshoogte"
+
+#: marketplace/models.py:540
+msgid "Image width"
+msgstr "Afbeeldingsbreedte"
+
+#: marketplace/models.py:542
+msgid "Criteria for participants"
+msgstr "Criteria"
+
+#: marketplace/models.py:544
+msgid "Participating communities"
+msgstr "Gemeentes"
+
+#: marketplace/models.py:545
+msgid "Date of activity"
+msgstr "Datum activiteit"
+
+#: marketplace/models.py:546 marketplace/models.py:840
+msgid "Start time"
+msgstr "Starttijd"
+
+#: marketplace/models.py:547 marketplace/models.py:842
+msgid "End time"
+msgstr "Eindtijd"
+
+#: marketplace/models.py:551
+msgid "Number of participants needed"
+msgstr "Deelnemers nodig"
+
+#: marketplace/models.py:553
+#: marketplace/templates/marketplace/campaign_details_snippet.html:12
+msgid "Reward per participant"
+msgstr "Waardering per deelnemer"
+
+#: marketplace/models.py:557
+msgid "Contact telephone number"
+msgstr "Telefoonnummer aanspreekpunt"
+
+#: marketplace/models.py:559
+msgid "Contact email"
+msgstr "E-mailadres aanspreekpunt"
+
+#: marketplace/models.py:566
+msgid "Reason for cancellation (if cancelled)"
+msgstr "Reden:"
+
+#: marketplace/models.py:633
+msgid "Finished"
+msgstr "Afgelopen"
+
+#: marketplace/models.py:635 prizedraw/models.py:20
+msgid "In progress"
+msgstr ""
+
+#: marketplace/templates/marketplace/ad_list.html:54
+#: marketplace/templates/marketplace/ad_list.html:70
+#: marketplace/templates/marketplace/ad_list.html:100
+#: marketplace/templates/marketplace/business_profile.html:168
+#: marketplace/templates/marketplace/businesses_page.html:22
+msgid "Offers"
+msgstr "Aanbod"
+
+#: marketplace/templates/marketplace/ad_list.html:54
+#: marketplace/templates/marketplace/ad_list.html:70
+#: marketplace/templates/marketplace/ad_list.html:105
+#: marketplace/templates/marketplace/business_profile.html:172
+#: marketplace/templates/marketplace/businesses_page.html:27
+msgid "Wants"
+msgstr "Vraag"
+
+#: marketplace/templates/marketplace/ad_list.html:59
+msgid "You have selected multiple categories"
+msgstr "U heeft meerdere categorie&euml;n geselecteerd"
+
+#: marketplace/templates/marketplace/ad_list.html:100
+msgid "Products &amp; services"
+msgstr "Producten &amp; diensten"
+
+#: marketplace/templates/marketplace/ad_list.html:156
+#: marketplace/templates/marketplace/business_profile.html:155
+msgid "Back"
+msgstr "Terug"
+
+#: marketplace/templates/marketplace/add_funds.html:4
+msgid "Add Credit"
+msgstr "Krediet"
+
+#: marketplace/templates/marketplace/business_profile.html:166
+msgid "Ads"
+msgstr "Advertenties"
+
+#: marketplace/templates/marketplace/business_profile.html:178
+msgid "Latest"
+msgstr "Laatste"
+
+#: marketplace/templates/marketplace/businesses_map_page.html:40
+msgid "Telephone"
+msgstr "Telefoon"
+
+#: marketplace/templates/marketplace/businesses_map_page.html:46
+msgid "View"
+msgstr "Bekijk"
+
+#: marketplace/templates/marketplace/campaign_detail.html:18
+#: marketplace/templates/marketplace/campaign_manage_participants.html:22
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:22
+msgid "back to my activities"
+msgstr "terug naar mijn activiteiten"
+
+#: marketplace/templates/marketplace/campaign_detail.html:20
+msgid "back to all activities"
+msgstr "terug naar alle activiteiten"
+
+#: marketplace/templates/marketplace/campaign_detail.html:53
+msgid "Where"
+msgstr "Lokatie"
+
+#: marketplace/templates/marketplace/campaign_detail.html:57
+msgid "Restrictions"
+msgstr "Criteria"
+
+#: marketplace/templates/marketplace/campaign_detail.html:58
+msgid "None"
+msgstr "Geen"
+
+#: marketplace/templates/marketplace/campaign_detail.html:62
+msgid "tel"
+msgstr "Telefoonnummer"
+
+#: marketplace/templates/marketplace/campaign_detail.html:63
+msgid "mail"
+msgstr "E-mailadres"
+
+#: marketplace/templates/marketplace/campaign_detail.html:92
+msgid "You need to log in to sign up for this activity"
+msgstr "Log in om u aan te melden voor deze activiteit"
+
+#: marketplace/templates/marketplace/campaign_detail.html:96
+msgid "Unsubscribe"
+msgstr "Afmelden"
+
+#: marketplace/templates/marketplace/campaign_detail.html:101
+msgid "Only consumers can sign up for activities"
+msgstr "Alleen spaarders kunnen zich inschrijven voor activiteiten"
+
+#: marketplace/templates/marketplace/campaign_detail.html:103
+msgid "You can't sign up for an activity from a different community"
+msgstr "U kunt zich niet aanmelden voor een activiteit buiten uw gemeente"
+
+#: marketplace/templates/marketplace/campaign_detail.html:106
+msgid "Sign up"
+msgstr "Aanmelden"
+
+#: marketplace/templates/marketplace/campaign_detail.html:117
+msgid "Signing up for an activity will make your profile visible to others"
+msgstr "Door u aan te melden wordt uw profiel zichtbaar voor anderen"
+
+#: marketplace/templates/marketplace/campaign_detail.html:124
+msgid "Taking part:"
+msgstr "Deze toppers hebben zich aangemeld!"
+
+#: marketplace/templates/marketplace/campaign_detail.html:148
+msgid "This is the maximum amount of Positoos you can earn"
+msgstr "Door deel te nemen aan deze activiteit spaart u: "
+
+#: marketplace/templates/marketplace/campaign_details_snippet.html:9
+msgid "Max participants"
+msgstr "Deelnemers nodig"
+
+#: marketplace/templates/marketplace/campaign_form.html:4
+#: marketplace/templates/marketplace/campaign_form.html:17
+msgid "New activity"
+msgstr "Nieuwe activiteit"
+
+#: marketplace/templates/marketplace/campaign_form.html:43
+#: marketplace/templates/marketplace/campaign_form.html:197
+msgid "Number of characters left"
+msgstr "Aantal resterende karakters"
+
+#: marketplace/templates/marketplace/campaign_form.html:75
+msgid ""
+"Select at least one community. Only members of your selected communities "
+"will be shown this activity."
+msgstr ""
+"Selecteer tenminste één gemeente. Alleen spaarders in de geselecteerde "
+"gemeente(s) zullen de activiteit zien."
+
+#: marketplace/templates/marketplace/campaign_form.html:83
+msgid "Location of activity"
+msgstr "Lokatie activiteit"
+
+#: marketplace/templates/marketplace/campaign_form.html:101
+msgid "Select the appropriate category/ies for the activity you are creating"
+msgstr "Selecteer de juiste categorie(en) voor de activiteit die u aanmaakt"
+
+#: marketplace/templates/marketplace/campaign_form.html:120
+msgid ""
+"If your planned activity has any restrictions, for example in terms of age "
+"or gender, you can specify it here. If you leave this field blank the "
+"criteria will be shown as: 'None'"
+msgstr ""
+"Indien deelnemers aan bepaalde criteria moeten voldoen, bijvoorbeeld op het "
+"gebied van leeftijd, geslacht, kennis of kunde, kunt u dit hier aangeven. "
+"Als u dit veld leeg laat zal er op de activiteiten pagina staan: 'geen'"
+
+#: marketplace/templates/marketplace/campaign_form.html:139
+msgid "Save changes to published activity"
+msgstr "Wijzigingen opslaan"
+
+#: marketplace/templates/marketplace/campaign_form.html:139
+#: marketplace/templates/marketplace/campaign_form.html:142
+msgid "Publish"
+msgstr "Publiceer"
+
+#: marketplace/templates/marketplace/campaign_form.html:141
+msgid "Save changes to unpublished activity"
+msgstr "Concept opslaan"
+
+#: marketplace/templates/marketplace/campaign_form.html:141
+msgid "Save (unpublished)"
+msgstr "Opslaan als concept"
+
+#: marketplace/templates/marketplace/campaign_form.html:142
+msgid "Save changes and publish"
+msgstr "Publiceren"
+
+#: marketplace/templates/marketplace/campaign_form.html:192
+msgid "Only 900 characters allowed"
+msgstr "Maximaal 900 karakters toegestaan"
+
+#: marketplace/templates/marketplace/campaign_manage_participants.html:4
+msgid "Manage participants"
+msgstr "Beheer deelnemers activiteit"
+
+#: marketplace/templates/marketplace/campaign_manage_participants.html:24
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:24
+msgid "back to activities summary"
+msgstr "terug naar overzicht activiteiten"
+
+#: marketplace/templates/marketplace/campaign_manage_participants.html:60
+msgid "Remove this participant"
+msgstr "Deelnemer afmelden"
+
+#: marketplace/templates/marketplace/campaign_manage_participants.html:63
+msgid "Not yet rewarded"
+msgstr "Nog niet gewaardeerd"
+
+#: marketplace/templates/marketplace/campaign_manage_participants.html:65
+msgid "reward paid"
+msgstr "Gewaardeerd"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:4
+msgid "Manage rewards"
+msgstr "Deelnemers waarderen"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:36
+msgid "Confirm reward payment"
+msgstr "Bevestigen waardering"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:37
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\t\t\t\tYou are about to make the following rewards payments for the "
+"'%(title)s'\n"
+"\t\t\t\t\t\t\t\tactivity that took place on %(date)s:\n"
+"\t\t\t\t\t\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\t\t\t\t\tU staat op het punt om, in verband met de activiteit "
+"'%(title)s'\n"
+"\t\t\t\t\t\t\t\top %(date)s de volgende transacties uit te voeren:\n"
+"\t\t\t\t\t\t\t\t"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:53
+msgid "The total amount of these transactions is"
+msgstr "Totaal"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:75
+msgid "Participant"
+msgstr "Deelnemer"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:76
+msgid "Attendance"
+msgstr "Aanwezigheid"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:76
+msgid "Adjust the times if the participant did not attend the whole session"
+msgstr "Pas de tijdstippen aan als de deelnemer niet volledig aanwezig was"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:77
+msgid "Individual reward"
+msgstr "Waardering per deelnemer"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:111
+msgid "Pay rewards"
+msgstr "Waardeer deelnemers"
+
+#: marketplace/templates/marketplace/campaign_manage_rewards.html:118
+msgid "Already rewarded"
+msgstr "Reeds gewaardeerd"
+
+#: marketplace/templates/marketplace/campaign_status_snippet.html:3
+msgid "This activity is finished"
+msgstr "Afgelopen"
+
+#: marketplace/templates/marketplace/campaign_status_snippet.html:6
+msgid "This activity has started"
+msgstr "Gepubliceerd"
+
+#: marketplace/templates/marketplace/campaign_status_snippet.html:9
+msgid "This activity has been cancelled"
+msgstr "Geannuleerd"
+
+#: marketplace/templates/marketplace/campaign_status_snippet.html:12
+#, python-format
+msgid "Still %(num_reqd)s participant needed"
+msgid_plural "Still %(num_reqd)s participants needed"
+msgstr[0] "Nog %(num_reqd)s deelnemer nodig"
+msgstr[1] "Nog %(num_reqd)s deelnemers nodig"
+
+#: marketplace/templates/marketplace/campaign_status_snippet.html:14
+msgid "This activity is full"
+msgstr "Vol"
+
+#: marketplace/templates/marketplace/campaignparticipant_confirm_delete.html:4
+#: marketplace/templates/marketplace/campaignparticipant_confirm_delete.html:13
+#: marketplace/templates/marketplace/campaignparticipant_confirm_delete.html:27
+msgid "Remove participant"
+msgstr "Deelnemer afmelden"
+
+#: marketplace/templates/marketplace/campaignparticipant_confirm_delete.html:18
+#, python-format
+msgid ""
+"\n"
+"                Are you sure you want to remove participant %(name)s from "
+"the '%(title)s' activity on %(date)s\n"
+"                "
+msgstr ""
+"\n"
+"                Weet u zeker dat u de deelnemer(s) %(name)s wilt afmelden "
+"voor %(title)s op %(date)s\n"
+"                "
+
+#: marketplace/templates/marketplace/campaignparticipant_confirm_delete.html:21
+msgid "The participant will be unsubscribed and informed by email."
+msgstr "De deelnemer wordt afgemeld en per e-mail geïnformeerd"
+
+#: marketplace/templates/marketplace/campaignparticipant_confirm_delete.html:22
+msgid ""
+"You can give a reason for the removal here and we'll include it in the email:"
+msgstr "Geef eventueel hier op waarom de deelnemer wordt afgemeld:"
+
+#: marketplace/templates/marketplace/cancel_campaign.html:4
+#: marketplace/templates/marketplace/cancel_campaign.html:13
+#: marketplace/templates/marketplace/cancel_campaign.html:28
+msgid "Cancel Activity"
+msgstr "Activiteit annuleren"
+
+#: marketplace/templates/marketplace/cancel_campaign.html:21
+msgid "Are you sure you want to cancel this activity?"
+msgstr "Weet u zeker dat u deze activiteit wilt annuleren?"
+
+#: marketplace/templates/marketplace/cancel_campaign.html:22
+msgid "Any participants will be informed by email."
+msgstr "Eventuele deelnemers worden per e-mail geïnformeerd."
+
+#: marketplace/templates/marketplace/cancel_campaign.html:23
+msgid "You can give an explanation here and we'll include it in the email:"
+msgstr ""
+"Geef eventueel hier op aan de deelnemers waarom de activiteit wordt "
+"geannuleerd:"
+
+#: marketplace/templates/marketplace/detail.html:4
+msgid "Marketplace detail"
+msgstr "Marktplaats detail"
+
+#: marketplace/templates/marketplace/detail.html:49
+msgid "enquire"
+msgstr "informeer"
+
+#: marketplace/templates/marketplace/detail.html:93
+msgid "Back to Overview"
+msgstr "Terug naar Overzicht"
+
+#: marketplace/templates/marketplace/enquire.html:7
+msgid "Enquire"
+msgstr "Informeren"
+
+#: marketplace/templates/marketplace/enquire.html:47
+msgid "Send enquiry"
+msgstr "Informeer"
+
+#: marketplace/templates/marketplace/enquire_advertiser_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(name)s,\n"
+"\n"
+"You have an enquiry from %(user)s about %(title)s (id: %(id)s).\n"
+"\n"
+"Please contact them at %(email)s\n"
+"\n"
+"Their additional comments: %(body)s\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Geachte %(name)s,\n"
+"\n"
+"U heeft een vraag van %(user)s over %(title)s (id: %(id)s).\n"
+"\n"
+"Neem a.u.b. contact op met hen via %(email)s\n"
+"\n"
+"Hun vraag/opmerking: %(body)s\n"
+"\n"
+"Vriendelijke groeten,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: marketplace/templates/marketplace/enquire_advertiser_email_subject.txt:1
+#: marketplace/templates/marketplace/enquire_enquirer_email_subject.txt:1
+#, python-format
+msgid "Enquiry about %(title)s sent through %(site)s"
+msgstr "Vraag over %(title)s verstuurd vanaf %(site)s"
+
+#: marketplace/templates/marketplace/enquire_enquirer_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(name)s,\n"
+"\n"
+"Thank you for your enquiry, an email has been sent to the advertiser, who "
+"will will be in touch with you shortly about the %(title)s.\n"
+"\n"
+"Your comments: %(body)s\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Beste %(name)s,\n"
+"\n"
+"Dank voor je informatieverzoek. Een bericht is verstuurd aan de "
+"adverteerder, die contact zal opnemen over %(title)s.\n"
+"\n"
+"Je opmerkingen: %(body)s\n"
+"\n"
+"Groet,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: marketplace/templates/marketplace/enquire_sent.html:5
+msgid "Thank You For Your Enquiry"
+msgstr "Bedankt voor uw vraag"
+
+#: marketplace/templates/marketplace/enquire_sent.html:10
+#: marketplace/views.py:1254
+msgid "Thank you for your enquiry. An email has been sent to the advertiser"
+msgstr "Dank voor uw reactie. Een email is verzonden aan de adverteerder"
+
+#: marketplace/templates/marketplace/latest_offers_wants.html:9
+msgid "View all offers"
+msgstr "Bekijk alles in de categorie aangeboden"
+
+#: marketplace/templates/marketplace/latest_offers_wants.html:9
+msgid "View all wants"
+msgstr "Bekijk alles in de categorie gevraagd"
+
+#: marketplace/templates/marketplace/pay.html:4
+msgid "Pay"
+msgstr "Betaal"
+
+#: marketplace/templates/marketplace/pay.html:108
+msgid "Pay for item"
+msgstr "Betaal voor item "
+
+#: marketplace/templates/marketplace/pay.html:115
+#, python-format
+msgid ""
+"Please check the details for your purchase, and click Process Payment if you "
+"are happy. <br />\n"
+"\n"
+"                    You are purchasing <strong>%(ad_title)s</strong>.<br />\n"
+"                    "
+msgstr ""
+"Controleer de details voor uw aankoop, en klik op betaling verwerken als u "
+"tevreden bent. <br />\n"
+"\n"
+"                    U zult aanschaffen <strong>%(ad_title)s</strong>.<br />\n"
+"                    "
+
+#: marketplace/templates/marketplace/products_and_services_page.html:11
+msgid "There were no results for your search"
+msgstr "Geen zoekresultaten"
+
+#: marketplace/views.py:117 marketplace/views.py:205
+msgid "Your ad will be visible once an administrator has approved it"
+msgstr ""
+"Uw advertentie wordt zichtbaar zodra deze door TradeQoin is goedgekeurd"
+
+#: marketplace/views.py:308
+msgid ""
+"Preview only: This ad will not be visible to other users until approved by "
+"the administrator"
+msgstr ""
+"Dit is een voorvertoning: Deze advertentie zal niet zichtbaar zijn voor "
+"andere gebruikers totdat deze door TradeQoin is goedgekeurd"
+
+#: marketplace/views.py:1029
+#, python-format
+msgid "Cannot find %s"
+msgstr "Kan %s niet vinden"
+
+#: marketplace/views.py:1096
+msgid "You cannot pay yourself"
+msgstr "U kunt geen betaling aan uzelf doen"
+
+#: marketplace/views.py:1182 marketplace/views.py:1191
+msgid "Could not make payment at this time. (Backend unavailable)"
+msgstr ""
+"Op dit moment kan de betaling niet worden voltrokken. (Backend unavailable)"
+
+#: marketplace/views.py:1232
+msgid "Only consumers can enquire about adverts"
+msgstr "Alleen spaarders kunnen reageren op advertenties"
+
+#: marketplace/views.py:1238
+msgid "You cannot enquire about your own advert"
+msgstr "U kunt niet reageren op uw eigen advertentie"
+
+#: marketplace/views.py:1564
+msgid "This activity has finished -- you cannot sign up"
+msgstr ""
+"De activiteit is afgelopen. U kunt zich niet niet meer aanmelden voor deze "
+"activiteit"
+
+#: marketplace/views.py:1567
+msgid "You are already signed up"
+msgstr "U heeft zich reeds aangemeld voor deze activiteit"
+
+#: marketplace/views.py:1570
+msgid "This activity is full -- you cannot sign up"
+msgstr ""
+"De activiteit is vol. U kunt zich niet meer aanmelden voor deze activiteit."
+
+#: marketplace/views.py:1574
+msgid ""
+"Thank you for signing up. The contact has received an email with your name "
+"and email address and can contact you."
+msgstr ""
+"Dank voor uw aanmelding. Het aanspreekpunt heeft een e-mail ontvangen met uw "
+"naam en e-mailadres en kan eventueel contact met u opnemen."
+
+#: marketplace/views.py:1592
+msgid "This activity has finished -- you cannot unsubscribe"
+msgstr ""
+"De activiteit is afgelopen. U kunt zich niet meer afmelden voor deze "
+"activiteit"
+
+#: marketplace/views.py:1595
+msgid "You are not currently signed up"
+msgstr "U heeft zich momenteel niet aangemeld voor deze activiteit"
+
+#: marketplace/views.py:1599
+msgid "Unsubscribing you"
+msgstr "U bent afgemeld voor deze activiteit"
+
+#: marketplace/views.py:1684
+msgid "Reward payments cancelled"
+msgstr "Waardering geannuleerd"
+
+#: marketplace/views.py:1702
+#, python-brace-format
+msgid "Made reward payments of {0} {1}"
+msgstr "Er is een waardering van {0} {1} uitgevoerd"
+
+#: marketplace/views.py:1894
+#, python-brace-format
+msgid "Participant {0} has been removed and notified"
+msgstr "De deelnemer {0} is afgemeld en per e-mail geïnformeerd"
+
+#: prizedraw/admin.py:86
+msgid "Cannot generate winning numbers for this draw - check status"
+msgstr ""
+
+#: prizedraw/admin.py:94
+msgid "Not enough tickets to award prizes"
+msgstr ""
+
+#: prizedraw/admin.py:97
+msgid "No prizes to award"
+msgstr ""
+
+#: prizedraw/admin.py:109
+msgid "Unable to generate prize numbers -- Please try again later"
+msgstr ""
+
+#: prizedraw/admin.py:123
+#, python-brace-format
+msgid "Winning numbers generated: {0}"
+msgstr ""
+
+#: prizedraw/admin.py:142
+#, python-brace-format
+msgid "Generate winning tickets for Draw {0}"
+msgstr ""
+
+#: prizedraw/admin.py:189
+msgid "There is no current draw, bulk purchases are not available"
+msgstr ""
+
+#: prizedraw/admin.py:193
+msgid "Please enter a number greater than 1"
+msgstr "Voer een getal groter dan 1 in"
+
+#: prizedraw/admin.py:204
+msgid "Admin users can only make bulk ticket purchases for Businesses"
+msgstr ""
+
+#: prizedraw/admin.py:213 prizedraw/utils.py:62
+msgid "You don't have enough credit"
+msgstr ""
+"U heeft niet afdoende saldo of kredietruimte om de betaling te voltrekken"
+
+#: prizedraw/forms.py:27
+msgid "Number of tickets to buy"
+msgstr ""
+
+#: prizedraw/forms.py:30
+msgid "Set up monthly ticket-purchase"
+msgstr ""
+
+#: prizedraw/forms.py:32
+msgid "If ticked, set up a monthly repeat purchase"
+msgstr ""
+
+#: prizedraw/forms.py:35
+msgid "Run indefinitely"
+msgstr ""
+
+#: prizedraw/forms.py:36
+msgid "Number of months to participate"
+msgstr ""
+
+#: prizedraw/forms.py:61
+#, python-brace-format
+msgid "You cannot buy {0} tickets: {1}"
+msgstr ""
+
+#: prizedraw/forms.py:75
+#, python-brace-format
+msgid "You cannot set up more than {0} active repeat purchases"
+msgstr ""
+
+#: prizedraw/forms.py:95
+msgid ""
+"If you would like to set up a repeat purchase, please tick the \"Run "
+"indefinitely\" checkbox * or * enter a number into the \"Number of months to "
+"participate\" box"
+msgstr ""
+
+#: prizedraw/forms.py:103
+msgid ""
+"If you would like to set up a repeat purchase, please tick the \"Set up "
+"monthly ticket-purchase\" checkbox"
+msgstr ""
+
+#: prizedraw/forms.py:131 prizedraw/forms.py:135
+msgid "Only the owner of the ticket can cancel the repeat purchase"
+msgstr ""
+
+#: prizedraw/forms.py:214 prizedraw/utils.py:54
+#, python-brace-format
+msgid "You can buy a maximum of {0} tickets"
+msgstr ""
+
+#: prizedraw/models.py:19
+msgid "Not yet started"
+msgstr ""
+
+#: prizedraw/models.py:21
+msgid "Ended, winners not yet chosen"
+msgstr ""
+
+#: prizedraw/models.py:22
+msgid "Ended, winners not yet paid"
+msgstr ""
+
+#: prizedraw/models.py:23
+msgid "Ended, winners paid"
+msgstr ""
+
+#: prizedraw/models.py:48
+msgid "Tickets go on sale from this date/time"
+msgstr ""
+
+#: prizedraw/models.py:50
+msgid "Tickets are on sale up to this date/time"
+msgstr ""
+
+#: prizedraw/models.py:71 prizedraw/tests/test_models.py:62
+msgid "Draw end must be after the start"
+msgstr ""
+
+#: prizedraw/models.py:81 prizedraw/tests/test_models.py:80
+msgid "Draw may not be updated once start time is reached"
+msgstr ""
+
+#: prizedraw/models.py:210 prizedraw/tests/test_models.py:98
+#: prizedraw/tests/test_models.py:106
+msgid "Tickets are not on currently sale for this draw"
+msgstr ""
+
+#: prizedraw/models.py:220
+msgid "You have already bought the maximum allowed number of tickets"
+msgstr ""
+
+#: prizedraw/models.py:228
+msgid "No more tickets are available for this draw"
+msgstr ""
+
+#: prizedraw/models.py:261 prizedraw/models.py:285
+msgid "draw"
+msgstr ""
+
+#: prizedraw/models.py:293
+msgid "winning_ticket"
+msgstr ""
+
+#: prizedraw/models.py:298
+msgid "paid by"
+msgstr ""
+
+#: prizedraw/models.py:307 prizedraw/tests/test_models.py:206
+msgid "Absolute amount and Percentage of take cannot both be set"
+msgstr ""
+
+#: prizedraw/models.py:310 prizedraw/tests/test_models.py:199
+msgid "One of Absolute amount and Percentage of take must be set"
+msgstr ""
+
+#: prizedraw/models.py:326
+#, python-format, python-brace-format
+msgid "{0}% of take"
+msgstr ""
+
+#: prizedraw/models.py:336
+msgid "payment pending"
+msgstr ""
+
+#: prizedraw/models.py:355
+#, python-brace-format
+msgid "Paid {0} by {1}: {2}"
+msgstr ""
+
+#: prizedraw/models.py:358
+#, python-brace-format
+msgid "Paid {0}: {1}"
+msgstr ""
+
+#: prizedraw/models.py:386
+msgid "Auto calculated end date, used to make cronjob more efficient"
+msgstr ""
+
+#: prizedraw/models.py:389
+msgid "Date when user cancelled their repeat purchase"
+msgstr ""
+
+#: prizedraw/models.py:404
+msgid "Indefinite"
+msgstr ""
+
+#: prizedraw/models.py:485
+msgid "Tickets purchased in which draw? (must be current)"
+msgstr ""
+
+#: prizedraw/templates/admin/prizedraw/draw/award_prizes.html:24
+#: prizedraw/templates/admin/prizedraw/draw/change_form.html:7
+msgid "Generate winning numbers"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:17
+msgid "Buy tickets for the draw of "
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:19
+msgid "Buy draw tickets"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:25
+msgid "You can still buy up to"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:25
+msgid "tickets in this draw"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:43
+msgid "You can always manage your recurring purchases after setting them up."
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:52
+msgid ""
+"Your repeat purchase starts on the 23rd day of the next month. Please ensure "
+"you have sufficient balance in time for your monthly ticket purchase."
+msgstr ""
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:65
+#, fuzzy, python-format
+msgid ""
+"You are about to buy %(num_tickets)s ticket(s) for a total amount of <span "
+"class=\"icon\">%(currency_symbol)s</span> %(amount)s"
+msgstr ""
+"Betaal %(name)s een bedrag van <span class=\"icon\">%(currency_symbol)s</"
+"span> %(amount)s"
+
+#: prizedraw/templates/prizedraw/buy_tickets.html:67
+#, python-format
+msgid ""
+"\n"
+"    You are about to buy %(num_tickets)s Brixton Bonus tickets for "
+"%(monthly_draws)s monthly draws.\n"
+"    This will total %(total_num_tickets)s at a cost of <span class=\"icon\">"
+"%(currency_symbol)s</span> %(amount)s.\n"
+"\n"
+"    You can always manage your recurring ticket purchase after setting it "
+"up.\n"
+"\n"
+"    <strong>Your future repeat purchases will occur on the 23rd day of each "
+"month.\n"
+"        Please ensure you have sufficient B£ balance by creating a standing "
+"order of at least\n"
+"        the value of your purchase to reach our reserve sterling account by "
+"the 20th day of each month\n"
+"        %(add_funds_link)s</strong>\n"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/cancel_repeat_purchase.html:4
+#: prizedraw/templates/prizedraw/cancel_repeat_purchase.html:10
+#: prizedraw/templates/prizedraw/cancel_repeat_purchase.html:25
+msgid "Cancel Repeat Purchase"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:8
+msgid "The upcoming draw"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:11
+msgid "Your tickets"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:12
+msgid "ticket maximum."
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:13
+msgid "You can buy up to"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:13
+msgid "You have already bought the maximum"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:22
+#: prizedraw/templates/prizedraw/home.html:80
+msgid "No tickets yet"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:27
+msgid "The prizes"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:32
+msgid "Prizes not yet specified"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:40
+msgid "Ticket price:"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:44
+msgid "Buy tickets for the upcoming draw"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:52
+msgid "No draw scheduled"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:57
+msgid "Your results in past draws"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:77
+msgid "Click here to see all your past results"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:86
+msgid "Overall winnings"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/home.html:111
+msgid "No draws yet"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/my_repeat_purchases.html:93
+#: prizedraw/templates/prizedraw/my_results.html:9
+#, fuzzy, python-format
+msgid "Back to %(lottery_name)s overview"
+msgstr "Terug naar Overzicht"
+
+#: prizedraw/templates/prizedraw/my_repeat_purchases.html:95
+msgid "Your repeat purchases"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/my_repeat_purchases.html:127
+msgid "Cancelled repeat purchases"
+msgstr ""
+
+#: prizedraw/templates/prizedraw/my_repeat_purchases.html:149
+msgid "YOU'RE ABOUT TO CANCEL A REPEAT PURCHASE"
+msgstr "U STAAT OP HET PUNT EEN TERUGKERENDE BETALING TE ANNULEREN"
+
+#: prizedraw/templates/prizedraw/my_results.html:11
+msgid "All your past draw results"
+msgstr ""
+
+#: prizedraw/utils.py:38
+msgid "There is no Draw in progress"
+msgstr ""
+
+#: prizedraw/utils.py:43
+#, python-brace-format
+msgid "You have already bought the maximum of {0} tickets"
+msgstr ""
+
+#: prizedraw/utils.py:49
+#, python-brace-format
+msgid ""
+"You already have {0} ticket(s), you can buy a maximum of {1} ticket(s) more"
+msgstr ""
+
+#: prizedraw/utils.py:176
+msgid "Direct purchase of Prize Draw tickets"
+msgstr ""
+
+#: prizedraw/utils.py:193
+msgid "You do not have sufficient credit to complete the payment."
+msgstr ""
+"U heeft niet afdoende saldo of kredietruimte om de betaling te voltrekken"
+
+#: prizedraw/utils.py:245 prizedraw/views_api.py:111
+#, python-brace-format
+msgid "Failed to buy ticket: {0}"
+msgstr ""
+
+#: prizedraw/utils.py:251
+#, python-brace-format
+msgid "{0} tickets bought "
+msgstr ""
+
+#: prizedraw/utils.py:277
+#, python-brace-format
+msgid ""
+"Repeat purchase for {0} tickets per month setup successfully. Please "
+"remember to set up a <a href=\"{1}\">monthly standing order</a> now."
+msgstr ""
+
+#: prizedraw/views.py:92 prizedraw/views_api.py:121 prizedraw/views_api.py:592
+msgid "There is no draw in progress"
+msgstr ""
+
+#: prizedraw/views.py:218
+msgid "Your repeat purchase has been cancelled"
+msgstr ""
+
+#: prizedraw/views.py:232
+msgid "Cannot cancel repeat purchase"
+msgstr ""
+
+#: prizedraw/views_api.py:291
+msgid "Business has insufficient balance to buy customers bonus tickets"
+msgstr ""
+
+#: registration/forms.py:9
+msgid "Individual"
+msgstr "Individueel"
+
+#: registration/forms.py:31
+msgid "Please enter your Email address"
+msgstr "Voer a.u.b. uw e-mailadres in"
+
+#: registration/forms.py:36
+msgid "Email Address (again)"
+msgstr "E-mailadres (nogmaals)"
+
+#: registration/forms.py:37
+msgid "Please confirm your Email address"
+msgstr "Herhaal uw e-mailadres a.u.b."
+
+#: registration/forms.py:44
+msgid "Please enter your chosen password"
+msgstr "Voer a.u.b. uw gekozen wachtwoord in"
+
+#: registration/forms.py:49
+msgid "Password (again)"
+msgstr "Wachtwoord (nogmaals)"
+
+#: registration/forms.py:50
+msgid "Please confirm your chosen password"
+msgstr "Herhaal het gekozen wachtwoord a.u.b."
+
+#: registration/forms.py:53
+msgid "I've read and accepted the terms &amp; conditions"
+msgstr "Ik heb de Algemene Voorwaarden gelezen en geaccepteerd"
+
+#: registration/forms.py:56 registration/forms.py:73
+msgid "You must accept the terms & conditions to register"
+msgstr "U moet de algemene voorwaarden accepteren"
+
+#: registration/forms.py:68
+msgid "Activate account immediately?"
+msgstr "Account onmiddelijk activeren"
+
+#: registration/forms.py:69
+msgid ""
+"Ticking this box activates the new account immediately and will not send the "
+"user an activation email."
+msgstr ""
+"Door aan te vinken wordt het account onmiddellijk actief en zal er geen "
+"activatie e-mail worden verstuurd naar de gebruiker"
+
+#: registration/forms.py:88
+msgid "This email has already been registered"
+msgstr "Dit e-mail adres is reeds geregistreerd"
+
+#: registration/forms.py:101
+msgid "Please enter a valid community code."
+msgstr "Voer a.u.b. een geldige community code in"
+
+#: registration/forms.py:129
+msgid "Please enter the same email for both email and email confirmation."
+msgstr "De ingevoerde e-mailadressen zijn niet gelijk"
+
+#: registration/forms.py:139
+msgid ""
+"Please enter the same password for both password and password confirmation."
+msgstr "De ingevoerde wachtwoorden zijn niet gelijk"
+
+#: registration/forms.py:153
+msgid "Please select Individual or Entreprise"
+msgstr "Selecteer a.u.b. spaarder of winkelier"
+
+#: registration/forms.py:163
+msgid "Please select Business or Individual"
+msgstr "Selecteer a.u.b. spaarder of winkelier"
+
+#: rewards/admin.py:128
+#, python-brace-format
+msgid ""
+"You cannot have more than one default good cause per\n"
+"                community. Please edit the existing Default Good Cause for\n"
+"                the {0} community"
+msgstr ""
+"U kunt niet meer dan één standaard spaardoel per\n"
+"                community instellen. Verander het huidige standaard "
+"spaardoel in\n"
+"                de {0} community in een gewoon spaardoel"
+
+#: rewards/common.py:20
+#, python-brace-format
+msgid "{0} user id"
+msgstr "{0} user id"
+
+#: rewards/forms.py:44 rewards/forms.py:221
+msgid "Individual's chosen percentage"
+msgstr "Standaard spaardoeldonatie percentage - door Spaarders gekozen"
+
+#: rewards/forms.py:49
+msgid "Select .CSV file to upload"
+msgstr "Selecteer het .CSV-bestand dat u wilt uploaden"
+
+#: rewards/forms.py:50
+msgid ""
+"Make sure the CSV file is comma (,) or semicolon (;) separated, and values "
+"are properly quoted if necessary (all options in Excel)."
+msgstr ""
+"Zorg ervoor dat het .CSV-bestand komma (,) of punt-komma (;) gescheiden "
+"waardes heeft en individuele cellen aanhanlingstekens hebben (allen opties "
+"in Excel)."
+
+#: rewards/forms.py:55
+msgid "Has header row"
+msgstr "Heeft een titel/header rij"
+
+#: rewards/forms.py:58
+msgid ""
+"Tick here if the first row of the file contains headings, not to be treated "
+"as data"
+msgstr ""
+"Aanvinken als de eerste rij van het CSV bestand titels bevat, die niet als "
+"data verwerkt moet worden"
+
+#: rewards/forms.py:68
+msgid "Have you uploaded an empty file?"
+msgstr "Heeft u een leeg bestand geupload?"
+
+#: rewards/forms.py:74
+msgid "Please check that it is a valid .CSV file, with delimiter ',' or ';'"
+msgstr ""
+"Zorg ervoor dat het .CSV-bestand komma (,) of punt-komma (;) gescheiden "
+"waardes heeft"
+
+#: rewards/forms.py:77
+#, python-brace-format
+msgid "Unable to read the .CSV file. {0}"
+msgstr "Niet in staat het .CSV bestand te lezen. {0}"
+
+#: rewards/forms.py:114
+msgid "Unique user identifier type"
+msgstr "Type Unieke Identificator gebruiker"
+
+#: rewards/forms.py:118
+msgid "Unique user identifier"
+msgstr "Unieke identificator"
+
+#: rewards/forms.py:122
+msgid ""
+"Which column in the .CSV file contains the unique user identifier? Each user "
+"must have this in his/her profile. Blank fields are not allowed."
+msgstr ""
+"Welke kolom in het .CSV bestand bevat de unieke identificatie van de "
+"spaarders? Elke spaarder die u wilt waarderen moet deze unieke identificator "
+"in zijn/haar profiel hebben. In deze kolom zijn lege velden niet toegestaan."
+
+#: rewards/forms.py:127
+msgid "Amount in Positoos"
+msgstr "Aantal punten"
+
+#: rewards/forms.py:131
+msgid ""
+"Which column in the .CSV file contains the number of Positoos to be awarded? "
+"This column must contain only numeric values without decimals. Empty cells "
+"or values of 0 are also not accepted."
+msgstr ""
+"Welke kolom in het .CSV-bestand bevat het aantal punten waarmee spaarders "
+"moeten worden gewaardeerd? Deze kolom moet uitsluitend numerieke waardes "
+"bevatten, zonder decimalen. Lege cellen of waardes van 0 worden ook niet "
+"geaccepteerd. "
+
+#: rewards/forms.py:141
+msgid ""
+"Which column in the .CSV file contains the  description of the transaction? "
+"If no description is specified in the .CSV file, users will see the default "
+"description 'Positoos earned in shop, business or institution' . "
+"Descriptions can not be longer than 75 characters."
+msgstr ""
+"Welke kolom in het .CSV-bestand bevat de omschrijving van de transactie? Als "
+"er geen omschrijving in het .CSV-bestand is opgegeven, zullen spaarders de "
+"standaard omschrijving zien 'Positoos gespaard bij winkelier, ondernemer of "
+"instelling'. Omschrijvingen kunnen niet langer zijn dan 75 karakters."
+
+#: rewards/forms.py:164
+msgid "Highlight amounts above"
+msgstr "Boven welk aantal punten is een transactie opvallend?"
+
+#: rewards/forms.py:167
+msgid ""
+"To reduce the risk of accidental large payments, you can specify a value "
+"above which transaction is striking. When you next click will show a pop-up "
+"window. There the number of ratings that exceed the value specified ."
+msgstr ""
+"Om het risico van onbedoeld hoge waarderingen te voorkomen, kunt u aangeven "
+"boven welke waarde een transactie opvallend is. Wanneer u op volgende klikt "
+"zal een pop-up scherm verschijnen. Daarin wordt het aantal waarderingen dat "
+"deze waarde overschrijdt vermeld."
+
+#: rewards/forms.py:173
+msgid "Donation percentage"
+msgstr "Percentage spaardoeldonatie"
+
+#: rewards/forms.py:198
+msgid "Column"
+msgstr "kolom"
+
+#: rewards/forms.py:249
+msgid "Column selections must be distinct"
+msgstr "U kunt niet dezelfde kolom selecteren voor meerdere velden"
+
+#: rewards/forms.py:276
+msgid ""
+"Please check the .csv file and ensure that you have selected the right "
+"columns.\n"
+"\n"
+"Affects row number(s):\n"
+msgstr ""
+"Pas het .CSV-bestand aan en controleer of u de juiste kolom heeft "
+"geselecteerd.\n"
+"\n"
+"Het betreft rijen:\n"
+
+#: rewards/forms.py:331
+msgid ""
+"Some of the values in the 'Amount in Positoos' column are not positive "
+"integers. "
+msgstr ""
+"Sommige cellen in de kolom ‘aantal punten’ hebben niet-numerieke waarden, "
+"zijn leeg, of hebben een waarde van 0."
+
+#: rewards/forms.py:343
+msgid ""
+"Some of the values in the 'Description' column exceed the maximum of 75 "
+"characters. "
+msgstr ""
+"Sommige cellen in de kolom ‘omschrijving’ overschrijden het maximum aantal "
+"van 75 karakters. "
+
+#: rewards/forms.py:349
+msgid "Some rows do not have enough columns. "
+msgstr "Sommige rijen hebben niet genoeg kolommen"
+
+#: rewards/forms.py:366
+msgid ""
+"Some of the values in the 'Email' column are not in the correct format. "
+msgstr ""
+"Sommige cellen in de kolom ‘e-mailadres’ hebben niet het juiste format. "
+
+#: rewards/forms.py:369
+msgid ""
+"Some of the values in the 'Card number' column are not in the correct "
+"format. "
+msgstr "Sommige cellen in de kolom ‘pasnummer’ hebben niet het juiste format. "
+
+#: rewards/forms.py:372
+msgid "Some of the values in the 'Qoinware User ID' column are not numeric. "
+msgstr ""
+"Sommige cellen in de kolom ‘Samen Doen gebruikers ID’ hebben niet-numerieke "
+"waarden. "
+
+#: rewards/models.py:15
+msgid "business"
+msgstr "bedrijfsnaam"
+
+#: rewards/models.py:17
+msgid "transaction percentage"
+msgstr "transacties percentage"
+
+#: rewards/models.py:19
+#, python-brace-format
+msgid "Percentage of each transaction to be rewarded in {0}"
+msgstr ""
+"Percentage van elke transactie dat als beloning in Positoos wordt uitbetaald "
+"{0}"
+
+#: rewards/models.py:22
+msgid "reward by percentage"
+msgstr "Belonen via percentage"
+
+#: rewards/models.py:23
+#, python-brace-format
+msgid ""
+"Reward will be automatically calculated as a percentage of the Euro "
+"transaction - percentage must be specified above. If not selected a fixed "
+"amount of {0} is to be entered."
+msgstr ""
+"Wanneer aangevinkt moet de operator het aankoopbedrag invoeren en wordt de "
+"beloning in punten automatisch berekend als percentage van het "
+"aankoopbedrag. Wanneer niet aangevinkt moet de operator zelf het aantal {0} "
+"invoeren"
+
+#: rewards/models.py:30 rewards/models.py:31
+msgid "Business reward settings"
+msgstr "terminal opties"
+
+#: rewards/models.py:45
+msgid "consumer"
+msgstr "Spaarder"
+
+#: rewards/models.py:47
+msgid "cause"
+msgstr "Spaardoel"
+
+#: rewards/models.py:49
+#, fuzzy
+#| msgid "transaction percentage"
+msgid "good causes donation percentage"
+msgstr "transacties percentage"
+
+#: rewards/models.py:70
+#, python-brace-format
+msgid "Donation percentage must not exceed {0}%"
+msgstr ""
+
+#: rewards/models.py:74
+#, python-brace-format
+msgid "Donation percentage must be at least {0}%"
+msgstr ""
+
+#: rewards/models.py:105
+msgid "default good cause"
+msgstr "Standaard spaardoel"
+
+#: rewards/templates/rewards/bulk_upload_form_1.html:11
+msgid ""
+"Please show which headers or columns of your .CSV file correspond to the "
+"Samen-Doen fields"
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_1.html:17
+msgid "Samen-Doen fields"
+msgstr "Samen-Doen velden"
+
+#: rewards/templates/rewards/bulk_upload_form_1.html:20
+msgid "Headers or columns in .CSV file"
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:11
+msgid "Confirm bulk rewards upload"
+msgstr "Bevestigen upload bulkwaardering"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:11
+msgid "Bulk rewards upload"
+msgstr "Bulk waardering upload"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:16
+msgid "Select file"
+msgstr "Kies CSV bestand"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:17
+msgid "Configure"
+msgstr "Stel in"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:18
+msgid "Confirm upload"
+msgstr "Bevestig upload"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:23
+#, python-format
+msgid ""
+"\n"
+"                <p>Found %(num_rows)s rows in the .CSV file. Click \"Make "
+"transactions\" to pay the rewards.</p>\n"
+"                <br/>\n"
+"                <strong>\n"
+"                <p style=\"color: green\">%(num_valid_rows)s of these rows "
+"can be actioned.</p>\n"
+"                <p>Total unique users to be rewarded: %(num_unique_users)s</"
+"p>\n"
+"                <p>Total amount to be paid: %(total_amount)s"
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:31
+msgid "Number of transactions where amount"
+msgstr "Aantal transacties waar bedrag"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:38
+msgid "rows could not be processed because the user could not be found."
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:39
+msgid "Affected row(s):"
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:44
+msgid "If you continue to make transactions these rows will be ignored."
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:69
+msgid "denotes a required field"
+msgstr ""
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:78
+msgid "Previous"
+msgstr "Vorige"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:81
+msgid "Make transactions"
+msgstr "Transacties uitvoeren"
+
+#: rewards/templates/rewards/bulk_upload_form_base.html:83
+msgid "Next"
+msgstr ""
+
+#: rewards/templates/rewards/search_cause.html:4
+msgid "Search results for"
+msgstr "Zoek resultaten voor"
+
+#: rewards/templates/rewards/search_cause.html:8
+msgid "causes found"
+msgstr "Gevonden spaardoelen"
+
+#: rewards/templates/rewards/search_cause.html:11
+#: rewards/templates/rewards/select_cause.html:11
+msgid "Currently committed with:"
+msgstr "Op dit moment gecommitteerd met:"
+
+#: rewards/templates/rewards/select_cause.html:4
+msgid "Select good cause"
+msgstr "Selecteer spaardoel"
+
+#: rewards/templates/rewards/select_cause.html:8
+msgid "good causes"
+msgstr "Spaardoelen"
+
+#: rewards/templates/rewards/update_donation_percentage_form.html:21
+#, fuzzy
+#| msgid "transaction percentage"
+msgid "Update percentage"
+msgstr "transacties percentage"
+
+#: rewards/utils.py:180
+msgid "Sum earned by user, business or institution"
+msgstr "Gespaard"
+
+#: rewards/utils.py:216
+#, python-brace-format
+msgid "{0}% Cause donation (chosen by {1})"
+msgstr "{0}% Spaardoeldonatie (door {1} gekozen)"
+
+#: rewards/views.py:197
+#, python-brace-format
+msgid "Donation percentage set to {0}%"
+msgstr "Het percentage is gewijzigd naar {0}%"
+
+#: rewards/views.py:200
+#, python-brace-format
+msgid "Donation percentage updated from {1}% to {0}%"
+msgstr "Het percentage is gewijzigd van {1}% naar {0}%"
+
+#: rewards/views.py:331
+#, python-brace-format
+msgid "Rewards applied successfully. Total amount paid: {0}"
+msgstr ""
+"Uw bulk waardering is succesvol verwerkt. In totaal is er {0} overgemaakt."
+
+#: rules/models.py:24
+msgid "equals"
+msgstr "is gelijk aan"
+
+#: rules/models.py:25
+msgid "greater than"
+msgstr "meer dan"
+
+#: rules/models.py:26
+msgid "less than"
+msgstr "minder dan"
+
+#: rules/models.py:27
+msgid "greater than or equal to"
+msgstr "meer dan of gelijk aan"
+
+#: rules/models.py:28
+msgid "less than or equal to"
+msgstr "minder dan of gelijk aan"
+
+#: rules/models.py:29
+msgid "not equal to"
+msgstr "niet gelijk aan"
+
+#: rules/models.py:30
+msgid "Use when comparing anything with (python) None (Python null)"
+msgstr ""
+
+#: rules/models.py:94
+msgid "Name of rule"
+msgstr "Naam van regel"
+
+#: rules/models.py:96
+msgid "Description of rule"
+msgstr "Beschrijving van regel"
+
+#: rules/models.py:99
+msgid "Which set of rules does this belong to"
+msgstr "Welke set regels hoort hierbij"
+
+#: rules/models.py:103
+msgid "Action to be run (if any), ie: cc3.rules.actions.Pay"
+msgstr "Actie om uit te voeren (if any), ie: cc3.rules.actions.Pay"
+
+#: rules/models.py:107
+msgid "123"
+msgstr "123"
+
+#: rules/models.py:111
+#, fuzzy
+msgid ""
+"Process model of instance passed to run_evaluate. Also used to identify "
+"related rules"
+msgstr ""
+"process model of instance passed to run_evaluate. also used to identify "
+"related rules from the process model"
+
+#: rules/models.py:116
+#, fuzzy
+msgid ""
+"Instance identifier, which model instance field passed to run_evaluate "
+"should be handed over to action"
+msgstr ""
+"instance identifier, which field of process model instance passed to "
+"run_evaluate should be handed over to action"
+
+#: rules/models.py:123
+#, fuzzy
+msgid ""
+"Extra kwargs as qualifier in case of multiple rows, for example {'parent': "
+"None}"
+msgstr ""
+"extra kwargs as qualifier in case of multiple rows, for example { 'parent': "
+"None }"
+
+#: rules/models.py:130
+msgid "If checked, exit rule chain if it evaluates true"
+msgstr ""
+
+#: rules/models.py:135
+msgid "If checked, exit rule chain if it evaluates false"
+msgstr ""
+
+#: rules/models.py:139
+msgid "If checked, only ever perform the action once"
+msgstr ""
+
+#: rules/models.py:143
+msgid "Sequence in which to run rules"
+msgstr ""
+
+#: rules/models.py:146
+msgid "Run rule as part of ruleset"
+msgstr ""
+
+#: rules/models.py:245
+msgid "Field"
+msgstr "Field"
+
+#: rules/models.py:247
+msgid ""
+"Name of (heading for) field in rule process_model where to get value for "
+"condition"
+msgstr ""
+
+#: rules/models.py:250
+msgid "Field Expression"
+msgstr ""
+
+#: rules/models.py:253
+#, python-brace-format
+msgid ""
+"If the field needs to be a parameter of an expression, use expression({0}) "
+"where {0} will be replaced with the field value, ie dateparse."
+"parse_datetime('{0}').month"
+msgstr ""
+
+#: rules/models.py:257
+msgid "Operator"
+msgstr "Operator"
+
+#: rules/models.py:261
+msgid ""
+"Operator to use for condition, field operator expression, ie price > "
+"(10*1.04)+4"
+msgstr ""
+
+#: rules/models.py:266
+msgid "Expression"
+msgstr ""
+
+#: rules/models.py:267
+msgid ""
+"(Python) expression for condition to evaluate and compare with, ie "
+"(125*1.05) or timezone.now().month"
+msgstr ""
+
+#: rules/models.py:363
+msgid ""
+"What value was in the instance_identifier field, ie which persoonnummer?"
+msgstr ""
+
+#: rules/models.py:376
+msgid "Which action was performed"
+msgstr ""
+
+#: rules/models.py:378
+msgid "What parameters were passed"
+msgstr ""
+
+#: rules/models.py:381
+msgid "Which RuleStatus caused this action to be run"
+msgstr ""
+
+#: rules/models.py:383
+msgid "What did the action return"
+msgstr "Wat was het resultaat van de actie"
+
+#: statistics/admin.py:24
+msgid "Select Dashboard"
+msgstr "Selecteer een Dashboard"
+
+#: statistics/models.py:32
+msgid "Table"
+msgstr "Tabel"
+
+#: statistics/models.py:33
+msgid "Bar Graph"
+msgstr ""
+
+#: statistics/models.py:34
+msgid "Multi Bar Graph"
+msgstr ""
+
+#: statistics/models.py:39
+msgid "Year and month ('YYYYMM')"
+msgstr ""
+
+#: statistics/models.py:45
+msgid "Focus of statistics area"
+msgstr ""
+
+#: statistics/models.py:47
+msgid "Order of dashboards"
+msgstr ""
+
+#: statistics/models.py:51 statistics/models.py:52
+msgid "Dashboard"
+msgstr ""
+
+#: statistics/models.py:68
+msgid "Title of the graph"
+msgstr ""
+
+#: statistics/models.py:72
+msgid "Placement in dashboard of graphs"
+msgstr ""
+
+#: statistics/models.py:74
+msgid "SQL to run to collect data for graph"
+msgstr ""
+
+#: statistics/models.py:77
+msgid ""
+"Key identifying SQL to run to collect data for graph (only used if no Raw "
+"SQL supplied)"
+msgstr ""
+
+#: statistics/models.py:80
+msgid "When set to true, raw_sql is run against the cyclos database"
+msgstr ""
+
+#: statistics/models.py:84
+msgid "Graph type or leave blank"
+msgstr ""
+
+#: statistics/models.py:86
+msgid "Width of graph on page"
+msgstr ""
+
+#: statistics/models.py:88
+msgid "Height of graph on page"
+msgstr ""
+
+#: statistics/models.py:91
+msgid "Special treatment for x values, or leave blank"
+msgstr ""
+
+#: statistics/models.py:94
+msgid "Output format for x values (depending on x type), or leave blank"
+msgstr ""
+
+#: statistics/models.py:96
+msgid "Limit the number of x columns shown"
+msgstr ""
+
+#: statistics/models.py:98
+msgid "Add a 'Totals' row to table"
+msgstr ""

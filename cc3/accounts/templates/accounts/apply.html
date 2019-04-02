@@ -1,0 +1,50 @@
+{% extends "accounts/base.html" %}
+{% load i18n %}
+{% load cmscontent_tags %}
+{% block title %}{% trans 'Credit Application' %}{% endblock %}
+
+
+
+{% block content %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->           
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+
+        {% include 'includes/messages.html' %}
+        {% if form %}
+
+        <p>
+            {% render_identifier 'accounts_apply_for_upgrade' %}
+        </p>
+          <form action="." method="post" class="element form">{% csrf_token %}
+             <fieldset>
+                <input id="id_name" name="name" type="hidden" value="{{form.name.value}}" />
+                <input id="id_email" name="email" type="hidden" value="{{form.email.value}}" />
+                <input id="id_body" name="body" type="hidden" value="dummy" />
+
+                <div class="element label{% if form.tnc.errors %} error{% endif %}">
+                    <div class="element field">
+                        <input id="id_tnc" name="tnc" type="checkbox"/>
+                        {% if form.tnc.errors %}<span>{% for error in form.tnc.errors %}{{error}}<br />{% endfor %}</span><br />{% endif %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <hr>
+                <button id="send_button" class="element button pull-right"><span class="l"></span><span class="c">{% trans 'Submit' %}</span><span class="r"></span></button>
+            </fieldset>                               
+          </form>
+          {% render_identifier 'accounts_apply_for_upgrade_below_form' %}
+
+        {% endif %}
+
+        
+    </div>
+{% endblock %}
+
+
+

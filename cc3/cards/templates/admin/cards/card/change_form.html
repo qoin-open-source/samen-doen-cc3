@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+    <li>
+        <a href="{% url 'admin:cyclos_cc3profile_change' original.owner.cc3_profile.pk %}">{% trans 'Related CC3Profile' %}</a>
+    </li>
+
+    {{ block.super }}
+{% endblock %}

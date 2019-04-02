@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Remove participant' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{% trans 'Remove participant' %}</h2>
+
+            <hr>
+
+            <form id="remove-participant-form" method="post" action="." class="element form">{% csrf_token %}
+                <p>{% blocktrans with name=object.profile.full_name title=object.campaign.title date=object.campaign.start_date %}
+                Are you sure you want to remove participant {{ name }} from the '{{ title}}' activity on {{ date }}
+                {% endblocktrans %}.</p>
+                <p>{% trans "The participant will be unsubscribed and informed by email." %}</p>
+                <p>{% trans "You can give a reason for the removal here and we'll include it in the email:" %}</p>
+                <div class="form-group {% if form.why_removed.errors %}has-error{% endif %}">
+                    {{ form.why_removed }}
+                </div>
+
+                <button class="btn btn-rounded btn-blue">{% trans 'Remove participant' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

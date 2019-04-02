@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if large_balance %}
+    <div class="notification">
+        <p style='width: 100%; background-image: none; padding-left: 10px;'><strong>{% blocktrans %}Your current balance is higher than {{limit}}. Please contact us to help find you spending opportunities.{% endblocktrans %}</strong></p>
+    </div>
+{% endif %}

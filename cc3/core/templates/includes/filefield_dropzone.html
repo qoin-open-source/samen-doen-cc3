@@ -1,0 +1,70 @@
+{% load i18n staticfiles pagination_tags thumbnail %}
+
+{# Dropzone.js configuration #}
+<script type="text/javascript">
+    var csrftoken = $.cookie('csrftoken');
+
+    var mockFile = { name: "Filename", size: 12345 };
+    var shownMaxFilesMessage = false;
+
+    // do not remove this - important for 'edit_ad.js'
+    var dropzone_ref;
+
+    Dropzone.autoDiscover = false;
+
+    $(".dropzone").dropzone({ url: "{{ image_endpoint }}",
+        maxFiles: {% if ad_images %}3 - {{ ad_images.count }}{% else %}3{% endif %},
+        parallelUploads: 100,
+        addRemoveLinks: true,
+        headers: {'X-CSRFToken': csrftoken},
+        acceptedFiles: "image/*",
+        paramName: "image",
+        removedfile: function(file) { {# Image removal handler, sends a 'DELETE' to the image endpoint #}
+            var name = file.name;
+            $.ajax({type: 'DELETE', url: "{{ image_endpoint }}",
+                    data: "id="+name, dataType:'html'});
+            var _ref;
+
+            var numOriginal = $(".dz-preview").not(".dz-success").not("dz-processing").not("dz-error").not("dz-started").size();
+            var $previewElement = $(file.previewElement);
+            var hasSuccess = $previewElement.hasClass("dz-success");
+            var hasProcessing = $previewElement.hasClass("dz-processing");
+            var hasError = $previewElement.hasClass("dz-error");
+            var hasStarted = $previewElement.hasClass("dz-started");
+            var removingUpload = hasSuccess || hasProcessing || hasError || hasStarted;
+
+            // if removing an original, can be one more maxFile
+            if (!removingUpload) numOriginal--;
+
+            this.options.maxFiles = 3 - numOriginal;
+
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        },
+        init: function() {
+            // create reference to dropzone globally, so we can check file upload status
+            dropzone_ref = this;
+
+            {# Showing currently uploaded images, if any. #}
+            {% for image in ad_images %}
+                var mockFile = {
+                    name: "{{ image.caption }}",
+                    size: {{ image.image.size|force_escape }}
+                };
+
+                this.emit("addedfile", mockFile);
+                {% with t=image.image|thumbnailer %}
+                this.emit("thumbnail", mockFile, "{{ t.profilepicture.url }}");
+                {% endwith %}
+            {% endfor %}
+        },
+        maxfilesexceeded: function(file) { 
+            this.removeFile(file); 
+            if (!shownMaxFilesMessage) {
+                alert(gettext('There is a maximum of three images for each advert'));
+                shownMaxFilesMessage = true;
+            }        
+        }  
+    });
+
+
+</script>

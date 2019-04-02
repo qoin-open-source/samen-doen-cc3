@@ -1,0 +1,117 @@
+{% extends "prizedraw/base.html" %}
+{% load i18n static %}
+
+{% block page-content %}
+    {% include 'includes/messages.html' %}
+
+    <div class="prizedraw">
+    <h4>{% trans 'The upcoming draw' %}</h4>
+    {% if next_draw %}
+        <div class="four columns alpha">
+            <h5>{% trans 'Your tickets' %}</h5>
+            <p>({{ next_draw.max_tickets_per_person }} {% trans "ticket maximum." %}<br/>
+            {% if max_tickets_to_buy %}{% trans "You can buy up to" %} {{ max_tickets_to_buy }}{% else %}{% trans "You have already bought the maximum" %}{% endif %})</p>
+            {% if my_tickets %}
+                <table class="zebra">
+                    <thead><tr><th>Ticket number</th></tr></thead>
+                    {% for ticket in my_tickets.all %}
+                        <tr><td>{{ ticket }}</td></tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="warning">{% trans 'No tickets yet' %}</div>
+            {% endif %}
+        </div>
+
+        <div class="seven columns omega">
+            <h5>{% trans 'The prizes' %}</h5>
+            <table>
+                {% for prize in next_draw.prizes.all %}
+                    <tr><td class="highlight">{{ prize.name }}:</td><td class="highlight">{{ prize.amount_summary }}</td></tr>
+                {% empty %}
+                    <div class="warning">{% trans 'Prizes not yet specified' %}</div>
+                {% endfor %}
+            </table>
+
+            <div class="bigger"><br/>The next draw is on: <span class="highlight">{{ next_draw.draw_ends }}</span></div>
+
+
+            {% if max_tickets_to_buy %}
+                <p><br/>{% trans "Ticket price:" %} {{ currency_symbol }} {{ next_draw.ticket_price }}</p>
+                <div class="buy_tickets">
+                <a class="element button" href="{% url 'prizedraw_buy_tickets' %}">
+                        <span class="l"></span>
+                        <span class="c">{% trans 'Buy tickets for the upcoming draw' %}</span>
+                        <span class="r"></span>
+                </a>
+                </div>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <div class="warning">{% trans 'No draw scheduled' %}</div>
+    {% endif %}
+
+    <hr/>
+
+    <h4>{% trans 'Your results in past draws' %}</h4>
+    <p>You've won <span class="highlight">{{ currency_symbol }} {{ my_winnings_to_date|floatformat:2|default:0 }}</span> to date<br/>
+       You've won <span class="highlight">{{ my_prizes_to_date|default:0 }}</span> prize{{ my_prizes_to_date|pluralize }} in total</p>
+
+    {% if my_past_tickets %}
+        <h6>5 latest tickets of {{ my_past_tickets|length }}</h6>
+        <table class="zebra">
+            <thead><tr><th>Ticket number</th> <th>Prize</th><th>Prize amount</th><th>Date of draw</th></tr></thead>
+
+            {% for ticket in my_past_tickets.all|slice:":5" %}
+                <tr>{% with prize=ticket.prizes.all.0 %}
+                    <td{% if prize %} class="highlight"{% endif %}>{{ ticket }}</td>
+                    <td{% if prize %} class="highlight"{% endif %}>{{ prize.name|default:'no' }}</td>
+                    <td{% if prize %} class="highlight"{% endif %}>{{ prize.amount_paid_summary }}</td>
+                    <td>{{ ticket.draw.draw_ends }}</td>
+                    {% endwith %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <p><br/><a href="{% url 'prizedraw_my_results' %}"><span class="highlight">{% trans 'Click here to see all your past results'%}</span></a></p>
+
+    {% else %}
+        <div class="warning">{% trans 'No tickets yet' %}</div>
+    {% endif %}
+
+
+    <hr/>
+
+    <h4>{% trans 'Overall winnings' %}</h4>
+
+    <p><span class="highlight">{{ currency_symbol }} {{ winnings_to_date|floatformat:2|default:0 }}</span>
+        winnings to date in the {{ lottery_name }}<br/>
+        And a total of <span class="highlight">{{ prizes_to_date|default:0 }}</span>
+        prizes and <span class="highlight">{{ winners_to_date|default:0 }}</span> winners</p>
+
+    {% if past_prizes %}
+        <table class="zebra">
+            <thead><tr><th>Year</th><th>Draw no.</th><th>Ticket</th><th>Prize</th><th>Prize amount</th><th>Date</th></tr></thead>
+
+            {% for prize in past_prizes.all|slice:":10" %}
+                {% with draw=prize.draw %}
+                <tr>
+                    <td>{{ draw.draw_ends.year|stringformat:"d" }}</td>
+                    <td>{{ draw.draw_number }}</td>
+                    <td{% ifequal prize.winning_ticket.purchased_by user %} class="highlight"{% endifequal %}>{{ prize.winning_ticket }}</td>
+                    <td>{{ prize.name }}</td>
+                    <td>{{ prize.amount_paid_summary }}</td>
+                    <td>{{ draw.draw_ends|date }}</td>
+                </tr>
+                {% endwith %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="warning">{% trans 'No draws yet' %}</div>
+    {% endif %}
+    <p>&nbsp;</p>
+    <p>By entering the Brixton Bonus you are agreeing to the <a href="http://brixtonpound.org/bonus-terms" target="_blank">terms and conditions of entry</a></p>
+    <p>Any questions? <a href="http://brixtonpound.org/bonus-faqs" target="_blank">FAQs here.</a></p>
+    </div>
+{% endblock %}

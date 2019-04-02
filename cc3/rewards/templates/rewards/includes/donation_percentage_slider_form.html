@@ -1,0 +1,63 @@
+{% load i18n static %}
+
+{% with slider_min=form.min_percent|default_if_none:0 slider_max=form.max_percent|default_if_none:100 %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  #custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+  }
+  #custom-handle.ui-state-default {
+    background: #009CDD;
+    border: 1px solid #1c75bc;
+    color: #ffffff;
+  }
+  #custom-handle.ui-state-active {
+    background: #f6f6f6;
+    border: 1px solid #c5c5c5;
+    color: #454545;
+  }
+  div#slider {
+    margin: 20px;
+  }
+  div.slider-legend {
+    margin-top: -10px;
+  }
+  div.slider-10 {
+    width: 40%;
+  }
+  div.slider-20 {
+    width: 60%;
+  }
+  div.slider-30 {
+    width: 80%;
+  }
+  </style>
+
+    <script src="{% static 'js/lib/jquery-ui.min.js' %}"></script>
+    <script>
+  $( function() {
+    var handle = $( "#custom-handle" );
+    $( "#slider" ).slider({
+      value: $('#id_donation_percent').val(),
+      step: 10,
+      min: {{ slider_min }},
+      max: {{ slider_max }},
+      animate: "fast",
+      create: function() {
+        handle.text( $( this ).slider( "value" ) + '%' );
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value + '%');
+        $('#id_donation_percent').val(ui.value);
+      }
+    });
+  } );
+    </script>
+
+{% endwith %}

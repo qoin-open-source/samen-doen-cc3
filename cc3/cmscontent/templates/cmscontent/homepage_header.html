@@ -1,0 +1,8 @@
+<h1 class="homepage-title">{{ instance.title|safe }}</h1>
+<div class="homepage-paragraph">
+    <p>{{ instance.paragraph|safe }}</p>
+
+    {% if instance.header_link %}
+        <a href="{{ instance.header_link }}" class="element button"><span class="l"></span><span class="c">{{ instance.button_link_text }}</span><span class="r"></span></a>
+    {% endif %}
+</div>

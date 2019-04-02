@@ -1,0 +1,15 @@
+/* Fix for embedded Google Maps widget (navigation) */
+.gmap img {
+     max-width: none;
+}
+
+#businesses_map {
+    width: 100%;
+    height: 500px;
+}
+
+.ui-geopicker {
+
+    width: 500px;
+    height: 500px;
+}

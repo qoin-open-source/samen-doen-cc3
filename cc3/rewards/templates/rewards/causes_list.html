@@ -1,0 +1,41 @@
+{% extends "accounts/base.html" %}
+{% load i18n static thumbnail %}
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div> {# end sidebar menu #}
+    </div> {# end five columns sidebar #}
+
+    <div class="eleven columns">
+        {% block top_page %}
+        {% endblock %}
+
+        {% if causes %}
+            <table>
+                <tbody>
+                {% for item in causes %}
+                    {% if forloop.counter0|divisibleby:4 %}<tr>{% endif %}
+                            <td>
+                                <div title="{{ item.cc3_profile.company_description }}">
+                                    <a href="{% url 'join_cause' item.pk %}">
+                                    {% if item.cc3_profile.get_picture %}
+                                        {% thumbnail item.cc3_profile.picture "100x100" crop="center" as im %}
+                                            <img id="cause-image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                    {% else %}
+                                        {{ item.cc3_profile.full_name }}
+                                    {% endif %}</a>
+                                    <p>{{ item.cc3_profile.business_name }}</p>
+                                </div>
+                            </td>
+                    {% if forloop.counter|divisibleby:4 %}</tr>{% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {# Pagination #}
+        {% include 'includes/paginator.html' %}
+    </div>
+{% endblock %}

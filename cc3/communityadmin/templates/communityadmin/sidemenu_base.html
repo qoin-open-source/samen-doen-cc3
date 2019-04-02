@@ -1,0 +1,54 @@
+{% load i18n staticfiles thumbnail %}
+
+{% if user.is_authenticated %}
+    {% with user_cc3_profile=user.get_cc3_profile %}
+        <ul class="sbmenu">
+            {% url 'communityadmin_ns:memberlist' as memberlist_url %}
+            <li class="members{% ifequal request.path memberlist_url %} active{% endifequal %}">
+                <a href="{{ memberlist_url }}"><span></span>{% trans 'Members' %}</a>
+            </li>
+
+            {% url 'communityadmin_ns:changepassword' cc3_profile.user.username as changepassword_url %}
+            {% url 'communityadmin_ns:changegroup' cc3_profile.user.username as changegroup_url %}
+            {% url 'communityadmin_ns:membertransactions' cc3_profile.user.username as membertransactions_url %}
+            {% url 'communityadmin_ns:memberwantsoffers' cc3_profile.user.username as memberwantsoffers_url %}
+            {% if request.path == changepassword_url or request.path == changegroup_url or request.path == membertransactions_url or request.path == memberwantsoffers_url %}
+                <li class="members active subitem">
+                    <a href="{% url 'communityadmin_ns:editmember' username=cc3_profile.user.username %}">{{ cc3_profile.user.get_profile.full_name }}</a>
+                </li>
+            {% endif %}
+
+            {% url 'communityadmin_ns:transactions' as transactions_url %}
+            <li class="transactions{% ifequal request.path transactions_url %} active{% endifequal %}">
+                <a href="{{ transactions_url }}"><span></span>{% trans 'Transactions' %}</a>
+            </li>
+
+            <li class="wants{% ifequal sbmenu 'wants' %} active{% endifequal %}">
+                <a href="{% url 'communityadmin_ns:wantsoffers' %}"><span></span>{% trans 'Wants and offers' %}</a>
+            </li>
+            {# Community admins may add and manage ads if the users within the groupset are allowed to #}
+
+            {% ifequal sbmenu 'wants' %}
+                <li class="members subitem"><a href="{% url 'communityadmin_ns:place-ad' %}">{% trans 'Place Ad' %}</a></li>
+            {% endifequal %}
+
+            {% ifequal sbmenu 'place_ad' %}
+                <li class="members active subitem"><a href="{% url 'communityadmin_ns:place-ad' %}">{% trans 'Place Ad' %}</a></li>
+            {% endifequal %}
+
+            {% ifequal sbmenu 'suboffer' %}
+                <li class="members subitem"><a href="{% url 'communityadmin_ns:place-ad' %}">{% trans 'Place Ad' %}</a></li>
+                <li class="members active subitem">
+                    <a href="{% url 'communityadmin_ns:edit_ad' ad.id %}">{{ ad.title }}</a>
+                </li>
+            {% endifequal %}
+
+            {% url 'communityadmin_ns:contentlist' as contentlist_url%}
+            <li class="content{% ifequal request.path contentlist_url %} active{% endifequal %}">
+                <a href="{{ contentlist_url }}"><span></span>{% trans 'Content' %}</a>
+            </li>
+        </ul>
+    {% endwith %}
+
+    {% block categories_links %}{% endblock %}
+{% endif %}

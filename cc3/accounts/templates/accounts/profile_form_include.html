@@ -1,0 +1,220 @@
+{% load i18n staticfiles thumbnail %}
+
+{% include 'includes/messages.html' %}
+
+            <div id="update_profile_form_errors" class="hide"></div>  
+            <form id="update_profile_form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+
+                <fieldset>
+
+                    <div class="element label">
+                        <label>{% trans 'Profile picture' %} <a href="#" class="element tp" title="{% trans 'Upload a profile image' %}"></a></label>
+                        <div class="field profile-picture">
+                            <div class="element innershadow pull-left">
+                                <div class="shadow"></div>
+                                
+                                {% if cc3_profile.get_picture %}
+                                <img class="" alt="{% trans 'Profile picture' %}" src="{{cc3_profile.picture|thumbnail_url:'profilepicture'}}">
+                                {% else %}
+                                <img class="" alt="{% trans 'Profile picture' %}" src="{% static 'images/backgrounds/avatar-placeholder.png' %}">
+                                {% endif %}
+
+                            </div>
+
+                            <input id="id_picture" name="picture" type="file" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Community' %}</label>
+                        <div class="field">
+                            <div class="element select">
+                                {{ form.community }}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Email' %} *</label>
+                        <div class="field">
+                            <div class="element">
+                                <input class="disabled" type="text" disabled="disabled" value="{{ cc3_profile.user.email }}"/>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label {% if form.business_name.errors %}error{% endif %}">
+                        <label>{% trans 'Business name' %} *</label>
+                        <div class="field">
+                            <input type="text" id="id_business_name" maxlength="255" name="business_name" value="{{form.business_name.value}}" class="input-text large">
+                        <span class="error">
+                            {% for error in form.business_name.errors %}
+                            {{ error }}<br/>
+                            {% endfor %}
+                        </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Contact person' %} *</label>
+                        <div class="field">
+                            <div class="element med">
+                                <input type="text" placeholder="{% trans 'First name' %}" id="id_first_name" maxlength="255" name="first_name" value="{{form.first_name.value}}" class="input-text med inline" />
+                            </div>
+                            <div class="element med">
+                                <input type="text" placeholder="{% trans 'Last name' %}" id="id_last_name" maxlength="255" name="last_name" value="{{form.last_name.value}}" class="input-text med inline" />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Job Title' %}</label>
+                        <div class="field">
+                            <input type="text" placeholder="{% trans 'Job Title' %}" id="id_job_title" maxlength="255" name="job_title" value="{{form.job_title.value}}" class="input-text large">
+
+<!--                            <input type="text" placeholder="{% trans 'Email' %}" id="id_email" name="email" value="{{form.email.value}}" class="input-text med inline">
+                            <hr> -->
+<!--
+                            <a href="#" class="element add-button reverse">+ REmove contact</a>
+                            <hr>
+                            <a href="#" class="element add-button pull-right">+ Add contact</a>
+-->
+                            <div class="clearfix"></div>
+                            <hr>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div class="element label">
+                        <label>{% trans 'Country' %}</label>
+                        <div class="field">
+                            <div class="element select">
+                                {{form.country}}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'City' %}</label>
+                        <div class="field">
+                            <input id="id_city" name="city" type="text" class="input-text large" value="{{form.city.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Address' %} *</label>
+                        <div class="field">
+                            <input id="id_address" name="address" type="text" class="input-text large" value="{{form.address.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Postal code' %}</label>
+                        <div class="field">
+                            <input id="id_postal_code" name="postal_code" type="text" class="input-text large" value="{{form.postal_code.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Registration number' %}</label>
+                        <div class="field">
+                            <input id="id_registration_number" name="registration_number" type="text" class="input-text large" value="{{form.registration_number.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Phone number' %}</label>
+                        <div class="field">
+                            <input id="id_phone_number" name="phone_number" type="text" class="input-text large" value="{{form.phone_number.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Mobile number' %} *</label>
+                        <div class="field">
+                            <input id="id_mobile_number" name="mobile_number" type="text" class="input-text large" value="{{form.mobile_number.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="element label">
+                        <label>{% trans 'Company website' %}</label>
+                        <div class="field">
+                            <input id="id_company_website" name="company_website" type="text" class="input-text large" value="{{form.company_website.value}}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <hr>
+
+                    <div class="element label">
+                        <label>{% trans 'Company description' %}</label>
+                        <div class="field">
+                            <textarea id="id_company_description" name="company_description" class="input-text large" cols="30" rows="10" placeholder="{% trans 'Give a clear indication of your areas of expertise so that other companies can easily find you.' %}">{{form.company_description.value}}</textarea>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+ <div class="element label filter-box{% if form.categories.errors %} error{% endif %}">
+        <label for="id_categories">{% trans "Company categories" %} *</label>
+        <div class="field" id="id_categories">
+            <div class="element checkbox-container checkbox-tree small">
+	            {{ form.categories }}
+                {% if form.categories.errors %}
+	                {% for err in form.categories.errors %}
+	                    <span class="error">{{ err }}</span><br />
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+                <!--
+                <div class="element label">
+                        <label>Password</label>
+                        <div class="field">
+                            <a href="{% url 'auth_password_change' %}" class="element button"><span class="l"></span><span class="c">CHANGE PASSWORD</span><span class="r"></span></a>
+                        </div>
+                        <div class="clearfix"></div>
+                </div>
+
+            -->
+<!--
+                            <div id="change_password" class="hide">
+                                <h4>Change Password</h4>
+                                <input type="text" class="input-text med" placeholder="Old password" value="">
+                                <input type="text" class="input-text med pull-left" placeholder="New password" value="">
+                                <input type="text" class="input-text med pull-left" placeholder="Confirm new password" value="">
+                                <div class="clearfix"></div>
+                                <button class="element button"><span class="l"></span><span class="c">SAVE CHANGES</span><span class="r"></span></button>
+
+
+                                <h4>Change Email address</h4>
+                                <input type="text" class="input-text med pull-left" placeholder="Current email address" value="">
+                                <input type="text" class="input-text med pull-left" placeholder="New email address" value="">
+                                <div class="clearfix"></div>
+                                <button class="element button"><span class="l"></span><span class="c">SAVE CHANGES</span><span class="r"></span></button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                    -->
+
+                    <hr>
+                    <div id="update_profile_form_spinner" class="element spinner hide pull-right"></div>
+                    <button class="element button pull-right" id="update_profile_form_button"><span class="l"></span><span class="c">{% trans 'SAVE PROFILE CHANGES' %}</span><span class="r"></span></button>
+
+                </fieldset>
+            </form>

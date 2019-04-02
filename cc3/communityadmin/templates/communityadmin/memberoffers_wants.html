@@ -1,0 +1,55 @@
+{% extends "marketplace/base.html" %}
+{% load i18n staticfiles thumbnail %}
+{% block title %}{% trans 'Member Wants and offers' %}{% endblock %}
+
+{% block content %}
+
+<div class="five columns">
+    <div class="block sidebar-menu not-mobile">
+        {% include 'communityadmin/sidemenu.html' %}
+    </div><!-- end sidebar menu -->
+</div><!-- end five columns sidebar -->
+                
+
+<div class="eight columns">
+    <h2>{% trans 'Member Wants and Offers' %}</h2>
+    <h3><a href="{% url 'communityadmin_ns:editmember' username=cc3_profile.user.username %}">{{ cc3_profile }}</a></h3>
+{% include 'includes/messages.html' %}
+<form method="get">
+<div class="element typeahead-div">
+    <input name="q" class="search" type="text" placeholder="{% trans 'Search' %}" value="{{ request.GET.q }}"/>
+    <a href="{% url 'communityadmin_ns:memberwantsoffers' username=cc3_profile.user.username %}" class="reset">reset</a>
+</div>
+</form>
+
+
+    <table class="listing account zebra">
+        <thead>
+            <tr>
+                <th>{% trans 'Image' %}</th>
+                <th>{% trans 'Contact' %}<!--<a class="sort" href="#"></a>--></th>
+                <th>{% trans 'Title' %}</th>
+                <!--<th class="not-mobile">{% trans 'Description' %}</th>-->
+                <th>{% trans 'Price' %}</th>
+                <th>{% trans 'Type' %}</th>
+                <th>{% trans 'Views' %}</th>
+                <th>{% trans 'Status' %}</th>
+                <th></th><!-- tools -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for ad in ads %}
+              {% include 'communityadmin/offer_want_row.html' with via="?via=memberoffers" %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% with objects=ads %}
+        {% include 'includes/paginator.html' %}
+    {% endwith %}
+</div>
+
+
+{% endblock %}
+
+

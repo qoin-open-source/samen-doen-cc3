@@ -1,0 +1,12 @@
+<div class="element label filter-box{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}{% block extra_field_classes %}{% endblock %}">
+  <label for="{{field.name}}">{{field.label|safe}}{% if field.field.required or required %} *{% endif %}</label>
+  <div class="field">
+    {% block field %}
+      <div class="element checkbox-container checkbox-tree{% if 'med' in field.field.widget.attrs.class %} med{% endif %}{% if 'large' in field.field.widget.attrs.class %} large{% endif %}{% if 'size' %} {{ size }}{% endif %}">
+        {{ field }}
+        {% include 'fragments/forms/_field_errors.html' %}
+      </div>
+    {% endblock %}
+  </div>
+  <div class="clearfix"></div>
+</div>

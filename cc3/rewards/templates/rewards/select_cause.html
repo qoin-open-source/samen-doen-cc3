@@ -1,0 +1,35 @@
+{% extends "rewards/causes_list.html" %}
+{% load i18n static thumbnail %}
+
+{% block title %}{% trans "Select good cause" %}{% endblock %}
+
+
+{% block top_page %}
+    <h4>{{ page_obj.paginator.count }} {% trans "good causes" %}</h4>
+
+    {% if request.user.usercause.cause %}
+        {% trans "Currently committed with:" %}
+        {% if request.user.usercause.cause.cc3_profile.get_picture %}
+            {% thumbnail request.user.usercause.cause.cc3_profile.picture "100x100" crop="center" as im %}
+            <img id="cause-image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% else %}
+            {{ request.user.usercause.cause.cc3_profile.full_name }}
+        {% endif %}
+        {{ request.user.usercause.cause.cc3_profile.business_name }}
+    {% endif %}
+
+    <ul class="element credits">
+        <li>
+            <div class="search">
+                <div class="search-box">
+                    <form action="{% url 'search_cause' %}" method="get">
+                        {% csrf_token %}
+
+                        <input name="query" class="txt" type="text" style="background-color: #FFFFCC;">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </li>
+    </ul>
+{% endblock %}

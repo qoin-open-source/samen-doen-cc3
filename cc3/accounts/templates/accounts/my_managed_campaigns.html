@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail cc3_tags %}
+
+{% block title %}{% trans 'My activities' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>{% trans 'Activities summary' %}</h2>
+
+        {% include 'includes/messages.html' %}
+
+        <div>
+            <table class="table rwd-table">
+                <thead>
+                    <tr class="table-head">
+                        <th>{% trans "Title" %}</th>
+                        <th>{% trans "Start" %}</th>
+                        <th>{% trans "End" %}</th>
+                        <th>{% trans "Participants needed" %}</th>
+                        <th>{% trans "Signed up" %}</th>
+                        <th>{% trans "Reward p.p." %}</th>
+                        <th>{% trans "Maximum cost" %}</th>
+                        <th>{% trans "Actual cost" %}</th>
+                        <th>{% trans "Contact name" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th>{% trans "Rewards" %}</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in object_list %}
+                    <tr>
+                        <td><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></td>
+                        <td>{{ item.start_date }}<br/>{{ item.start_time }}</td>
+                        <td>{{ item.start_date }}<br/>{{ item.end_time }}</td>
+                        <td>{{ item.max_participants }}</td>
+                        <td>{{ item.participants.count }}{% if item.is_editable and item.participants.count %} <a href="{% url 'accounts-manage-campaign-participants' item.pk %}">Manage</a>{% endif %}</td>
+                        <td>{% if item.reward_per_participant %}<span><i class="icon-samendoen"></i>{{ item.reward_per_participant|floatformat:"0" }}</span>{% else %}-{% endif %}</td>
+                        <td>{% if item.max_reward_payable %}<span><i class="icon-samendoen"></i>{{ item.max_reward_payable|floatformat:"0" }}</span>{% else %}-{% endif %}</td>
+                        <td>{% if item.has_finished and item.rewards_all_paid %}<span><i class="icon-samendoen"></i>{{ item.total_rewards_paid|floatformat:"0" }}</span>{% else %}-{% endif %}</td>
+                        <td>{{ item.contact_name }}</td>
+                        <td>{{ item.pretty_status }}</td>
+                        <td>{% if item.has_finished and item.participants.count %}<a href="{% url 'accounts-manage-campaign-rewards' item.pk %}">{% if item.rewards_all_paid %}{% trans "Paid" %}{% else %}{% trans "Pay now" %}{% endif %}</a>{% endif %}</td>
+                        <td>{% if item.is_editable %}<a href="{% url 'accounts-edit-campaign' item.pk %}" title="{% trans 'Edit activity' %}"><i class="icon-edit"></i></a>{% else %}&nbsp;{% endif %}</td>
+                        <td>{% if item.is_live %}<a href="{% url 'accounts-cancel-campaign' item.pk %}" title="{% trans 'Cancel activity' %}"><i class="icon-trash"></i></a>{% else %}&nbsp;{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            {% if not object_list %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans "You haven't created any activities yet." %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+    {% include 'includes/paginator.html' %}
+{% endblock %}

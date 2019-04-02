@@ -1,0 +1,9 @@
+<a {% if instance.block_link %}href="{{ instance.block_link }}"{% else %}href="#" onclick="return false;"{% endif %}>
+    <div class="inner">
+        {% if instance.icon %}
+        <span class="icons {{ instance.icon }}"></span>
+        {% endif %}
+        <h3>{{ instance.title|safe }}</h3>
+        <p>{{ instance.sub_title|safe }}</p>
+    </div>
+</a>

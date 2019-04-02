@@ -1,0 +1,19 @@
+{% extends "accounts/disable_ad.html" %}
+{% load i18n %}
+
+{% block back-link %}
+<a class="element button" href="{% url 'communityadmin_ns:wantsoffers' %}">
+    <span class="l"></span>
+    <span class="c">{% trans 'Back to list' %}</span>
+    <span class="r"</span>
+</a>
+{% endblock %}
+
+{% block sidebar-menu %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'communityadmin/sidemenu.html' %}
+            </div>
+        </div>
+
+{% endblock %}

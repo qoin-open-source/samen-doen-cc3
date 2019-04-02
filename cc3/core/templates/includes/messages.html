@@ -1,0 +1,25 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if 'error' in message.tags %}
+            <div class="element form-error">
+                <p>{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</p>
+            </div>
+        {% else %}
+            {% if 'info' in message.tags %}
+            <div class="element info-box">
+                <p>{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</p>
+            </div>
+            {% else %}
+                {% if 'warning' in message.tags %}
+                <div class="element form-error">
+                    <p>{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</p>
+                </div>
+                {% else %}
+                <div class="element{% if message.tags %} {{ message.tags }}{% endif %}">
+                    <p>{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</p>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}

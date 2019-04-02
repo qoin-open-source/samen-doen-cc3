@@ -1,0 +1,29 @@
+{% load i18n staticfiles thumbnail %}
+
+{# Required: ad #}
+
+           <tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %} status-{{ ad.status }}">
+                <td class="image">
+                    {% ifequal ad.adimage_set.all.count 0 %}
+                        <img src="{% static 'images/backgrounds/avatar-placeholder.png' %}" width="44" height="44" alt="logo" />
+                    {% else %}
+                        <img src="{{ ad.adimage_set.all.0.image|thumbnail_url:'marketplacethumb' }}" alt="" />
+                    {% endifequal%}
+                </td>
+                <td class="contact">
+                    <a href="{% url 'communityadmin_ns:editmember' username=ad.created_by.user.username %}">{{ ad.created_by }}</a>
+                </td>
+                <td class="title"><a href="{% url 'communityadmin_ns:edit_ad' ad.id %}{{ via }}">{{ ad.title }}</a></td>
+                <!--<td class="descr not-mobile">{{ ad.description|safe }}</td>-->
+                <td class="number"><span class="icon">{{currency_symbol}}</span>&nbsp;{{ ad.get_price }}</td>
+                <td class="type">{% with ad.adtype.id as adtype_id %}{% ifequal adtype_id 1 %}{% trans 'Offer' %}{% endifequal %}{% ifequal adtype_id 2 %}{% trans 'Want' %}{% endifequal %}{% endwith %}</td>
+                <td class="views">{{ ad.views }}</td>
+                <td class="status">
+                    <span class="{{ ad.status }}">{{ ad.get_status_display }}</span>
+                </td>
+                <td class="edit-buttons not-mobile">
+                    <ul class="item-menu">
+                        <li class="edit"><a href="{% url 'communityadmin_ns:edit_ad' ad.id %}{{ via }}">{% trans 'Edit' %}</a></li>
+                    </ul>
+                </td>
+            </tr>

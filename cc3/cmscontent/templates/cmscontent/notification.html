@@ -1,0 +1,8 @@
+{% load i18n %}
+<div class="notification">
+    <p>
+        {% if instance.date %}<strong>{{ instance.date|date:"l j F" }} </strong>{% endif %}{{ instance.notice|safe }}
+        {% if instance.info_link %}<a href="{{ instance.info_link }}">{% trans "More info" %}</a>{% endif %}
+    </p>
+    {% if instance.notification_link %}<a href="{{ instance.notification_link }}" class="notification-link">{{ instance.notification_link_label }}</a>{% endif %}
+</div>

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block extrabody %}class="page-with-sidebar main-content about"{% endblock %}
+{% block extramainclasses %} content-page{% endblock %}
+
+{% block content %}
+        <div class="five columns">
+           {% include 'includes/sidemenu.html' %}
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+
+            <div class="inner">
+
+                <h1 class="page-title">{% page_attribute "page_title" %}</h1>
+                {% include 'includes/messages.html' %}
+
+                <div class="row add_first add_last">
+
+                    <div class="content-third">
+                        <div class="inner">
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    {% placeholder 'content-col-1' %}
+                                </div>
+                            </div>
+
+                        </div><!-- end inner -->
+
+                    </div><!-- content-third -->
+
+                    <div class="content-third">
+                        <div class="inner">
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    {% placeholder 'content-col-2' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- content-third -->
+                    
+                    <div class="content-third">
+                        <div class="inner">
+
+                            <div class="item">
+                                <div class="inner-item placeholder">
+                                    {% placeholder 'content-col-3' %}
+                                </div>
+                            </div>
+
+                        </div><!-- end inner -->
+
+                    </div><!-- content-third -->
+
+
+                </div><!-- end row -->
+            </div>
+        </div>
+{% endblock %}

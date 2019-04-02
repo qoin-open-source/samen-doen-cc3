@@ -1,0 +1,67 @@
+{% load i18n %}
+
+{# Modal popups for blocking and unblocking card, #}
+<div class="modal fade" id="modal-block-card-{{ card.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                <h4 class="modal-title" id="myModalLabel-first">{% trans 'Block card' %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="highlight" id="block_card_send_highlight">
+                    {% blocktrans with card_desc=card.number.number %}Are you sure you want to block card number {{ card_desc }}?{% endblocktrans %}
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                <button type="button" id="confirm_block_card_{{ card.pk }}" class="btn btn-rounded btn-green">{% trans 'Block Card' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-unblock-card-{{ card.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                <h4 class="modal-title" id="myModalLabel-old">{% trans 'Unblock card' %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="highlight" id="unblock_card_send_highlight">
+                    {% blocktrans with card_desc=card.number.number %}Are you sure you want to unblock card number {{ card_desc }}?{% endblocktrans %}
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                <button type="button" id="confirm_unblock_card_{{ card.pk }}" class="btn btn-rounded btn-green">{% trans 'Unblock Card' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{# modal block/unblock confirmations -- need to be within the for loop #}
+<script type="text/javascript">
+    $(function() {
+        {# 'Submit' button clicked. #}
+        $('#block_card_form_button_{{ card.pk }}').on('click', function()  {
+            {# Show the modal confirmation form. #}
+            $('#modal-block-card-{{ card.pk }}').modal('show');
+        });
+        $('#unblock_card_form_button_{{ card.pk }}').on('click', function()  {
+            {# Show the modal confirmation form. #}
+            $('#modal-unblock-card-{{ card.pk }}').modal('show');
+        });
+
+        {# POST the contents of the form. #}
+        $('#confirm_block_card_{{ card.pk }}').click(function() {
+            $('#block_card_form_{{ card.pk }}').submit();
+        });
+        $('#confirm_unblock_card_{{ card.pk }}').click(function() {
+            $('#unblock_card_form_{{ card.pk }}').submit();
+        });
+    });
+</script>

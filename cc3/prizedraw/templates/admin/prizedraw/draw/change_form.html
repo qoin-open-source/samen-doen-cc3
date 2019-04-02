@@ -1,0 +1,12 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+    {% if original.can_award_prizes %}
+    <li>
+        <a href="{% url 'admin:prizedraw_draw_award_prizes' pk=object_id %}">{% trans 'Generate winning numbers' %}</a>
+    </li>
+{% endif %}
+
+    {{ block.super }}
+{% endblock %}

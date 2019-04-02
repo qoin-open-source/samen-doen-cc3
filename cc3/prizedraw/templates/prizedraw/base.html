@@ -1,0 +1,18 @@
+{% extends "accounts/base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ lottery_name }}{% endblock %}
+
+
+{% block content %}
+    <div class="five columns">
+        <div class="block sidebar-menu not-mobile">
+            {% include 'includes/accounts_sidemenu.html' %}
+        </div> {# end sidebar menu #}
+    </div> {# end five columns sidebar #}
+
+    <div class="eleven columns">
+        <h3>{{ lottery_name }}</h3>
+        {% block page-content %}{% endblock %}
+    </div>
+{% endblock %}

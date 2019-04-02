@@ -1,0 +1,17 @@
+{% extends 'fragments/forms/_field.html' %}
+{% load tz i18n staticfiles map_tags %}
+{% block field %}
+<label class="long">{% trans "Set your location for the Businesses map by clicking on the map" %}</label>
+<div id="map_id_{{ lat.name }}{{ long.name}}" class="ui-geopicker gmap">
+</div>
+{% comment %}Use periods as decimal separator {% endcomment %}
+<input type="hidden" value="{% if lat.value %}{{ lat.value | stringformat:'f' }}{% endif %}" name="{{ lat.name }}">
+<input type="hidden" value="{% if long.value %}{{ long.value | stringformat:'f' }}{% endif %}" name="{{ long.name }}">
+<script type="text/javascript">
+$(document).ready(function(){
+    var map = qoinware.geo.FormMap("map_id_{{ lat.name }}{{ long.name}}", "{{ lat.name }}", "{{ long.name }}", {zoom: 12});
+    map.setCenterAddress("{% full_address street city num_street country %}");
+    map.centralize();
+})
+</script>
+{% endblock %}

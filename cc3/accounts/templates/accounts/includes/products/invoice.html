@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<h2>{% trans 'My products' %}</h2>
+
+<h3>{{ object.invoice_date|date:"M d, Y" }} &mdash; {{ object.invoicing_company }}</h3>
+
+{% if object.items.all.count < 1 %}
+    {% trans 'There are no items on this invoice' %}
+{% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="40%">&nbsp;</th>
+                <th width="20%" class="number">{% trans 'Unit price (ex. tax)' %}</th>
+                <th width="20%" class="number">{% trans 'Line total (ex. tax)' %}</th>
+                <th width="20%" class="number">{% trans 'Line total (incl. tax)' %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in object.items.all %}
+                <tr>
+                    <td>{{ item.quantity }} x {{item.assigned_product.product.name }}</td>
+                    <td class="number">{{ item.unit_price_ex_tax }}</td>
+                    <td class="number">{{ item.line_total_ex_tax }}</td>
+                    <td class="number">{{ item.line_total_incl_tax }}</td>
+                </tr>
+                {% if item.discount_amount_ex_tax %}
+                    <tr>
+                        <td>{{ item.discount_description }}</td>
+                        <td class="number">&nbsp;</td>
+                        <td class="number">{{ item.discount_amount_ex_tax }}</td>
+                        <td class="number">{{ item.discount_amount_incl_tax }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+            <tr class="total-line">
+                <td class="no-border">&nbsp;</td>
+                <td><strong>{% trans 'Total' %}:</strong></td>
+                <td class="number"><strong>{{ object.invoice_total_ex_tax|floatformat:2 }}</strong></td>
+                <td class="number"><strong>{{ object.invoice_total_incl_tax|floatformat:2 }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}

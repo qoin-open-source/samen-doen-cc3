@@ -1,0 +1,22 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' 'cards' %}">Cards</a>
+    &rsaquo; <a href="{% url 'admin:cards_cardnumber_changelist' %}">Card number</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div>
+            <input type="submit" value="{% trans 'Upload CSV file' %}" />
+        </div>
+    </form>
+{% endblock %}
